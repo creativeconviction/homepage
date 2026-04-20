@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Creative Conviction — Paul Jun</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; border: 0 solid; }
+
+    :root {
+      --bg: #FAFBFF;
+      --text: #1E1E3F;
+      --text-10: rgba(30, 30, 63, 0.1);
+      --text-50: rgba(30, 30, 63, 0.45);
+      --accent: #4A54E1;
+      --interviewer: #4A54E1;
+      --guest: #4A54E1;
+      --highlight-bg: #E8EAFF;
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-text: 'DM Sans', system-ui, sans-serif;
+      --sidebar-w: 16rem;
+      --content-max: 600px;
+      --break-desktop: 1140px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-text);
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ── Mobile back link ── */
+    .mobile-back {
+      display: block;
+      padding: 2rem 2rem 0;
+    }
+    @media (min-width: 1140px) { .mobile-back { display: none; } }
+
+    .back-link {
+      font-family: var(--font-text);
+      font-size: 0.875rem;
+      color: var(--text);
+      opacity: 0.8;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .back-link:hover { opacity: 1; }
+
+    /* ── Layout shell ── */
+    .layout { display: flex; padding-top: 0; }
+    @media (min-width: 1140px) { .layout { padding-top: 3rem; } }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      display: none;
+      position: fixed;
+      left: 0;
+      top: 48px;
+      width: var(--sidebar-w);
+      padding-left: 3rem;
+      padding-right: 1rem;
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    @media (min-width: 1140px) { .sidebar { display: block; } }
+    .sidebar.visible { opacity: 1; transform: translateX(0); }
+
+    .sidebar-read-time {
+      font-family: var(--font-text);
+      font-size: 0.75rem;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    .sidebar-nav { display: flex; align-items: flex-start; }
+
+    .sidebar-track {
+      position: relative;
+      width: 2px;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      align-self: stretch;
+    }
+    .sidebar-track-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: var(--text-10);
+    }
+    .sidebar-track-indicator {
+      position: absolute;
+      width: 100%;
+      background: var(--accent);
+      height: 13px;
+      min-height: 13px;
+      top: 0;
+      transition: top 0.3s ease-out, height 0.15s ease-out;
+      will-change: transform;
+    }
+
+    .sidebar-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .sidebar-link {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-text);
+      font-size: 0.75rem;
+      color: var(--accent);
+      text-align: left;
+      line-height: 1.3;
+      padding: 0.125rem 0;
+      opacity: 0.6;
+      transition: opacity 0.3s;
+    }
+    .sidebar-link:hover { opacity: 1; }
+    .sidebar-link.active { opacity: 1; font-weight: 700; color: var(--text); }
+
+    .sidebar .back-link {
+      display: inline-block;
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+    }
+
+    /* ── Main content ── */
+    main {
+      flex: 1;
+      padding: 2rem;
+      padding-top: 3rem;
+    }
+    @media (min-width: 1140px) { main { padding-bottom: 3rem; } }
+
+    .content { max-width: var(--content-max); margin: 0 auto; }
+
+    .scroll-anchor { scroll-margin-top: 7rem; }
+
+    /* ── Header ── */
+    .article-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 2.25rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+    @media (min-width: 1140px) { .article-title { font-size: 3.5rem; } }
+
+    .article-subtitle {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      text-align: center;
+      opacity: 0.8;
+      margin-bottom: 1rem;
+    }
+    @media (min-width: 1140px) { .article-subtitle { font-size: 1.875rem; } }
+
+    .article-date {
+      font-family: var(--font-text);
+      font-size: 0.875rem;
+      text-align: center;
+      opacity: 0.5;
+      margin-bottom: 4rem;
+    }
+
+    /* ── Intro prose ── */
+    .intro {
+      margin-bottom: 4rem;
+      font-family: var(--font-text);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    @media (min-width: 1140px) { .intro { font-size: 0.875rem; } }
+
+    .intro p { margin-bottom: 1rem; }
+    .intro p:last-child { margin-bottom: 0; }
+
+    .intro a {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-thickness: 1px;
+      color: inherit;
+      transition: opacity 0.2s;
+    }
+    .intro a:hover { opacity: 0.7; }
+
+    /* ── Q&A blocks ── */
+    .qa-container { position: relative; }
+    .qa-list { display: flex; flex-direction: column; gap: 2rem; margin-bottom: 4rem; }
+
+    .qa-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    @media (min-width: 1140px) {
+      .qa-block {
+        display: grid;
+        gap: 1rem;
+        align-items: start;
+        grid-template-columns: 5rem 1fr;
+      }
+    }
+
+    /* Speaker names */
+    .speaker-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.875rem;
+      padding-top: 0.125rem;
+      white-space: nowrap;
+      letter-spacing: 0.05em;
+    }
+    .speaker-name.interviewer { color: var(--interviewer); }
+    .speaker-name.guest { color: var(--guest); }
+
+    .speaker-name.full-name {
+      text-align: left;
+    }
+    @media (min-width: 1140px) {
+      .speaker-name.full-name { padding-left: 0; }
+    }
+
+    .speaker-name.initials {
+      text-align: left;
+      letter-spacing: 0;
+    }
+    @media (min-width: 1140px) {
+      .speaker-name.initials { text-align: right; }
+    }
+
+    /* First appearance gets extra margin on desktop */
+    .qa-block.first-appearance .qa-body {
+      margin-top: 0;
+    }
+    @media (min-width: 1140px) {
+      .qa-block.first-appearance .qa-body { margin-top: 1.5rem; }
+    }
+
+    /* Question text (interviewer) */
+    .qa-body.question {
+      font-family: var(--font-text);
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    @media (min-width: 1140px) { .qa-body.question { font-size: 0.875rem; } }
+
+    /* Response text (guest) */
+    .qa-body.response {
+      font-family: var(--font-text);
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+    @media (min-width: 1140px) { .qa-body.response { font-size: 0.875rem; } }
+
+    .qa-body p { margin-bottom: 1rem; }
+    .qa-body p:last-child { margin-bottom: 0; }
+
+    .qa-body a {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-thickness: 1px;
+      color: inherit;
+      transition: opacity 0.2s;
+    }
+    .qa-body a:hover { opacity: 0.7; }
+
+    /* ── Highlighted quotes ── */
+    .highlight-quote {
+      background: linear-gradient(180deg, transparent 60%, var(--highlight-bg) 60%);
+      padding: 0 2px;
+    }
+
+    /* ── Hot Takes ── */
+    .hot-takes { padding-top: 3rem; }
+
+    .hot-takes-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.875rem;
+      margin-bottom: 2rem;
+    }
+    @media (min-width: 1140px) { .hot-takes-title { font-size: 2.25rem; } }
+
+    .hot-takes-list { display: flex; flex-direction: column; gap: 2rem; }
+
+    .hot-take {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    @media (min-width: 1140px) {
+      .hot-take {
+        display: grid;
+        gap: 1rem;
+        align-items: start;
+        grid-template-columns: 5rem 1fr;
+      }
+    }
+
+    .hot-take-number {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.875rem;
+      color: var(--text);
+    }
+    @media (min-width: 1140px) { .hot-take-number { text-align: right; } }
+
+    .hot-take-question {
+      font-family: var(--font-text);
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 0.5rem;
+    }
+    @media (min-width: 1140px) { .hot-take-question { font-size: 0.875rem; } }
+
+    .hot-take-answer {
+      font-family: var(--font-text);
+      font-size: 1rem;
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+    @media (min-width: 1140px) { .hot-take-answer { font-size: 0.875rem; } }
+
+    /* ── Footer ── */
+    footer {
+      padding: 4rem 1.5rem;
+      background: var(--bg);
+      color: var(--text);
+    }
+    @media (min-width: 768px) { footer { padding: 4rem 4rem; } }
+
+    .footer-inner { max-width: 1308px; margin: 0 auto; display: flex; flex-direction: column; gap: 2rem; }
+
+    .footer-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.25rem;
+      line-height: 1.1;
+      text-decoration: none;
+      color: inherit;
+      transition: opacity 0.2s;
+    }
+    .footer-title:hover { opacity: 0.8; }
+    @media (min-width: 768px) { .footer-title { font-size: 2rem; } }
+
+    .footer-divider { border-top: 1px solid var(--text-10); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-text);
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mobile-back">
+    <a class="back-link" href="/">← Back to Index</a>
+  </div>
+
+  <div class="layout">
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar" id="sidebar">
+      <div style="font-family:var(--font-text);font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;">Contents</div>
+      <div class="sidebar-nav">
+        <div class="sidebar-track">
+          <div class="sidebar-track-bg"></div>
+          <div class="sidebar-track-indicator" id="track-indicator"></div>
+        </div>
+        <div class="sidebar-links" id="sidebar-links">
+          <button class="sidebar-link active" data-target="intro">Introduction</button>
+          <button class="sidebar-link" data-target="brand-in-the-org">Brand's Place in the Org</button>
+          <button class="sidebar-link" data-target="three-phases">The Three Phases</button>
+          <button class="sidebar-link" data-target="product-vs-brand">Product vs. Brand Designers</button>
+          <button class="sidebar-link" data-target="brand-as-behavior">Brand as Behavior</button>
+          <button class="sidebar-link" data-target="programmable-brand">Making Brand Programmable</button>
+          <button class="sidebar-link" data-target="skills-and-systems">The Skills and Systems Layer</button>
+          <button class="sidebar-link" data-target="tooling">Tooling and Experimentation</button>
+          <button class="sidebar-link" data-target="time-for-creatives">The Time for Creatives</button>
+          <button class="sidebar-link" data-target="hot-takes">Hot Takes</button>
+        </div>
+      </div>
+      <div class="sidebar-read-time" style="margin-top:1.5rem;">~12 min read</div>
+      <a class="back-link" href="/">← Back to Index</a>
+    </aside>
+
+    <!-- ── MAIN ── -->
+    <main>
+      <div class="content">
+
+        <!-- Header -->
+        <div id="intro" class="scroll-anchor"></div>
+        <h1 class="article-title">Brand Engineers and the Future of Creative Teams</h1>
+        <p class="article-subtitle">with Paul Jun</p>
+        <p class="article-date">April 2026</p>
+
+        <!-- Intro -->
+        <div class="intro">
+          <p>We're <a href="https://creativeconviction.github.io" target="_blank">Libbie</a> and <a href="https://x.com/rayoufalhumedhi" target="_blank">Rayouf</a>, two investors at <a href="https://www.bvp.com/" target="_blank">Bessemer Venture Partners</a> who spend our days at the intersection of creativity, technology, and company building. We started Creative Conviction because we believe that taste and creative ambition are becoming the most important differentiators in the age of AI, and we wanted a place to explore what that means with the people living it.</p>
+          <p>Paul Jun is the Head of Brand at <a href="https://ramp.com" target="_blank">Ramp</a>, where he leads brand identity, visual and verbal systems, and the tooling infrastructure that every team at the company touches. Before Ramp, Paul spent 17 years in the design industry, from agencies to in-house roles, developing a conviction that brand design and product design should never have been separated in the first place. He was one of the earliest adopters of <a href="https://www.cursor.com/" target="_blank">Cursor</a>, building a Figma plugin with it in three days back in December 2023, and has since been on a mission to show what's possible when creatives learn to build.</p>
+          <p>We wanted to talk to Paul because he sits at an interesting crossroads. He's a brand leader at one of tech's most design-forward companies, and he's also deeply technical in a way that most brand designers historically haven't been. His view is that brand teams are about to undergo a fundamental transformation, and that the designers who thrive will be the ones who learn to think in systems, code, and prompts. We found his perspective on where brand sits in the org, how to make it programmable, and why this is the best time in history to be a creative to be both grounding and energizing.</p>
+        </div>
+
+        <!-- Q&A Content -->
+        <div class="qa-container">
+          <div class="qa-list">
+
+            <!-- ═══ SECTION: Brand's Place in the Org ═══ -->
+            <div id="brand-in-the-org" class="scroll-anchor"></div>
+
+            <div class="qa-block first-appearance">
+              <span class="speaker-name interviewer full-name">Libbie Frost and Rayouf Alhumedhi</span>
+              <div class="qa-body question">
+                <p>What changes when brand reports into product and engineering versus marketing? And what does that look like at Ramp today?</p>
+              </div>
+            </div>
+
+            <div class="qa-block first-appearance">
+              <span class="speaker-name guest full-name">Paul Jun</span>
+              <div class="qa-body response">
+                <p>A lot of startups place brand under marketing, and it's a strange thing. My sense is that early-stage companies influence this org chart decision without much thought. At the end of the day, product design and brand design is just design. <span class="highlight-quote">Product design is form follows function. Brand design is form follows fantasy.</span> Both require form and both require a customer to experience it.</p>
+                <p>In my past two jobs before Ramp, I always negotiated that I would not report to a CMO. I want to report to a designer and a builder. My team still works with marketing. We create the templates, the guidelines, the assets. But I think before the age of AI, most leaders and CEOs, because they don't understand branding, just placed brand designers on marketing teams. This idea of an "in-house agency" was a trend for the last 20 years. I personally think that idea is horrendous. I don't think it's working at all, and you're going to lose a lot of good designers that way.</p>
+              </div>
+            </div>
+
+            <!-- ═══ SECTION: Three Phases ═══ -->
+            <div id="three-phases" class="scroll-anchor"></div>
+
+            <div class="qa-block">
+              <span class="speaker-name interviewer initials">LF + RA</span>
+              <div class="qa-body question">
+                <p>Can you walk us through how you see startups evolving on this?</p>
+              </div>
+            </div>
+
+            <div class="qa-block">
+              <span class="speaker-name guest initials">PJ</span>
+              <div class="qa-body response">
+                <p>Every startup goes through phases. First, you have to find product-market fit. Brand design is influencing things like marketing campaigns, emails, the identity itself, the website. Important, but functional.</p>
+                <p>Second phase is what I'd call the features war. One company builds a feature, another company says "we have that too, but better." Companies get stuck in this world trying to out-feature each other, and I think that's a race to the bottom.</p>
+                <p><span class="highlight-quote">Phase three is where you're investing in experience, which is really asking yourself: what does the product feel like when I use it?</span> Not just what job is it doing, but how does it feel when I do the job? And I think brand designers are the most poised to figure out what that means.</p>
+                <p>The best designers can do both product design and brand design. I know maybe three of them out of the hundreds I've worked with. These people can build you an entire product, but then they can also think about the motion states, how color is used, how typography is used, what the onboarding feels like, how the product upsell feels. Most product designers think of it very narrowly.</p>
+              </div>
+            </div>
+
+            <div class="qa-block">
+              <span class="speaker-name interviewer initials">LF + RA</span>
+              <div class="qa-body question">
+                <p>What's the scope of your team's accountability at Ramp?</p>
+              </div>
+            </div>
+
+            <div class="qa-block">
+              <span class="speaker-name guest initials">PJ</span>
+              <div class="qa-body response">
+                <p>My team is accountable for thinking about the entire arc, from the first performance ad to the homepage, to a demo, to a sales conversation, the sales deck, even the language the sales team uses, all the way to onboarding into the product, your first moment of value, and inviting a colleague. That is all brand. And I'm not saying it just falls on the brand team. Everyone at a company should feel like they're accountable for the brand.</p>
+              </div>
+            </div>
+
+            <!-- ═══ SECTION: Product vs. Brand Designers ═══ -->
+            <div id="product-vs-brand" class="scroll-anchor"></div>
+
+            <div class="qa-block">
+              <span class="speaker-name interviewer initials">LF + RA</span>
+              <div class="qa-body question">
+                <p>You said most product designers don't think this way and you only have a handful of people that can do both. Why is that? And how do people upskill?</p>
+              </div>
+            </div>
+
+            <div class="qa-block">
+              <span class="speaker-name guest initials">PJ</span>
+              <div class="qa-body response">
+                <p>Some of it is honestly just luck. You have to work at a place where you have the right design leadership that shows you can be both, that you can use both sides of your brain.</p>
+                <p>This might be a cynical take, but I think the growth era where everything was about moving fast, the low interest rate economy, I think product design fell to a shallow game. Product designers were held to certain numbers and outcomes that they had to game at big companies, and it created some bad habits. They were forced to play the wrong game. They never learned brand because they were stuck in their own world being managed by PMs or engineering teams. And those two worlds never talked to each other.</p>
+                <p><span class="highlight-quote">At the end of the day, we are all designers. We are all making rectangles and squares on our screens.</span> We all have to think about the customer, the product, the business, and the customer mindset. Why is there such a separation between these two disciplines? I think a lot of it was economic.</p>
+                <p>Both product design and brand design were born in Photoshop. At some point, a tech company said "product design, you go over there and work with eng. Brand design, you more artistic types, you go work with marketing. We don't know what to do with you." And that's how it happened. It came from the FAANG companies, and because we're social animals, startups looked at what was working, copied it, and it created this weird expectation.</p>
+              </div>
+            </div>
+
+            <!-- ═══ SECTION: Brand as Behavior ═══ -->
+            <div id="brand-as-behavior" class="scroll-anchor"></div>
+
+            <div class="qa-block">
+              <span class="speaker-name interviewer initials">LF + RA</span>
+              <div class="qa-body question">
+                <p>Something we've been thinking about, and probably arguing, is that brand in a lot of ways comes from the founding team's vision. And it's the product made visible. How do you think about how much of Ramp's edge is product versus brand versus team?</p>
+              </div>
+            </div>
+
+            <div class="qa-block">
+              <span class="speaker-name guest initials">PJ</span>
+              <div class="qa-body response">
+                <p>Every single prospect or agency I talk to mentions Ramp's brand as being iconic. I was talking to an agency the other day and they were like, "literally every client call, they say they want something like Ramp's brand." I take no credit for that. The team before me did a great job of creating something truly differentiated in the financial space, which is often seen as esoteric, intimidating, and high barrier to entry. Ramp's brand is very quiet and confident. Not loud and in your face.</p>
+                <p>What brought me to Ramp, other than the brand being so strong, was that the engineering is clearly world class. Every friend I told I was interviewing said "Ramp is next level, they have some of the best engineers." And it's clear because the product just works. It's that fast and that automatic.</p>
+                <p>Now Ramp is at the phase where you're not a startup anymore. You're scaling up, reaching new audiences, new verticals, building a ton of new products. <span class="highlight-quote">When you're a startup, you can sound like a fifth grade band recital and still succeed. Now it's about performing like a symphony.</span></p>
+                <p>I always say brand is behavior. What are the things we're going to do that get talked about within the cultures we want to be a part of? How do our ideas make it into that culture so that other people start referencing our ways of working and our ways of thinking?</p>
+              </div>
+            </div>
+
+            <!-- ═══ SECTION: Programmable Brand ═══ -->
+            <div id="programmable-brand" class="scroll-anchor"></div>
+
+            <div class="qa-block">
+              <span class="speaker-name interviewer initials">LF + RA</span>
+              <div class="qa-body question">
+                <p>We've been writing about how all these sub-processes of brand are becoming programmatic or programmable. But there are some aspects of cohesive narrative building that you just need creatives in the loop for. How do you think about that? What are the sub-processes you're automating first versus not?</p>
+              </div>
+            </div>
+
+            <div class="qa-block">
+              <span class="speaker-name guest initials">PJ</span>
+              <div class="qa-body response">
+                <p>Something I said to my team my second or third week at Ramp, and something I still deeply believe, is: <span class="highlight-quote">make the brand easy to love and impossible to misuse. And that's on us.</span></p>
+                <p>We're building a Slack bot right now that can generate a brief for a product area, turn that brief into a deck, and turn that deck into different assets. All of it happening just in Slack. I'm working with one design engineer on it.</p>
+                <p>I have a Notion doc where I break down the requests my team gets. Tier one is high craft, the most important projects, the biggest launches, the biggest bets. All the way down to tier three, which might be something like "I need a LinkedIn image promoting that we have stablecoins." Someone should be able to do that in five minutes. Before AI, that may have taken a brand designer an hour, a full day, multiple rounds with stakeholders. I want to create a world where no one on my team ever has to touch a tier three asset again, maybe even a tier two. All of the human talent and energy gets dedicated to the biggest bets and to the future.</p>
+                <p>I think there are two modes that brand design teams work in. Problem solving versus opportunity seeking. I would say 99% of their energy is spent problem solving. Doing other people's requests. Make me a deck, make me a sticker, I need swag, I need this logo resized on this sales deck because I don't know how to do it. I want to flip that completely and have us spending time thinking about the future and building it. Because if we figure that out first, we're staying ahead of competitors.</p>
+              </div>
+            </div>
+
+            <div class="qa-block">
+              <span class="speaker-name interviewer initials">LF + RA</span>
+              <div class="qa-body question">
+                <p>Has that shift started happening yet? Have you seen a designer with extra time pursuing a new opportunity because of this?</p>
+              </div>
+            </div>
+
+            <div class="qa-block">
+              <span class="speaker-name guest initials">PJ</span>
+              <div class="qa-body response">
+                <p>Not yet. I'm 10 weeks into the job and there's so much foundational stuff I'm fixing and changing. But my hope is that every single designer on my team can plug into any team at Ramp and within a couple weeks, that team's output is 10x better. The quality of their writing, the way they launch things. One person goes into a team, works with dozens of people, 10x their output, then leaves it better than they found it and moves on to the next team.</p>
+              </div>
+            </div>
+
+            <!-- ═══ SECTION: Skills and Systems ═══ -->
+            <div id="skills-and-systems" class="scroll-anchor"></div>
+
+            <div class="qa-block">
+              <span class="speaker-name interviewer initials">LF + RA</span>
+              <div class="qa-body question">
+                <p>Earlier you mentioned the idea that brand designers need to become "brand engineers." Can you expand on what that means in practice?</p>
+              </div>
+            </div>
+
+            <div class="qa-block">
+              <span class="speaker-name guest initials">PJ</span>
+              <div class="qa-body response">
+                <p>The future is that brand designers need to become brand engineers. You have to learn Claude Code and Cursor. You have to learn how to build tools. The question becomes: how might a brand team create the systems, the agents, the skills, the prompt libraries, the patterns that every team uses?</p>
+                <p>I went to the SEO team last week and asked, "what do you need to represent the brand well without a designer in the room?" They need the Ramp tone of voice, the brand strategy, persona and ICP data from product marketing, research from the research team, a library of product graphics for articles, a library of assets for blog hero images. So you go make friends with these teams, deeply understand what they're accountable for and what outcomes they're driving, and then reverse engineer it. What are the skills, the prompts, the agents they need to be set up for success?</p>
+                <p>Right now a lot of people at Ramp create Claude skills, which is fantastic. But when I look at some of them, they're not properly formatted, they don't have the right content, they don't have the right connections. <span class="highlight-quote">The way I described it to someone today was: there are a lot of tentacles but there's no brain. We need to create the brain of the octopus.</span> Because your skill for campaign writing, if it's not connected to your personas, your ICP, your Snowflake data about your latest campaigns, then what is that skill really doing?</p>
+                <p>It's also dangerous if you're creating a skill outside your expertise, because you don't know how to pressure test it. You don't know how to validate whether it's working. I encourage people to create the skills that are based on their expert knowledge and then distribute those to others. Don't try to create a skill that falls in my domain because you have no idea what you're doing. You're just going to create slop.</p>
+              </div>
+            </div>
+
+            <!-- ═══ SECTION: Tooling ═══ -->
+            <div id="tooling" class="scroll-anchor"></div>
+
+            <div class="qa-block">
+              <span class="speaker-name interviewer initials">LF + RA</span>
+              <div class="qa-body question">
+                <p>From your perspective, have you seen any creative tools that have stuck or that you've gotten real value out of? And are there gaps where you're still spending manual time that you think could be interesting?</p>
+              </div>
+            </div>
+
+            <div class="qa-block">
+              <span class="speaker-name guest initials">PJ</span>
+              <div class="qa-body response">
+                <p>We've been playing with Paper, that Figma competitor, and it's shown some pretty impressive output. At Ramp we encourage everyone to try to break things. Use a tool, connect it to Claude, and try to imagine an end-to-end process. Let's say you wanted to build a landing page. Do you have the design systems? The components? The right skills? Does it understand your Figma files? Do you have recipes that understand what a good landing page looks like on a pixel level?</p>
+                <p>The way I frame it to my team is: you are the expert of your craft. I need you to test these tools and tell me whether they have any feasibility. If you tell me they don't, I'll leave you alone. But I need you to explore that.</p>
+                <p>One major thing I'm accountable for is: how might anyone at Ramp ship a landing page that is nine out of ten quality without a designer doing it for them? So we're creating an agent that reviews your landing page and gives you a summary. I've taken vibe-coded slop HTML examples from other teams, run it through this review bot, and it said "this is a four out of ten, here's why." Then in just a couple prompts in Claude, I could get it to a seven out of ten.</p>
+                <p>A designer named Mary on our team figured out how to point it at hundreds of our shipped landing pages and atomize, on a pixel level, our spacing, our radii, our typography, our information hierarchy, how we tell stories on these pages. It's early. We haven't released it company-wide. But it's promising.</p>
+              </div>
+            </div>
+
+            <!-- ═══ SECTION: Time for Creatives ═══ -->
+            <div id="time-for-creatives" class="scroll-anchor"></div>
+
+            <div class="qa-block">
+              <span class="speaker-name interviewer initials">LF + RA</span>
+              <div class="qa-body question">
+                <p>What gives you conviction that this is the right moment for creatives?</p>
+              </div>
+            </div>
+
+            <div class="qa-block">
+              <span class="speaker-name guest initials">PJ</span>
+              <div class="qa-body response">
+                <p>I started using Cursor a month after it came out. It was the end of 2023, I had a week or two off from work, and I downloaded it and told myself: I'm just going to sit here, I don't care how frustrated I get, I'm just going to push myself. In three days, I built a Figma plugin that I couldn't believe I built. I sent it to an engineer and asked him to review the code. He called me and said "you know how to code?" I said no, I used this tool called Cursor. He said "this is 95% good, this is something I would have written myself." This was an early design engineer at Facebook before that was even a title.</p>
+                <p>I remember thinking: everything is about to change. And for the first time in my career, I felt like I was ahead of the curve.</p>
+                <p>I built the entire Ramp tone of voice in between meetings with Claude Code and Figma MCP. That would have taken an agency six to eight weeks and probably over $100k. I don't know why people aren't rushing to learn this stuff faster.</p>
+                <p><span class="highlight-quote">I think designers are uniquely positioned for this moment. A good brand-product designer with deep experience can build a product, brand it, write for it, build the website, build the marketing materials, and make the product better over time. Designers can do everything end to end.</span></p>
+                <p>Candidly, I think we are in the dial-up phase of AI. We are in the AOL.com phase right now. Very early. And the more time goes on, the more overwhelmed you get if you haven't started. At my previous job, a month after I discovered Cursor, I went to my VP and said we need to activate this for everyone. Within three months we had over 60 product designers using Cursor to prototype. I don't think anyone was moving that fast other than Ramp or maybe a handful of other companies.</p>
+              </div>
+            </div>
+
+          </div><!-- end qa-list -->
+
+
+        </div><!-- end qa-container -->
+
+        <!-- ── HOT TAKES ── -->
+        <div id="hot-takes" class="hot-takes scroll-anchor">
+          <h2 class="hot-takes-title">Hot Takes</h2>
+          <div class="hot-takes-list">
+
+            <div class="hot-take">
+              <span class="hot-take-number">#1</span>
+              <div>
+                <div class="hot-take-question">What's one thing you think most tech companies get wrong about brand?</div>
+                <div class="hot-take-answer">
+                  <p>I can probably count on one hand the amount of companies that know what good brand design is or how to work with a good brand designer. For a long time, I was frustrated by how tech viewed brand design. But now I think AI is going to be the change agent that shifts this perception entirely. It's going to be someone, hopefully me, who shows what's possible and where the future is going.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="hot-take">
+              <span class="hot-take-number">#2</span>
+              <div>
+                <div class="hot-take-question">Which companies do you think are at the cutting edge of creative and AI right now?</div>
+                <div class="hot-take-answer">
+                  <p>I would put Shopify. They've turned something around in the last two years. They've always been very design minded, but recently they're doing some interesting stuff. Vercel was quite early, they have a pretty cracked design team. But honestly, I feel like most of the market is behind. When I talk to friends outside of tech at agencies, their adoption was slow and it wasn't because of curiosity. It's because clients were coming to them and going, "I need you to build me a tool that scales this brand." And they're like, "what are you talking about?"</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="hot-take">
+              <span class="hot-take-number">#3</span>
+              <div>
+                <div class="hot-take-question">What's the most useful AI workflow tip you'd share with another creative?</div>
+                <div class="hot-take-answer">
+                  <p>Go into Claude Code, have it scrape the best practices from OpenAI and Anthropic from the last three to six months, create a skill on what makes a good system prompt, then store it in memory so that anytime you create a new skill, it triggers that other skill to review your markdown file and reformat it for maximum effectiveness. The output will be a lot better. So much of this is information-sharing that doesn't happen because there's too much noise.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div><!-- end content -->
+    </main>
+
+  </div><!-- end layout -->
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-inner">
+      <a class="footer-title" href="/">Creative<br/>Conviction</a>
+      <div style="display:flex;flex-direction:column;gap:2rem;">
+        <hr class="footer-divider" />
+        <div class="footer-bottom">
+          <p>Made with love in NYC</p>
+          <p>&copy; 2026</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Sidebar entrance animation ──
+    setTimeout(() => {
+      document.getElementById('sidebar')?.classList.add('visible');
+    }, 300);
+
+    // ── Scroll tracking for sidebar ──
+    const sections = [
+      'intro', 'brand-in-the-org', 'three-phases', 'product-vs-brand',
+      'brand-as-behavior', 'programmable-brand', 'skills-and-systems',
+      'tooling', 'time-for-creatives', 'hot-takes'
+    ];
+
+    const links = document.querySelectorAll('.sidebar-link');
+    const indicator = document.getElementById('track-indicator');
+
+    function updateSidebar() {
+      let activeIdx = 0;
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el && el.getBoundingClientRect().top <= 150) {
+          activeIdx = i;
+          break;
+        }
+      }
+      links.forEach((link, i) => {
+        link.classList.toggle('active', i === activeIdx);
+      });
+      // Move indicator
+      if (links[activeIdx] && indicator) {
+        const navContainer = document.getElementById('sidebar-links');
+        const linkTop = links[activeIdx].offsetTop;
+        const linkHeight = links[activeIdx].offsetHeight;
+        indicator.style.top = linkTop + 'px';
+        indicator.style.height = linkHeight + 'px';
+      }
+    }
+
+    // Smooth scroll on click
+    links.forEach((link, i) => {
+      link.addEventListener('click', () => {
+        const target = document.getElementById(sections[i]);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    window.addEventListener('scroll', updateSidebar, { passive: true });
+    updateSidebar();
+  </script>
+
+</body>
+</html>
