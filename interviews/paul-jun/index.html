@@ -348,16 +348,17 @@
     .footer-inner { max-width: 1308px; margin: 0 auto; display: flex; flex-direction: column; gap: 2rem; }
 
     .footer-title {
-      font-family: var(--font-display);
+      font-family: var(--font-text);
       font-weight: 700;
-      font-size: 1.25rem;
+      font-size: 0.875rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
       line-height: 1.1;
       text-decoration: none;
-      color: inherit;
+      color: var(--accent);
       transition: opacity 0.2s;
     }
     .footer-title:hover { opacity: 0.8; }
-    @media (min-width: 768px) { .footer-title { font-size: 2rem; } }
 
     .footer-divider { border-top: 1px solid var(--text-10); }
 
@@ -662,7 +663,7 @@
   <!-- ── FOOTER ── -->
   <footer>
     <div class="footer-inner">
-      <a class="footer-title" href="../../">Creative<br/>Conviction</a>
+      <a class="footer-title" href="../../">Creative Conviction</a>
       <div style="display:flex;flex-direction:column;gap:2rem;">
         <hr class="footer-divider" />
         <div class="footer-bottom">
