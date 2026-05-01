@@ -7,14 +7,33 @@
   <meta name="description" content="Interviews on capital, creative work, and AI." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --bg: #fff8f1;
       --text: #20124d;
-      --muted: rgba(32, 18, 77, 0.42);
+      --muted: rgba(32, 18, 77, 0.4);
+      --thumb: rgba(32, 18, 77, 0.07);
+    }
+
+    body.terminal {
+      --bg: #0a0a0a;
+      --text: #c8f0c8;
+      --muted: rgba(200, 240, 200, 0.42);
+      --thumb: rgba(200, 240, 200, 0.07);
+    }
+    body.terminal,
+    body.terminal * {
+      font-family: 'Courier New', Courier, monospace !important;
+    }
+    body.terminal .hero-title {
+      letter-spacing: 0.04em !important;
+    }
+    body.terminal .card-thumb {
+      border: 1px solid var(--muted);
+      background: transparent !important;
     }
 
     html { scroll-behavior: smooth; }
@@ -25,11 +44,12 @@
       color: var(--text);
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
+      transition: background 0.25s, color 0.25s;
     }
 
     /* NAV */
     nav {
-      max-width: 760px;
+      max-width: 720px;
       margin: 0 auto;
       padding: 2rem 2rem 0;
       display: flex;
@@ -38,12 +58,34 @@
     }
 
     .nav-logo {
-      font-size: 1.0625rem;
+      font-size: 0.875rem;
       font-weight: 500;
-      letter-spacing: 0.01em;
-      color: var(--text);
+      color: var(--muted);
       text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.15s;
     }
+    .nav-logo:hover { color: var(--text); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .terminal-toggle {
+      background: none;
+      border: 1px solid var(--muted);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.75rem;
+      color: var(--muted);
+      padding: 0.2rem 0.55rem;
+      letter-spacing: 0.06em;
+      transition: color 0.15s, border-color 0.15s;
+      line-height: 1.6;
+    }
+    .terminal-toggle:hover { color: var(--text); border-color: var(--text); }
 
     .nav-about {
       font-size: 1rem;
@@ -53,11 +95,52 @@
     }
     .nav-about:hover { color: var(--text); }
 
+    /* HERO */
+    .hero {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem 3rem;
+      text-align: center;
+    }
+
+    .hero-title {
+      font-size: clamp(3.25rem, 9vw, 6rem);
+      font-weight: 600;
+      line-height: 0.93;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      min-height: 1em;
+    }
+
+    .hero-cursor {
+      display: inline-block;
+      width: 0.05em;
+      height: 0.82em;
+      background: var(--text);
+      margin-left: 0.04em;
+      vertical-align: middle;
+      animation: blink 0.9s step-end infinite;
+    }
+    .hero-cursor.done { display: none; }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .hero-tagline {
+      font-size: 1.125rem;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.5;
+    }
+
     /* FILTERS */
     .filters {
-      max-width: 760px;
+      max-width: 720px;
       margin: 0 auto;
-      padding: 2.25rem 2rem 2.5rem;
+      padding: 0 2rem 2.5rem;
       display: flex;
       gap: 1.5rem;
     }
@@ -77,7 +160,7 @@
 
     /* CONTENT */
     .content {
-      max-width: 760px;
+      max-width: 720px;
       margin: 0 auto;
       padding: 0 2rem;
     }
@@ -85,51 +168,126 @@
     .card-list {
       display: flex;
       flex-direction: column;
-      gap: 2.75rem;
+      gap: 2.5rem;
     }
 
     /* CARD */
     .card {
       text-decoration: none;
       color: var(--text);
-      display: block;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
       transition: opacity 0.15s;
     }
-    .card:hover { opacity: 0.55; }
+    .card:hover { opacity: 0.5; }
+
+    .card-thumb {
+      flex-shrink: 0;
+      width: 90px;
+      height: 68px;
+      background: var(--thumb);
+      border-radius: 2px;
+    }
+    @media (min-width: 580px) {
+      .card-thumb { width: 116px; height: 82px; }
+    }
+
+    .card-body { flex: 1; min-width: 0; }
 
     .card-type {
       font-size: 0.6875rem;
       letter-spacing: 0.13em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 0.45rem;
-    }
-
-    .card-title {
-      font-size: 1.4375rem;
-      font-weight: 500;
-      line-height: 1.2;
-      letter-spacing: -0.01em;
       margin-bottom: 0.4rem;
     }
 
+    .card-title {
+      font-size: 1.375rem;
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.35rem;
+    }
+
     .card-desc {
-      font-size: 1.0625rem;
+      font-size: 1rem;
       color: var(--muted);
-      line-height: 1.5;
+      line-height: 1.45;
       font-style: italic;
     }
 
     .card-date {
       font-size: 0.875rem;
       color: var(--muted);
-      margin-top: 0.55rem;
+      margin-top: 0.5rem;
     }
+
+    /* EMAIL SIGNUP */
+    .signup {
+      max-width: 720px;
+      margin: 5.5rem auto 0;
+      padding: 0 2rem;
+    }
+
+    .signup-label {
+      font-size: 0.6875rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.85rem;
+    }
+
+    .signup-title {
+      font-size: 1.625rem;
+      font-weight: 500;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.015em;
+    }
+
+    .signup-form {
+      display: flex;
+      gap: 0;
+      max-width: 400px;
+    }
+
+    .signup-input {
+      flex: 1;
+      background: transparent;
+      border: 1px solid var(--muted);
+      border-right: none;
+      color: var(--text);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1rem;
+      padding: 0.55rem 0.85rem;
+      outline: none;
+      transition: border-color 0.15s;
+      border-radius: 0;
+      -webkit-appearance: none;
+    }
+    .signup-input::placeholder { color: var(--muted); }
+    .signup-input:focus { border-color: var(--text); }
+
+    .signup-btn {
+      background: var(--text);
+      color: var(--bg);
+      border: 1px solid var(--text);
+      cursor: pointer;
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1rem;
+      padding: 0.55rem 1.1rem;
+      transition: opacity 0.15s;
+      white-space: nowrap;
+      border-radius: 0;
+    }
+    .signup-btn:hover { opacity: 0.75; }
 
     /* FOOTER */
     footer {
-      max-width: 760px;
-      margin: 7rem auto 0;
+      max-width: 720px;
+      margin: 5rem auto 0;
       padding: 2rem;
       display: flex;
       justify-content: space-between;
@@ -142,8 +300,16 @@
 
   <nav>
     <a class="nav-logo" href="./">Creative Conviction</a>
-    <a class="nav-about" href="./about.html">About</a>
+    <div class="nav-right">
+      <button class="terminal-toggle" id="terminal-toggle">&gt;_</button>
+      <a class="nav-about" href="./about.html">About</a>
+    </div>
   </nav>
+
+  <div class="hero">
+    <h1 class="hero-title" id="hero-title"></h1>
+    <p class="hero-tagline">Interviews on capital, creative work, and AI.</p>
+  </div>
 
   <div class="filters">
     <button class="filter-btn active" data-filter="all">All</button>
@@ -155,42 +321,90 @@
     <div class="card-list">
 
       <a class="card" href="interviews/paul-jun/" data-type="interview">
-        <div class="card-type">Interview</div>
-        <div class="card-title">Paul Jun, Head of Brand at Ramp</div>
-        <div class="card-desc">Brand engineers and the future of creative teams</div>
-        <div class="card-date">April 2026</div>
+        <div class="card-thumb"></div>
+        <div class="card-body">
+          <div class="card-type">Interview</div>
+          <div class="card-title">Paul Jun, Head of Brand at Ramp</div>
+          <div class="card-desc">Brand engineers and the future of creative teams</div>
+          <div class="card-date">April 2026</div>
+        </div>
       </a>
 
       <a class="card" href="https://creativeconviction.github.io/brand-and-narrative/" data-type="report">
-        <div class="card-type">Report</div>
-        <div class="card-title">Brand and Narrative</div>
-        <div class="card-desc">How AI is reshaping brand building, creative storytelling, and narrative strategy.</div>
-        <div class="card-date">April 2026</div>
+        <div class="card-thumb"></div>
+        <div class="card-body">
+          <div class="card-type">Report</div>
+          <div class="card-title">Brand and Narrative</div>
+          <div class="card-desc">How AI is reshaping brand building, creative storytelling, and narrative strategy.</div>
+          <div class="card-date">April 2026</div>
+        </div>
       </a>
 
       <a class="card" href="https://creativeconviction.github.io/product-design/" data-type="report">
-        <div class="card-type">Report</div>
-        <div class="card-title">Product Design</div>
-        <div class="card-desc">How AI is transforming product design workflows, tooling, and the role of the designer.</div>
-        <div class="card-date">March 2026</div>
+        <div class="card-thumb"></div>
+        <div class="card-body">
+          <div class="card-type">Report</div>
+          <div class="card-title">Product Design</div>
+          <div class="card-desc">How AI is transforming product design workflows, tooling, and the role of the designer.</div>
+          <div class="card-date">March 2026</div>
+        </div>
       </a>
 
       <a class="card" href="https://creativeconviction.github.io/creative-conviction/" data-type="report">
-        <div class="card-type">Report</div>
-        <div class="card-title">Creative Conviction Primer</div>
-        <div class="card-desc">Our thesis on why taste and creative ambition are the last true differentiators in the age of AI.</div>
-        <div class="card-date">February 2026</div>
+        <div class="card-thumb"></div>
+        <div class="card-body">
+          <div class="card-type">Report</div>
+          <div class="card-title">Creative Conviction Primer</div>
+          <div class="card-desc">Our thesis on why taste and creative ambition are the last true differentiators in the age of AI.</div>
+          <div class="card-date">February 2026</div>
+        </div>
       </a>
 
     </div>
   </div>
 
+  <div class="signup">
+    <div class="signup-label">Newsletter</div>
+    <div class="signup-title">Stay in the loop.</div>
+    <form class="signup-form" onsubmit="return false;">
+      <input class="signup-input" type="email" placeholder="your@email.com" required />
+      <button class="signup-btn" type="submit">Subscribe</button>
+    </form>
+  </div>
+
   <footer>
-    <span>Creative Conviction</span>
+    <span>Made in NYC 🍎</span>
     <span>&copy; 2026</span>
   </footer>
 
   <script>
+    // Typewriter animation
+    const titleEl = document.getElementById('hero-title');
+    const text = 'Creative Conviction';
+    const cursor = document.createElement('span');
+    cursor.className = 'hero-cursor';
+    titleEl.appendChild(cursor);
+    let i = 0;
+
+    function type() {
+      if (i < text.length) {
+        titleEl.insertBefore(document.createTextNode(text[i]), cursor);
+        i++;
+        setTimeout(type, 72);
+      } else {
+        setTimeout(() => cursor.classList.add('done'), 900);
+      }
+    }
+    type();
+
+    // Terminal toggle
+    const toggle = document.getElementById('terminal-toggle');
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('terminal');
+      toggle.textContent = document.body.classList.contains('terminal') ? '[exit]' : '>_';
+    });
+
+    // Filters
     const btns = document.querySelectorAll('.filter-btn');
     const cards = document.querySelectorAll('.card');
 
@@ -200,7 +414,7 @@
         btn.classList.add('active');
         const filter = btn.dataset.filter;
         cards.forEach(card => {
-          card.style.display = (filter === 'all' || card.dataset.type === filter) ? 'block' : 'none';
+          card.style.display = (filter === 'all' || card.dataset.type === filter) ? 'flex' : 'none';
         });
       });
     });
