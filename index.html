@@ -4,306 +4,203 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Creative Conviction</title>
-  <meta name="description" content="An interview series on taste, creativity, and conviction at the frontier of technology." />
+  <meta name="description" content="Interviews on capital, creative work, and AI." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #FAFBFF;
-      --text: #1E1E3F;
-      --text-40: rgba(30, 30, 63, 0.40);
-      --text-15: rgba(30, 30, 63, 0.15);
-      --accent: #4A54E1;
-      --font-display: 'Instrument Serif', Georgia, serif;
-      --font-text: 'DM Sans', system-ui, sans-serif;
+      --bg: #fff8f1;
+      --text: #20124d;
+      --muted: rgba(32, 18, 77, 0.42);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: var(--font-text);
+      font-family: 'EB Garamond', Georgia, serif;
       background: var(--bg);
       color: var(--text);
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
     }
 
-    /* ── NAV ── */
+    /* NAV */
     nav {
-      border-bottom: 1px solid var(--text-15);
-      padding: 0 1.5rem;
-    }
-    @media (min-width: 768px) { nav { padding: 0 3rem; } }
-
-    .nav-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2rem 2rem 0;
       display: flex;
-      align-items: center;
-      height: 60px;
+      align-items: baseline;
+      justify-content: space-between;
     }
 
     .nav-logo {
-      font-family: var(--font-text);
-      font-weight: 700;
-      font-size: 0.875rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
+      font-size: 1.0625rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: var(--text);
       text-decoration: none;
     }
 
-    /* ── FILTER TABS ── */
-    .tabs {
-      border-bottom: 1px solid var(--text-15);
-      padding: 0 1.5rem;
+    .nav-about {
+      font-size: 1rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
     }
-    @media (min-width: 768px) { .tabs { padding: 0 3rem; } }
+    .nav-about:hover { color: var(--text); }
 
-    .tabs-inner {
+    /* FILTERS */
+    .filters {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2.25rem 2rem 2.5rem;
       display: flex;
+      gap: 1.5rem;
     }
 
-    .tab {
+    .filter-btn {
       background: none;
       border: none;
       cursor: pointer;
-      font-family: var(--font-text);
-      font-size: 0.875rem;
-      color: var(--text-40);
-      padding: 1rem 1rem 1rem 0;
-      margin-right: 1.5rem;
-      border-bottom: 2px solid transparent;
-      margin-bottom: -1px;
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1rem;
+      color: var(--muted);
+      padding: 0;
       transition: color 0.15s;
-      font-weight: 400;
     }
-    .tab:hover { color: var(--text); }
-    .tab.active {
-      color: var(--text);
-      font-weight: 600;
-      border-bottom-color: var(--text);
-    }
+    .filter-btn:hover { color: var(--text); }
+    .filter-btn.active { color: var(--text); }
 
-    /* ── CONTENT LIST ── */
+    /* CONTENT */
     .content {
-      max-width: 860px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 0 1.5rem;
+      padding: 0 2rem;
     }
-    @media (min-width: 768px) { .content { padding: 0 3rem; } }
 
     .card-list {
       display: flex;
       flex-direction: column;
+      gap: 2.75rem;
     }
 
-    /* ── CARD ── */
+    /* CARD */
     .card {
-      display: flex;
-      gap: 1.25rem;
-      padding: 1.75rem 0;
-      border-bottom: 1px solid var(--text-15);
       text-decoration: none;
       color: var(--text);
+      display: block;
       transition: opacity 0.15s;
     }
-    .card:first-child { border-top: 1px solid var(--text-15); }
-    .card:hover { opacity: 0.65; }
-
-    @media (min-width: 640px) { .card { gap: 1.75rem; } }
-
-    /* Thumbnail */
-    .card-thumb {
-      flex-shrink: 0;
-      width: 96px;
-      height: 72px;
-      background: var(--text-15);
-      border-radius: 4px;
-    }
-    @media (min-width: 640px) {
-      .card-thumb { width: 140px; height: 96px; }
-    }
-
-    /* Text */
-    .card-body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 0.3rem;
-      flex: 1;
-      min-width: 0;
-    }
+    .card:hover { opacity: 0.55; }
 
     .card-type {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
+      font-size: 0.6875rem;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--muted);
+      margin-bottom: 0.45rem;
     }
 
     .card-title {
-      font-family: var(--font-text);
-      font-size: 0.9375rem;
-      font-weight: 600;
-      line-height: 1.4;
-      color: var(--text);
-    }
-    @media (min-width: 640px) { .card-title { font-size: 1rem; } }
-
-    .card-byline {
-      font-size: 0.8125rem;
-      color: var(--text-40);
-      line-height: 1.4;
+      font-size: 1.4375rem;
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.4rem;
     }
 
     .card-desc {
-      font-size: 0.8125rem;
-      color: var(--text-40);
+      font-size: 1.0625rem;
+      color: var(--muted);
       line-height: 1.5;
-      display: none;
+      font-style: italic;
     }
-    @media (min-width: 640px) { .card-desc { display: block; } }
 
     .card-date {
-      font-size: 0.75rem;
-      color: var(--text-40);
-      margin-top: 0.15rem;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      padding: 3.5rem 1.5rem;
-      margin-top: 2rem;
-    }
-    @media (min-width: 768px) { footer { padding: 3.5rem 3rem; } }
-
-    .footer-inner {
-      max-width: 860px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .footer-title {
-      font-family: var(--font-text);
-      font-weight: 700;
       font-size: 0.875rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      line-height: 1.1;
-      text-decoration: none;
-      color: var(--accent);
-      transition: opacity 0.15s;
+      color: var(--muted);
+      margin-top: 0.55rem;
     }
-    .footer-title:hover { opacity: 0.7; }
 
-    .footer-bottom {
+    /* FOOTER */
+    footer {
+      max-width: 760px;
+      margin: 7rem auto 0;
+      padding: 2rem;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      font-size: 0.8125rem;
-      color: var(--text-40);
-      border-top: 1px solid var(--text-15);
-      padding-top: 1.5rem;
+      font-size: 0.9375rem;
+      color: var(--muted);
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
-    <div class="nav-inner">
-      <a class="nav-logo" href="./">Creative Conviction</a>
-    </div>
+    <a class="nav-logo" href="./">Creative Conviction</a>
+    <a class="nav-about" href="./about.html">About</a>
   </nav>
 
-  <!-- FILTER TABS -->
-  <div class="tabs">
-    <div class="tabs-inner">
-      <button class="tab active" data-filter="all">All</button>
-      <button class="tab" data-filter="report">Reports</button>
-      <button class="tab" data-filter="interview">Interviews</button>
-    </div>
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="report">Reports</button>
+    <button class="filter-btn" data-filter="interview">Interviews</button>
   </div>
 
-  <!-- CONTENT LIST -->
   <div class="content">
     <div class="card-list">
 
-      <!-- 1. Interview: Paul Jun -->
       <a class="card" href="interviews/paul-jun/" data-type="interview">
-        <div class="card-thumb"></div>
-        <div class="card-body">
-          <span class="card-type">Interview</span>
-          <div class="card-title">Paul Jun, Head of Brand at Ramp</div>
-          <div class="card-desc">Brand engineers and the future of creative teams</div>
-          <div class="card-date">April 2026</div>
-        </div>
+        <div class="card-type">Interview</div>
+        <div class="card-title">Paul Jun, Head of Brand at Ramp</div>
+        <div class="card-desc">Brand engineers and the future of creative teams</div>
+        <div class="card-date">April 2026</div>
       </a>
 
-      <!-- 2. Report: Brand and Narrative -->
       <a class="card" href="https://creativeconviction.github.io/brand-and-narrative/" data-type="report">
-        <div class="card-thumb"></div>
-        <div class="card-body">
-          <span class="card-type">Report</span>
-          <div class="card-title">Brand and Narrative</div>
-          <div class="card-desc">How AI is reshaping brand building, creative storytelling, and narrative strategy.</div>
-          <div class="card-date">April 2026</div>
-        </div>
+        <div class="card-type">Report</div>
+        <div class="card-title">Brand and Narrative</div>
+        <div class="card-desc">How AI is reshaping brand building, creative storytelling, and narrative strategy.</div>
+        <div class="card-date">April 2026</div>
       </a>
 
-      <!-- 3. Report: Product Design -->
       <a class="card" href="https://creativeconviction.github.io/product-design/" data-type="report">
-        <div class="card-thumb"></div>
-        <div class="card-body">
-          <span class="card-type">Report</span>
-          <div class="card-title">Product Design</div>
-          <div class="card-desc">How AI is transforming product design workflows, tooling, and the role of the designer.</div>
-          <div class="card-date">March 2026</div>
-        </div>
+        <div class="card-type">Report</div>
+        <div class="card-title">Product Design</div>
+        <div class="card-desc">How AI is transforming product design workflows, tooling, and the role of the designer.</div>
+        <div class="card-date">March 2026</div>
       </a>
 
-      <!-- 4. Report: Creative Conviction -->
       <a class="card" href="https://creativeconviction.github.io/creative-conviction/" data-type="report">
-        <div class="card-thumb"></div>
-        <div class="card-body">
-          <span class="card-type">Report</span>
-          <div class="card-title">Creative Conviction Primer</div>
-          <div class="card-desc">Our thesis on why taste and creative ambition are the last true differentiators in the age of AI.</div>
-          <div class="card-date">February 2026</div>
-        </div>
+        <div class="card-type">Report</div>
+        <div class="card-title">Creative Conviction Primer</div>
+        <div class="card-desc">Our thesis on why taste and creative ambition are the last true differentiators in the age of AI.</div>
+        <div class="card-date">February 2026</div>
       </a>
 
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer>
-    <div class="footer-inner">
-      <a class="footer-title" href="./">Creative Conviction</a>
-      <div class="footer-bottom">
-        <span>Made in NYC</span>
-        <span>&copy; 2026</span>
-      </div>
-    </div>
+    <span>Creative Conviction</span>
+    <span>&copy; 2026</span>
   </footer>
 
   <script>
-    const tabs = document.querySelectorAll('.tab');
+    const btns = document.querySelectorAll('.filter-btn');
     const cards = document.querySelectorAll('.card');
 
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-
-        const filter = tab.dataset.filter;
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
         cards.forEach(card => {
-          card.style.display = (filter === 'all' || card.dataset.type === filter) ? 'flex' : 'none';
+          card.style.display = (filter === 'all' || card.dataset.type === filter) ? 'block' : 'none';
         });
       });
     });
