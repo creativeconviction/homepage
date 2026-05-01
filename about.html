@@ -6,25 +6,33 @@
   <title>About — Creative Conviction</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --bg: #fff8f1;
       --text: #20124d;
-      --muted: rgba(32, 18, 77, 0.4);
+      --muted: rgba(32, 18, 77, 0.38);
     }
 
     body.terminal {
-      --bg: #0a0a0a;
-      --text: #c8f0c8;
-      --muted: rgba(200, 240, 200, 0.42);
+      --bg: #000;
+      --text: #fff;
+      --muted: rgba(255, 255, 255, 0.4);
     }
-    body.terminal,
-    body.terminal * {
+    body.terminal, body.terminal * {
       font-family: 'Courier New', Courier, monospace !important;
     }
+    body.terminal::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.08) 3px, rgba(0,0,0,0.08) 4px);
+      pointer-events: none;
+      z-index: 9999;
+    }
+    body.terminal .corner { border-color: rgba(255,255,255,0.25); }
 
     html { scroll-behavior: smooth; }
 
@@ -34,32 +42,27 @@
       color: var(--text);
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
-      transition: background 0.25s, color 0.25s;
+      transition: background 0.2s, color 0.2s;
     }
 
-    /* NAV */
+    .corner {
+      position: fixed;
+      width: 16px; height: 16px;
+      pointer-events: none;
+      z-index: 50;
+    }
+    .corner-tl { top: 1.25rem; left: 1.25rem; border-top: 1px solid var(--muted); border-left: 1px solid var(--muted); }
+    .corner-tr { top: 1.25rem; right: 1.25rem; border-top: 1px solid var(--muted); border-right: 1px solid var(--muted); }
+    .corner-bl { bottom: 1.25rem; left: 1.25rem; border-bottom: 1px solid var(--muted); border-left: 1px solid var(--muted); }
+    .corner-br { bottom: 1.25rem; right: 1.25rem; border-bottom: 1px solid var(--muted); border-right: 1px solid var(--muted); }
+
     nav {
       max-width: 720px;
       margin: 0 auto;
-      padding: 2rem 2rem 0;
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-    }
-
-    .nav-logo {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--muted);
-      text-decoration: none;
-      letter-spacing: 0.01em;
-      transition: color 0.15s;
-    }
-    .nav-logo:hover { color: var(--text); }
-
-    .nav-right {
+      padding: 1.75rem 2rem 0;
       display: flex;
       align-items: center;
+      justify-content: flex-end;
       gap: 1.25rem;
     }
 
@@ -67,32 +70,33 @@
       background: none;
       border: 1px solid var(--muted);
       cursor: pointer;
-      font-family: inherit;
-      font-size: 0.75rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.6875rem;
       color: var(--muted);
-      padding: 0.2rem 0.55rem;
-      letter-spacing: 0.06em;
+      padding: 0.2rem 0.5rem;
+      letter-spacing: 0.05em;
       transition: color 0.15s, border-color 0.15s;
-      line-height: 1.6;
+      line-height: 1.7;
     }
     .terminal-toggle:hover { color: var(--text); border-color: var(--text); }
 
     .nav-about {
-      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8125rem;
       color: var(--text);
       text-decoration: none;
     }
 
-    /* CONTENT */
     .content {
-      max-width: 560px;
+      max-width: 540px;
       margin: 5.5rem auto 0;
       padding: 0 2rem;
     }
 
     .page-label {
+      font-family: 'Inter', sans-serif;
       font-size: 0.6875rem;
-      letter-spacing: 0.13em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--muted);
       margin-bottom: 2rem;
@@ -115,32 +119,34 @@
     }
     .about-body a:hover { opacity: 0.6; }
 
-    /* FOOTER */
     footer {
       max-width: 720px;
       margin: 7rem auto 0;
       padding: 2rem;
       display: flex;
       justify-content: space-between;
-      font-size: 0.9375rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
       color: var(--muted);
     }
   </style>
 </head>
 <body>
 
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
   <nav>
-    <a class="nav-logo" href="./">Creative Conviction</a>
-    <div class="nav-right">
-      <button class="terminal-toggle" id="terminal-toggle">&gt;_</button>
-      <a class="nav-about" href="./about.html">About</a>
-    </div>
+    <button class="terminal-toggle" id="terminal-toggle">&gt;_</button>
+    <a class="nav-about" href="./about.html">About</a>
   </nav>
 
   <div class="content">
     <div class="page-label">About</div>
     <div class="about-body">
-      <p>We're Libbie and <a href="https://x.com/rayoufalhumedhi" target="_blank">Rayouf</a>, two investors at <a href="https://www.bvp.com/" target="_blank">Bessemer Venture Partners</a> who spend our days at the intersection of creativity, technology, and company building. We started Creative Conviction because we believe that taste and creative ambition are becoming the most important differentiators in the age of AI, and we wanted a place to explore what that means with the people living it.</p>
+      <p>We're <a href="https://www.linkedin.com/in/libbie-frost-9a20b4195" target="_blank">Libbie</a> and <a href="https://x.com/rayoufalhumedhi" target="_blank">Rayouf</a>, two investors at <a href="https://www.bvp.com/" target="_blank">Bessemer Venture Partners</a> who spend our days at the intersection of creativity, technology, and company building. We started Creative Conviction because we believe that taste and creative ambition are becoming the most important differentiators in the age of AI, and we wanted a place to explore what that means with the people living it.</p>
     </div>
   </div>
 
