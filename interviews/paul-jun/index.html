@@ -13,22 +13,34 @@
     :root {
       --bg: #fff8f1;
       --text: #20124d;
-      --muted: rgba(32, 18, 77, 0.4);
-      --faint: rgba(32, 18, 77, 0.08);
-      --highlight: rgba(32, 18, 77, 0.07);
-      --sidebar-w: 15rem;
+      --muted: rgba(32, 18, 77, 0.38);
+      --faint: rgba(32, 18, 77, 0.07);
+      --interviewer: #8a8a9a;
+      --guest: #20124d;
+      --sidebar-w: 14rem;
     }
 
     body.terminal {
-      --bg: #0a0a0a;
-      --text: #c8f0c8;
-      --muted: rgba(200, 240, 200, 0.42);
-      --faint: rgba(200, 240, 200, 0.08);
-      --highlight: rgba(200, 240, 200, 0.06);
+      --bg: #000;
+      --text: #00ff41;
+      --muted: rgba(0, 255, 65, 0.38);
+      --faint: rgba(0, 255, 65, 0.07);
+      --interviewer: rgba(0, 255, 65, 0.4);
+      --guest: #00ff41;
     }
-    body.terminal,
-    body.terminal * {
+    body.terminal, body.terminal * {
       font-family: 'Courier New', Courier, monospace !important;
+    }
+    body.terminal::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 3px,
+        rgba(0,0,0,0.1) 3px, rgba(0,0,0,0.1) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
     }
 
     html { scroll-behavior: smooth; }
@@ -38,15 +50,17 @@
       background: var(--bg);
       color: var(--text);
       -webkit-font-smoothing: antialiased;
-      transition: background 0.25s, color 0.25s;
+      transition: background 0.2s, color 0.2s;
     }
 
-    /* MOBILE BACK */
-    .mobile-back {
-      display: block;
-      padding: 2rem 2rem 0;
+    /* MOBILE TOP BAR */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 1.5rem 0;
     }
-    @media (min-width: 1100px) { .mobile-back { display: none; } }
+    @media (min-width: 1060px) { .topbar { display: none; } }
 
     .back-link {
       font-size: 0.9375rem;
@@ -56,16 +70,6 @@
     }
     .back-link:hover { color: var(--text); }
 
-    /* TOP NAV (mobile/tablet) */
-    .top-nav {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding: 2rem 2rem 0;
-      gap: 1.25rem;
-    }
-    @media (min-width: 1100px) { .top-nav { display: none; } }
-
     .terminal-toggle {
       background: none;
       border: 1px solid var(--muted);
@@ -73,47 +77,45 @@
       font-family: inherit;
       font-size: 0.75rem;
       color: var(--muted);
-      padding: 0.2rem 0.55rem;
+      padding: 0.18rem 0.5rem;
       letter-spacing: 0.06em;
       transition: color 0.15s, border-color 0.15s;
-      line-height: 1.6;
+      line-height: 1.7;
     }
     .terminal-toggle:hover { color: var(--text); border-color: var(--text); }
 
     /* LAYOUT */
     .layout { display: flex; }
-    @media (min-width: 1100px) { .layout { padding-top: 3rem; } }
+    @media (min-width: 1060px) { .layout { padding-top: 2.5rem; } }
 
     /* SIDEBAR */
     .sidebar {
       display: none;
       position: fixed;
-      left: 0;
-      top: 48px;
+      left: 0; top: 44px;
       width: var(--sidebar-w);
-      padding-left: 3rem;
+      padding-left: 2.5rem;
       padding-right: 1rem;
       opacity: 0;
-      transform: translateX(-16px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      transform: translateX(-12px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
     }
-    @media (min-width: 1100px) { .sidebar { display: block; } }
+    @media (min-width: 1060px) { .sidebar { display: block; } }
     .sidebar.visible { opacity: 1; transform: translateX(0); }
 
     .sidebar-header {
-      font-size: 0.6875rem;
-      letter-spacing: 0.13em;
+      font-size: 0.625rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 1rem;
+      margin-bottom: 0.85rem;
     }
 
-    .sidebar-nav { display: flex; align-items: flex-start; }
+    .sidebar-nav { display: flex; align-items: flex-start; gap: 0.75rem; }
 
     .sidebar-track {
       position: relative;
       width: 1px;
-      margin-right: 1rem;
       flex-shrink: 0;
       align-self: stretch;
       background: var(--faint);
@@ -122,125 +124,101 @@
       position: absolute;
       width: 100%;
       background: var(--text);
-      height: 13px;
-      top: 0;
-      transition: top 0.25s ease-out, height 0.15s ease-out;
+      height: 13px; top: 0;
+      transition: top 0.22s ease-out, height 0.12s ease-out;
     }
 
-    .sidebar-links {
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-    }
+    .sidebar-links { display: flex; flex-direction: column; gap: 0.15rem; }
 
     .sidebar-link {
-      background: none;
-      border: none;
-      cursor: pointer;
+      background: none; border: none; cursor: pointer;
       font-family: 'EB Garamond', Georgia, serif;
-      font-size: 0.875rem;
+      font-size: 0.8125rem;
       color: var(--muted);
       text-align: left;
-      line-height: 1.4;
+      line-height: 1.35;
       padding: 0.1rem 0;
-      transition: color 0.2s;
+      transition: color 0.18s;
     }
     .sidebar-link:hover { color: var(--text); }
     .sidebar-link.active { color: var(--text); font-weight: 600; }
 
-    .sidebar-meta {
-      margin-top: 1.5rem;
-      font-size: 0.875rem;
-      color: var(--muted);
-      font-style: italic;
-    }
-
-    .sidebar .back-link {
-      display: inline-block;
-      margin-top: 1.25rem;
-      font-size: 0.875rem;
-    }
-
-    .sidebar .terminal-toggle {
-      display: block;
-      margin-top: 1.25rem;
-      width: fit-content;
-    }
+    .sidebar-meta { margin-top: 1.25rem; font-size: 0.8125rem; color: var(--muted); font-style: italic; }
+    .sidebar .back-link { display: inline-block; margin-top: 1rem; font-size: 0.8125rem; }
+    .sidebar .terminal-toggle { display: block; margin-top: 1rem; }
 
     /* MAIN */
-    main {
-      flex: 1;
-      padding: 2rem;
-      padding-top: 3rem;
-    }
-    @media (min-width: 1100px) { main { padding-bottom: 4rem; } }
+    main { flex: 1; padding: 2rem 2rem 4rem; }
+    @media (min-width: 1060px) { main { padding-top: 2.5rem; } }
 
-    .content { max-width: 600px; margin: 0 auto; }
+    .content { max-width: 580px; margin: 0 auto; }
 
-    .scroll-anchor { scroll-margin-top: 6rem; }
+    .scroll-anchor { scroll-margin-top: 5rem; }
 
     /* HEADER */
+    .article-kicker {
+      font-size: 0.9375rem;
+      font-style: italic;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 0.6rem;
+    }
+
     .article-title {
-      font-size: clamp(2rem, 5vw, 3rem);
+      font-size: clamp(1.875rem, 4.5vw, 2.625rem);
       font-weight: 600;
       line-height: 1.05;
       letter-spacing: -0.025em;
       text-align: center;
-      margin-bottom: 1rem;
+      margin-bottom: 0.6rem;
     }
 
     .article-subtitle {
-      font-size: 1.375rem;
+      font-size: 1.125rem;
       font-style: italic;
       text-align: center;
       color: var(--muted);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
     }
 
     .article-date {
-      font-size: 0.9375rem;
+      font-size: 0.875rem;
       text-align: center;
       color: var(--muted);
-      margin-bottom: 4rem;
+      margin-bottom: 3rem;
     }
 
     /* Q&A */
-    .qa-list { display: flex; flex-direction: column; gap: 2rem; margin-bottom: 4rem; }
-
-    .qa-block {
+    .qa-list {
       display: flex;
       flex-direction: column;
-      gap: 0.2rem;
+      gap: 1.1rem;
+      margin-bottom: 3.5rem;
     }
-    @media (min-width: 1100px) {
-      .qa-block {
-        display: grid;
-        grid-template-columns: 5rem 1fr;
-        gap: 1rem;
-        align-items: start;
-      }
+
+    .qa-block {
+      display: grid;
+      grid-template-columns: 2.75rem 1fr;
+      gap: 0 0.85rem;
+      align-items: start;
     }
 
     .speaker-name {
-      font-size: 0.875rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      color: var(--text);
-      padding-top: 0.1rem;
-      white-space: nowrap;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      padding-top: 0.12rem;
+      line-height: 1.35;
     }
-    @media (min-width: 1100px) {
-      .speaker-name.initials { text-align: right; }
-    }
+    .speaker-name.interviewer { color: var(--interviewer); }
+    .speaker-name.guest { color: var(--guest); }
 
     .qa-body {
-      font-size: 1.0625rem;
-      line-height: 1.65;
-      white-space: pre-line;
+      font-size: 1rem;
+      line-height: 1.38;
     }
-    .qa-body p { margin-bottom: 1rem; }
+    .qa-body p { margin-bottom: 0.55rem; }
     .qa-body p:last-child { margin-bottom: 0; }
-
     .qa-body.question { font-weight: 600; }
     .qa-body.response { font-weight: 400; }
 
@@ -253,64 +231,57 @@
     }
     .qa-body a:hover { opacity: 0.6; }
 
+    /* PULL QUOTE */
     .highlight-quote {
-      background: linear-gradient(180deg, transparent 58%, var(--highlight) 58%);
-      padding: 0 2px;
+      font-style: italic;
+      font-weight: 500;
     }
 
     /* HOT TAKES */
-    .hot-takes { padding-top: 3rem; }
+    .hot-takes { padding-top: 2.5rem; }
 
     .hot-takes-title {
-      font-size: 2rem;
+      font-size: 1.75rem;
       font-weight: 600;
       letter-spacing: -0.02em;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
 
-    .hot-takes-list { display: flex; flex-direction: column; gap: 2rem; }
+    .hot-takes-list { display: flex; flex-direction: column; gap: 1.5rem; }
 
     .hot-take {
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-    }
-    @media (min-width: 1100px) {
-      .hot-take {
-        display: grid;
-        grid-template-columns: 5rem 1fr;
-        gap: 1rem;
-        align-items: start;
-      }
+      display: grid;
+      grid-template-columns: 2.75rem 1fr;
+      gap: 0 0.85rem;
+      align-items: start;
     }
 
     .hot-take-number {
-      font-size: 0.875rem;
-      font-weight: 600;
+      font-size: 0.8125rem;
+      font-weight: 700;
       color: var(--muted);
+      padding-top: 0.12rem;
     }
-    @media (min-width: 1100px) { .hot-take-number { text-align: right; } }
 
     .hot-take-question {
-      font-size: 1.0625rem;
+      font-size: 1rem;
       font-weight: 600;
-      line-height: 1.5;
-      margin-bottom: 0.5rem;
+      line-height: 1.38;
+      margin-bottom: 0.4rem;
     }
 
     .hot-take-answer {
-      font-size: 1.0625rem;
-      line-height: 1.65;
-      white-space: pre-line;
+      font-size: 1rem;
+      line-height: 1.38;
     }
-    .hot-take-answer p { margin-bottom: 1rem; }
+    .hot-take-answer p { margin-bottom: 0.55rem; }
     .hot-take-answer p:last-child { margin-bottom: 0; }
 
     /* FOOTER */
     footer {
       max-width: 720px;
-      margin: 5rem auto 0;
-      padding: 2rem;
+      margin: 4rem auto 0;
+      padding: 1.5rem 2rem;
       display: flex;
       justify-content: space-between;
       font-size: 0.9375rem;
@@ -320,12 +291,9 @@
 </head>
 <body>
 
-  <div class="top-nav">
-    <button class="terminal-toggle" id="terminal-toggle-mobile">&gt;_</button>
-  </div>
-
-  <div class="mobile-back">
+  <div class="topbar">
     <a class="back-link" href="https://creativeconviction.github.io/homepage/">← Creative Conviction</a>
+    <button class="terminal-toggle" id="terminal-toggle-mobile">&gt;_</button>
   </div>
 
   <div class="layout">
@@ -358,41 +326,41 @@
     <main>
       <div class="content">
 
-        <div id="brand-in-the-org" class="scroll-anchor"></div>
+        <div class="article-kicker">Interview</div>
         <h1 class="article-title">Brand Engineers and the Future of Creative Teams</h1>
         <p class="article-subtitle">with Paul Jun</p>
         <p class="article-date">April 2026</p>
 
+        <div id="brand-in-the-org" class="scroll-anchor"></div>
+
         <div class="qa-list">
 
-          <!-- Brand's Place in the Org -->
           <div class="qa-block">
-            <span class="speaker-name full-name">Libbie Frost and Rayouf Alhumedhi</span>
+            <span class="speaker-name interviewer">LF+RA</span>
             <div class="qa-body question">
               <p>What changes when brand reports into product and engineering versus marketing? And what does that look like at Ramp today?</p>
             </div>
           </div>
 
           <div class="qa-block">
-            <span class="speaker-name full-name">Paul Jun</span>
+            <span class="speaker-name guest">PJ</span>
             <div class="qa-body response">
               <p>A lot of startups place brand under marketing, and it's a strange thing. My sense is that early-stage companies influence this org chart decision without much thought. At the end of the day, product design and brand design is just design. <span class="highlight-quote">Product design is form follows function. Brand design is form follows fantasy.</span> Both require form and both require a customer to experience it.</p>
               <p>In my past two jobs before Ramp, I always negotiated that I would not report to a CMO. I want to report to a designer and a builder. My team still works with marketing. We create the templates, the guidelines, the assets. But I think before the age of AI, most leaders and CEOs, because they don't understand branding, just placed brand designers on marketing teams. This idea of an "in-house agency" was a trend for the last 20 years. I personally think that idea is horrendous. I don't think it's working at all, and you're going to lose a lot of good designers that way.</p>
             </div>
           </div>
 
-          <!-- Three Phases -->
           <div id="three-phases" class="scroll-anchor"></div>
 
           <div class="qa-block">
-            <span class="speaker-name initials">LF + RA</span>
+            <span class="speaker-name interviewer">LF+RA</span>
             <div class="qa-body question">
               <p>Can you walk us through how you see startups evolving on this?</p>
             </div>
           </div>
 
           <div class="qa-block">
-            <span class="speaker-name initials">PJ</span>
+            <span class="speaker-name guest">PJ</span>
             <div class="qa-body response">
               <p>Every startup goes through phases. First, you have to find product-market fit. Brand design is influencing things like marketing campaigns, emails, the identity itself, the website. Important, but functional.</p>
               <p>Second phase is what I'd call the features war. One company builds a feature, another company says "we have that too, but better." Companies get stuck in this world trying to out-feature each other, and I think that's a race to the bottom.</p>
@@ -402,31 +370,30 @@
           </div>
 
           <div class="qa-block">
-            <span class="speaker-name initials">LF + RA</span>
+            <span class="speaker-name interviewer">LF+RA</span>
             <div class="qa-body question">
               <p>What's the scope of your team's accountability at Ramp?</p>
             </div>
           </div>
 
           <div class="qa-block">
-            <span class="speaker-name initials">PJ</span>
+            <span class="speaker-name guest">PJ</span>
             <div class="qa-body response">
               <p>My team is accountable for thinking about the entire arc, from the first performance ad to the homepage, to a demo, to a sales conversation, the sales deck, even the language the sales team uses, all the way to onboarding into the product, your first moment of value, and inviting a colleague. That is all brand. And I'm not saying it just falls on the brand team. Everyone at a company should feel like they're accountable for the brand.</p>
             </div>
           </div>
 
-          <!-- Product vs. Brand -->
           <div id="product-vs-brand" class="scroll-anchor"></div>
 
           <div class="qa-block">
-            <span class="speaker-name initials">LF + RA</span>
+            <span class="speaker-name interviewer">LF+RA</span>
             <div class="qa-body question">
               <p>You said most product designers don't think this way and you only have a handful of people that can do both. Why is that? And how do people upskill?</p>
             </div>
           </div>
 
           <div class="qa-block">
-            <span class="speaker-name initials">PJ</span>
+            <span class="speaker-name guest">PJ</span>
             <div class="qa-body response">
               <p>Some of it is honestly just luck. You have to work at a place where you have the right design leadership that shows you can be both, that you can use both sides of your brain.</p>
               <p>This might be a cynical take, but I think the growth era where everything was about moving fast, the low interest rate economy, I think product design fell to a shallow game. Product designers were held to certain numbers and outcomes that they had to game at big companies, and it created some bad habits. They were forced to play the wrong game. They never learned brand because they were stuck in their own world being managed by PMs or engineering teams. And those two worlds never talked to each other.</p>
@@ -435,18 +402,17 @@
             </div>
           </div>
 
-          <!-- Brand as Behavior -->
           <div id="brand-as-behavior" class="scroll-anchor"></div>
 
           <div class="qa-block">
-            <span class="speaker-name initials">LF + RA</span>
+            <span class="speaker-name interviewer">LF+RA</span>
             <div class="qa-body question">
               <p>Something we've been thinking about, and probably arguing, is that brand in a lot of ways comes from the founding team's vision. And it's the product made visible. How do you think about how much of Ramp's edge is product versus brand versus team?</p>
             </div>
           </div>
 
           <div class="qa-block">
-            <span class="speaker-name initials">PJ</span>
+            <span class="speaker-name guest">PJ</span>
             <div class="qa-body response">
               <p>Every single prospect or agency I talk to mentions Ramp's brand as being iconic. I was talking to an agency the other day and they were like, "literally every client call, they say they want something like Ramp's brand." I take no credit for that. The team before me did a great job of creating something truly differentiated in the financial space, which is often seen as esoteric, intimidating, and high barrier to entry. Ramp's brand is very quiet and confident. Not loud and in your face.</p>
               <p>What brought me to Ramp, other than the brand being so strong, was that the engineering is clearly world class. Every friend I told I was interviewing said "Ramp is next level, they have some of the best engineers." And it's clear because the product just works. It's that fast and that automatic.</p>
@@ -455,18 +421,17 @@
             </div>
           </div>
 
-          <!-- Programmable Brand -->
           <div id="programmable-brand" class="scroll-anchor"></div>
 
           <div class="qa-block">
-            <span class="speaker-name initials">LF + RA</span>
+            <span class="speaker-name interviewer">LF+RA</span>
             <div class="qa-body question">
               <p>We've been writing about how all these sub-processes of brand are becoming programmatic or programmable. But there are some aspects of cohesive narrative building that you just need creatives in the loop for. How do you think about that? What are the sub-processes you're automating first versus not?</p>
             </div>
           </div>
 
           <div class="qa-block">
-            <span class="speaker-name initials">PJ</span>
+            <span class="speaker-name guest">PJ</span>
             <div class="qa-body response">
               <p>Something I said to my team my second or third week at Ramp, and something I still deeply believe, is: <span class="highlight-quote">make the brand easy to love and impossible to misuse. And that's on us.</span></p>
               <p>We're building a Slack bot right now that can generate a brief for a product area, turn that brief into a deck, and turn that deck into different assets. All of it happening just in Slack. I'm working with one design engineer on it.</p>
@@ -476,31 +441,30 @@
           </div>
 
           <div class="qa-block">
-            <span class="speaker-name initials">LF + RA</span>
+            <span class="speaker-name interviewer">LF+RA</span>
             <div class="qa-body question">
               <p>Has that shift started happening yet? Have you seen a designer with extra time pursuing a new opportunity because of this?</p>
             </div>
           </div>
 
           <div class="qa-block">
-            <span class="speaker-name initials">PJ</span>
+            <span class="speaker-name guest">PJ</span>
             <div class="qa-body response">
               <p>Not yet. I'm 10 weeks into the job and there's so much foundational stuff I'm fixing and changing. But my hope is that every single designer on my team can plug into any team at Ramp and within a couple weeks, that team's output is 10x better. The quality of their writing, the way they launch things. One person goes into a team, works with dozens of people, 10x their output, then leaves it better than they found it and moves on to the next team.</p>
             </div>
           </div>
 
-          <!-- Skills and Systems -->
           <div id="skills-and-systems" class="scroll-anchor"></div>
 
           <div class="qa-block">
-            <span class="speaker-name initials">LF + RA</span>
+            <span class="speaker-name interviewer">LF+RA</span>
             <div class="qa-body question">
               <p>Earlier you mentioned the idea that brand designers need to become "brand engineers." Can you expand on what that means in practice?</p>
             </div>
           </div>
 
           <div class="qa-block">
-            <span class="speaker-name initials">PJ</span>
+            <span class="speaker-name guest">PJ</span>
             <div class="qa-body response">
               <p>The future is that brand designers need to become brand engineers. You have to learn Claude Code and Cursor. You have to learn how to build tools. The question becomes: how might a brand team create the systems, the agents, the skills, the prompt libraries, the patterns that every team uses?</p>
               <p>I went to the SEO team last week and asked, "what do you need to represent the brand well without a designer in the room?" They need the Ramp tone of voice, the brand strategy, persona and ICP data from product marketing, research from the research team, a library of product graphics for articles, a library of assets for blog hero images. So you go make friends with these teams, deeply understand what they're accountable for and what outcomes they're driving, and then reverse engineer it. What are the skills, the prompts, the agents they need to be set up for success?</p>
@@ -509,18 +473,17 @@
             </div>
           </div>
 
-          <!-- Tooling -->
           <div id="tooling" class="scroll-anchor"></div>
 
           <div class="qa-block">
-            <span class="speaker-name initials">LF + RA</span>
+            <span class="speaker-name interviewer">LF+RA</span>
             <div class="qa-body question">
               <p>From your perspective, have you seen any creative tools that have stuck or that you've gotten real value out of? And are there gaps where you're still spending manual time that you think could be interesting?</p>
             </div>
           </div>
 
           <div class="qa-block">
-            <span class="speaker-name initials">PJ</span>
+            <span class="speaker-name guest">PJ</span>
             <div class="qa-body response">
               <p>We've been playing with Paper, that Figma competitor, and it's shown some pretty impressive output. At Ramp we encourage everyone to try to break things. Use a tool, connect it to Claude, and try to imagine an end-to-end process. Let's say you wanted to build a landing page. Do you have the design systems? The components? The right skills? Does it understand your Figma files? Do you have recipes that understand what a good landing page looks like on a pixel level?</p>
               <p>The way I frame it to my team is: you are the expert of your craft. I need you to test these tools and tell me whether they have any feasibility. If you tell me they don't, I'll leave you alone. But I need you to explore that.</p>
@@ -529,18 +492,17 @@
             </div>
           </div>
 
-          <!-- Time for Creatives -->
           <div id="time-for-creatives" class="scroll-anchor"></div>
 
           <div class="qa-block">
-            <span class="speaker-name initials">LF + RA</span>
+            <span class="speaker-name interviewer">LF+RA</span>
             <div class="qa-body question">
               <p>What gives you conviction that this is the right moment for creatives?</p>
             </div>
           </div>
 
           <div class="qa-block">
-            <span class="speaker-name initials">PJ</span>
+            <span class="speaker-name guest">PJ</span>
             <div class="qa-body response">
               <p>I started using Cursor a month after it came out. It was the end of 2023, I had a week or two off from work, and I downloaded it and told myself: I'm just going to sit here, I don't care how frustrated I get, I'm just going to push myself. In three days, I built a Figma plugin that I couldn't believe I built. I sent it to an engineer and asked him to review the code. He called me and said "you know how to code?" I said no, I used this tool called Cursor. He said "this is 95% good, this is something I would have written myself." This was an early design engineer at Facebook before that was even a title.</p>
               <p>I remember thinking: everything is about to change. And for the first time in my career, I felt like I was ahead of the curve.</p>
@@ -601,7 +563,6 @@
   </footer>
 
   <script>
-    // Terminal toggle (both sidebar and mobile)
     function setupToggle(id) {
       const btn = document.getElementById(id);
       if (!btn) return;
@@ -616,16 +577,12 @@
     setupToggle('terminal-toggle-sidebar');
     setupToggle('terminal-toggle-mobile');
 
-    // Sidebar entrance
-    setTimeout(() => document.getElementById('sidebar')?.classList.add('visible'), 250);
+    setTimeout(() => document.getElementById('sidebar')?.classList.add('visible'), 200);
 
-    // Scroll tracking
     const sections = [
-      'brand-in-the-org', 'three-phases', 'product-vs-brand',
-      'brand-as-behavior', 'programmable-brand', 'skills-and-systems',
-      'tooling', 'time-for-creatives', 'hot-takes'
+      'brand-in-the-org','three-phases','product-vs-brand','brand-as-behavior',
+      'programmable-brand','skills-and-systems','tooling','time-for-creatives','hot-takes'
     ];
-
     const links = document.querySelectorAll('.sidebar-link');
     const indicator = document.getElementById('track-indicator');
 
@@ -633,7 +590,7 @@
       let activeIdx = 0;
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
-        if (el && el.getBoundingClientRect().top <= 140) { activeIdx = i; break; }
+        if (el && el.getBoundingClientRect().top <= 130) { activeIdx = i; break; }
       }
       links.forEach((link, i) => link.classList.toggle('active', i === activeIdx));
       if (links[activeIdx] && indicator) {
@@ -643,9 +600,7 @@
     }
 
     links.forEach((link, i) => {
-      link.addEventListener('click', () => {
-        document.getElementById(sections[i])?.scrollIntoView({ behavior: 'smooth' });
-      });
+      link.addEventListener('click', () => document.getElementById(sections[i])?.scrollIntoView({ behavior: 'smooth' }));
     });
 
     window.addEventListener('scroll', updateSidebar, { passive: true });

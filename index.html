@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Creative Conviction</title>
-  <meta name="description" content="Interviews on capital, creative work, and AI." />
+  <meta name="description" content="We seek to spark conversation around capital, creative work, and AI." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
@@ -18,23 +18,39 @@
       --thumb: rgba(32, 18, 77, 0.07);
     }
 
+    /* ── TERMINAL MODE ── */
     body.terminal {
-      --bg: #0a0a0a;
-      --text: #c8f0c8;
-      --muted: rgba(200, 240, 200, 0.42);
-      --thumb: rgba(200, 240, 200, 0.07);
+      --bg: #000;
+      --text: #00ff41;
+      --muted: rgba(0, 255, 65, 0.38);
+      --thumb: rgba(0, 255, 65, 0.06);
     }
-    body.terminal,
-    body.terminal * {
+    body.terminal, body.terminal * {
       font-family: 'Courier New', Courier, monospace !important;
     }
-    body.terminal .hero-title {
-      letter-spacing: 0.04em !important;
+    /* scanlines */
+    body.terminal::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(0, 0, 0, 0.1) 3px,
+        rgba(0, 0, 0, 0.1) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
     }
-    body.terminal .card-thumb {
-      border: 1px solid var(--muted);
-      background: transparent !important;
-    }
+    body.terminal .hero { padding: 1.75rem 2rem 1.25rem; }
+    body.terminal .hero-title { letter-spacing: 0.02em !important; }
+    body.terminal .filters { padding: 0 2rem 1.25rem; gap: 1rem; }
+    body.terminal .card-list { gap: 0.9rem; }
+    body.terminal .card-thumb { background: transparent !important; border: 1px solid var(--muted); }
+    body.terminal .filter-btn.active::before { content: '> '; }
+    body.terminal .signup { margin-top: 3rem; }
+    body.terminal .signup-underline { border-color: var(--muted); }
 
     html { scroll-behavior: smooth; }
 
@@ -44,32 +60,17 @@
       color: var(--text);
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
-      transition: background 0.25s, color 0.25s;
+      transition: background 0.2s, color 0.2s;
     }
 
     /* NAV */
     nav {
       max-width: 720px;
       margin: 0 auto;
-      padding: 2rem 2rem 0;
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-    }
-
-    .nav-logo {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--muted);
-      text-decoration: none;
-      letter-spacing: 0.01em;
-      transition: color 0.15s;
-    }
-    .nav-logo:hover { color: var(--text); }
-
-    .nav-right {
+      padding: 1.75rem 2rem 0;
       display: flex;
       align-items: center;
+      justify-content: flex-end;
       gap: 1.25rem;
     }
 
@@ -80,10 +81,10 @@
       font-family: inherit;
       font-size: 0.75rem;
       color: var(--muted);
-      padding: 0.2rem 0.55rem;
+      padding: 0.18rem 0.5rem;
       letter-spacing: 0.06em;
       transition: color 0.15s, border-color 0.15s;
-      line-height: 1.6;
+      line-height: 1.7;
     }
     .terminal-toggle:hover { color: var(--text); border-color: var(--text); }
 
@@ -99,17 +100,17 @@
     .hero {
       max-width: 720px;
       margin: 0 auto;
-      padding: 3.5rem 2rem 3rem;
+      padding: 3rem 2rem 2.75rem;
       text-align: center;
     }
 
     .hero-title {
-      font-size: clamp(3.25rem, 9vw, 6rem);
+      font-size: clamp(2.9rem, 8.1vw, 5.4rem);
       font-weight: 600;
       line-height: 0.93;
       letter-spacing: -0.04em;
       color: var(--text);
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.1rem;
       min-height: 1em;
     }
 
@@ -130,17 +131,19 @@
     }
 
     .hero-tagline {
-      font-size: 1.125rem;
+      font-size: 1.0625rem;
       color: var(--muted);
       font-style: italic;
       line-height: 1.5;
+      max-width: 480px;
+      margin: 0 auto;
     }
 
     /* FILTERS */
     .filters {
       max-width: 720px;
       margin: 0 auto;
-      padding: 0 2rem 2.5rem;
+      padding: 0 2rem 2.25rem;
       display: flex;
       gap: 1.5rem;
     }
@@ -168,7 +171,7 @@
     .card-list {
       display: flex;
       flex-direction: column;
-      gap: 2.5rem;
+      gap: 2.25rem;
     }
 
     /* CARD */
@@ -176,7 +179,7 @@
       text-decoration: none;
       color: var(--text);
       display: flex;
-      gap: 1.5rem;
+      gap: 1.25rem;
       align-items: flex-start;
       transition: opacity 0.15s;
     }
@@ -184,110 +187,109 @@
 
     .card-thumb {
       flex-shrink: 0;
-      width: 90px;
-      height: 68px;
+      width: 88px;
+      height: 62px;
       background: var(--thumb);
       border-radius: 2px;
+      overflow: hidden;
     }
-    @media (min-width: 580px) {
-      .card-thumb { width: 116px; height: 82px; }
-    }
+    .card-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    @media (min-width: 580px) { .card-thumb { width: 112px; height: 76px; } }
 
     .card-body { flex: 1; min-width: 0; }
 
     .card-type {
       font-size: 0.6875rem;
-      letter-spacing: 0.13em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.3rem;
     }
 
     .card-title {
-      font-size: 1.375rem;
+      font-size: 1.3125rem;
       font-weight: 500;
       line-height: 1.2;
       letter-spacing: -0.01em;
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.3rem;
     }
 
     .card-desc {
-      font-size: 1rem;
+      font-size: 0.9375rem;
       color: var(--muted);
-      line-height: 1.45;
+      line-height: 1.4;
       font-style: italic;
     }
 
     .card-date {
-      font-size: 0.875rem;
+      font-size: 0.8125rem;
       color: var(--muted);
-      margin-top: 0.5rem;
+      margin-top: 0.4rem;
     }
 
     /* EMAIL SIGNUP */
     .signup {
       max-width: 720px;
-      margin: 5.5rem auto 0;
+      margin: 5rem auto 0;
       padding: 0 2rem;
     }
 
     .signup-label {
       font-size: 0.6875rem;
-      letter-spacing: 0.13em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 0.85rem;
+      margin-bottom: 0.75rem;
     }
 
     .signup-title {
-      font-size: 1.625rem;
+      font-size: 1.5rem;
       font-weight: 500;
       line-height: 1.15;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
       letter-spacing: -0.015em;
     }
 
-    .signup-form {
+    .signup-underline {
       display: flex;
-      gap: 0;
-      max-width: 400px;
+      align-items: center;
+      border-bottom: 1px solid var(--muted);
+      max-width: 380px;
+      padding-bottom: 0.3rem;
+      transition: border-color 0.15s;
     }
+    .signup-underline:focus-within { border-color: var(--text); }
 
     .signup-input {
       flex: 1;
       background: transparent;
-      border: 1px solid var(--muted);
-      border-right: none;
+      border: none;
       color: var(--text);
       font-family: 'EB Garamond', Georgia, serif;
-      font-size: 1rem;
-      padding: 0.55rem 0.85rem;
+      font-size: 1.0625rem;
+      padding: 0.25rem 0;
       outline: none;
-      transition: border-color 0.15s;
-      border-radius: 0;
-      -webkit-appearance: none;
     }
     .signup-input::placeholder { color: var(--muted); }
-    .signup-input:focus { border-color: var(--text); }
 
     .signup-btn {
-      background: var(--text);
-      color: var(--bg);
-      border: 1px solid var(--text);
+      background: none;
+      border: none;
       cursor: pointer;
-      font-family: 'EB Garamond', Georgia, serif;
-      font-size: 1rem;
-      padding: 0.55rem 1.1rem;
+      color: var(--text);
+      font-size: 1.125rem;
+      padding: 0 0 0 0.5rem;
+      line-height: 1;
+      opacity: 0.5;
       transition: opacity 0.15s;
-      white-space: nowrap;
-      border-radius: 0;
+      flex-shrink: 0;
     }
-    .signup-btn:hover { opacity: 0.75; }
+    .signup-btn:hover { opacity: 1; }
 
     /* FOOTER */
     footer {
       max-width: 720px;
-      margin: 5rem auto 0;
+      margin: 4.5rem auto 0;
       padding: 2rem;
       display: flex;
       justify-content: space-between;
@@ -299,16 +301,13 @@
 <body>
 
   <nav>
-    <a class="nav-logo" href="./">Creative Conviction</a>
-    <div class="nav-right">
-      <button class="terminal-toggle" id="terminal-toggle">&gt;_</button>
-      <a class="nav-about" href="./about.html">About</a>
-    </div>
+    <button class="terminal-toggle" id="terminal-toggle">&gt;_</button>
+    <a class="nav-about" href="./about.html">About</a>
   </nav>
 
   <div class="hero">
     <h1 class="hero-title" id="hero-title"></h1>
-    <p class="hero-tagline">Interviews on capital, creative work, and AI.</p>
+    <p class="hero-tagline">We seek to spark conversation around capital, creative work, and AI.</p>
   </div>
 
   <div class="filters">
@@ -366,10 +365,12 @@
   <div class="signup">
     <div class="signup-label">Newsletter</div>
     <div class="signup-title">Stay in the loop.</div>
-    <form class="signup-form" onsubmit="return false;">
-      <input class="signup-input" type="email" placeholder="your@email.com" required />
-      <button class="signup-btn" type="submit">Subscribe</button>
-    </form>
+    <div class="signup-underline">
+      <form style="display:contents;" onsubmit="return false;">
+        <input class="signup-input" type="email" placeholder="your@email.com" required />
+        <button class="signup-btn" type="submit" aria-label="Subscribe">&#8594;</button>
+      </form>
+    </div>
   </div>
 
   <footer>
@@ -378,14 +379,13 @@
   </footer>
 
   <script>
-    // Typewriter animation
+    // Typewriter
     const titleEl = document.getElementById('hero-title');
     const text = 'Creative Conviction';
     const cursor = document.createElement('span');
     cursor.className = 'hero-cursor';
     titleEl.appendChild(cursor);
     let i = 0;
-
     function type() {
       if (i < text.length) {
         titleEl.insertBefore(document.createTextNode(text[i]), cursor);
@@ -407,7 +407,6 @@
     // Filters
     const btns = document.querySelectorAll('.filter-btn');
     const cards = document.querySelectorAll('.card');
-
     btns.forEach(btn => {
       btn.addEventListener('click', () => {
         btns.forEach(b => b.classList.remove('active'));
