@@ -359,9 +359,9 @@
       </a>
 
       <a class="card" href="https://creativeconviction.github.io/creative-conviction/" data-type="report">
-        <div class="card-thumb" data-word="PRIMER"></div>
+        <div class="card-thumb" data-word="WELCOME"></div>
         <div class="card-body">
-          <div class="card-title">Creative Conviction Primer</div>
+          <div class="card-title">Welcome to Creative Conviction</div>
           <div class="card-desc">Our thesis on why taste and creative ambition are the last true differentiators in the age of AI.</div>
           <div class="card-date">February 2026</div>
         </div>
@@ -458,9 +458,40 @@
     });
   });
 
-  // ASCII art thumbnails
+  // 5×5 bitmap pixel font — every letter guaranteed crisp at any scale
+  const PIXEL_FONT = {
+    'A':[0,1,1,1,0, 1,0,0,0,1, 1,1,1,1,1, 1,0,0,0,1, 1,0,0,0,1],
+    'B':[1,1,1,1,0, 1,0,0,0,1, 1,1,1,1,0, 1,0,0,0,1, 1,1,1,1,0],
+    'C':[0,1,1,1,1, 1,0,0,0,0, 1,0,0,0,0, 1,0,0,0,0, 0,1,1,1,1],
+    'D':[1,1,1,1,0, 1,0,0,0,1, 1,0,0,0,1, 1,0,0,0,1, 1,1,1,1,0],
+    'E':[1,1,1,1,1, 1,0,0,0,0, 1,1,1,1,0, 1,0,0,0,0, 1,1,1,1,1],
+    'F':[1,1,1,1,1, 1,0,0,0,0, 1,1,1,1,0, 1,0,0,0,0, 1,0,0,0,0],
+    'G':[0,1,1,1,1, 1,0,0,0,0, 1,0,0,1,1, 1,0,0,0,1, 0,1,1,1,1],
+    'H':[1,0,0,0,1, 1,0,0,0,1, 1,1,1,1,1, 1,0,0,0,1, 1,0,0,0,1],
+    'I':[1,1,1,1,1, 0,0,1,0,0, 0,0,1,0,0, 0,0,1,0,0, 1,1,1,1,1],
+    'J':[0,1,1,1,1, 0,0,0,1,0, 0,0,0,1,0, 1,0,0,1,0, 0,1,1,0,0],
+    'K':[1,0,0,0,1, 1,0,0,1,0, 1,1,1,0,0, 1,0,0,1,0, 1,0,0,0,1],
+    'L':[1,0,0,0,0, 1,0,0,0,0, 1,0,0,0,0, 1,0,0,0,0, 1,1,1,1,1],
+    'M':[1,0,0,0,1, 1,1,0,1,1, 1,0,1,0,1, 1,0,0,0,1, 1,0,0,0,1],
+    'N':[1,0,0,0,1, 1,1,0,0,1, 1,0,1,0,1, 1,0,0,1,1, 1,0,0,0,1],
+    'O':[0,1,1,1,0, 1,0,0,0,1, 1,0,0,0,1, 1,0,0,0,1, 0,1,1,1,0],
+    'P':[1,1,1,1,0, 1,0,0,0,1, 1,1,1,1,0, 1,0,0,0,0, 1,0,0,0,0],
+    'Q':[0,1,1,1,0, 1,0,0,0,1, 1,0,1,0,1, 1,0,0,1,0, 0,1,1,0,1],
+    'R':[1,1,1,1,0, 1,0,0,0,1, 1,1,1,1,0, 1,0,0,1,0, 1,0,0,0,1],
+    'S':[0,1,1,1,1, 1,0,0,0,0, 0,1,1,1,0, 0,0,0,0,1, 1,1,1,1,0],
+    'T':[1,1,1,1,1, 0,0,1,0,0, 0,0,1,0,0, 0,0,1,0,0, 0,0,1,0,0],
+    'U':[1,0,0,0,1, 1,0,0,0,1, 1,0,0,0,1, 1,0,0,0,1, 0,1,1,1,0],
+    'V':[1,0,0,0,1, 1,0,0,0,1, 1,0,0,0,1, 0,1,0,1,0, 0,0,1,0,0],
+    'W':[1,0,0,0,1, 1,0,0,0,1, 1,0,1,0,1, 1,1,0,1,1, 1,0,0,0,1],
+    'X':[1,0,0,0,1, 0,1,0,1,0, 0,0,1,0,0, 0,1,0,1,0, 1,0,0,0,1],
+    'Y':[1,0,0,0,1, 0,1,0,1,0, 0,0,1,0,0, 0,0,1,0,0, 0,0,1,0,0],
+    'Z':[1,1,1,1,1, 0,0,0,1,0, 0,0,1,0,0, 0,1,0,0,0, 1,1,1,1,1],
+    ' ':[0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0],
+  };
+  const CHAR_W = 5, CHAR_H = 5, LGAP = 1, WGAP = 2;
+
   function initAsciiThumb(container) {
-    const words = (container.dataset.word || '').split('|');
+    const words = (container.dataset.word || '').toUpperCase().split('|');
     const canvas = document.createElement('canvas');
     canvas.style.cssText = 'display:block;position:absolute;inset:0;width:100%;height:100%;';
     container.style.position = 'relative';
@@ -475,51 +506,46 @@
     const ctx = canvas.getContext('2d');
     ctx.scale(DPR, DPR);
 
-    // Adaptive pixel size: bigger squares for short words, smaller for long ones
+    // Scale cell size so the widest word fills ~88% of width, all lines fit in height
     const maxLen = Math.max(...words.map(w => w.length));
-    const STRIDE = Math.max(4, Math.min(12, Math.floor(W / (maxLen * 2.6))));
-    const SQ = STRIDE - 1;
-    const COLS = Math.floor(W / STRIDE);
-    const ROWS = Math.floor(H / STRIDE);
+    const gridW = maxLen * CHAR_W + Math.max(0, maxLen - 1) * LGAP;
+    const gridH = words.length * CHAR_H + Math.max(0, words.length - 1) * WGAP;
+    const CELL = Math.max(2, Math.floor(Math.min(W * 0.88 / gridW, H * 0.82 / gridH)));
+    const SQ = Math.max(1, CELL - 1);
 
-    // Render word(s) to offscreen canvas for sampling
-    const OW = W * DPR, OH = H * DPR;
-    const off = document.createElement('canvas');
-    off.width = OW; off.height = OH;
-    const oc = off.getContext('2d');
-    const fs = Math.min(OW * 0.88 / maxLen, OH * 0.72 / words.length);
-    oc.fillStyle = '#000'; oc.fillRect(0, 0, OW, OH);
-    oc.fillStyle = '#fff';
-    oc.font = `900 ${fs}px "Arial Black", "Arial Bold", Impact, sans-serif`;
-    oc.textAlign = 'center'; oc.textBaseline = 'middle';
-    words.forEach((w, i) => {
-      oc.fillText(w, OW / 2, (OH / (words.length + 1)) * (i + 1));
-    });
-    const imgData = oc.getImageData(0, 0, OW, OH).data;
+    // Center block
+    const blockW = gridW * CELL, blockH = gridH * CELL;
+    const bx = Math.floor((W - blockW) / 2);
+    const by = Math.floor((H - blockH) / 2);
 
     const PALETTE = ['#7c3aed', '#ec4899', '#f59e0b', '#3b82f6'];
-
-    // Build cells with spring-physics state (ox/oy = home, px/py = current)
     const cells = [];
-    for (let r = 0; r < ROWS; r++) {
-      for (let c = 0; c < COLS; c++) {
-        let lit = false;
-        const x0 = (c * STRIDE * DPR) | 0, y0 = (r * STRIDE * DPR) | 0;
-        const x1 = Math.min(x0 + STRIDE * DPR, OW), y1 = Math.min(y0 + STRIDE * DPR, OH);
-        outer: for (let py = y0; py < y1; py++)
-          for (let px = x0; px < x1; px++)
-            if (imgData[(py * OW + px) * 4] > 40) { lit = true; break outer; }
-        const ox = c * STRIDE, oy = r * STRIDE;
-        cells.push({ lit, ox, oy, px: ox, py: oy, vx: 0, vy: 0,
-          colorIdx: (c + r * 2) % PALETTE.length,
-          delay: (Math.random() * 20) | 0 });
-      }
-    }
 
-    // Cursor repulsion
+    words.forEach((word, li) => {
+      // Center each line independently
+      const lineGridW = word.length * CHAR_W + Math.max(0, word.length - 1) * LGAP;
+      const lx = Math.floor((W - lineGridW * CELL) / 2);
+      const ly = by + li * (CHAR_H + WGAP) * CELL;
+
+      for (let ci = 0; ci < word.length; ci++) {
+        const bits = PIXEL_FONT[word[ci]] || PIXEL_FONT[' '];
+        const cx = lx + ci * (CHAR_W + LGAP) * CELL;
+        for (let row = 0; row < CHAR_H; row++) {
+          for (let col = 0; col < CHAR_W; col++) {
+            if (!bits[row * CHAR_W + col]) continue;
+            const ox = cx + col * CELL, oy = ly + row * CELL;
+            cells.push({ ox, oy, px: ox, py: oy, vx: 0, vy: 0,
+              colorIdx: (col + row * 2 + ci * 3) % PALETTE.length,
+              delay: (Math.random() * 22) | 0 });
+          }
+        }
+      }
+    });
+
+    // Cursor repulsion spring physics
     let mx = -9999, my = -9999, hovering = false;
-    const REPEL_R = STRIDE * 7;
-    const REPEL_F = STRIDE * 1.5;
+    const REPEL_R = CELL * 9;
+    const REPEL_F = CELL * 2;
     const SPRING = 0.1, DAMP = 0.72;
 
     container.addEventListener('mousemove', e => {
@@ -531,20 +557,15 @@
     container.addEventListener('mouseleave', () => { hovering = false; mx = -9999; my = -9999; });
 
     let frame = 0, last = 0;
-    const REVEAL = 28;
 
     function loop(t) {
-      const fps = (frame < REVEAL || hovering) ? 30 : 12;
+      const fps = (frame < 30 || hovering) ? 30 : 12;
       if (t - last >= 1000 / fps) {
         const terminal = document.body.classList.contains('terminal');
         ctx.clearRect(0, 0, W, H);
-
         cells.forEach(cell => {
-          if (!cell.lit) return;
           const appeared = frame >= cell.delay;
-
           if (appeared) {
-            // Spring physics
             const ddx = cell.px - mx, ddy = cell.py - my;
             const dist = Math.sqrt(ddx * ddx + ddy * ddy);
             if (dist < REPEL_R && dist > 0) {
@@ -556,17 +577,13 @@
             cell.vy += (cell.oy - cell.py) * SPRING;
             cell.vx *= DAMP; cell.vy *= DAMP;
             cell.px += cell.vx; cell.py += cell.vy;
-
             ctx.fillStyle = terminal ? '#fff' : PALETTE[cell.colorIdx];
             ctx.fillRect(cell.px, cell.py, SQ, SQ);
-          } else {
-            if (Math.random() < 0.25) {
-              ctx.fillStyle = terminal ? 'rgba(255,255,255,0.35)' : 'rgba(100,60,200,0.2)';
-              ctx.fillRect(cell.ox, cell.oy, SQ, SQ);
-            }
+          } else if (Math.random() < 0.25) {
+            ctx.fillStyle = terminal ? 'rgba(255,255,255,0.35)' : 'rgba(100,60,200,0.2)';
+            ctx.fillRect(cell.ox, cell.oy, SQ, SQ);
           }
         });
-
         frame++; last = t;
       }
       requestAnimationFrame(loop);
