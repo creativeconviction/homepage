@@ -62,9 +62,18 @@
       padding: 1.75rem 2rem 0;
       display: flex;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: space-between;
       gap: 1.25rem;
     }
+
+    .nav-home {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-home:hover { color: var(--text); }
 
     .terminal-toggle {
       background: none;
@@ -104,7 +113,7 @@
 
     .about-body {
       font-size: 1.25rem;
-      line-height: 1.65;
+      line-height: 1.45;
       color: var(--text);
     }
 
@@ -132,6 +141,7 @@
   </style>
 </head>
 <body>
+  <script>if(localStorage.getItem('cc-terminal')==='1')document.body.classList.add('terminal');</script>
 
   <div class="corner corner-tl"></div>
   <div class="corner corner-tr"></div>
@@ -139,12 +149,14 @@
   <div class="corner corner-br"></div>
 
   <nav>
-    <button class="terminal-toggle" id="terminal-toggle">&gt;_</button>
-    <a class="nav-about" href="./about.html">About</a>
+    <a class="nav-home" href="./">Creative Conviction</a>
+    <div style="display:flex;align-items:center;gap:1.25rem;">
+      <button class="terminal-toggle" id="terminal-toggle">&gt;_</button>
+      <a class="nav-about" href="./about.html">About</a>
+    </div>
   </nav>
 
   <div class="content">
-    <div class="page-label">About</div>
     <div class="about-body">
       <p>We're <a href="https://www.linkedin.com/in/libbie-frost-9a20b4195" target="_blank">Libbie</a> and <a href="https://x.com/rayoufalhumedhi" target="_blank">Rayouf</a>, two investors at <a href="https://www.bvp.com/" target="_blank">Bessemer Venture Partners</a> who spend our days at the intersection of creativity, technology, and company building. We started Creative Conviction because we believe that taste and creative ambition are becoming the most important differentiators in the age of AI, and we wanted a place to explore what that means with the people living it.</p>
     </div>
@@ -159,7 +171,9 @@
     const toggle = document.getElementById('terminal-toggle');
     toggle.addEventListener('click', () => {
       document.body.classList.toggle('terminal');
-      toggle.textContent = document.body.classList.contains('terminal') ? '[exit]' : '>_';
+      const on = document.body.classList.contains('terminal');
+      localStorage.setItem('cc-terminal', on ? '1' : '0');
+      toggle.textContent = on ? '[exit]' : '>_';
     });
   </script>
 

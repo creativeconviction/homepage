@@ -41,12 +41,19 @@
       pointer-events: none;
       z-index: 9999;
     }
-    body.terminal .hero { padding: 1.75rem 2rem 1.25rem; }
-    body.terminal .card-list { gap: 0.85rem; }
-    body.terminal .filters { padding: 0 2rem 1.25rem; }
+    body.terminal { font-size: 0.8rem; }
+    body.terminal .hero { padding: 1.25rem 2rem 0.75rem; }
+    body.terminal .hero-tagline { font-size: 0.7rem; line-height: 1.2; }
+    body.terminal .filters { padding: 0 2rem 0.85rem; }
+    body.terminal .card-list { gap: 0.5rem; }
+    body.terminal .card-title { font-size: 0.8rem; line-height: 1.2; }
+    body.terminal .card-desc { font-size: 0.7rem; line-height: 1.2; }
+    body.terminal .card-date { font-size: 0.6rem; }
+    body.terminal .signup { margin-top: 2rem; }
+    body.terminal .signup-title { font-size: 1rem; margin-bottom: 0.75rem; }
+    body.terminal footer { margin-top: 2rem; }
     body.terminal .card-thumb { background: transparent !important; border: 1px solid var(--muted); }
     body.terminal .filter-btn.active::before { content: '> '; }
-    body.terminal .signup { margin-top: 3rem; }
     body.terminal .corner { border-color: rgba(255,255,255,0.25); }
 
     html { scroll-behavior: smooth; }
@@ -222,7 +229,7 @@
       font-size: 0.9375rem;
       color: var(--muted);
       line-height: 1.4;
-      font-style: italic;
+      font-style: normal;
     }
 
     .card-date {
@@ -298,6 +305,7 @@
   </style>
 </head>
 <body>
+  <script>if(localStorage.getItem('cc-terminal')==='1')document.body.classList.add('terminal');</script>
 
   <div class="corner corner-tl"></div>
   <div class="corner corner-tr"></div>
@@ -324,16 +332,16 @@
     <div class="card-list">
 
       <a class="card" href="interviews/paul-jun/" data-type="interview">
-        <div class="card-thumb"></div>
+        <div class="card-thumb" data-word="PJ"></div>
         <div class="card-body">
-          <div class="card-title">Paul Jun, Head of Brand at Ramp</div>
+          <div class="card-title">Paul Jun, Creative Director at Ramp</div>
           <div class="card-desc">Brand engineers and the future of creative teams</div>
           <div class="card-date">April 2026</div>
         </div>
       </a>
 
       <a class="card" href="https://creativeconviction.github.io/brand-and-narrative/" data-type="report">
-        <div class="card-thumb"></div>
+        <div class="card-thumb" data-word="BRAND"></div>
         <div class="card-body">
           <div class="card-title">Brand and Narrative</div>
           <div class="card-desc">How AI is reshaping brand building, creative storytelling, and narrative strategy.</div>
@@ -342,7 +350,7 @@
       </a>
 
       <a class="card" href="https://creativeconviction.github.io/product-design/" data-type="report">
-        <div class="card-thumb"></div>
+        <div class="card-thumb" data-word="PRODUCT|DESIGN"></div>
         <div class="card-body">
           <div class="card-title">Product Design</div>
           <div class="card-desc">How AI is transforming product design workflows, tooling, and the role of the designer.</div>
@@ -351,7 +359,7 @@
       </a>
 
       <a class="card" href="https://creativeconviction.github.io/creative-conviction/" data-type="report">
-        <div class="card-thumb"></div>
+        <div class="card-thumb" data-word="PRIMER"></div>
         <div class="card-body">
           <div class="card-title">Creative Conviction Primer</div>
           <div class="card-desc">Our thesis on why taste and creative ambition are the last true differentiators in the age of AI.</div>
@@ -378,15 +386,18 @@
   </footer>
 
   <script>
-    const titleEl = document.getElementById('hero-title');
-    const text = 'Creative Conviction';
+  const titleEl = document.getElementById('hero-title');
+  const TEXT = 'Creative Conviction';
+  const CHARS = '0123456789@#$%!?[]{}|<>';
+
+  function typewriter() {
     const cursor = document.createElement('span');
     cursor.className = 'hero-cursor';
     titleEl.appendChild(cursor);
     let i = 0;
     function type() {
-      if (i < text.length) {
-        titleEl.insertBefore(document.createTextNode(text[i]), cursor);
+      if (i < TEXT.length) {
+        titleEl.insertBefore(document.createTextNode(TEXT[i]), cursor);
         i++;
         setTimeout(type, 72);
       } else {
@@ -394,26 +405,144 @@
       }
     }
     type();
+  }
 
-    const toggle = document.getElementById('terminal-toggle');
-    toggle.addEventListener('click', () => {
-      document.body.classList.toggle('terminal');
-      toggle.textContent = document.body.classList.contains('terminal') ? '[exit]' : '>_';
-    });
+  function matrixReveal() {
+    titleEl.textContent = '';
+    let frame = 0;
+    const TOTAL = TEXT.length * 4 + 10;
+    function tick() {
+      const out = TEXT.split('').map((ch, i) => {
+        if (ch === ' ') return ' ';
+        const threshold = i * 4;
+        return frame >= threshold + 4 ? ch : CHARS[Math.random() * CHARS.length | 0];
+      }).join('');
+      titleEl.textContent = out;
+      frame++;
+      if (frame <= TOTAL) setTimeout(tick, 45);
+      else {
+        titleEl.textContent = TEXT;
+        const blink = document.createElement('span');
+        blink.style.cssText = 'animation:blink 0.9s step-end infinite; margin-left:0.04em;';
+        blink.textContent = '_';
+        titleEl.appendChild(blink);
+      }
+    }
+    tick();
+  }
 
-    const btns = document.querySelectorAll('.filter-btn');
-    const cards = document.querySelectorAll('.card');
-    btns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        btns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        cards.forEach(card => {
-          card.style.display = (filter === 'all' || card.dataset.type === filter) ? 'flex' : 'none';
-        });
+  if (document.body.classList.contains('terminal')) {
+    matrixReveal();
+  } else {
+    typewriter();
+  }
+
+  const toggle = document.getElementById('terminal-toggle');
+  toggle.addEventListener('click', () => {
+    document.body.classList.toggle('terminal');
+    const on = document.body.classList.contains('terminal');
+    localStorage.setItem('cc-terminal', on ? '1' : '0');
+    toggle.textContent = on ? '[exit]' : '>_';
+  });
+
+  const btns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.card');
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      cards.forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.type === filter) ? 'flex' : 'none';
       });
     });
-  </script>
+  });
+
+  // ASCII art thumbnails
+  function initAsciiThumb(container) {
+    const words = (container.dataset.word || '').split('|');
+    const canvas = document.createElement('canvas');
+    canvas.style.cssText = 'display:block;position:absolute;inset:0;width:100%;height:100%;';
+    container.style.position = 'relative';
+    container.innerHTML = '';
+    container.appendChild(canvas);
+
+    const W = container.offsetWidth || 112;
+    const H = container.offsetHeight || 76;
+    canvas.width = W;
+    canvas.height = H;
+
+    const CW = 5, CH = 7;
+    const COLS = Math.floor(W / CW);
+    const ROWS = Math.floor(H / CH);
+
+    const off = document.createElement('canvas');
+    off.width = W; off.height = H;
+    const oc = off.getContext('2d');
+    const maxLen = Math.max(...words.map(w => w.length));
+    const fs = Math.min(W * 0.75 / maxLen, H * 0.5 / words.length);
+
+    oc.fillStyle = '#000';
+    oc.fillRect(0, 0, W, H);
+    oc.fillStyle = '#fff';
+    oc.font = `900 ${fs}px "Arial Black", Impact, sans-serif`;
+    oc.textAlign = 'center';
+    oc.textBaseline = 'middle';
+    words.forEach((w, i) => {
+      oc.fillText(w, W / 2, (H / (words.length + 1)) * (i + 1));
+    });
+
+    const imgData = oc.getImageData(0, 0, W, H).data;
+    const ACHARS = '.,:!+@#%';
+
+    const cells = Array.from({ length: ROWS * COLS }, (_, idx) => {
+      const c = idx % COLS, r = (idx / COLS) | 0;
+      const sx = Math.min(((c + 0.5) * CW) | 0, W - 1);
+      const sy = Math.min(((r + 0.5) * CH) | 0, H - 1);
+      return { lit: imgData[(sy * W + sx) * 4] > 50, x: c * CW, y: r * CH, phase: (Math.random() * ACHARS.length) | 0 };
+    });
+
+    let frame = 0;
+    const ctx = canvas.getContext('2d');
+    let last = 0;
+
+    function loop(t) {
+      const fps = frame < 40 ? 20 : 5;
+      if (t - last >= 1000 / fps) {
+        const terminal = document.body.classList.contains('terminal');
+        const litColor = terminal ? '#fff' : 'rgba(32,18,77,0.88)';
+        const dimColor = terminal ? 'rgba(255,255,255,0.07)' : 'rgba(32,18,77,0.05)';
+
+        ctx.clearRect(0, 0, W, H);
+        ctx.font = `${CH - 1}px "Courier New", monospace`;
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'top';
+
+        cells.forEach(cell => {
+          if (cell.lit) {
+            ctx.fillStyle = litColor;
+            const ch = frame < 40
+              ? ACHARS[(Math.random() * ACHARS.length) | 0]
+              : ACHARS[(((frame >> 3) + cell.phase) % ACHARS.length)];
+            ctx.fillText(ch, cell.x, cell.y);
+          } else if (Math.random() < 0.01) {
+            ctx.fillStyle = dimColor;
+            ctx.fillText('.', cell.x, cell.y);
+          }
+        });
+
+        frame++;
+        last = t;
+      }
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  }
+
+  setTimeout(() => {
+    document.querySelectorAll('.card-thumb[data-word]').forEach(initAsciiThumb);
+  }, 150);
+</script>
 
 </body>
 </html>
