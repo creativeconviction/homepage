@@ -475,65 +475,66 @@
     const ctx = canvas.getContext('2d');
     ctx.scale(DPR, DPR);
 
-    // Tight pixel grid: 2px squares, 1px gap = 3px stride
-    const SQ = 2, GAP = 1, STRIDE = SQ + GAP;
+    // Adaptive pixel size: bigger squares for short words, smaller for long ones
+    const maxLen = Math.max(...words.map(w => w.length));
+    const STRIDE = Math.max(4, Math.min(12, Math.floor(W / (maxLen * 2.6))));
+    const SQ = STRIDE - 1;
     const COLS = Math.floor(W / STRIDE);
     const ROWS = Math.floor(H / STRIDE);
 
-    // Render word on a high-res offscreen canvas for accurate sampling
+    // Render word(s) to offscreen canvas for sampling
     const OW = W * DPR, OH = H * DPR;
     const off = document.createElement('canvas');
     off.width = OW; off.height = OH;
     const oc = off.getContext('2d');
-
-    const maxLen = Math.max(...words.map(w => w.length));
-    // Large bold font so strokes fill enough cells
-    const fs = Math.min(OW * 0.92 / maxLen, OH * 0.68 / words.length);
-
-    oc.fillStyle = '#000';
-    oc.fillRect(0, 0, OW, OH);
+    const fs = Math.min(OW * 0.88 / maxLen, OH * 0.72 / words.length);
+    oc.fillStyle = '#000'; oc.fillRect(0, 0, OW, OH);
     oc.fillStyle = '#fff';
     oc.font = `900 ${fs}px "Arial Black", "Arial Bold", Impact, sans-serif`;
-    oc.textAlign = 'center';
-    oc.textBaseline = 'middle';
+    oc.textAlign = 'center'; oc.textBaseline = 'middle';
     words.forEach((w, i) => {
       oc.fillText(w, OW / 2, (OH / (words.length + 1)) * (i + 1));
     });
-
     const imgData = oc.getImageData(0, 0, OW, OH).data;
 
-    // 4-color palette: purple, pink, yellow, blue
     const PALETTE = ['#7c3aed', '#ec4899', '#f59e0b', '#3b82f6'];
 
+    // Build cells with spring-physics state (ox/oy = home, px/py = current)
     const cells = [];
     for (let r = 0; r < ROWS; r++) {
       for (let c = 0; c < COLS; c++) {
-        // Sample every physical pixel in this cell's area for accuracy
         let lit = false;
-        for (let dy = 0; dy < STRIDE * DPR && !lit; dy++) {
-          for (let dx = 0; dx < STRIDE * DPR && !lit; dx++) {
-            const px = Math.min((c * STRIDE * DPR + dx) | 0, OW - 1);
-            const py = Math.min((r * STRIDE * DPR + dy) | 0, OH - 1);
-            if (imgData[(py * OW + px) * 4] > 40) lit = true;
-          }
-        }
-        cells.push({
-          lit,
-          x: c * STRIDE,
-          y: r * STRIDE,
+        const x0 = (c * STRIDE * DPR) | 0, y0 = (r * STRIDE * DPR) | 0;
+        const x1 = Math.min(x0 + STRIDE * DPR, OW), y1 = Math.min(y0 + STRIDE * DPR, OH);
+        outer: for (let py = y0; py < y1; py++)
+          for (let px = x0; px < x1; px++)
+            if (imgData[(py * OW + px) * 4] > 40) { lit = true; break outer; }
+        const ox = c * STRIDE, oy = r * STRIDE;
+        cells.push({ lit, ox, oy, px: ox, py: oy, vx: 0, vy: 0,
           colorIdx: (c + r * 2) % PALETTE.length,
-          delay: (Math.random() * 20) | 0
-        });
+          delay: (Math.random() * 20) | 0 });
       }
     }
 
-    let frame = 0;
-    let last = 0;
+    // Cursor repulsion
+    let mx = -9999, my = -9999, hovering = false;
+    const REPEL_R = STRIDE * 7;
+    const REPEL_F = STRIDE * 1.5;
+    const SPRING = 0.1, DAMP = 0.72;
+
+    container.addEventListener('mousemove', e => {
+      const rect = canvas.getBoundingClientRect();
+      mx = (e.clientX - rect.left) * (W / rect.width);
+      my = (e.clientY - rect.top) * (H / rect.height);
+      hovering = true;
+    });
+    container.addEventListener('mouseleave', () => { hovering = false; mx = -9999; my = -9999; });
+
+    let frame = 0, last = 0;
     const REVEAL = 28;
 
     function loop(t) {
-      // Fast during reveal, slower idle
-      const fps = frame < REVEAL ? 28 : 12;
+      const fps = (frame < REVEAL || hovering) ? 30 : 12;
       if (t - last >= 1000 / fps) {
         const terminal = document.body.classList.contains('terminal');
         ctx.clearRect(0, 0, W, H);
@@ -541,20 +542,32 @@
         cells.forEach(cell => {
           if (!cell.lit) return;
           const appeared = frame >= cell.delay;
-          if (!appeared) {
-            // Random noise before the pixel settles
+
+          if (appeared) {
+            // Spring physics
+            const ddx = cell.px - mx, ddy = cell.py - my;
+            const dist = Math.sqrt(ddx * ddx + ddy * ddy);
+            if (dist < REPEL_R && dist > 0) {
+              const force = (1 - dist / REPEL_R) * REPEL_F;
+              cell.vx += (ddx / dist) * force;
+              cell.vy += (ddy / dist) * force;
+            }
+            cell.vx += (cell.ox - cell.px) * SPRING;
+            cell.vy += (cell.oy - cell.py) * SPRING;
+            cell.vx *= DAMP; cell.vy *= DAMP;
+            cell.px += cell.vx; cell.py += cell.vy;
+
+            ctx.fillStyle = terminal ? '#fff' : PALETTE[cell.colorIdx];
+            ctx.fillRect(cell.px, cell.py, SQ, SQ);
+          } else {
             if (Math.random() < 0.25) {
               ctx.fillStyle = terminal ? 'rgba(255,255,255,0.35)' : 'rgba(100,60,200,0.2)';
-              ctx.fillRect(cell.x, cell.y, SQ, SQ);
+              ctx.fillRect(cell.ox, cell.oy, SQ, SQ);
             }
-          } else {
-            ctx.fillStyle = terminal ? '#fff' : PALETTE[cell.colorIdx];
-            ctx.fillRect(cell.x, cell.y, SQ, SQ);
           }
         });
 
-        frame++;
-        last = t;
+        frame++; last = t;
       }
       requestAnimationFrame(loop);
     }
