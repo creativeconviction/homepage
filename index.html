@@ -52,7 +52,7 @@
     body.terminal .signup { margin-top: 2rem; }
     body.terminal .signup-title { font-size: 1rem; margin-bottom: 0.75rem; }
     body.terminal footer { margin-top: 2rem; }
-    body.terminal .card-thumb { background: transparent !important; border: 1px solid var(--muted); }
+    body.terminal .card-thumb { border-color: rgba(255,255,255,0.25); }
     body.terminal .filter-btn.active::before { content: '> '; }
     body.terminal .corner { border-color: rgba(255,255,255,0.25); }
 
@@ -211,7 +211,8 @@
       flex-shrink: 0;
       width: 100px;
       height: 68px;
-      background: var(--thumb);
+      background: transparent;
+      border: 1px solid var(--muted);
       border-radius: 2px;
       overflow: hidden;
     }
@@ -522,8 +523,7 @@
     const bx = Math.floor((W - blockW) / 2);
     const by = Math.floor((H - blockH) / 2);
 
-    // Lighter palette — pops on dark thumbnail background
-    const PALETTE = ['#a78bfa', '#f472b6', '#fbbf24', '#60a5fa'];
+    const PALETTE = ['#7c3aed', '#ec4899', '#f59e0b', '#3b82f6'];
     const cells = [];
 
     words.forEach((word, li) => {
@@ -585,7 +585,7 @@
             ctx.fillStyle = terminal ? '#fff' : PALETTE[cell.colorIdx];
             ctx.fillRect(cell.px, cell.py, SQ, SQ);
           } else if (Math.random() < 0.25) {
-            ctx.fillStyle = terminal ? 'rgba(255,255,255,0.35)' : 'rgba(167,139,250,0.35)';
+            ctx.fillStyle = terminal ? 'rgba(255,255,255,0.35)' : 'rgba(100,60,200,0.2)';
             ctx.fillRect(cell.ox, cell.oy, SQ, SQ);
           }
         });
