@@ -15,7 +15,7 @@
       --bg: #fff8f1;
       --text: #20124d;
       --muted: rgba(32, 18, 77, 0.38);
-      --thumb: rgba(32, 18, 77, 0.07);
+      --thumb: rgba(20, 10, 50, 0.88);
       --quote-bg: rgba(32, 18, 77, 0.09);
     }
 
@@ -344,7 +344,7 @@
       </a>
 
       <a class="card" href="https://creativeconviction.github.io/brand-and-narrative/" data-type="report">
-        <div class="card-thumb" data-word="BRAND" data-thick="1"></div>
+        <div class="card-thumb" data-word="BRAND"></div>
         <div class="card-body">
           <div class="card-title">Brand and Narrative</div>
           <div class="card-desc">How AI is reshaping brand building, creative storytelling, and narrative strategy.</div>
@@ -353,7 +353,7 @@
       </a>
 
       <a class="card" href="https://creativeconviction.github.io/product-design/" data-type="report">
-        <div class="card-thumb" data-word="PRODUCT|DESIGN" data-thick="1"></div>
+        <div class="card-thumb" data-word="PRODUCT|DESIGN"></div>
         <div class="card-body">
           <div class="card-title">Product Design</div>
           <div class="card-desc">How AI is transforming product design workflows, tooling, and the role of the designer.</div>
@@ -362,7 +362,7 @@
       </a>
 
       <a class="card" href="https://creativeconviction.github.io/creative-conviction/" data-type="report">
-        <div class="card-thumb" data-word="WELCOME" data-thick="1"></div>
+        <div class="card-thumb" data-word="WELCOME"></div>
         <div class="card-body">
           <div class="card-title">Welcome to Creative Conviction</div>
           <div class="card-desc">Our thesis on why taste and creative ambition are the last true differentiators in the age of AI.</div>
@@ -493,21 +493,8 @@
   };
   const CHAR_W = 5, CHAR_H = 5, LGAP = 1, WGAP = 2;
 
-  function dilate(bits) {
-    const out = [...bits];
-    for (let r = 0; r < CHAR_H; r++)
-      for (let c = 0; c < CHAR_W; c++)
-        if (bits[r * CHAR_W + c])
-          [[-1,0],[1,0],[0,-1],[0,1]].forEach(([dr,dc]) => {
-            const nr = r+dr, nc = c+dc;
-            if (nr>=0 && nr<CHAR_H && nc>=0 && nc<CHAR_W) out[nr*CHAR_W+nc] = 1;
-          });
-    return out;
-  }
-
   function initAsciiThumb(container) {
     const words = (container.dataset.word || '').toUpperCase().split('|');
-    const thick = !!container.dataset.thick;
     const canvas = document.createElement('canvas');
     canvas.style.cssText = 'display:block;position:absolute;inset:0;width:100%;height:100%;';
     container.style.position = 'relative';
@@ -527,14 +514,16 @@
     const gridW = maxLen * CHAR_W + Math.max(0, maxLen - 1) * LGAP;
     const gridH = words.length * CHAR_H + Math.max(0, words.length - 1) * WGAP;
     const CELL = Math.max(2, Math.floor(Math.min(W * 0.88 / gridW, H * 0.82 / gridH)));
-    const SQ = Math.max(1, CELL - 1);
+    // Small cells: fill completely (no gap) for bolder look; large cells: keep 1px gap
+    const SQ = CELL <= 4 ? CELL : CELL - 1;
 
     // Center block
     const blockW = gridW * CELL, blockH = gridH * CELL;
     const bx = Math.floor((W - blockW) / 2);
     const by = Math.floor((H - blockH) / 2);
 
-    const PALETTE = ['#7c3aed', '#ec4899', '#f59e0b', '#3b82f6'];
+    // Lighter palette — pops on dark thumbnail background
+    const PALETTE = ['#a78bfa', '#f472b6', '#fbbf24', '#60a5fa'];
     const cells = [];
 
     words.forEach((word, li) => {
@@ -544,8 +533,7 @@
       const ly = by + li * (CHAR_H + WGAP) * CELL;
 
       for (let ci = 0; ci < word.length; ci++) {
-        const rawBits = PIXEL_FONT[word[ci]] || PIXEL_FONT[' '];
-        const bits = thick ? dilate(rawBits) : rawBits;
+        const bits = PIXEL_FONT[word[ci]] || PIXEL_FONT[' '];
         const cx = lx + ci * (CHAR_W + LGAP) * CELL;
         for (let row = 0; row < CHAR_H; row++) {
           for (let col = 0; col < CHAR_W; col++) {
@@ -597,7 +585,7 @@
             ctx.fillStyle = terminal ? '#fff' : PALETTE[cell.colorIdx];
             ctx.fillRect(cell.px, cell.py, SQ, SQ);
           } else if (Math.random() < 0.25) {
-            ctx.fillStyle = terminal ? 'rgba(255,255,255,0.35)' : 'rgba(100,60,200,0.2)';
+            ctx.fillStyle = terminal ? 'rgba(255,255,255,0.35)' : 'rgba(167,139,250,0.35)';
             ctx.fillRect(cell.ox, cell.oy, SQ, SQ);
           }
         });
