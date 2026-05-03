@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Part I: Product Design — Creative Conviction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fff8f1;
+      --text: #20124d;
+      --muted: rgba(32, 18, 77, 0.38);
+    }
+
+    body.terminal {
+      --bg: #000;
+      --text: #fff;
+      --muted: rgba(255, 255, 255, 0.4);
+    }
+    body.terminal, body.terminal * { font-family: 'Courier New', Courier, monospace !important; }
+    body.terminal::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.08) 3px, rgba(0,0,0,0.08) 4px);
+      pointer-events: none;
+      z-index: 9999;
+    }
+    body.terminal .corner { border-color: rgba(255,255,255,0.25); }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'EB Garamond', Georgia, serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .corner { position: fixed; width: 16px; height: 16px; pointer-events: none; z-index: 50; }
+    .corner-tl { top: 1.25rem; left: 1.25rem; border-top: 1px solid var(--muted); border-left: 1px solid var(--muted); }
+    .corner-tr { top: 1.25rem; right: 1.25rem; border-top: 1px solid var(--muted); border-right: 1px solid var(--muted); }
+    .corner-bl { bottom: 1.25rem; left: 1.25rem; border-bottom: 1px solid var(--muted); border-left: 1px solid var(--muted); }
+    .corner-br { bottom: 1.25rem; right: 1.25rem; border-bottom: 1px solid var(--muted); border-right: 1px solid var(--muted); }
+
+    nav {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 1.75rem 2rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+    }
+    .nav-home { font-family: 'Inter', sans-serif; font-size: 0.8125rem; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+    .nav-home:hover { color: var(--text); }
+    .terminal-toggle {
+      background: none; border: 1px solid var(--muted); cursor: pointer;
+      font-family: 'Inter', sans-serif; font-size: 0.6875rem; color: var(--muted);
+      padding: 0.2rem 0.5rem; letter-spacing: 0.05em;
+      transition: color 0.15s, border-color 0.15s; line-height: 1.7;
+    }
+    .terminal-toggle:hover { color: var(--text); border-color: var(--text); }
+    .nav-about { font-family: 'Inter', sans-serif; font-size: 0.8125rem; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+    .nav-about:hover { color: var(--text); }
+
+    .article-header { max-width: 680px; margin: 5rem auto 3.5rem; padding: 0 2rem; }
+    .article-label {
+      font-family: 'Inter', sans-serif; font-size: 0.6875rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 1rem;
+    }
+    .article-title {
+      font-size: clamp(2rem, 5vw, 3.25rem); font-weight: 500;
+      line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.75rem;
+    }
+    .article-meta { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; }
+
+    .article-body { max-width: 680px; margin: 0 auto; padding: 0 2rem 7rem; }
+    .article-body p { font-size: 1.125rem; line-height: 1.72; margin-bottom: 1.4rem; }
+    .article-body h2 { font-size: 1.5rem; font-weight: 500; line-height: 1.2; margin: 3.25rem 0 1rem; letter-spacing: -0.01em; }
+    .article-body h3 { font-size: 1.2rem; font-weight: 400; font-style: italic; margin: 2.25rem 0 0.75rem; }
+    .article-body a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: opacity 0.15s; }
+    .article-body a:hover { opacity: 0.6; }
+    .article-body strong { font-weight: 600; }
+    .article-body em { font-style: italic; }
+    .article-body ul, .article-body ol { margin: 0 0 1.4rem 1.75rem; }
+    .article-body li { font-size: 1.125rem; line-height: 1.72; margin-bottom: 0.6rem; }
+    .article-body hr { border: none; border-top: 1px solid var(--muted); margin: 2.5rem 0; opacity: 0.35; }
+    .article-body blockquote { border-left: 2px solid var(--muted); padding-left: 1.25rem; margin: 1.5rem 0; opacity: 0.8; }
+    .article-img { width: 100%; display: block; margin: 2.5rem 0 0.6rem; border-radius: 2px; }
+    .article-caption { font-family: 'Inter', sans-serif; font-size: 0.75rem; color: var(--muted); margin-bottom: 2.5rem; line-height: 1.5; }
+
+    footer {
+      max-width: 720px; margin: 0 auto; padding: 2rem;
+      display: flex; justify-content: space-between;
+      font-family: 'Inter', sans-serif; font-size: 0.75rem; color: var(--muted);
+      border-top: 1px solid var(--muted); opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <script>if(localStorage.getItem('cc-terminal')==='1')document.body.classList.add('terminal');</script>
+
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <nav>
+    <a class="nav-home" href="../../">Creative Conviction</a>
+    <div style="display:flex;align-items:center;gap:1.25rem;">
+      <button class="terminal-toggle" id="terminal-toggle">&gt;_</button>
+      <a class="nav-about" href="../../about.html">About</a>
+    </div>
+  </nav>
+
+  <div class="article-header">
+    <div class="article-label">Part I</div>
+    <h1 class="article-title">Product Design</h1>
+    <div class="article-meta">
+      <span>Libbie Frost &amp; Rayouf Alhumedhi</span>
+      <span>March 20, 2026</span>
+    </div>
+  </div>
+
+  <div class="article-body" id="article"></div>
+
+  <footer>
+    <span>Made in NYC 🍎</span>
+    <span>&copy; 2026</span>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('terminal-toggle');
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('terminal');
+      const on = document.body.classList.contains('terminal');
+      localStorage.setItem('cc-terminal', on ? '1' : '0');
+      toggle.textContent = on ? '[exit]' : '>_';
+    });
+    if (document.body.classList.contains('terminal')) toggle.textContent = '[exit]';
+
+    const BASE = 'https://creativeconviction.github.io/product-design/';
+
+    const MD = `*This is the first in a three-part series examining AI's impact on product design, brand & marketing, and consumer play. [Link to our primer on Creative Conviction in the AI era here.](https://creativeconviction.github.io/creative-conviction/)*
+
+Two things are happening in software design simultaneously, and most people are only paying attention to one of them. The first is visible and widely covered, which is that agentic coding tools are absorbing the implementation work that used to require an engineer, compressing the distance between an idea and a working product. The second is that, as execution gets cheaper, the premium on taste, judgement, and point of view rises.
+
+Product design in software has always been a sequence of connected jobs: understanding which problem is worth solving, exploring options visually, getting to something testable fast, iterating, and making decisions with incomplete information. But this whole product development sequence is being reordered. As AI coding agents take on more of what used to require an engineer, the role of designers, design tooling, and where design work happens is being reshaped.
+
+We spent the last several months talking to design leaders at companies we admire and to the founders building the tools enabling this shift. What follows is what we found… that is, as of March 20th, 2026. Our honest caveat is that the rate at which this is changing makes any map feel provisional the moment we draw it. Regardless, here are our takes:
+
+- **[The best product teams are figuring out how to automate and enhance user feedback loops](#feedback-loops)**
+- **[Even if models can generate an infinite number of aesthetic products, knowing which direction to choose still requires taste](#taste)**
+- **[Taste can only scale if it's part of the founding DNA](#founding-dna)**
+- **[Interfaces are becoming increasingly dynamic, so understanding model behavior becomes an integral part of the designer's job](#model-behavior)**
+- **[While the visual layer between agents and designers is still developing, the canvas isn't going away](#canvas)**
+
+<a id="feedback-loops"></a>
+## The best product teams are figuring out how to automate and enhance user feedback loops
+
+The thinking that precedes the writing of code has always been one of the slowest working areas of software product teams. Understanding what users need, synthesizing a hundred conflicting signals into one clear direction, and deciding which problem is worth solving all takes time. But as product teams write less and less code, they're spending more time in the "what should we build?" faze. That said, teams are even working on automating parts of this now too...
+
+Take [Boris Cherny's team at Claude Code](https://www.lennysnewsletter.com/p/head-of-claude-code-what-happens), for example. They built an agent that reads the user feedback Slack channel, surfaces recurring patterns, and generates PRDs for humans to review. We are also seeing specific tools aimed to tighten this product feedback loop. [Linear](https://linear.app/) lets teams convert their customer conversations into structured issues automatically and get routed without a PM acting as translator. [At Ramp](https://linear.app/customers/ramp), they have built internal workflows such that their R&D teams literally react with an emoji in Slack to create a Linear issue that then gets auto-routed to the right team. Diego Zaks, VP of Design, describes the ambition as eliminating any friction in the path from observation to tracked feedback - reducing the risk of product signals disappearing.
+
+Paul Bakaus, founder of [Impeccable](http://impeccable.style), thinks these feedback loops can get automated one step further. "It's easier to build something right away than to put it in an issue tracker...I don't have a backlog anymore." The issue tracker was potentially designed to manage handoffs between specialists, but when the specialists collapse into one person who can both decide and ship, then a tracking system might not even be necessary (at least for smaller teams…).
+
+In addition to automating the feedback loops from inbound customer feedback (e.g. tickets), there's also innovation happening around gathering more outbound market feedback. User research is also an area we're seeing new tooling. [Simile](http://simile.ai) and Aaru let users interrogate a synthetic population of thousands before speaking to a single real person, thus replacing statistically significant custom research surveys/ studies once performed by consultants. [Strella](https://www.strella.io/) and Listenlabs deploy an AI interviewer that recruits real participants, conduct the conversation, and return a synthesized qualitative research report ready to read the next morning, rather than waiting for weeks. [Inflight](https://www.inflight.co/) is specifically designed for streamlining product design feedback.
+
+Despite the ability to collect more feedback than ever before, product outputs are only as good as the priorities they run against. Agents do not know what matter to a company unless someone explicitly tells it all the context and keeps this up to date. The loop is powerful, but the thing that makes it point in the right direction is still up to teams who are defining what matters and why.
+
+<a id="taste"></a>
+## Even if models can generate an infinite number of aesthetic products, knowing which direction to choose still requires taste
+
+The working theory for many product teams is that models can generate and iterate, but models don't have stakes in the outcome. Models cannot want something to be beautiful in the same way a human does. A designer who has spent years caring about visual quality brings something to their work that expresses the accumulated frustration of seeing things done badly and the embarrassment of shipping something that wasn't right. That orientation toward quality doesn't 100% transfer through training data yet. While the generalized models are closing the aesthetic gap faster than expected, as they can learn the design principles and elements and predict what humans like, models trained on everything can recognize aesthetic patterns in aggregate. But as a result, their outputs regress to "the aesthetic average." A person with taste, however, has an opinion about the average. They know where to deviate slightly and how to make something unique.
+
+Gabriella Hachem at [Dessn](https://www.dessn.ai/), a tool that allows designers to prototype within their code base, observes this across her users: "The LLM can suggest and A/B test options, but it cannot say 'I'm betting the company on this.'" Ben South, founder of [Variant](https://variant.com/), a tool that generates an endless scroll of fully-formed, tasteful interactive designs, frames this as: "Design becomes more about curation and search - knowing what to put out there. It's not about execution. It's about how to direct the product and land it such that the zeitgeist will accept it." That act of selection, knowing not just what looks good, but what is right for this product at this moment, is where creative conviction lives.
+
+<a id="founding-dna"></a>
+## Taste can only scale if it's part of the founding DNA
+
+We believe that product judgment is an organizational property, not just a hiring decision to be bolted on later. Dylan Babbs, co-founder of [Profound](https://www.tryprofound.com/) and former design engineer, shared his perspective: "It would be very hard for a founder with a pure engineering background to just decide they're going to have a good design sense." Further, the best tastemakers want to work for people who truly care about it, so everything has to come from the founding team or someone very close to it. It's all about alignment of priorities.
+
+Oliver Harmin, co-founder and brand leader at [Quartr](https://quartr.com/), has made a commitment to quality a founding principle of the company. "If something's not done with quality, it's a future liability. It's a cultural thing, and it can't be solved with guidelines." As Quartr crossed a hundred people, Hamrin found that taste wouldn't scale through just hiring. "The previous ratio of tastemakers vs. the rest of the team won't be enough as we grow, because feedback and microdecisions that require taste grow exponentially with the team and customer base."
+
+So how does taste scale? Beyond having the presence of taste on the founding team, it also requires leaders who are extraordinarily gifted at storytelling. In addition to empathizing with the market and recognizing a huge business opportunity, they must communicate this clearly to their team and prospective hires on why it matters. Noam Lovinsky, CPO at Superhuman, elaborates on this point on [20Product](https://open.spotify.com/episode/6GA0zfHt4LW1iR5A5RhaGx?si=lOthyNXISvuS7X7chyx7QQ): "The best product leaders can get people to run at walls to bring the mission to life."
+
+<a id="model-behavior"></a>
+## Interfaces are becoming increasingly dynamic, so understanding model behavior becomes an integral part of the designer's job
+
+Product design in the software era assumed that interfaces were fixed artifacts, but now this assumption is breaking down. Designing for AI systems requires a different kind of literacy than designing for deterministic outputs. As [Oscar Dumlao](https://www.oscardumlao.com/), Head of Design at [Reve](https://www.reve.com/), put it in our conversation, designers now need "truth to materials," borrowing a principle from architecture. Builders are obligated to understand the nature and limits of the material they work with; the highest and best forms embrace those properties rather than fight them. Pre‑AI, software designers could largely ignore the "material" (or the code) and focus on arranging pixels and flows. With AI systems, however, the material is the model's behavior itself, how it reasons, plans, and fails, so being honest about what it can and cannot do becomes a core design skill.
+
+Jenny Wen, Design Lead at Anthropic, describes this change of building interfaces on [recent interview on Lenny's Podcast](https://www.lennysnewsletter.com/p/the-design-process-is-dead). She sees three types of interfaces living inside a single product: (1) durable static UIs that do not change between sessions, (2) a chat box that responds in real time, and (3) UIs generated on the fly by AI in response to what a user asks for in the moment. Anthropic's [Generative UI launch](https://x.com/claudeai/status/2032124273587077133), shipped this past week, shows what the third category looks like in practice. When a user asks for a chart, Claude generates the logic and rendering instructions for a custom widget tailored to that specific request. [Tambo](https://tambo.co/) is another tool helping to solve the real time generative interface problem for product engineers. Founder and CEO, Michael Magan, shared: "The future of software will be agentic interfaces."
+
+Of course, designing for custom, non-deterministic UI outputs requires knowing how models will behave. In addition to the new expectation that all designers should be living closer to the codebase, they are increasingly also expected to be strong prompt engineers and have a stronger understanding of how models behave. We're already seeing the title of the "model designer" emerge - someone who shapes how the model itself produces outputs, not just how users interact with them. [Barron Webster](https://www.aidesignfieldguide.com/articles/barron-webster), one of the first to hold the title at Figma, describes the risk of the alternative in an interview with AI Design Field Guide: "If you're designing UI for something that you haven't played with, the risk is that you're designing UI for a perfect case that isn't representative of how it will work."
+
+Another example of a designer wearing the "model designer" hat is Cedric Ith from BVP portfolio company [Perceptron](https://perceptron.inc/), a vision AI foundation model. Perceptron outputs mix together text, bounding boxes, polygons, and video timelines at large scale. A simple output might be a sentence. A complex output might be a hundred objects tracked across frames of a video. There is no Figma mock that adequately covers that range of states. As Cedric puts it: "You have to coordinate constantly with the modeling team on new capabilities, and then figure out how to show the model thinking - the visual equivalent of watching a reasoning model work through a problem." Further, one of the biggest barriers to AI adoption more broadly isn't that the models don't work; it's creating the right user experience for humans to understand what they should use it for and feel incentivized to provide enough context. [Nate Parrott](https://www.aidesignfieldguide.com/articles/nate-parrott) from Anthropic frames the broader implication: "Design becomes a matter of figuring out how to communicate your ideas to the model. In the same way you're thinking about what tools you're giving the user, you have to do the same thing for the model."
+
+<a id="canvas"></a>
+## While the visual layer between agents and designers is still developing, the canvas isn't going away
+
+There's nothing the design community likes debating more on X than the rhyme "Figma is dead" vs "Figma is ahead." Most designers we've spoken with say they still love having a visual workflow, especially for the design thinking process and high-fidelity refinement work. [Wen from Anthropic](https://www.youtube.com/watch?v=eh8bcBIAAFo) explains her reasoning: "Coding tools are super linear, where you iterate in one direction. But fine interaction details, micro directions for typography and styles… having those in a canvas to explore specifically is not something you always want to go directly to coding for." What changes most is where designers enter and exit the process. They are working both earlier, setting direction and defining constraints, and later, crafting the detailed visual refinement that prompts cannot do cleanly. In between, they are generating code-based prototypes using tools like [Lovable](https://lovable.dev/), [Cursor](https://cursor.com/), [Vercel](https://vercel.com/), or working directly inside code editors through [Claude Code](https://code.claude.com/docs/en/overview), [Codex](https://chatgpt.com/codex), and others.
+
+The biggest signal that the canvas is evolving rather than disappearing is shown by companies building new ones. Google recently launched its new beta for [Stitch](https://x.com/stitchbygoogle/status/2034332847893574080), an AI-native design canvas that holds and reasons across images, code, and text simultaneously, with parallel agents, voice-driven design direction, and a DESIGN.md file that enforces consistency across generated screens. [Replit's Agent 4](https://docs.replit.com/replitai/design-canvas) release takes a similar approach, letting users design on an infinite canvas, run parallel agents, and ship working apps from a single surface. Figma's [Code to Canvas](https://developers.figma.com/docs/figma-mcp-server/code-to-canvas/) feature takes AI-generated code and converts it back into editable designs. Various approaches show how the canvas is becoming the orchestration layer for agents rather than a static workspace for humans. Companies are also exploring using the canvas for their own home-grown AI product development systems. [Shopify](https://youtu.be/eMSqlQMk480), for example, has embedded [tldraw](http://tldraw.com), an open-source infinite canvas SDK, into its internal AI stack so that agents and humans can collaborate visually.
+
+We're continuing to see innovation and new tools emerge solving for the new workflow of where the visual and the generative meet. [Paper](http://paper.design), for example, is completely rebuilding design software to be AI native. Every design element renders as actual HTML, CSS, and Tailwind in real time, so the design and the code are the same thing from the first mark. Paper has also shipped an MCP server, meaning AI coding agents in Cursor or Claude Code can read and write to Paper files directly with no translation required. Stephen Haney, founder and CEO, describes their vision: "We see the new agent stack as: a coding agent, a code review tool, and a visual canvas to communicate with the agent." We are also seeing teams fill the "design language" coding gap with skills. [Impeccable](http://impeccable.style) is one example of a skills system that introduces a shared vocabulary - defining words like critique, polish, bolder, quieter, distill, animate - to direct coding agent output. Another tool, [Agentation](https://agentation.dev/), fills a remaining piece of the loop. Rather than starting from the design file or the coding agent, it starts from the living product. Users click any element on screen, add a note, and it passes structured context to the coding agent alongside their feedback.
+
+---
+
+<div class="img-placeholder" data-label="Market Map" data-src="market-map.png"></div>
+
+## What we're watching
+
+The designers thriving in this environment share a few things. They are comfortable with ambiguous outputs. They have enough prompt engineering fluency to work close to the codebase and models. They draw on wide references from materials, space, objects, and natural systems beyond just software, giving them something to reach for when familiar, average options fall short. And they have accountability, the willingness to say this is the direction and own what happens next.
+
+Creative conviction is held by people, and we believe that creative technologists have never been more valuable. If this is you, we'd love to meet you. And if you think differently about any of the things we've said, we'd especially love to meet you. ;)
+
+---
+
+*With special thanks to: Ben South (Variant), Tom Krcha (Pencil), Dylan Babbs (Profound), Oliver Hamrin (Quartr), Gabriella Hachem (Dessn), Paul Bakaus (Impeccable), Cedric Ith (Perceptron), Michael Magan (Tambo), Moe Amaya (Operate), and others who generously shared their thinking.*
+
+*Thank you also these product design leaders and communities we are fans of: [Dive Club](https://www.dive.club/) (Ridd), [First of Kind](https://firstofkind.com/) (Solieo), [Lenny's Podcast](https://www.lennysnewsletter.com/podcast) (Lenny), [Implications](https://www.implications.com/) (Scott Belsky), and others.*`;
+
+    marked.use({ breaks: false, gfm: true });
+    document.getElementById('article').innerHTML = marked.parse(MD);
+
+    document.querySelectorAll('.img-placeholder').forEach(div => {
+      const img = document.createElement('img');
+      img.src = BASE + div.dataset.src;
+      img.alt = div.dataset.label || '';
+      img.className = 'article-img';
+      const cap = document.createElement('p');
+      cap.className = 'article-caption';
+      cap.textContent = div.dataset.label || '';
+      div.replaceWith(img, cap);
+    });
+  </script>
+</body>
+</html>

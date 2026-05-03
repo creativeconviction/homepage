@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Welcome to Creative Conviction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fff8f1;
+      --text: #20124d;
+      --muted: rgba(32, 18, 77, 0.38);
+    }
+
+    body.terminal {
+      --bg: #000;
+      --text: #fff;
+      --muted: rgba(255, 255, 255, 0.4);
+    }
+    body.terminal, body.terminal * { font-family: 'Courier New', Courier, monospace !important; }
+    body.terminal::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.08) 3px, rgba(0,0,0,0.08) 4px);
+      pointer-events: none;
+      z-index: 9999;
+    }
+    body.terminal .corner { border-color: rgba(255,255,255,0.25); }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'EB Garamond', Georgia, serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .corner { position: fixed; width: 16px; height: 16px; pointer-events: none; z-index: 50; }
+    .corner-tl { top: 1.25rem; left: 1.25rem; border-top: 1px solid var(--muted); border-left: 1px solid var(--muted); }
+    .corner-tr { top: 1.25rem; right: 1.25rem; border-top: 1px solid var(--muted); border-right: 1px solid var(--muted); }
+    .corner-bl { bottom: 1.25rem; left: 1.25rem; border-bottom: 1px solid var(--muted); border-left: 1px solid var(--muted); }
+    .corner-br { bottom: 1.25rem; right: 1.25rem; border-bottom: 1px solid var(--muted); border-right: 1px solid var(--muted); }
+
+    nav {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 1.75rem 2rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+    }
+    .nav-home {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-home:hover { color: var(--text); }
+    .terminal-toggle {
+      background: none;
+      border: 1px solid var(--muted);
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.6875rem;
+      color: var(--muted);
+      padding: 0.2rem 0.5rem;
+      letter-spacing: 0.05em;
+      transition: color 0.15s, border-color 0.15s;
+      line-height: 1.7;
+    }
+    .terminal-toggle:hover { color: var(--text); border-color: var(--text); }
+    .nav-about {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-about:hover { color: var(--text); }
+
+    .article-header {
+      max-width: 680px;
+      margin: 5rem auto 3.5rem;
+      padding: 0 2rem;
+    }
+    .article-title {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.75rem;
+    }
+    .article-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 2rem;
+    }
+
+    .article-body {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 2rem 7rem;
+    }
+    .article-body p {
+      font-size: 1.125rem;
+      line-height: 1.72;
+      margin-bottom: 1.4rem;
+    }
+    .article-body h2 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      line-height: 1.2;
+      margin: 3.25rem 0 1rem;
+      letter-spacing: -0.01em;
+    }
+    .article-body h3 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      font-style: italic;
+      margin: 2.25rem 0 0.75rem;
+    }
+    .article-body a {
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+      transition: opacity 0.15s;
+    }
+    .article-body a:hover { opacity: 0.6; }
+    .article-body strong { font-weight: 600; }
+    .article-body em { font-style: italic; }
+    .article-body ul, .article-body ol {
+      margin: 0 0 1.4rem 1.75rem;
+    }
+    .article-body li {
+      font-size: 1.125rem;
+      line-height: 1.72;
+      margin-bottom: 0.6rem;
+    }
+    .article-body hr {
+      border: none;
+      border-top: 1px solid var(--muted);
+      margin: 2.5rem 0;
+      opacity: 0.35;
+    }
+    .article-body blockquote {
+      border-left: 2px solid var(--muted);
+      padding-left: 1.25rem;
+      margin: 1.5rem 0;
+      opacity: 0.8;
+    }
+    .article-img {
+      width: 100%;
+      display: block;
+      margin: 2.5rem 0 0.6rem;
+      border-radius: 2px;
+    }
+    .article-caption {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      line-height: 1.5;
+    }
+
+    footer {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: var(--muted);
+      border-top: 1px solid var(--muted);
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <script>if(localStorage.getItem('cc-terminal')==='1')document.body.classList.add('terminal');</script>
+
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <nav>
+    <a class="nav-home" href="../../">Creative Conviction</a>
+    <div style="display:flex;align-items:center;gap:1.25rem;">
+      <button class="terminal-toggle" id="terminal-toggle">&gt;_</button>
+      <a class="nav-about" href="../../about.html">About</a>
+    </div>
+  </nav>
+
+  <div class="article-header">
+    <h1 class="article-title">Welcome to Creative Conviction</h1>
+    <div class="article-meta">
+      <span>Libbie Frost &amp; Rayouf Alhumedhi</span>
+      <span>February 24, 2026</span>
+    </div>
+  </div>
+
+  <div class="article-body" id="article"></div>
+
+  <footer>
+    <span>Made in NYC 🍎</span>
+    <span>&copy; 2026</span>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('terminal-toggle');
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('terminal');
+      const on = document.body.classList.contains('terminal');
+      localStorage.setItem('cc-terminal', on ? '1' : '0');
+      toggle.textContent = on ? '[exit]' : '>_';
+    });
+    if (document.body.classList.contains('terminal')) toggle.textContent = '[exit]';
+
+    const BASE = 'https://creativeconviction.github.io/creative-conviction/';
+
+    const MD = `In the late 80s and early 90s, graphic design went through an unprecedented shift. The introduction of desktop publishing tools, such as Aldus PageMaker for the Macintosh in 1985 and Adobe Illustrator (1987) and Photoshop (1990), collapsed the technical barriers to producing visual work. Tasks that once required specialized typesetters, print shops, and production expertise could suddenly be rendered by anyone with a computer. Conventional wisdom suggested designers would vanish. Instead, these tools lowered the barriers to creating visual content, which grew the market for designers.
+
+A decade later, marketing faced a similar inflection point with the rise of the internet and social media platforms in the 2000s. [Distribution](https://www.bvp.com/atlas/investor-field-notes-distribution-and-conversion-models-for-consumer-startups), once scarce and expensive to access through highly mature channels like television and print, became free and widely accessible as the Internet emerged as a new channel without large gatekeepers in its early days. This new channel created a need for new specialists. Content marketers emerged at early blogs and startups, while companies like Facebook and Dropbox pioneered the role of the growth marketer. The focus of marketing departments evolved from expensive ad spend to strategic brand narratives and content creation. The reduction in execution costs expanded the creative surface area rather than contracting it.
+
+The narrative dominating today's conversation around AI is largely one of subtraction, in which we fixate on code generation replacing junior engineers or on automation reducing back-office staff. While every major technological shift indeed rocks the existing org chart, history suggests disruption creates more than it destroys, and we think this pattern will be pronounced in creative disciplines. Just as desktop publishing created brand designers and the internet created new types of marketers, the AI era is already producing new creative roles and tooling that will influence how we work, innovate, and play for decades to come. When process and generation are commoditized, taste and judgment — or creative conviction — becomes vital.
+
+<div class="img-placeholder" data-label="Hero editorial — creative conviction visual" data-src="cc v2.png"></div>
+
+## New dynamics for founders and creative teams
+
+The composition of founding teams is changing. We're seeing a surge of entrepreneurs with creative, non-technical backgrounds empowered by AI to write the code necessary to bring their startups to life. We've also noticed the urgency to hire "Founding Designers" across all types of AI startups. The job market also reflects this shift, with design openings climbing (up [13%](https://adplist.substack.com/p/state-of-the-design-job-market-in) from 2024). We're also seeing entirely new hybrid design roles emerging as well, from the rise of the "Design Engineer" that has become popularized by companies like Facebook, Vercel, and Netflix, to the "[Model Designer](https://www.aidesignfieldguide.com/)" being pioneered by creatives at Figma.
+
+For later-stage companies, we're noticing a pattern where CEOs are calling for a complete restructure of their design functions under C-suite leadership. At Shopify, [Tobi urgently called Carl Rivera](https://www.youtube.com/watch?v=qUoIfw5R-iE) in 2025 to revive and lead the design organization, while also simplifying titles to just "designer" or "writer" and re-focusing on craft and ambition. Stripe has adopted a similar approach, treating "design as design" by housing product, brand, marketing, creative, user research, and content all under one pillar and executive leader. Airbnb is another example — at [Config 2023](https://www.youtube.com/watch?v=Dkfijg7s76o), Brian Chesky told the audience that Airbnb had eliminated its product management function, with everything now running through design.
+
+In the future, we believe the role of the designer will look less like a discrete function and more like a foundational capability threaded through the entire company. The best designers will no longer sit downstream of product decisions; they will shape those decisions directly, moving at the speed of engineers while knowing when to slow things down. Designers who focus solely on the drawing board or shipping component libraries will be challenged by a new generation of designers who see the true form of the product, both present and future, and who tweak it across layers using storytelling, code, and imagery.
+
+Within organizations, we expect design to consolidate from a support function into a strategic one: fewer handoffs, more ownership, and a direct line to the CEO. The title may simplify, but the scope will expand. What gets called "design" tomorrow will encompass taste, narrative, product intuition, and brand in ways that blur every boundary we've drawn around the discipline today.
+
+## AI's impact on creative tooling
+
+The proliferation of new tooling has fundamentally expanded and augmented the bounds of creativity. We view the impact of AI on creative work in three distinct areas:
+
+- **Product design**: Tools like [Paper](http://paper.design), [Cursor](http://cursor.com), and [Dessn](http://dessn.ai) are allowing designers to prototype, ship code all the way through to production, and collapse the timelines between problem, idea, and reality. As we've previously noted, [the rise of design engineers is already underway](https://www.bvp.com/atlas/ai-powered-rd-vibecoding-taste-and-the-evolution-of-full-stack-design#3-AI-is-driving-the-rise-of-the-design-engineer-role), and there's an opportunity for founders to build tooling that demonstrates this function.
+
+- **Brand and visual marketing**: Platforms like [Canva](http://canva.com), [Flora](http://flora.ai), and [Reve](https://app.reve.com/) are modernizing horizontal creative workflows, enabling teams to generate high-fidelity assets from animations to interactive decks without the traditional bottlenecks. Every company has a brand, and those that can express it at scale without losing authenticity or coherence will outperform, which is exactly where we think the next wave of tooling matters most.
+
+- **Consumer play**: Platforms are emerging where the creation itself is the entertainment, not just a means to an end. Users build "gizmos" on [Gizmo](http://gizmo.party), generate songs on [Suno](http://suno.com), or have hour-long conversations with [Tolan](http://tolans.com) purely for the joy of making, sharing, or stepping into other worlds. These companies invest heavily in brand and narrative because the emotional promise to consumers is just as important as their technical capability. Successful consumer-facing companies realize that the product is a feeling as much as a feature set.
+
+<div class="img-placeholder" data-label="AI creative tooling landscape — product, brand, consumer play" data-src="market map v2.png"></div>
+
+## Defining creative conviction
+
+Creative conviction combines two forces: the power and ambition to create something new and a firmly held belief in what you're creating. It's about standing for specificity, making opinionated choices, and designing for emotional connection. It's rooted in subjectivity and is difficult to teach — something AI doesn't handle well. As investors, we've honed our ability to identify this in entrepreneurs and companies. When we backed Pinterest in 2010, Ben Silbermann's and Evan Sharp's obsession with design was a primary reason we invested.
+
+It's also why other consumer internet winners (e.g., Airbnb, Shopify) pulled ahead despite operating in crowded markets. Airbnb's "Belong Anywhere" ethos wasn't just marketing; it was embedded in product decisions, such as lush photography that showcased homes as aspirational destinations, highlighting neighborhood guides and encouraging hosts to share local recommendations. Shopify made design choices that treated store owners as creators and fostered experiences like one-click checkout and mobile-first storefronts that made selling feel accessible and inspirational.
+
+We're already observing this pattern in the AI-native startups we back, too. [Legora](https://www.bvp.com/news/building-legoras-collaborative-ai-platform-for-legal-workflow-automation)'s customers assess which team ships innovations first and at the highest velocity, whose execution quality is superior, and which leadership team sees the future more creatively. When law firms evaluate legal AI platforms, they're not just comparing feature sets in today's products; they're betting on tomorrow's creative edge. What these [category-defining businesses](https://www.bvp.com/atlas/consumer-earthquake-startups) share is the ability to create visceral, emotional reactions; value propositions so stunning, they become etched into pop culture. As AI commoditizes execution, creative conviction commands a premium. It's hard to explain, impossible to fake, and that's exactly why it's valuable.
+
+This is just the beginning of our evolving thesis on an emerging creative tech stack. In that spirit, we'll be doing a three-part deep dive into product design, brand and marketing, and consumer play. We'll explore how the best teams are working, which tools actually matter, and why creative conviction remains an overlooked moat in a world where everyone has access to the same models.
+
+*This perspective was authored by Libbie Frost and Rayouf Alhumedhi, with reviews and edits from Partners Jeremy Levine and Lauri Moore, including Atlas Editors. If you are building in the creative tooling space, reach out directly to lfrost@bvp.com and ralhumedhi@bvp.com.*`;
+
+    marked.use({ breaks: false, gfm: true });
+    document.getElementById('article').innerHTML = marked.parse(MD);
+
+    document.querySelectorAll('.img-placeholder').forEach(div => {
+      const src = encodeURIComponent(div.dataset.src).replace(/%20/g, '%20');
+      const label = div.dataset.label || '';
+      const img = document.createElement('img');
+      img.src = BASE + div.dataset.src.replace(/ /g, '%20');
+      img.alt = label;
+      img.className = 'article-img';
+      const cap = document.createElement('p');
+      cap.className = 'article-caption';
+      cap.textContent = label;
+      div.replaceWith(img, cap);
+    });
+  </script>
+</body>
+</html>
