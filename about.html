@@ -9,145 +9,60 @@
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #fff8f1;
-      --text: #20124d;
-      --muted: rgba(32, 18, 77, 0.38);
-    }
-
-    body.terminal {
-      --bg: #000;
-      --text: #fff;
-      --muted: rgba(255, 255, 255, 0.4);
-    }
-    body.terminal, body.terminal * {
-      font-family: 'Courier New', Courier, monospace !important;
-    }
-    body.terminal::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.08) 3px, rgba(0,0,0,0.08) 4px);
-      pointer-events: none;
-      z-index: 9999;
-    }
+    :root { --bg: #fff8f1; --text: #20124d; --muted: rgba(32, 18, 77, 0.38); }
+    body.terminal { --bg: #000; --text: #fff; --muted: rgba(255, 255, 255, 0.4); }
+    body.terminal, body.terminal * { font-family: 'Courier New', Courier, monospace !important; }
+    body.terminal::after { content: ''; position: fixed; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.08) 3px, rgba(0,0,0,0.08) 4px); pointer-events: none; z-index: 9999; }
     body.terminal .corner { border-color: rgba(255,255,255,0.25); }
-
+    body.terminal .tv-body { background: #111; border-color: #333; }
+    body.terminal .tv-neck { background: #111; border-color: #333; }
+    body.terminal .tv-base { background: #111; border-color: #333; }
+    body.terminal .tv-screen { border-color: #333; }
     html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'EB Garamond', Georgia, serif;
-      background: var(--bg);
-      color: var(--text);
-      -webkit-font-smoothing: antialiased;
-      min-height: 100vh;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .corner {
-      position: fixed;
-      width: 16px; height: 16px;
-      pointer-events: none;
-      z-index: 50;
-    }
+    body { font-family: 'EB Garamond', Georgia, serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; min-height: 100vh; transition: background 0.2s, color 0.2s; }
+    .corner { position: fixed; width: 16px; height: 16px; pointer-events: none; z-index: 50; }
     .corner-tl { top: 1.25rem; left: 1.25rem; border-top: 1px solid var(--muted); border-left: 1px solid var(--muted); }
     .corner-tr { top: 1.25rem; right: 1.25rem; border-top: 1px solid var(--muted); border-right: 1px solid var(--muted); }
     .corner-bl { bottom: 1.25rem; left: 1.25rem; border-bottom: 1px solid var(--muted); border-left: 1px solid var(--muted); }
     .corner-br { bottom: 1.25rem; right: 1.25rem; border-bottom: 1px solid var(--muted); border-right: 1px solid var(--muted); }
-
-    nav {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 1.75rem 2rem 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.25rem;
-    }
-
-    .nav-home {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.8125rem;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
+    nav { max-width: 720px; margin: 0 auto; padding: 1.75rem 2rem 0; display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; }
+    .nav-home { font-family: 'Inter', sans-serif; font-size: 0.8125rem; color: var(--muted); text-decoration: none; transition: color 0.15s; }
     .nav-home:hover { color: var(--text); }
-
-    .terminal-toggle {
-      background: none;
-      border: 1px solid var(--muted);
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.6875rem;
-      color: var(--muted);
-      padding: 0.2rem 0.5rem;
-      letter-spacing: 0.05em;
-      transition: color 0.15s, border-color 0.15s;
-      line-height: 1.7;
-    }
+    .terminal-toggle { background: none; border: 1px solid var(--muted); cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.6875rem; color: var(--muted); padding: 0.2rem 0.5rem; letter-spacing: 0.05em; transition: color 0.15s, border-color 0.15s; line-height: 1.7; }
     .terminal-toggle:hover { color: var(--text); border-color: var(--text); }
-
-    .nav-about {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.8125rem;
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .content {
-      max-width: 540px;
-      margin: 5.5rem auto 0;
-      padding: 0 2rem;
-    }
-
-    .page-label {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.6875rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 2rem;
-    }
-
-    .about-body {
-      font-size: 1.25rem;
-      line-height: 1.45;
-      color: var(--text);
-    }
-
+    .nav-about { font-family: 'Inter', sans-serif; font-size: 0.8125rem; color: var(--text); text-decoration: none; }
+    @keyframes tv-flicker { 0%, 94%, 96%, 100% { opacity: 1; } 95% { opacity: 0.88; } }
+    @keyframes tv-scanshift { from { background-position: 0 0; } to { background-position: 0 4px; } }
+    .tv-section { max-width: 720px; margin: 3.5rem auto 0; padding: 0 2rem; display: flex; justify-content: center; }
+    .tv-body { background: #27201a; border-radius: 10px; padding: 12px 12px 8px; border: 2px solid #1a1410; box-shadow: inset 0 1px 0 rgba(255,255,255,0.04); }
+    .tv-screen { position: relative; width: 288px; height: 172px; border-radius: 3px; overflow: hidden; border: 3px solid #1a1410; background: #000; cursor: crosshair; }
+    .tv-bars { display: flex; width: 100%; height: 100%; position: absolute; inset: 0; animation: tv-flicker 11s ease-in-out infinite; transition: opacity 0.2s; }
+    .tv-bar { flex: 1; height: 100%; }
+    .tv-scanlines { animation: tv-scanshift 0.18s steps(1) infinite; position: absolute; inset: 0; background-image: repeating-linear-gradient(to bottom, transparent 0px, transparent 2px, rgba(0,0,0,0.16) 2px, rgba(0,0,0,0.16) 3px); pointer-events: none; z-index: 2; transition: opacity 0.2s; }
+    .tv-glare { position: absolute; top: 5px; left: 8px; width: 52px; height: 16px; background: rgba(255,255,255,0.05); border-radius: 50%; transform: rotate(-8deg); pointer-events: none; z-index: 2; }
+    #tv-pixel-canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.2s; z-index: 3; pointer-events: none; }
+    #tv-pixel-canvas.active { opacity: 1; }
+    .tv-bottom-bar { display: flex; align-items: center; justify-content: space-between; padding: 7px 2px 4px; }
+    .tv-ch-label { font-family: 'Courier New', Courier, monospace; font-size: 9px; color: rgba(255,255,255,0.28); letter-spacing: 0.12em; }
+    .tv-knobs { display: flex; gap: 5px; align-items: center; }
+    .tv-knob-sm { width: 7px; height: 7px; border-radius: 50%; background: #1a1410; border: 1px solid rgba(255,255,255,0.08); }
+    .tv-knob-lg { width: 12px; height: 12px; border-radius: 50%; background: #1a1410; border: 1px solid rgba(255,255,255,0.12); margin-left: 2px; }
+    .tv-neck { width: 44px; height: 7px; background: #27201a; margin: 0 auto; border-left: 2px solid #1a1410; border-right: 2px solid #1a1410; }
+    .tv-base { width: 86px; height: 6px; background: #27201a; margin: 0 auto; border-radius: 0 0 5px 5px; border: 2px solid #1a1410; border-top: none; }
+    .content { max-width: 540px; margin: 4rem auto 0; padding: 0 2rem; }
+    .about-body { font-size: 1.25rem; line-height: 1.45; color: var(--text); }
     .about-body p + p { margin-top: 1.25rem; }
-
-    .about-body a {
-      color: var(--text);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-thickness: 1px;
-      transition: opacity 0.15s;
-    }
+    .about-body a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: opacity 0.15s; }
     .about-body a:hover { opacity: 0.6; }
-
-    footer {
-      max-width: 720px;
-      margin: 7rem auto 0;
-      padding: 2rem;
-      display: flex;
-      justify-content: space-between;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
+    footer { max-width: 720px; margin: 7rem auto 0; padding: 2rem; display: flex; justify-content: space-between; font-family: 'Inter', sans-serif; font-size: 0.75rem; color: var(--muted); }
   </style>
 </head>
 <body>
   <script>if(localStorage.getItem('cc-terminal')==='1')document.body.classList.add('terminal');</script>
-
   <div class="corner corner-tl"></div>
   <div class="corner corner-tr"></div>
   <div class="corner corner-bl"></div>
   <div class="corner corner-br"></div>
-
   <nav>
     <a class="nav-home" href="./">Creative Conviction</a>
     <div style="display:flex;align-items:center;gap:1.25rem;">
@@ -155,18 +70,44 @@
       <a class="nav-about" href="./about.html">About</a>
     </div>
   </nav>
-
-  <div class="content">
-    <div class="about-body">
-      <p>We're <a href="https://www.linkedin.com/in/libbie-frost-9a20b4195" target="_blank">Libbie</a> and <a href="https://x.com/rayoufalhumedhi" target="_blank">Rayouf</a>, two investors at <a href="https://www.bvp.com/" target="_blank">Bessemer Venture Partners</a> who spend our days at the intersection of creativity, technology, and company building. We started Creative Conviction because we believe that taste and creative ambition are becoming the most important differentiators in the age of AI, and we wanted a place to explore what that means with the people living it.</p>
+  <div class="tv-section">
+    <div>
+      <div class="tv-body">
+        <div class="tv-screen" id="tv-screen">
+          <div class="tv-bars" id="tv-bars">
+            <div class="tv-bar" style="background:#fff8f1;"></div>
+            <div class="tv-bar" style="background:#f59e0b;"></div>
+            <div class="tv-bar" style="background:#ec4899;"></div>
+            <div class="tv-bar" style="background:#3b82f6;"></div>
+            <div class="tv-bar" style="background:#7c3aed;"></div>
+            <div class="tv-bar" style="background:#20124d;"></div>
+          </div>
+          <div class="tv-scanlines" id="tv-scanlines"></div>
+          <div class="tv-glare"></div>
+          <canvas id="tv-pixel-canvas"></canvas>
+        </div>
+        <div class="tv-bottom-bar">
+          <span class="tv-ch-label">CH-01 &middot; CC</span>
+          <div class="tv-knobs">
+            <div class="tv-knob-sm"></div>
+            <div class="tv-knob-sm"></div>
+            <div class="tv-knob-lg"></div>
+          </div>
+        </div>
+      </div>
+      <div class="tv-neck"></div>
+      <div class="tv-base"></div>
     </div>
   </div>
-
+  <div class="content">
+    <div class="about-body">
+      <p>We're <a href="https://libbiefrost.com" target="_blank">Libbie</a> and <a href="https://rayouf.com" target="_blank">Rayouf</a>, two investors at <a href="https://www.bvp.com/" target="_blank">Bessemer Venture Partners</a> who spend our days at the intersection of creativity, technology, and company building. We started Creative Conviction because we believe that taste and creative ambition are becoming the most important differentiators in the age of AI, and we wanted a place to explore what that means with the people living it.</p>
+    </div>
+  </div>
   <footer>
     <span>Made in NYC 🍎</span>
     <span>&copy; 2026</span>
   </footer>
-
   <script>
     const toggle = document.getElementById('terminal-toggle');
     toggle.addEventListener('click', () => {
@@ -175,7 +116,131 @@
       localStorage.setItem('cc-terminal', on ? '1' : '0');
       toggle.textContent = on ? '[exit]' : '>_';
     });
-  </script>
 
+    const PIXEL_FONT = {
+      'A':[0,1,1,1,0, 1,0,0,0,1, 1,1,1,1,1, 1,0,0,0,1, 1,0,0,0,1],
+      'B':[1,1,1,1,0, 1,0,0,0,1, 1,1,1,1,0, 1,0,0,0,1, 1,1,1,1,0],
+      'E':[1,1,1,1,1, 1,0,0,0,0, 1,1,1,1,0, 1,0,0,0,0, 1,1,1,1,1],
+      'F':[1,1,1,1,1, 1,0,0,0,0, 1,1,1,1,0, 1,0,0,0,0, 1,0,0,0,0],
+      'I':[0,0,1,0,0, 0,0,1,0,0, 0,0,1,0,0, 0,0,1,0,0, 0,0,1,0,0],
+      'L':[1,0,0,0,0, 1,0,0,0,0, 1,0,0,0,0, 1,0,0,0,0, 1,1,1,1,1],
+      'O':[0,1,1,1,0, 1,0,0,0,1, 1,0,0,0,1, 1,0,0,0,1, 0,1,1,1,0],
+      'R':[1,1,1,1,0, 1,0,0,0,1, 1,1,1,1,0, 1,0,0,1,0, 1,0,0,0,1],
+      'U':[1,0,0,0,1, 1,0,0,0,1, 1,0,0,0,1, 1,0,0,0,1, 0,1,1,1,0],
+      'Y':[1,0,0,0,1, 0,1,0,1,0, 0,0,1,0,0, 0,0,1,0,0, 0,0,1,0,0],
+      '&':[0,1,1,0,0, 1,0,0,1,0, 0,1,1,0,1, 1,0,0,1,0, 0,1,1,0,1],
+      ' ':[0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0],
+    };
+    const CHAR_W = 5, CHAR_H = 5, LGAP = 1, WGAP = 2;
+
+    (function initTV() {
+      const screen    = document.getElementById('tv-screen');
+      const bars      = document.getElementById('tv-bars');
+      const scanlines = document.getElementById('tv-scanlines');
+      const canvas    = document.getElementById('tv-pixel-canvas');
+      if (!screen || !canvas) return;
+
+      const ctx = canvas.getContext('2d');
+      const DPR = Math.min(window.devicePixelRatio || 1, 2);
+      const W = 288, H = 172;
+      canvas.width = W * DPR;
+      canvas.height = H * DPR;
+      ctx.scale(DPR, DPR);
+
+      const TWORDS  = ['LIBBIE', '& RAYOUF'];
+      const PALETTE = ['#7c3aed', '#ec4899', '#f59e0b', '#3b82f6'];
+
+      const maxLen = Math.max(...TWORDS.map(w => w.length));
+      const gridW  = maxLen * CHAR_W + (maxLen - 1) * LGAP;
+      const gridH  = TWORDS.length * CHAR_H + (TWORDS.length - 1) * WGAP;
+      const CELL   = Math.max(5, Math.floor(Math.min(W * 0.88 / gridW, H * 0.82 / gridH)));
+      const SQ     = 1;
+      const SUB    = 3;
+      const STEP   = Math.floor(CELL / (SUB + 1));
+      const blockH_px = gridH * CELL;
+      const by     = Math.floor((H - blockH_px) / 2);
+
+      const cells = [];
+      TWORDS.forEach((word, li) => {
+        const lineGridW = word.length * CHAR_W + (word.length - 1) * LGAP;
+        const lx = Math.floor((W - lineGridW * CELL) / 2);
+        const ly = by + li * (CHAR_H + WGAP) * CELL;
+        for (let ci = 0; ci < word.length; ci++) {
+          const bits = PIXEL_FONT[word[ci]] || PIXEL_FONT[' '];
+          const cx = lx + ci * (CHAR_W + LGAP) * CELL;
+          for (let row = 0; row < CHAR_H; row++)
+            for (let col = 0; col < CHAR_W; col++) {
+              if (!bits[row * CHAR_W + col]) continue;
+              const cellX = cx + col * CELL;
+              const cellY = ly + row * CELL;
+              for (let sy = 0; sy < SUB; sy++)
+                for (let sx = 0; sx < SUB; sx++) {
+                  const ox = cellX + STEP * (sx + 1);
+                  const oy = cellY + STEP * (sy + 1);
+                  cells.push({ ox, oy, px: ox, py: oy, vx: 0, vy: 0,
+                    colorIdx: (col + row * 2 + ci * 3 + li * 7 + sx + sy * 2) % PALETTE.length,
+                    delay: ci * 2 + li * 12 + (sx + sy) });
+                }
+            }
+        }
+      });
+
+      const REPEL_R = Math.max(40, CELL * 9);
+      const REPEL_F = Math.max(8,  CELL * 2);
+      const SPRING = 0.1, DAMP = 0.72;
+      let mx = -9999, my = -9999, hovering = false, frame = 0, last = 0;
+
+      screen.addEventListener('mouseenter', () => {
+        frame = 0;
+        cells.forEach(c => { c.px = c.ox; c.py = c.oy; c.vx = 0; c.vy = 0; });
+        hovering = true;
+        canvas.classList.add('active');
+        bars.style.opacity = '0';
+        scanlines.style.opacity = '0';
+      });
+      screen.addEventListener('mousemove', e => {
+        const rect = canvas.getBoundingClientRect();
+        mx = (e.clientX - rect.left) * (W / rect.width);
+        my = (e.clientY - rect.top) * (H / rect.height);
+      });
+      screen.addEventListener('mouseleave', () => {
+        hovering = false; mx = -9999; my = -9999;
+        canvas.classList.remove('active');
+        bars.style.opacity = '1';
+        scanlines.style.opacity = '1';
+      });
+
+      function loop(t) {
+        if (hovering && t - last >= 1000 / 30) {
+          const terminal = document.body.classList.contains('terminal');
+          ctx.clearRect(0, 0, W, H);
+          cells.forEach(cell => {
+            const appeared = frame >= cell.delay;
+            if (appeared) {
+              const ddx = cell.px - mx, ddy = cell.py - my;
+              const dist = Math.sqrt(ddx * ddx + ddy * ddy);
+              if (dist < REPEL_R && dist > 0) {
+                const force = (1 - dist / REPEL_R) * REPEL_F;
+                cell.vx += (ddx / dist) * force;
+                cell.vy += (ddy / dist) * force;
+              }
+              cell.vx += (cell.ox - cell.px) * SPRING;
+              cell.vy += (cell.oy - cell.py) * SPRING;
+              cell.vx *= DAMP; cell.vy *= DAMP;
+              cell.px += cell.vx; cell.py += cell.vy;
+              ctx.fillStyle = terminal ? '#fff' : PALETTE[cell.colorIdx];
+              ctx.fillRect(cell.px, cell.py, SQ, SQ);
+            } else if (Math.random() < 0.3) {
+              ctx.fillStyle = terminal ? 'rgba(255,255,255,0.4)' : 'rgba(100,60,200,0.25)';
+              ctx.fillRect(cell.ox, cell.oy, SQ, SQ);
+            }
+          });
+          frame++; last = t;
+        }
+        requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
+    })();
+  </script>
 </body>
 </html>
