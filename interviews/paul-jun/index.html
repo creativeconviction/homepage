@@ -18,6 +18,9 @@
       --interviewer: #8a8a9a;
       --guest: #20124d;
       --sidebar-w: 14rem;
+      --highlight-bg: rgba(74, 84, 225, 0.10);
+      --highlight-hover-bg: rgba(74, 84, 225, 0.05);
+      --highlight-hover-text: #4A54E1;
     }
 
     body.terminal {
@@ -126,7 +129,6 @@
       font-family: 'Inter', sans-serif;
       font-size: 0.625rem;
       letter-spacing: 0.14em;
-      text-transform: uppercase;
       color: var(--muted);
       margin-bottom: 0.85rem;
     }
@@ -163,7 +165,13 @@
     .sidebar-link:hover { color: var(--text); }
     .sidebar-link.active { color: var(--text); font-weight: 600; }
 
-    .sidebar-meta { margin-top: 1.25rem; font-size: 0.8125rem; color: var(--muted); font-style: italic; }
+    .sidebar-meta {
+      margin-top: 1.25rem;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      font-family: 'Inter', sans-serif;
+      font-style: normal;
+    }
     .sidebar .back-link { display: inline-block; margin-top: 1rem; font-size: 0.8125rem; }
     .sidebar .terminal-toggle { display: block; margin-top: 1rem; }
 
@@ -202,6 +210,7 @@
     }
 
     .article-date {
+      font-family: 'Inter', sans-serif;
       font-size: 0.875rem;
       text-align: center;
       color: var(--muted);
@@ -224,6 +233,7 @@
     }
 
     .speaker-name {
+      font-family: 'Inter', sans-serif;
       font-size: 0.8125rem;
       font-weight: 700;
       letter-spacing: 0.01em;
@@ -253,9 +263,15 @@
 
     /* PULL QUOTE */
     .highlight-quote {
-      background: rgba(32, 18, 77, 0.09);
+      background: var(--highlight-bg);
       padding: 1px 4px;
       border-radius: 2px;
+      transition: background 0.2s, color 0.2s;
+      cursor: default;
+    }
+    .highlight-quote:hover {
+      background: var(--highlight-hover-bg);
+      color: var(--highlight-hover-text);
     }
     body.terminal .highlight-quote {
       background: rgba(255, 255, 255, 0.12);
