@@ -17,6 +17,8 @@
       --muted: rgba(32, 18, 77, 0.38);
       --thumb: rgba(20, 10, 50, 0.88);
       --quote-bg: rgba(32, 18, 77, 0.09);
+      --ui-font: 'Inter', sans-serif;
+      --ui-size: 0.75rem;
     }
 
     /* ── TERMINAL ── */
@@ -95,8 +97,9 @@
       background: none;
       border: 1px solid var(--muted);
       cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.6875rem;
+      font-family: var(--ui-font);
+      font-size: var(--ui-size);
+      font-weight: 400;
       color: var(--muted);
       padding: 0.2rem 0.5rem;
       letter-spacing: 0.05em;
@@ -106,8 +109,9 @@
     .terminal-toggle:hover { color: var(--text); border-color: var(--text); }
 
     .nav-about {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.8125rem;
+      font-family: var(--ui-font);
+      font-size: var(--ui-size);
+      font-weight: 400;
       color: var(--muted);
       text-decoration: none;
       transition: color 0.15s;
@@ -173,12 +177,12 @@
       background: none;
       border: none;
       cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.8125rem;
+      font-family: var(--ui-font);
+      font-size: var(--ui-size);
+      font-weight: 400;
       color: var(--muted);
       padding: 0;
       transition: color 0.15s;
-      font-weight: 400;
     }
     .filter-btn:hover { color: var(--text); }
     .filter-btn.active { color: var(--text); font-weight: 500; }
@@ -236,11 +240,11 @@
     }
 
     .card-date {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.6875rem;
+      font-family: var(--ui-font);
+      font-size: var(--ui-size);
+      font-weight: 400;
       color: var(--muted);
       margin-top: 0.4rem;
-      font-weight: 400;
     }
 
     /* EMAIL SIGNUP */
@@ -273,8 +277,9 @@
       background: transparent;
       border: none;
       color: var(--text);
-      font-family: 'Inter', sans-serif;
-      font-size: 0.875rem;
+      font-family: var(--ui-font);
+      font-size: var(--ui-size);
+      font-weight: 400;
       padding: 0.25rem 0;
       outline: none;
     }
@@ -285,6 +290,7 @@
       border: none;
       cursor: pointer;
       color: var(--text);
+      font-family: var(--ui-font);
       font-size: 1rem;
       padding: 0 0 0 0.5rem;
       line-height: 1;
@@ -301,8 +307,9 @@
       padding: 2rem;
       display: flex;
       justify-content: space-between;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.75rem;
+      font-family: var(--ui-font);
+      font-size: var(--ui-size);
+      font-weight: 400;
       color: var(--muted);
     }
   </style>
@@ -464,11 +471,6 @@
   });
 
   // ── COSMOS SCROLLING STRIP THUMBNAILS ───────────────────────────
-  //
-  // Both types scroll vertically. Reports get a diagonal fade on the
-  // lower-right half. Interviews get an inset frame (center faded out).
-  // On hover: weave effect + 2× speed. Colors reveal on load with typewriter.
-
   const BG_PEACH = '#fff8f1';
 
   function seededRng(seed) {
@@ -580,10 +582,58 @@
     const ctx = canvas.getContext('2d');
     ctx.scale(DPR, DPR);
 
+    // ── INTERVIEW: waveform renderer ─────────────────────────────
+    if (isInterview) {
+      const palette = ['#7c3aed', '#4A54E1', '#93c5fd', '#1e3a8a', '#ec4899', '#f59e0b'];
+      const rng = seededRng((cardIdx + 1) * 131071);
+      const N = 22;
+      const phases  = Array.from({ length: N }, () => rng() * Math.PI * 2);
+      const speeds2 = Array.from({ length: N }, () => 3.2 + rng() * 4.6);
+      const bases   = Array.from({ length: N }, () => 0.22 + rng() * 0.32);
+
+      container.style.borderColor = 'transparent';
+      requestAnimationFrame(() => { container.style.transition = 'border-color 0.45s'; });
+      setTimeout(() => { container.style.borderColor = ''; },
+        Math.max(0, 1480 - (window.ccIntroStart ? performance.now() - window.ccIntroStart : 0))
+      );
+
+      let lastTs = 0;
+      function waveLoop(ts) {
+        if (ts - lastTs < 33) { requestAnimationFrame(waveLoop); return; }
+        lastTs = ts;
+        const t = ts / 1000;
+
+        ctx.fillStyle = BG_PEACH;
+        ctx.fillRect(0, 0, W, H);
+
+        ctx.strokeStyle = 'rgba(32,18,77,.07)';
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(4, H / 2); ctx.lineTo(W - 4, H / 2); ctx.stroke();
+
+        const bMax   = H * 0.7;
+        const bW     = Math.max(2, (W - 8 - (N - 1) * 2) / N);
+        const startX = (W - (N * bW + (N - 1) * 2)) / 2;
+
+        for (let i = 0; i < N; i++) {
+          const bh = Math.max(3, (bases[i] + 0.18 * Math.sin(t * speeds2[i] * 0.5 + phases[i]) + 0.08 * Math.sin(t * speeds2[i] * 0.85 + phases[i] + 1)) * bMax);
+          const x = startX + i * (bW + 2);
+          const y = (H - bh) / 2;
+          ctx.fillStyle = palette[i % palette.length];
+          ctx.fillRect(x, y, bW, bh);
+          ctx.globalAlpha = 0.15;
+          ctx.fillRect(x, H / 2 + (H / 2 - y - bh), bW, bh * 0.4);
+          ctx.globalAlpha = 1;
+        }
+
+        requestAnimationFrame(waveLoop);
+      }
+      requestAnimationFrame(waveLoop);
+      return;
+    }
+
+    // ── REPORT: cosmos strip renderer ────────────────────────────
     const palette = ['#7c3aed', '#4A54E1', '#93c5fd', '#1e3a8a', '#ec4899', '#f59e0b'];
 
-    // Both types use the same strip count so block widths are visually identical.
-    // The frame inset (interviews) and diagonal fade (reports) are the differentiators.
     const NUM_STRIPS = 14;
     const crossLen   = W;
     const scrollLen  = H;
@@ -622,7 +672,6 @@
     canvas.addEventListener('mouseenter', () => { hovering = true;  });
     canvas.addEventListener('mouseleave', () => { hovering = false; });
 
-    // ── Intro color reveal — synced with the typewriter ───────────
     const INTRO_PHASES = [
       { color: '#93c5fd', startMs: 0    },
       { color: '#f59e0b', startMs: 230  },
@@ -662,14 +711,12 @@
         hoverAlpha + (hovering ? FADE : -FADE)
       ));
 
-      // Advance offsets — 2× slower when idle, full speed on hover
       const speedMul = hovering ? 1.0 : 0.5;
       for (let i = 0; i < NUM_STRIPS; i++) {
         fwdOff[i] += speeds[i] * speedMul;
         revOff[i] -= speeds[NUM_STRIPS - 1 - i] * speedMul;
       }
 
-      // ── Pass 1: background fill + forward colored blocks ──────
       ctx.fillStyle = BG_PEACH;
       ctx.fillRect(0, 0, W, H);
 
@@ -678,21 +725,18 @@
           false, W, H, terminal, true, getIntroAlpha);
       }
 
-      // ── Pass 2: hover weave — reversed animation in bg spaces ─
       if (hoverAlpha > 0.005) {
         const bgRects = [];
         for (let i = 0; i < NUM_STRIPS; i++) {
           collectBgRects(tapes[i], fwdOff[i], stripPositions[i], thicknesses[i],
             false, W, H).forEach(r => bgRects.push(r));
         }
-
         if (bgRects.length > 0) {
           ctx.save();
           ctx.globalAlpha = hoverAlpha;
           ctx.beginPath();
           bgRects.forEach(r => ctx.rect(r.x, r.y, r.w, r.h));
           ctx.clip();
-
           for (let i = 0; i < NUM_STRIPS; i++) {
             const ri = NUM_STRIPS - 1 - i;
             drawTapeStrip(ctx, tapes[ri], revOff[ri], stripPositions[i], thicknesses[i],
@@ -702,25 +746,17 @@
         }
       }
 
-      // ── Pass 3: type differentiator ───────────────────────────
-      // Reports    : lower-right triangle at 90% peach overlay → ~10% opacity
-      // Interviews : inset frame — inner rectangle at 90% peach → ~10% opacity,
-      //              outer border ring stays fully opaque
+      // Document fold — upper-left corner
+      const F = Math.round(Math.min(W, H) * 0.28);
       ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(F, 0);
+      ctx.lineTo(0, F);
+      ctx.closePath();
       ctx.fillStyle = BG_PEACH;
-      if (!isInterview) {
-        ctx.globalAlpha = 0.90;
-        ctx.beginPath();
-        ctx.moveTo(0, H);
-        ctx.lineTo(W, 0);
-        ctx.lineTo(W, H);
-        ctx.closePath();
-        ctx.fill();
-      } else {
-        const inset = Math.round(Math.min(W, H) * 0.22);
-        ctx.globalAlpha = 0.90;
-        ctx.fillRect(inset, inset, W - inset * 2, H - inset * 2);
-      }
+      ctx.globalAlpha = 1;
+      ctx.fill();
       ctx.restore();
 
       requestAnimationFrame(loop);
@@ -729,7 +765,7 @@
     requestAnimationFrame(loop);
   }
 
-  // Shared palette constants (used by hero pixel hover below)
+  // Shared palette constants (used by hero pixel hover)
   const PURPLE  = '#7c3aed';
   const MAGENTA = '#ec4899';
   const ORANGE  = '#f59e0b';
