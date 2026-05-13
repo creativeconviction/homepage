@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gatherings — Creative Conviction</title>
+  <meta name="description" content="Dinners, demo nights, and other gatherings hosted by Creative Conviction and Bessemer Venture Partners." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400..700&display=swap" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --cc-magenta:   #D8016A;
+      --cc-indigo:    #361C76;
+
+      --cc-paper:        #F7F5FA;
+      --cc-paper-soft:   #F2EFF7;
+      --cc-white:        #FBFAFD;
+
+      --cc-ink:    #1A1130;
+      --cc-ink-2:  #322847;
+      --cc-ink-3:  #6A6378;
+      --cc-ink-4:  #9C97A8;
+      --cc-rule:        #D2CDDB;
+      --cc-rule-soft:   #E5E1ED;
+
+      --fg-1: var(--cc-ink);
+      --fg-2: var(--cc-ink-2);
+      --fg-3: var(--cc-ink-3);
+
+      --font-serif: "EB Garamond", "Iowan Old Style", Charter, Georgia, serif;
+      --font-sans:  "Inter", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+      --ease: cubic-bezier(.2,.6,.2,1);
+      --dur-1: 120ms;
+      --dur-2: 220ms;
+    }
+
+    body {
+      background: var(--cc-paper);
+      color: var(--fg-1);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      min-height: 100vh;
+    }
+
+    a { color: var(--cc-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: text-decoration-thickness var(--dur-1) var(--ease); }
+    a:hover { text-decoration-thickness: 2px; }
+    em { font-family: var(--font-serif); font-style: italic; }
+
+    /* ----- Shell ----- */
+    .cc-shell {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 40px 80px;
+    }
+
+    /* ----- Header (matches homepage) ----- */
+    .cc-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--cc-rule);
+      margin-bottom: 80px;
+    }
+    .cc-mark {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      text-decoration: none;
+      line-height: 1;
+    }
+    .cc-mark em { font-style: italic; color: var(--cc-indigo); font-family: var(--font-serif); }
+    .cc-nav { display: flex; gap: 28px; }
+    .cc-nav-link {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--fg-2);
+      text-decoration: none;
+      transition: color var(--dur-1) var(--ease);
+    }
+    .cc-nav-link:hover { color: var(--cc-ink); }
+
+    /* ----- Page layout ----- */
+    .cc-page { max-width: 820px; margin: 0; }
+
+    .cc-page-header { margin-bottom: 56px; }
+    .cc-page-title {
+      font-family: var(--font-serif);
+      font-size: clamp(40px, 5.5vw, 56px);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--cc-ink);
+      margin: 0 0 16px;
+    }
+    .cc-page-dek {
+      font-family: var(--font-serif);
+      font-size: 19px;
+      line-height: 1.5;
+      color: var(--fg-2);
+      max-width: 600px;
+      margin: 0;
+    }
+    .cc-page-dek em { font-style: italic; }
+
+    /* ----- Gathering list ----- */
+    .cc-gathering-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--cc-rule);
+    }
+    .cc-gathering {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      align-items: start;
+      gap: 32px;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--cc-rule-soft);
+      scroll-margin-top: 32px;
+    }
+    .cc-gathering-image {
+      aspect-ratio: 4 / 3;
+      background-color: var(--cc-paper-soft);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border: 1px solid var(--cc-rule-soft);
+      position: relative;
+    }
+    .cc-gathering-image::after {
+      content: "Photo";
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 14px;
+      color: var(--cc-ink-4);
+      pointer-events: none;
+    }
+    /* When the box has an inline background-image set, hide the "Photo" label */
+    .cc-gathering-image[style*="background-image"]::after { content: ""; }
+
+    .cc-gathering-meta { padding-top: 4px; }
+    .cc-gathering-name {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      margin: 0 0 10px;
+    }
+    .cc-gathering-info {
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      color: var(--fg-3);
+      margin: 0 0 10px;
+      letter-spacing: 0.01em;
+    }
+    .cc-gathering-info span + span::before {
+      content: " \00B7 ";
+      margin: 0 2px;
+      color: var(--cc-ink-4);
+    }
+    .cc-gathering-hosts {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--fg-2);
+      margin: 0;
+    }
+
+    /* ----- Footer ----- */
+    .cc-footer {
+      border-top: 1px solid var(--cc-rule);
+      padding-top: 32px;
+      margin-top: 96px;
+    }
+    .cc-footer-meta {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 640px) {
+      .cc-shell { padding: 24px 24px 64px; }
+      .cc-header { margin-bottom: 56px; }
+      .cc-page-header { margin-bottom: 36px; }
+      .cc-gathering { grid-template-columns: 1fr; gap: 16px; padding: 28px 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cc-shell">
+
+    <header class="cc-header">
+      <a class="cc-mark" href="../">Creative <em>Conviction</em></a>
+      <nav class="cc-nav">
+        <a class="cc-nav-link" href="../about.html">About</a>
+      </nav>
+    </header>
+
+    <main class="cc-page">
+
+      <div class="cc-page-header">
+        <h1 class="cc-page-title">Gatherings</h1>
+        <p class="cc-page-dek">
+          Dinners, demo nights, and rooms we&rsquo;ve built with the founders,
+          designers, and operators in our orbit.
+        </p>
+      </div>
+
+      <ul class="cc-gathering-list">
+
+        <li class="cc-gathering" id="ramp-design-bvp-dinner">
+          <div class="cc-gathering-image" data-src="images/ramp-design-bvp-dinner.jpg"></div>
+          <div class="cc-gathering-meta">
+            <h2 class="cc-gathering-name">Ramp Design &times; BVP Dinner</h2>
+            <p class="cc-gathering-info">
+              <span>[Add date]</span><span>[Add location]</span>
+            </p>
+            <p class="cc-gathering-hosts">Hosted by Ramp Design and Bessemer</p>
+          </div>
+        </li>
+
+        <li class="cc-gathering" id="melanie-bvp-dinner">
+          <div class="cc-gathering-image" data-src="images/melanie-bvp-dinner.jpg"></div>
+          <div class="cc-gathering-meta">
+            <h2 class="cc-gathering-name">Dinner with Melanie &times; BVP</h2>
+            <p class="cc-gathering-info">
+              <span>[Add date]</span><span>[Add location]</span>
+            </p>
+            <p class="cc-gathering-hosts">Hosted by Melanie and Bessemer</p>
+          </div>
+        </li>
+
+        <li class="cc-gathering" id="flora-bvp-dinner">
+          <div class="cc-gathering-image" data-src="images/flora-bvp-dinner.jpg"></div>
+          <div class="cc-gathering-meta">
+            <h2 class="cc-gathering-name">Flora &times; BVP Dinner</h2>
+            <p class="cc-gathering-info">
+              <span>[Add date]</span><span>[Add location]</span>
+            </p>
+            <p class="cc-gathering-hosts">Hosted by Flora and Bessemer</p>
+          </div>
+        </li>
+
+        <li class="cc-gathering" id="flora-bvp-demo-night">
+          <div class="cc-gathering-image" data-src="images/flora-bvp-demo-night.jpg"></div>
+          <div class="cc-gathering-meta">
+            <h2 class="cc-gathering-name">Flora &times; BVP AI Demo Night</h2>
+            <p class="cc-gathering-info">
+              <span>[Add date]</span><span>[Add location]</span>
+            </p>
+            <p class="cc-gathering-hosts">Hosted by Flora and Bessemer</p>
+          </div>
+        </li>
+
+        <li class="cc-gathering" id="arts-crafts-bauhaus-bvp">
+          <div class="cc-gathering-image" data-src="images/arts-crafts-bauhaus-bvp.jpg"></div>
+          <div class="cc-gathering-meta">
+            <h2 class="cc-gathering-name">Arts &amp; Crafts Bauhaus &times; BVP</h2>
+            <p class="cc-gathering-info">
+              <span>[Add date]</span><span>[Add location]</span>
+            </p>
+            <p class="cc-gathering-hosts">Hosted by Arts &amp; Crafts Bauhaus and Bessemer</p>
+          </div>
+        </li>
+
+      </ul>
+
+    </main>
+
+    <footer class="cc-footer">
+      <p class="cc-footer-meta">&copy; 2026 Creative Conviction</p>
+    </footer>
+
+  </div>
+</body>
+</html>
