@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Creative Conviction</title>
+  <meta name="description" content="A platform where we seek to spark conversation around capital, creativity, and AI." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400..700&display=swap" />
+
+  <style>
+    /* ===========================================================
+       Creative Conviction — homepage
+       Tokens lifted from the Creative Conviction design system
+       (colors_and_type.css + ui_kits/homepage/kit.css).
+       =========================================================== */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      /* Brand accents (use one per screen, with restraint) */
+      --cc-magenta:   #D8016A;
+      --cc-orange:    #FF6514;
+      --cc-blue:      #1A0AE6;
+      --cc-indigo:    #361C76;
+
+      /* Surfaces — indigo-tinted near-white, never pure */
+      --cc-paper:        #F7F5FA;
+      --cc-paper-soft:   #F2EFF7;
+      --cc-white:        #FBFAFD;
+
+      /* Ink + neutrals (indigo-undertoned) */
+      --cc-ink:    #1A1130;
+      --cc-ink-2:  #322847;
+      --cc-ink-3:  #6A6378;
+      --cc-ink-4:  #9C97A8;
+      --cc-rule:        #D2CDDB;
+      --cc-rule-soft:   #E5E1ED;
+
+      --fg-1: var(--cc-ink);
+      --fg-2: var(--cc-ink-2);
+      --fg-3: var(--cc-ink-3);
+      --fg-4: var(--cc-ink-4);
+
+      --font-serif: "EB Garamond", "Iowan Old Style", Charter, Georgia, serif;
+      --font-sans:  "Inter", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+      --ease: cubic-bezier(.2,.6,.2,1);
+      --dur-1: 120ms;
+      --dur-2: 220ms;
+    }
+
+    body {
+      background: var(--cc-paper);
+      color: var(--fg-1);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      min-height: 100vh;
+    }
+
+    a { color: var(--cc-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: text-decoration-thickness var(--dur-1) var(--ease); }
+    a:hover { text-decoration-thickness: 2px; }
+    em { font-family: var(--font-serif); font-style: italic; }
+
+    /* ----- Shell ----- */
+    .cc-shell {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 40px 80px;
+    }
+
+    /* ----- Header ----- */
+    .cc-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--cc-rule);
+      margin-bottom: 64px;
+    }
+    .cc-mark {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      text-decoration: none;
+      line-height: 1;
+    }
+    .cc-mark em { font-style: italic; color: var(--cc-indigo); font-family: var(--font-serif); }
+    .cc-nav { display: flex; gap: 28px; }
+    .cc-nav-link {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--fg-2);
+      text-decoration: none;
+      transition: color var(--dur-1) var(--ease);
+    }
+    .cc-nav-link:hover { color: var(--cc-ink); }
+
+    /* ----- Home layout ----- */
+    .cc-home {
+      max-width: 680px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+    }
+
+    /* ----- Bio ----- */
+    .cc-bio { max-width: 560px; }
+    .cc-lead {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.5;
+      color: var(--cc-ink);
+      margin: 0 0 18px;
+      text-wrap: pretty;
+    }
+    .cc-lead em { font-style: italic; }
+    .cc-body {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg-2);
+      margin: 0 0 16px;
+      text-wrap: pretty;
+    }
+    .cc-body em { font-family: var(--font-serif); font-style: italic; }
+    .cc-body a { color: var(--cc-ink); }
+
+    /* ----- Section headings ----- */
+    .cc-h2 {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin: 0 0 24px;
+      color: var(--cc-ink);
+    }
+
+    /* ----- Episodes (scrollable numbered-ish list) ----- */
+    .cc-episodes { margin-bottom: 0; }
+    .cc-episode-scroll {
+      position: relative;
+      max-height: calc(84px * 3);
+      overflow-y: auto;
+      border-top: 1px solid var(--cc-rule);
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .cc-episode-scroll::-webkit-scrollbar { display: none; }
+    .cc-episode-list { list-style: none; margin: 0; padding: 0; }
+    .cc-episode {
+      display: grid;
+      grid-template-columns: 1fr 180px 110px;
+      align-items: baseline;
+      gap: 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--cc-rule-soft);
+      transition: background var(--dur-1) var(--ease);
+    }
+    .cc-episode:hover { background: rgba(26, 17, 48, 0.025); }
+    .cc-episode-title {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.25;
+      color: var(--cc-ink);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .cc-episode-title em { font-style: italic; }
+    .cc-episode:hover .cc-episode-title {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+    }
+    .cc-episode-cat {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--fg-3);
+      text-align: right;
+    }
+    .cc-episode-date {
+      font-family: var(--font-sans);
+      font-variant-numeric: tabular-nums;
+      font-size: 12.5px;
+      color: var(--fg-3);
+      text-align: right;
+    }
+
+    /* ----- Three-column index (homepage bottom block) ----- */
+    .cc-index { margin-top: 0; }
+    .cc-index-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .cc-index-col { display: flex; flex-direction: column; gap: 8px; }
+    .cc-index-h {
+      margin: 0 0 6px 0;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
+    .cc-index-link {
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--cc-ink);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+      text-decoration-skip-ink: none;
+      transition: text-decoration-thickness var(--dur-1) var(--ease);
+    }
+    .cc-index-link:hover { text-decoration-thickness: 2px; }
+    .cc-index-item {
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--fg-2);
+      text-decoration: none;
+    }
+    .cc-index-overview {
+      margin-top: 4px;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 15px;
+    }
+    .cc-index-arrow {
+      font-family: var(--font-sans);
+      font-style: normal;
+      font-size: 14px;
+      color: var(--fg-3);
+      display: inline-block;
+      margin-left: 4px;
+      transition: transform var(--dur-2) var(--ease);
+    }
+    .cc-index-overview:hover .cc-index-arrow { transform: translateX(3px); }
+
+    /* ----- Footer ----- */
+    .cc-footer {
+      border-top: 1px solid var(--cc-rule);
+      padding: 48px 0 32px;
+      margin-top: 96px;
+    }
+    .cc-footer-sub {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+      max-width: 420px;
+    }
+    .cc-footer-h {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.2;
+      color: var(--cc-ink);
+      margin: 0;
+    }
+    .cc-input {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--cc-ink);
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--cc-rule);
+      border-radius: 0;
+      padding: 6px 0;
+      outline: none;
+      width: 100%;
+      max-width: 320px;
+      transition: border-color var(--dur-1) var(--ease);
+    }
+    .cc-input::placeholder { color: var(--cc-ink-4); }
+    .cc-input:focus { border-bottom-color: var(--cc-ink); }
+    .cc-footer-thanks {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--cc-magenta);
+      margin: 0;
+    }
+    .cc-footer-meta {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--fg-3);
+      margin-top: 32px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ----- Small-screen ----- */
+    @media (max-width: 640px) {
+      .cc-shell { padding: 24px 24px 64px; }
+      .cc-header { margin-bottom: 48px; }
+      .cc-home { gap: 48px; }
+      .cc-episode { grid-template-columns: 1fr; gap: 4px; padding: 18px 0; }
+      .cc-episode-cat, .cc-episode-date { text-align: left; }
+      .cc-index-grid { grid-template-columns: 1fr; gap: 28px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cc-shell">
+
+    <header class="cc-header">
+      <a class="cc-mark" href="./">Creative <em>Conviction</em></a>
+      <nav class="cc-nav">
+        <a class="cc-nav-link" href="./about.html">About</a>
+      </nav>
+    </header>
+
+    <main class="cc-home">
+
+      <section class="cc-bio">
+        <p class="cc-lead">
+          <em>Creative Conviction</em> is a platform where we seek to spark
+          conversation around capital, creativity, and AI.
+        </p>
+        <p class="cc-body">
+          Our methods include interviews with founders and creative leaders,
+          curated gatherings, and written reports. We are
+          <a href="https://www.linkedin.com/in/libbie-frost-9a20b4195" target="_blank" rel="noopener">Libbie</a>
+          and
+          <a href="https://x.com/rayoufalhumedhi" target="_blank" rel="noopener">Rayouf</a>,
+          two investors at
+          <a href="https://www.bvp.com/" target="_blank" rel="noopener">Bessemer Venture Partners</a>
+          who spend our days at the intersection of creativity, technology, and
+          company building.
+        </p>
+        <p class="cc-body">
+          We started Creative Conviction because we believe that taste and
+          creative ambition are becoming the most important differentiators in
+          the age of AI, and we wanted a place to explore what that means with
+          the people living it.
+        </p>
+      </section>
+
+      <section class="cc-episodes">
+        <h2 class="cc-h2">Episodes</h2>
+        <div class="cc-episode-scroll" aria-label="Scroll for more episodes">
+          <ul class="cc-episode-list">
+
+            <li class="cc-episode" onclick="window.location='interviews/paul-jun/'">
+              <a class="cc-episode-title" href="interviews/paul-jun/">
+                Paul Jun — Brand engineers and the future of creative teams
+              </a>
+              <span class="cc-episode-cat">Creative Director, Ramp</span>
+              <span class="cc-episode-date">April 2026</span>
+            </li>
+
+            <li class="cc-episode" onclick="window.location='interviews/dylan-babbs/'">
+              <a class="cc-episode-title" href="interviews/dylan-babbs/">
+                Dylan Babbs — Design as moat
+              </a>
+              <span class="cc-episode-cat">Co-founder, Profound</span>
+              <span class="cc-episode-date">March 2026</span>
+            </li>
+
+          </ul>
+        </div>
+      </section>
+
+      <section class="cc-index">
+        <div class="cc-index-grid">
+
+          <div class="cc-index-col">
+            <h4 class="cc-index-h">Episodes</h4>
+            <a class="cc-index-link" href="interviews/paul-jun/">Paul Jun</a>
+            <a class="cc-index-link" href="interviews/dylan-babbs/">Dylan Babbs</a>
+            <a class="cc-index-link cc-index-overview" href="interviews/">
+              All episodes <span class="cc-index-arrow">→</span>
+            </a>
+          </div>
+
+          <div class="cc-index-col">
+            <h4 class="cc-index-h">Reports</h4>
+            <a class="cc-index-link" href="reports/brand-and-narrative/">Brand and narrative</a>
+            <a class="cc-index-link" href="reports/product-design/">Product design</a>
+            <a class="cc-index-link cc-index-overview" href="reports/">
+              All reports <span class="cc-index-arrow">→</span>
+            </a>
+          </div>
+
+          <div class="cc-index-col">
+            <h4 class="cc-index-h">Gatherings</h4>
+            <span class="cc-index-item">Ramp Design &times; BVP Dinner</span>
+            <span class="cc-index-item">Dinner with Melody &times; BVP</span>
+            <a class="cc-index-link cc-index-overview" href="gatherings/">
+              All gatherings <span class="cc-index-arrow">→</span>
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="cc-footer">
+      <form class="cc-footer-sub" id="cc-sub" novalidate>
+        <h3 class="cc-footer-h">Stay in the loop</h3>
+        <input
+          class="cc-input"
+          type="email"
+          id="cc-sub-email"
+          placeholder="you@studio.co"
+          aria-label="Email address"
+          required
+        />
+        <p class="cc-footer-thanks" id="cc-sub-thanks" hidden>You rock!</p>
+      </form>
+      <p class="cc-footer-meta">&copy; 2026 Creative Conviction</p>
+    </footer>
+
+  </div>
+
+  <script>
+    // Email signup posts to a Google Sheet via Apps Script Web App.
+    (function () {
+      var SHEET_URL = 'https://script.google.com/macros/s/AKfycbxN0ifH8CEiArlNTC4i76kfIm0JDhFxjy8TqHq2hvOWAOpbjCvhIDkDGra4eXc7ltMedw/exec';
+      var form   = document.getElementById('cc-sub');
+      var input  = document.getElementById('cc-sub-email');
+      var thanks = document.getElementById('cc-sub-thanks');
+      if (!form) return;
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!input.value || !input.checkValidity()) { input.focus(); return; }
+        fetch(SHEET_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ email: input.value })
+        });
+        input.hidden = true;
+        thanks.hidden = false;
+      });
+    })();
+  </script>
+</body>
+</html>
