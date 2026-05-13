@@ -1,289 +1,285 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Part II: Brand &amp; Narrative — Creative Conviction</title>
+  <title>Brand &amp; Narrative — Creative Conviction</title>
+  <meta name="description" content="Part II of the Creative Conviction in the AI Era series. How AI is reshaping brand building, creative storytelling, and narrative strategy." />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400..700&display=swap" />
   <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     :root {
-      --bg: #fff8f1;
-      --text: #20124d;
-      --muted: rgba(32, 18, 77, 0.38);
+      --cc-magenta:      #D8016A;
+      --cc-orange:       #FF6514;
+      --cc-blue:         #1A0AE6;
+      --cc-indigo:       #361C76;
+      --cc-magenta-tint: #FBE0EC;
+
+      --cc-paper:        #F7F5FA;
+      --cc-paper-soft:   #F2EFF7;
+      --cc-white:        #FBFAFD;
+
+      --cc-ink:    #1A1130;
+      --cc-ink-2:  #322847;
+      --cc-ink-3:  #6A6378;
+      --cc-ink-4:  #9C97A8;
+      --cc-rule:        #D2CDDB;
+      --cc-rule-soft:   #E5E1ED;
+
+      --fg-1: var(--cc-ink);
+      --fg-2: var(--cc-ink-2);
+      --fg-3: var(--cc-ink-3);
+
+      --font-serif: "EB Garamond", "Iowan Old Style", Charter, Georgia, serif;
+      --font-sans:  "Inter", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+      --ease: cubic-bezier(.2,.6,.2,1);
+      --dur-1: 120ms;
     }
 
-    body.terminal {
-      --bg: #000;
-      --text: #fff;
-      --muted: rgba(255, 255, 255, 0.4);
-    }
-    body.terminal, body.terminal * { font-family: 'Courier New', Courier, monospace !important; }
-    body.terminal::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.08) 3px, rgba(0,0,0,0.08) 4px);
-      pointer-events: none;
-      z-index: 9999;
-    }
-    body.terminal .corner { border-color: rgba(255,255,255,0.25); }
-
-    html { scroll-behavior: smooth; }
     body {
-      font-family: 'EB Garamond', Georgia, serif;
-      background: var(--bg);
-      color: var(--text);
+      background: var(--cc-paper);
+      color: var(--fg-1);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.55;
       -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
       min-height: 100vh;
-      transition: background 0.2s, color 0.2s;
     }
 
-    .corner { position: fixed; width: 16px; height: 16px; pointer-events: none; z-index: 50; }
-    .corner-tl { top: 1.25rem; left: 1.25rem; border-top: 1px solid var(--muted); border-left: 1px solid var(--muted); }
-    .corner-tr { top: 1.25rem; right: 1.25rem; border-top: 1px solid var(--muted); border-right: 1px solid var(--muted); }
-    .corner-bl { bottom: 1.25rem; left: 1.25rem; border-bottom: 1px solid var(--muted); border-left: 1px solid var(--muted); }
-    .corner-br { bottom: 1.25rem; right: 1.25rem; border-bottom: 1px solid var(--muted); border-right: 1px solid var(--muted); }
+    a { color: var(--cc-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: text-decoration-thickness var(--dur-1) var(--ease); }
+    a:hover { text-decoration-thickness: 2px; }
+    em { font-family: var(--font-serif); font-style: italic; }
 
-    nav {
-      max-width: 720px;
+    .cc-shell {
+      max-width: 980px;
       margin: 0 auto;
-      padding: 1.75rem 2rem 0;
+      padding: 32px 40px 80px;
+    }
+
+    .cc-header {
       display: flex;
-      align-items: center;
+      align-items: baseline;
       justify-content: space-between;
-      gap: 1.25rem;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--cc-rule);
+      margin-bottom: 64px;
     }
-    .nav-home { font-family: 'Inter', sans-serif; font-size: 0.8125rem; color: var(--muted); text-decoration: none; transition: color 0.15s; }
-    .nav-home:hover { color: var(--text); }
-    .terminal-toggle {
-      background: none; border: 1px solid var(--muted); cursor: pointer;
-      font-family: 'Inter', sans-serif; font-size: 0.6875rem; color: var(--muted);
-      padding: 0.2rem 0.5rem; letter-spacing: 0.05em;
-      transition: color 0.15s, border-color 0.15s; line-height: 1.7;
+    .cc-mark {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      text-decoration: none;
+      line-height: 1;
     }
-    .terminal-toggle:hover { color: var(--text); border-color: var(--text); }
-    .nav-about { font-family: 'Inter', sans-serif; font-size: 0.8125rem; color: var(--muted); text-decoration: none; transition: color 0.15s; }
-    .nav-about:hover { color: var(--text); }
+    .cc-mark em { font-style: italic; color: var(--cc-indigo); font-family: var(--font-serif); }
+    .cc-nav { display: flex; gap: 28px; }
+    .cc-nav-link {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--fg-2);
+      text-decoration: none;
+      transition: color var(--dur-1) var(--ease);
+    }
+    .cc-nav-link:hover { color: var(--cc-ink); }
 
-    .article-header { max-width: 680px; margin: 5rem auto 3.5rem; padding: 0 2rem; }
-    .article-label {
-      font-family: 'Inter', sans-serif; font-size: 0.6875rem; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--muted); margin-bottom: 1rem;
+    /* ----- Article ----- */
+    .cc-article {
+      max-width: 680px;
+      margin: 0 auto;
     }
-    .article-title {
-      font-size: clamp(2rem, 5vw, 3.25rem); font-weight: 500;
-      line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.75rem;
+
+    .cc-article-header { margin-bottom: 48px; }
+    .cc-article-eyebrow {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 15px;
+      color: var(--fg-3);
+      margin-bottom: 14px;
     }
-    .article-meta { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; }
+    .cc-article-title {
+      font-family: var(--font-serif);
+      font-size: clamp(36px, 4.8vw, 56px);
+      font-weight: 400;
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      color: var(--cc-ink);
+      margin: 0 0 22px;
+    }
+    .cc-article-title em { font-style: italic; }
+    .cc-article-meta {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--fg-3);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 24px;
+      letter-spacing: 0.02em;
+    }
 
-    .article-body { max-width: 680px; margin: 0 auto; padding: 0 2rem 7rem; }
-    .article-body p { font-size: 1.125rem; line-height: 1.72; margin-bottom: 1.4rem; }
-    .article-body h2 { font-size: 1.5rem; font-weight: 500; line-height: 1.2; margin: 3.25rem 0 1rem; letter-spacing: -0.01em; }
-    .article-body h3 { font-size: 1.2rem; font-weight: 400; font-style: italic; margin: 2.25rem 0 0.75rem; }
-    .article-body a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: opacity 0.15s; }
-    .article-body a:hover { opacity: 0.6; }
-    .article-body strong { font-weight: 600; }
-    .article-body em { font-style: italic; }
-    .article-body ul, .article-body ol { margin: 0 0 1.4rem 1.75rem; }
-    .article-body li { font-size: 1.125rem; line-height: 1.72; margin-bottom: 0.6rem; }
-    .article-body hr { border: none; border-top: 1px solid var(--muted); margin: 2.5rem 0; opacity: 0.35; }
-    .article-body blockquote { border-left: 2px solid var(--muted); padding-left: 1.25rem; margin: 1.5rem 0; opacity: 0.8; }
-    .article-img { width: 100%; display: block; margin: 2.5rem 0 0.6rem; border-radius: 2px; }
-    .article-caption { font-family: 'Inter', sans-serif; font-size: 0.75rem; color: var(--muted); margin-bottom: 2.5rem; line-height: 1.5; }
+    /* ----- Body (rendered from markdown) ----- */
+    .cc-article-body { color: var(--fg-2); }
+    .cc-article-body p {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.7;
+      margin: 0 0 18px;
+      text-wrap: pretty;
+    }
+    .cc-article-body p em { font-family: var(--font-serif); font-style: italic; }
+    .cc-article-body p strong { color: var(--cc-ink); font-weight: 600; }
+    .cc-article-body p:first-of-type em:only-child {
+      /* Italic standalone intro paragraph reads as a kicker */
+      color: var(--fg-3);
+    }
+    .cc-article-body h2 {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      margin: 56px 0 18px;
+    }
+    .cc-article-body h2 em { font-style: italic; }
+    .cc-article-body h3 {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 21px;
+      font-weight: 400;
+      line-height: 1.3;
+      color: var(--cc-ink);
+      margin: 36px 0 12px;
+    }
+    .cc-article-body a {
+      color: var(--cc-ink);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+    }
+    .cc-article-body ul, .cc-article-body ol {
+      margin: 0 0 22px 22px;
+      padding: 0;
+    }
+    .cc-article-body li {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--fg-2);
+      margin-bottom: 8px;
+    }
+    .cc-article-body li strong { color: var(--cc-ink); font-weight: 600; }
+    .cc-article-body hr {
+      border: 0;
+      border-top: 1px solid var(--cc-rule);
+      margin: 48px 0;
+    }
+    .cc-article-body blockquote {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 19px;
+      line-height: 1.5;
+      color: var(--cc-ink);
+      padding-left: 20px;
+      border-left: 2px solid var(--cc-rule);
+      margin: 28px 0;
+    }
+    .cc-article-img {
+      width: 100%;
+      display: block;
+      margin: 40px 0 8px;
+    }
+    .cc-article-caption {
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      color: var(--fg-3);
+      line-height: 1.5;
+      margin-bottom: 40px;
+      letter-spacing: 0.01em;
+    }
 
-    footer {
-      max-width: 720px; margin: 0 auto; padding: 2rem;
-      display: flex; justify-content: space-between;
-      font-family: 'Inter', sans-serif; font-size: 0.75rem; color: var(--muted);
-      border-top: 1px solid var(--muted); opacity: 0.7;
+    /* ----- Footer ----- */
+    .cc-footer {
+      border-top: 1px solid var(--cc-rule);
+      padding: 48px 0 32px;
+      margin-top: 96px;
+    }
+    .cc-footer-meta {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 640px) {
+      .cc-shell { padding: 24px 24px 64px; }
+      .cc-header { margin-bottom: 48px; }
+      .cc-article-header { margin-bottom: 36px; }
+      .cc-article-body h2 { margin: 40px 0 14px; }
     }
   </style>
 </head>
+
 <body>
-  <script>if(localStorage.getItem('cc-terminal')==='1')document.body.classList.add('terminal');</script>
+  <div class="cc-shell">
 
-  <div class="corner corner-tl"></div>
-  <div class="corner corner-tr"></div>
-  <div class="corner corner-bl"></div>
-  <div class="corner corner-br"></div>
+    <header class="cc-header">
+      <a class="cc-mark" href="../../">Creative <em>Conviction</em></a>
+      <nav class="cc-nav">
+        <a class="cc-nav-link" href="../../about.html">About</a>
+      </nav>
+    </header>
 
-  <nav>
-    <a class="nav-home" href="../../">Creative Conviction</a>
-    <div style="display:flex;align-items:center;gap:1.25rem;">
-      <button class="terminal-toggle" id="terminal-toggle">&gt;_</button>
-      <a class="nav-about" href="../../about.html">About</a>
-    </div>
-  </nav>
+    <main class="cc-article">
 
-  <div class="article-header">
-    <div class="article-label">Part II</div>
-    <h1 class="article-title">Brand &amp; Narrative</h1>
-    <div class="article-meta">
-      <span>Libbie Frost &amp; Rayouf Alhumedhi</span>
-      <span>April 17, 2026</span>
-    </div>
+      <div class="cc-article-header">
+        <p class="cc-article-eyebrow">Part II &middot; Creative Conviction in the AI Era</p>
+        <h1 class="cc-article-title">Brand &amp; Narrative</h1>
+        <div class="cc-article-meta">
+          <span>Libbie Frost &amp; Rayouf Alhumedhi</span>
+          <span>April 2026</span>
+        </div>
+      </div>
+
+      <div class="cc-article-body" id="cc-article-body"></div>
+
+    </main>
+
+    <footer class="cc-footer">
+      <p class="cc-footer-meta">&copy; 2026 Creative Conviction</p>
+    </footer>
+
   </div>
 
-  <div class="article-body" id="article"></div>
-
-  <footer>
-    <span>Made in NYC 🍎</span>
-    <span>&copy; 2026</span>
-  </footer>
-
   <script>
-    const toggle = document.getElementById('terminal-toggle');
-    toggle.addEventListener('click', () => {
-      document.body.classList.toggle('terminal');
-      const on = document.body.classList.contains('terminal');
-      localStorage.setItem('cc-terminal', on ? '1' : '0');
-      toggle.textContent = on ? '[exit]' : '>_';
-    });
-    if (document.body.classList.contains('terminal')) toggle.textContent = '[exit]';
-
-    const BASE = 'https://creativeconviction.github.io/brand-and-narrative/';
-
-    const MD = `*This is the second deep dive in a three-part series examining AI's impact on product design, brand & narrative, and consumer play. Link to our primer on Creative Conviction in the AI era [here](https://creativeconviction.github.io/creative-conviction/) and Product Design deep dive [here](https://creativeconviction.github.io/product-design/).*
-
-There is something about brand that resists being made legible. You can define a company's visual identity in a style guide and write its voice into a document, and still miss the thing that makes someone feel something when they encounter the product. The best brands have always lived in that gap, between the Nike swoosh as a vector file and the Nike swoosh as a reason a teenager believes she can run faster.
-
-For most of the last century, the discipline of brand building was an attempt to work inside that gap without collapsing it. The people who were good at it, the Bernbachs whose agency produced the most iconic ads, or Wieden+Kennedy who created "Just Do It," understood that you could shape the feeling but you couldn't fully engineer it, and that the irreducibility was what made it valuable.
-
-<div class="img-placeholder" data-label="Bernbach's Think Small Campaign for Volkswagen" data-src="cars.png"></div>
-
-*Bernbach's Think Small Campaign for Volkswagen. [Read](https://www.speedcraftvw.com/think-small-ad-campaign-changed-advertising/) how it changed advertising in the 50s.*
-
-That irreducibility also meant that everything got bundled together. There was no clean way to separate the part of brand that required human conviction from the part that was, frankly, operational.
-
-AI is now drawing that line with startling clarity. What it reveals is that brand has always had two layers being transformed in opposite directions:
-
-1. The **infrastructure** layer is everything that makes brand work repeatable and scalable. Defining your identity in a format machines can read, measuring how you show up across channels, generating assets that match your guidelines, managing formats and files and feedback, evaluating whether the output is any good. These sub-processes are becoming programmable.
-2. The **narrative** layer is what makes a brand feel alive. The founder's point of view made visible through product and expression.
-
-We believe that companies that build enduring brands in the AI era will understand that programmable infrastructure without narrative conviction produces efficient mediocrity, and narrative conviction without programmable infrastructure can't scale.
-
-<div class="img-placeholder" data-label="The Anatomy of Brand" data-src="anatomy.png"></div>
-
-## A Brief History of Brand Tooling Across Three Eras
-
-Every shift in creative tooling follows the same pattern. Barriers fall, the market expands, and the premium moves from execution to judgment.
-
-### Era 1 — Professional tools go digital (1982–2012)
-
-Before Aldus PageMaker shipped in 1985, brand production was a physical trade. Typesetters, paste-up artists, and print shops sat between a creative director's idea and the finished piece. Adobe Illustrator (1987) and Photoshop collapsed that chain into software, but the tools were powerful and expensive, designed for trained professionals inside agencies. Adobe built a $24 billion revenue business on that premise.
-
-### Era 2 — Design is democratized (2006–2023)
-
-The internet and social media changed the constraint from skill to volume. Every company needed assets for Facebook, Instagram, email, web, and mobile, and the old model of briefing an agency for every banner was no longer efficient. [Canva](https://www.bvp.com/companies/canva) built a $40B+ company with 265M MAUs by making design accessible to brand and marketing teams who needed to produce work every day without a design degree.
-
-### Era 3 — The brand workflow becomes programmatic (2024–now)
-
-The cost of producing brand assets is collapsing. A single person with the right models can now generate campaign-quality creative at a volume that would have required a full agency team a year ago. But adoption is uneven. [fal](https://www.bvp.com/companies/fal-ai), a BVP portfolio company running 600+ generative models via API for over 2 million developers, [finds](https://fal.ai/gen-media-report-volume-1) that 89% of individuals use generative media tools versus just 57% of organizations, and only 30% of marketers have integrated them across the full campaign lifecycle. [Alejandro Matamala Ortiz](https://www.linkedin.com/in/matamalaortiz/), co-founder of [Runway](https://runwayml.com/), one of the earliest foundation model companies built for the creative industry, sees this gap as natural. The technology is still improving at turning prompts into production-ready media, and entirely new creative formats and use cases that don't exist yet will continue to emerge as the models mature.
-
-There is almost $1T in global ad spend where roughly 15% goes to creative production, and most of this still flows to traditional outsourced agencies. We think a significant share is about to be captured by two kinds of new entrants: self-serve tooling that keeps creative judgment in-house while automating production, and AI-native creative services.
-
-<div class="img-placeholder" data-label="A Brief History of Brand Tooling — Era 1, 2, 3" data-src="history.png"></div>
-
-## Brand Is Becoming Programmable Infrastructure
-
-### Context. Making brand machine-readable.
-
-Before you can automate anything, the system needs to know what your brand is. Claude skills are a starting point for encoding brand context, and the best brand teams are already building them. The most compelling practitioner example we found is at [Ramp](https://ramp.com/), whose brand has become a reference point across tech. [Paul Jun's](https://www.linkedin.com/in/paul-jun-3544a167) team is building internal tooling so that anyone who doesn't speak a brand designer's language can generate a brief for a product area, turn it into a deck, then turn that deck into different assets, all happening in Slack, all within brand guidelines. Building this tooling requires a new skillset. "Brand designers need to become brand engineers," Jun said. "Ultimately how you make a brand team work is they create the tooling, the skills, processes, libraries, and patterns, for every team to use. They make the brand easy to love and impossible to misuse."
-
-But skills have their limits. They are static documents in a context window, not structured data that connects to your live brand presence or updates as your positioning evolves. They can't tell you how AI models describe your company to prospective customers. And they have no feedback mechanism to learn whether the assets they help produce are performing.
-
-### Intelligence. Understanding how you show up and where to play.
-
-Once a brand is encoded, the next question is how it's landing. This is a new and urgent category. Brands now need to understand three things simultaneously: what AI is saying about them, how they compare to competitors across channels, and whether their own output matches the identity they've defined.
-
-[Profound](https://www.tryprofound.com/) is building the AEO (answer engine optimization) platform, starting with the most neglected question: what do AI models tell prospective customers about your brand? Co-founder [Dylan Babbs](https://www.linkedin.com/in/babbsdj/) frames the scale of the opportunity: "In 2024, $93 billion was spent on SEO. But only $3 billion of that was analytics. The other $90 billion is services. Our goal is to address the services market, bringing AI agents to help marketers do their work." [Pomo](https://usepomo.ai/) works the competitive angle, monitoring competitor moves, demand signals, and channel performance, then surfacing the priorities that matter each day. Pomo is building the decision layer for AI-native marketing, where agents don't just generate outputs, but continuously inform what to do next and execute on it. Founder [Praneet Dutta](https://www.linkedin.com/in/praneetdutta/), formerly a core researcher on Imagen and Nano Banana at Google DeepMind, frames the gap: "How can we have the central human brain in the loop, the marketer, but have all these agents inform the priors for them and help with execution?" [Brand.ai](http://brand.ai) takes a different approach, where founder [Nate Bosshard](https://www.linkedin.com/in/natebosshard/) describes it like building "GitHub for your brand," a structured system of record across three layers: what you say you are, what you're showing up as, and what others say about you, then scoring assets against that identity.
-
-Together, these companies bet that the intelligence layer will sit between context and generation, ensuring everything downstream is informed and improving. They realize that intelligence without action is just a dashboard, and the real value unlocks when insight feeds directly into what you produce next.
-
-### Generation for two kinds of users.
-
-That feedback loop, from insight to asset to performance data and back, is the holy grail of the programmable brand stack. Though we aren't fully there yet, the generation layer is where the stack gets tangible, and it splits into two distinct categories depending on who's in the chair:
-
-**(1) Making creatives themselves more powerful.** A wave of companies have trained or fine-tuned foundation models purpose-built for creative use cases: [Midjourney](http://midjourney.com) and [Reve](http://reve.com) for image generation and editing; [Runway](https://runwayml.com/) for cinematic AI video; [Higgsfield](https://higgsfield.ai/) and [HeyGen](http://heygen.com) for personalized AI video; [Elevenlabs](http://elevenlabs.com), [Cartesia](https://cartesia.ai/sonic), and [Suno](http://suno.ai) for sound… soon creatives will experiment more with [world models](https://www.bvp.com/atlas/can-world-models-unlock-general-purpose-robotics) too. These models are increasingly powerful on their own, but in practice, creative teams don't use one model. They use many, switching between them depending on the task, the aesthetic, and the output format. The workflow challenge of working across all of these is where a company like [Flora](http://flora.ai) sits. Flora brings 50+ generative models onto a single infinite canvas where teams can generate, compare, and iterate across image, video, and copy in one multiplayer workspace. As [Weber Wong](https://www.linkedin.com/in/weberwong), Flora's founder, put it, "The cost will not go to zero. You still need great creatives on your team and the time it takes to develop great creative ideas. We are seeking to lower the friction from idea to execution."
-
-**(2) Scaling the brand without a designer in every loop.** The second category encodes brand into systems that let non-creatives (sales reps, growth marketers, demand gen teams) generate on-brand assets. For instance, [Flint](http://tryflint.com), which ingests a company's design system from a single URL and generates personalized landing pages for every account, connected to CRM and GTM tools, tied to GEO and revenue measurability. [Michelle Lim](https://www.linkedin.com/in/michlimlim/), Flint's founder, frames the shift in infrastructure terms: "Your design system isn't a Figma file sitting in someone's sidebar. It's an API. Once you treat it that way, you stop waiting on eng to ship a landing page and start shipping hundreds." [Moda](https://moda.app/) is building an AI-native canvas that ingests brand context from across a company, not just colors and typography but pitch deck narratives, positioning, and visual patterns, then lets anyone produce on-brand collateral. As [Anvisha Pai](https://www.linkedin.com/in/anvisha), Moda's founder, put it, "It is incredibly difficult to capture all this brand context and write skill files and feed them into an LLM and keep them updated. We're trying to put that on autopilot."
-
-### Formats and media. The precision layer.
-
-Most AI output is flat rasterized images, but brand work requires vectors, layered files, editable typography, and motion. A pattern is emerging across the new tools solving this: the most durable creative output is code, not pixels.
-
-[Quiver](https://quiver.ai/), for example, is building a foundation model for computational vector graphics from scratch. As founder [Joan Rodriguez](https://www.linkedin.com/in/joanrod/) explained, when the large labs trained their models, "they were basically skipping SVG data. They wanted to prioritize Python, HTML…" Rodriguez built the opposite: a model trained on nothing but SVGs that generates production-ready vector assets with the precision designers expect from software. [Remotion](https://remotion.dev/) and [Osmo](http://osmo.inc) are applying the same code-gen insight to motion graphics and video, generating editable code-based animations that are versionable and embeddable anywhere rather than pixel-based video. Osmo is also building a collaboration architecture that treats humans and agents as equal users, with git-like branching for video projects. [Chris He](https://www.linkedin.com/in/chris-he/), Osmo's CEO, frames the ambition broadly: "What percentage of the creative media stack do you think we can rewrite using code gen at the core?"
-
-But generating precise assets is only half the problem. Production teams drown in moving, finding, organizing, and reviewing those assets once they exist. [Shade](https://shade.inc/) handles this post-production layer, from real-time upload during shoots to AI-powered search to client review with version control. [Brandon Fan](https://www.linkedin.com/in/brandonfan1256/), Shade's CEO, describes the philosophy as building "Invisible software… How do we build something that feels so invisible, but is so necessary that if you pull it away, people would all kind of freak out."
-
-### Evaluation. The taste gap and why we are still early.
-
-Even with programmable context, intelligence, generation, and precision tooling, there is still a distance between what a creative intends and what a model produces. As Contra's co-founder [Ben Huffman](https://www.linkedin.com/in/ben-huffman-b7b6a8102/) put it, "Good creative is very divergent, and that is what makes good creative. The problem with most LLMs, especially with generated media, is mode collapse. It all converges into the same type of output." There is no unit test for taste. Coding benchmarks are relatively static, but design trends shift over days or months, which means any evaluation framework for creative work has to be continuously refreshed.
-
-[Lica](https://lica.world/) is tackling this at the data layer, building the largest graphic design dataset to date and creating the [Graphic Design Bench](https://arxiv.org/abs/2604.04192), a 49-task evaluation spanning five design domains. No model is ready for professional design work. Of the 49 tasks, 2 are mostly solved, 25 are partially solved, and 22 remain unsolved. Lica co-founder [Purvanshi Mehta](https://www.linkedin.com/in/purvanshi-mehta/) describes the reality of today: "The truth is there is a person still at a public company whose job is to change aspect ratios day in and day out. There's such a huge gap between how people are solving it and what needs to be solved." [Contra Labs](https://contralabs.com/), the research arm of [Contra's](https://contra.com/) 1.5-million-member creative marketplace, is building the "human creativity benchmark," studying actual creative workflows to understand where AI tools fall short. As Huffman noted, "Most everything in eval is built for text and code, but few people are thinking about design and creative." [DesignArena](https://www.designarena.ai/), by ArcadiaLabs, takes a different approach, treating design quality as fundamentally subjective and capturing that subjectivity at scale through community-based tournaments grounded in human judgment.
-
-The feedback loop between creative generation and performance data is the biggest unsolved problem in the programmable brand stack. Every layer above improves when evaluation improves. But evaluation still runs on human judgment. The infrastructure amplifies whoever holds it. So the question becomes: who are those people, what does their role look like, and why are they more valuable now than they've ever been?
-
-<div class="img-placeholder" data-label="The Programmable Brand Stack" data-src="stack.png"></div>
-
-## Cohesive Narrative Is a Competitive Surface
-
-### In software, brand excellence starts with product excellence.
-
-The strongest brands become language: Google, Uber, Claude. Nobody "verbed" a product because of an ad campaign — people make it happen organically because the product experience is so distinctive it replaces a category name. In software, brand and product can't diverge for long. A software product is experienced directly and repeatedly, so if the brand promises something the product doesn't deliver, users find out in minutes, not months.
-
-[Oliver Hamrin](https://www.linkedin.com/posts/oliver-hamrin-6341a2202_weve-had-quite-a-bit-of-attention-lately-activity-7393270514489745408-jZ_L/), co-founder of [Quartr](https://quartr.com/), the financial research platform whose distinctive visual identity has become a reference point in B2B (read more [here](https://www.milkkarten.net/p/quartr-social-media-design-x?hide_intro_popup=true)), frames the relationship between product and brand as inseparable. "Separating product and brand is a really bad idea. In software, the best brands and products are cohesive across the entire user journey. The illusion and the product experience also have to be in sync." Paul Jun at Ramp sees the same thing from inside a company the entire industry tries to emulate: "Every agency I talk to says every client says 'we want Ramp's brand.' But what made it work is that it was born from the product." His team is accountable for the full journey, from first ad to onboarding to first moment of value. "Brand is the extension of product. Everyone at a company should feel accountable for brand."
-
-<div class="img-placeholder" data-label="Quartr — distinctive brand design examples" data-src="anatomy.png"></div>
-
-But does that mean narrative should never run ahead of the product? [Mishti Sharma](https://www.linkedin.com/in/vmsharma/), Head of Narratives at [Clay](https://www.clay.com/), argues the opposite: "We're pretty comfortable running ahead of the product in some ways, because the reactions we get when we put visions into the world can inform what we build." Clay's storytelling around the GTM engineer helped manifest an entire career path, and the community feedback it generated directly informed the product roadmap. The storytelling was doing R&D in public. Importantly, though, this only works when the narrative is grounded in a real point of view about where the world is going, not in a feature list that doesn't exist yet.
-
-Jun from Ramp offers a framework for when brand matters most. Every startup goes through three phases: PMF, the features war, then investing in experience. Most companies get stuck in phase two, competing on features that AI will commoditize. The ones that break through invest in how the product feels, not just what it does. "Product designers are 'form follows function.' Brand designers are 'form follows fantasy.'" That second skillset, the ability to shape experience and emotion, is what phase three demands, and it's becoming the most desirable in the industry. But if taste compounds, how do you build it? As generation gets democratized, the differentiator becomes the depth of your creative vocabulary, and we're seeing new tooling emerge to enhance and hone this creative skill too. Cosmos, for example, is building the curation layer for this. Co-founder [Andy McCune](https://www.linkedin.com/in/andymccune/) puts it: "Your output is a reflection of your inputs. The purpose of collecting isn't to revisit something later. It's this act of training your eye and adopting that thing into your taste."
-
-### The creative org is consolidating around narrative.
-
-Creative organizations have always evolved in response to new tools. In 1949, Bill Bernbach co-founded DDB and did something no agency had done before: he put copywriters and art directors together as equal partners. His insight, that the best creative work comes from people with different skills solving problems together without handoffs, produced campaigns from Volkswagen's "Think Small" to Avis's "We Try Harder."
-
-Something similar is happening now. Moda's Anvisha Pai sees this happening across every function: "Every job is turning into more of an orchestration job. The tools that won't be successful are the ones that just give you an output. That works for a lot of things, but not for creative work where there's no objectively correct answer." Quartr's Oliver Hamrin describes the hire this creates: "The ideal creative hire is a deeply curious Swiss army knife. Strong opinions, loosely held. As new tools level the technical playing field, opinions and decisions are the only things that matter."
-
-This shift has created an entirely new role. [LinkedIn job postings including "storyteller" doubled in 2025](https://www.wsj.com/articles/companies-are-desperately-seeking-storytellers-7b79f54e). Anthropic and Notion have both gone viral for hiring Heads of Storytelling at striking salaries. Mishti Sharma at Clay explains why: "Content orgs can seem transactional and removed from comms and PR, and the brand team is completely different. It's a way of unifying disciplines that we didn't think really needed to be siloed."
-
-The reporting structure matters just as much. Bernbach's insight was that the creative team needed to be peers, not a service desk. Paul Jun at Ramp was tasked with building the team to become the bridge between product and brand. The companies getting this right are the Bernbachs of the AI era: they're reorganizing talent around a model that matches the moment.
-
-## The Invisible and the Unforgettable
-
-Brand has two layers, and AI is transforming them in opposite directions. The infrastructure layer is becoming programmable: context, intelligence, generation, precision, evaluation, each is being rebuilt by a new wave of companies making brand work faster, more measurable, and more scalable. That infrastructure will become invisible, embedded in every tool and agent, running in the background the way design systems and CI/CD pipelines do today.
-
-But the layer that sits on top, the story, remains irreducibly human. Not because the technology is immature, but because the job is different. Trends shift over days and months, and the best creatives set those trends. Effective branding lives in the tension between producing something timeless and capturing the current moment. As Chris He from Osmo put it, "AI is great at getting you 90% of the way there. But that last 10% still requires a human touch. We are not replacing anybody's creativity. They still need to know what story they want to tell."
-
-Every era of creative tooling has followed the same arc. Barriers fall, the market expands, the premium moves from execution to judgment. We are in the early innings of the third era. The companies building the programmable brand stack will capture enormous value. Further, the companies that use that infrastructure to tell stories people care about, stories that compound over years and become part of how people talk about a category — those are the ones that will define the next decade.
-
-[Tim Ellis](https://www.linkedin.com/in/tim-ellis-84b9b413), CMO of the NFL, said it best on the [CMO Podcast](https://podcasts.apple.com/ch/podcast/tim-ellis-nfl-how-the-nfl-builds-culture-not-just-fans/id1460604334?i=1000746033947): "I want to break new ground and do things that haven't been done before, things the world hasn't seen. If AI can help me do that, then awesome, but I won't do something just because it's been successful before. You can't bottle it. Things have their own magic. I have instincts, I believe in myself, I listen, I change my mind. But when I have conviction on something, that is what I am doing."
-
-When process and generation are commoditized, taste and judgment command a premium. In brand and marketing, that premium is about to get a lot larger.
-
-*This perspective was authored by Libbie Frost and Rayouf Alhumedhi. If you are building in the creative tooling space, reach out to lfrost@bvp.com and ralhumedhi@bvp.com.*
-
-*We are grateful to the founders, operators, and creative leaders who shared their time and perspectives for this piece. Thank you to Dylan Babbs (Profound), Nate Bosshard (Brand.ai), Brandon Fan (Shade), Jamey Gannon (The AI Creative Director), Oliver Hamrin (Quartr), Chris He (Osmo), Ben Huffman & Alison Nulty (Contra), Paul Jun (Ramp), Purvanshi Mehta (Lica), Michelle Lim (Flint), Alejandro Matamala-Ortiz (Runway), Andy McCune (Cosmos), Anvisha Pai (Moda), Joan Rodriguez (Quiver), Mishti Sharma (Clay), and Weber Wong (Flora).*
-
-*Up next in the Creative Conviction series: Part III, Consumer Play.*`;
+    var BASE = 'https://creativeconviction.github.io/brand-and-narrative/';
+    var MD = "*This is the second deep dive in a three-part series examining AI's impact on product design, brand & narrative, and consumer play. Link to our primer on Creative Conviction in the AI era [here](https://creativeconviction.github.io/creative-conviction/) and Product Design deep dive [here](https://creativeconviction.github.io/product-design/).*\n\nThere is something about brand that resists being made legible. You can define a company's visual identity in a style guide and write its voice into a document, and still miss the thing that makes someone feel something when they encounter the product. The best brands have always lived in that gap, between the Nike swoosh as a vector file and the Nike swoosh as a reason a teenager believes she can run faster.\n\nFor most of the last century, the discipline of brand building was an attempt to work inside that gap without collapsing it. The people who were good at it, the Bernbachs whose agency produced the most iconic ads, or Wieden+Kennedy who created \"Just Do It,\" understood that you could shape the feeling but you couldn't fully engineer it, and that the irreducibility was what made it valuable.\n\n<div class=\"img-placeholder\" data-label=\"Bernbach's Think Small Campaign for Volkswagen\" data-src=\"cars.png\"></div>\n\n*Bernbach's Think Small Campaign for Volkswagen. [Read](https://www.speedcraftvw.com/think-small-ad-campaign-changed-advertising/) how it changed advertising in the 50s.*\n\nThat irreducibility also meant that everything got bundled together. There was no clean way to separate the part of brand that required human conviction from the part that was, frankly, operational.\n\nAI is now drawing that line with startling clarity. What it reveals is that brand has always had two layers being transformed in opposite directions:\n\n1. The **infrastructure** layer is everything that makes brand work repeatable and scalable. Defining your identity in a format machines can read, measuring how you show up across channels, generating assets that match your guidelines, managing formats and files and feedback, evaluating whether the output is any good. These sub-processes are becoming programmable.\n2. The **narrative** layer is what makes a brand feel alive. The founder's point of view made visible through product and expression.\n\nWe believe that companies that build enduring brands in the AI era will understand that programmable infrastructure without narrative conviction produces efficient mediocrity, and narrative conviction without programmable infrastructure can't scale.\n\n<div class=\"img-placeholder\" data-label=\"The Anatomy of Brand\" data-src=\"anatomy.png\"></div>\n\n## A Brief History of Brand Tooling Across Three Eras\n\nEvery shift in creative tooling follows the same pattern. Barriers fall, the market expands, and the premium moves from execution to judgment.\n\n### Era 1 \u2014 Professional tools go digital (1982\u20132012)\n\nBefore Aldus PageMaker shipped in 1985, brand production was a physical trade. Typesetters, paste-up artists, and print shops sat between a creative director's idea and the finished piece. Adobe Illustrator (1987) and Photoshop collapsed that chain into software, but the tools were powerful and expensive, designed for trained professionals inside agencies. Adobe built a $24 billion revenue business on that premise.\n\n### Era 2 \u2014 Design is democratized (2006\u20132023)\n\nThe internet and social media changed the constraint from skill to volume. Every company needed assets for Facebook, Instagram, email, web, and mobile, and the old model of briefing an agency for every banner was no longer efficient. [Canva](https://www.bvp.com/companies/canva) built a $40B+ company with 265M MAUs by making design accessible to brand and marketing teams who needed to produce work every day without a design degree.\n\n### Era 3 \u2014 The brand workflow becomes programmatic (2024\u2013now)\n\nThe cost of producing brand assets is collapsing. A single person with the right models can now generate campaign-quality creative at a volume that would have required a full agency team a year ago. But adoption is uneven. [fal](https://www.bvp.com/companies/fal-ai), a BVP portfolio company running 600+ generative models via API for over 2 million developers, [finds](https://fal.ai/gen-media-report-volume-1) that 89% of individuals use generative media tools versus just 57% of organizations, and only 30% of marketers have integrated them across the full campaign lifecycle. [Alejandro Matamala Ortiz](https://www.linkedin.com/in/matamalaortiz/), co-founder of [Runway](https://runwayml.com/), one of the earliest foundation model companies built for the creative industry, sees this gap as natural. The technology is still improving at turning prompts into production-ready media, and entirely new creative formats and use cases that don't exist yet will continue to emerge as the models mature.\n\nThere is almost $1T in global ad spend where roughly 15% goes to creative production, and most of this still flows to traditional outsourced agencies. We think a significant share is about to be captured by two kinds of new entrants: self-serve tooling that keeps creative judgment in-house while automating production, and AI-native creative services.\n\n<div class=\"img-placeholder\" data-label=\"A Brief History of Brand Tooling \u2014 Era 1, 2, 3\" data-src=\"history.png\"></div>\n\n## Brand Is Becoming Programmable Infrastructure\n\n### Context. Making brand machine-readable.\n\nBefore you can automate anything, the system needs to know what your brand is. Claude skills are a starting point for encoding brand context, and the best brand teams are already building them. The most compelling practitioner example we found is at [Ramp](https://ramp.com/), whose brand has become a reference point across tech. [Paul Jun's](https://www.linkedin.com/in/paul-jun-3544a167) team is building internal tooling so that anyone who doesn't speak a brand designer's language can generate a brief for a product area, turn it into a deck, then turn that deck into different assets, all happening in Slack, all within brand guidelines. Building this tooling requires a new skillset. \"Brand designers need to become brand engineers,\" Jun said. \"Ultimately how you make a brand team work is they create the tooling, the skills, processes, libraries, and patterns, for every team to use. They make the brand easy to love and impossible to misuse.\"\n\nBut skills have their limits. They are static documents in a context window, not structured data that connects to your live brand presence or updates as your positioning evolves. They can't tell you how AI models describe your company to prospective customers. And they have no feedback mechanism to learn whether the assets they help produce are performing.\n\n### Intelligence. Understanding how you show up and where to play.\n\nOnce a brand is encoded, the next question is how it's landing. This is a new and urgent category. Brands now need to understand three things simultaneously: what AI is saying about them, how they compare to competitors across channels, and whether their own output matches the identity they've defined.\n\n[Profound](https://www.tryprofound.com/) is building the AEO (answer engine optimization) platform, starting with the most neglected question: what do AI models tell prospective customers about your brand? Co-founder [Dylan Babbs](https://www.linkedin.com/in/babbsdj/) frames the scale of the opportunity: \"In 2024, $93 billion was spent on SEO. But only $3 billion of that was analytics. The other $90 billion is services. Our goal is to address the services market, bringing AI agents to help marketers do their work.\" [Pomo](https://usepomo.ai/) works the competitive angle, monitoring competitor moves, demand signals, and channel performance, then surfacing the priorities that matter each day. Pomo is building the decision layer for AI-native marketing, where agents don't just generate outputs, but continuously inform what to do next and execute on it. Founder [Praneet Dutta](https://www.linkedin.com/in/praneetdutta/), formerly a core researcher on Imagen and Nano Banana at Google DeepMind, frames the gap: \"How can we have the central human brain in the loop, the marketer, but have all these agents inform the priors for them and help with execution?\" [Brand.ai](http://brand.ai) takes a different approach, where founder [Nate Bosshard](https://www.linkedin.com/in/natebosshard/) describes it like building \"GitHub for your brand,\" a structured system of record across three layers: what you say you are, what you're showing up as, and what others say about you, then scoring assets against that identity.\n\nTogether, these companies bet that the intelligence layer will sit between context and generation, ensuring everything downstream is informed and improving. They realize that intelligence without action is just a dashboard, and the real value unlocks when insight feeds directly into what you produce next.\n\n### Generation for two kinds of users.\n\nThat feedback loop, from insight to asset to performance data and back, is the holy grail of the programmable brand stack. Though we aren't fully there yet, the generation layer is where the stack gets tangible, and it splits into two distinct categories depending on who's in the chair:\n\n**(1) Making creatives themselves more powerful.** A wave of companies have trained or fine-tuned foundation models purpose-built for creative use cases: [Midjourney](http://midjourney.com) and [Reve](http://reve.com) for image generation and editing; [Runway](https://runwayml.com/) for cinematic AI video; [Higgsfield](https://higgsfield.ai/) and [HeyGen](http://heygen.com) for personalized AI video; [Elevenlabs](http://elevenlabs.com), [Cartesia](https://cartesia.ai/sonic), and [Suno](http://suno.ai) for sound\u2026 soon creatives will experiment more with [world models](https://www.bvp.com/atlas/can-world-models-unlock-general-purpose-robotics) too. These models are increasingly powerful on their own, but in practice, creative teams don't use one model. They use many, switching between them depending on the task, the aesthetic, and the output format. The workflow challenge of working across all of these is where a company like [Flora](http://flora.ai) sits. Flora brings 50+ generative models onto a single infinite canvas where teams can generate, compare, and iterate across image, video, and copy in one multiplayer workspace. As [Weber Wong](https://www.linkedin.com/in/weberwong), Flora's founder, put it, \"The cost will not go to zero. You still need great creatives on your team and the time it takes to develop great creative ideas. We are seeking to lower the friction from idea to execution.\"\n\n**(2) Scaling the brand without a designer in every loop.** The second category encodes brand into systems that let non-creatives (sales reps, growth marketers, demand gen teams) generate on-brand assets. For instance, [Flint](http://tryflint.com), which ingests a company's design system from a single URL and generates personalized landing pages for every account, connected to CRM and GTM tools, tied to GEO and revenue measurability. [Michelle Lim](https://www.linkedin.com/in/michlimlim/), Flint's founder, frames the shift in infrastructure terms: \"Your design system isn't a Figma file sitting in someone's sidebar. It's an API. Once you treat it that way, you stop waiting on eng to ship a landing page and start shipping hundreds.\" [Moda](https://moda.app/) is building an AI-native canvas that ingests brand context from across a company, not just colors and typography but pitch deck narratives, positioning, and visual patterns, then lets anyone produce on-brand collateral. As [Anvisha Pai](https://www.linkedin.com/in/anvisha), Moda's founder, put it, \"It is incredibly difficult to capture all this brand context and write skill files and feed them into an LLM and keep them updated. We're trying to put that on autopilot.\"\n\n### Formats and media. The precision layer.\n\nMost AI output is flat rasterized images, but brand work requires vectors, layered files, editable typography, and motion. A pattern is emerging across the new tools solving this: the most durable creative output is code, not pixels.\n\n[Quiver](https://quiver.ai/), for example, is building a foundation model for computational vector graphics from scratch. As founder [Joan Rodriguez](https://www.linkedin.com/in/joanrod/) explained, when the large labs trained their models, \"they were basically skipping SVG data. They wanted to prioritize Python, HTML\u2026\" Rodriguez built the opposite: a model trained on nothing but SVGs that generates production-ready vector assets with the precision designers expect from software. [Remotion](https://remotion.dev/) and [Osmo](http://osmo.inc) are applying the same code-gen insight to motion graphics and video, generating editable code-based animations that are versionable and embeddable anywhere rather than pixel-based video. Osmo is also building a collaboration architecture that treats humans and agents as equal users, with git-like branching for video projects. [Chris He](https://www.linkedin.com/in/chris-he/), Osmo's CEO, frames the ambition broadly: \"What percentage of the creative media stack do you think we can rewrite using code gen at the core?\"\n\nBut generating precise assets is only half the problem. Production teams drown in moving, finding, organizing, and reviewing those assets once they exist. [Shade](https://shade.inc/) handles this post-production layer, from real-time upload during shoots to AI-powered search to client review with version control. [Brandon Fan](https://www.linkedin.com/in/brandonfan1256/), Shade's CEO, describes the philosophy as building \"Invisible software\u2026 How do we build something that feels so invisible, but is so necessary that if you pull it away, people would all kind of freak out.\"\n\n### Evaluation. The taste gap and why we are still early.\n\nEven with programmable context, intelligence, generation, and precision tooling, there is still a distance between what a creative intends and what a model produces. As Contra's co-founder [Ben Huffman](https://www.linkedin.com/in/ben-huffman-b7b6a8102/) put it, \"Good creative is very divergent, and that is what makes good creative. The problem with most LLMs, especially with generated media, is mode collapse. It all converges into the same type of output.\" There is no unit test for taste. Coding benchmarks are relatively static, but design trends shift over days or months, which means any evaluation framework for creative work has to be continuously refreshed.\n\n[Lica](https://lica.world/) is tackling this at the data layer, building the largest graphic design dataset to date and creating the [Graphic Design Bench](https://arxiv.org/abs/2604.04192), a 49-task evaluation spanning five design domains. No model is ready for professional design work. Of the 49 tasks, 2 are mostly solved, 25 are partially solved, and 22 remain unsolved. Lica co-founder [Purvanshi Mehta](https://www.linkedin.com/in/purvanshi-mehta/) describes the reality of today: \"The truth is there is a person still at a public company whose job is to change aspect ratios day in and day out. There's such a huge gap between how people are solving it and what needs to be solved.\" [Contra Labs](https://contralabs.com/), the research arm of [Contra's](https://contra.com/) 1.5-million-member creative marketplace, is building the \"human creativity benchmark,\" studying actual creative workflows to understand where AI tools fall short. As Huffman noted, \"Most everything in eval is built for text and code, but few people are thinking about design and creative.\" [DesignArena](https://www.designarena.ai/), by ArcadiaLabs, takes a different approach, treating design quality as fundamentally subjective and capturing that subjectivity at scale through community-based tournaments grounded in human judgment.\n\nThe feedback loop between creative generation and performance data is the biggest unsolved problem in the programmable brand stack. Every layer above improves when evaluation improves. But evaluation still runs on human judgment. The infrastructure amplifies whoever holds it. So the question becomes: who are those people, what does their role look like, and why are they more valuable now than they've ever been?\n\n<div class=\"img-placeholder\" data-label=\"The Programmable Brand Stack\" data-src=\"stack.png\"></div>\n\n## Cohesive Narrative Is a Competitive Surface\n\n### In software, brand excellence starts with product excellence.\n\nThe strongest brands become language: Google, Uber, Claude. Nobody \"verbed\" a product because of an ad campaign \u2014 people make it happen organically because the product experience is so distinctive it replaces a category name. In software, brand and product can't diverge for long. A software product is experienced directly and repeatedly, so if the brand promises something the product doesn't deliver, users find out in minutes, not months.\n\n[Oliver Hamrin](https://www.linkedin.com/posts/oliver-hamrin-6341a2202_weve-had-quite-a-bit-of-attention-lately-activity-7393270514489745408-jZ_L/), co-founder of [Quartr](https://quartr.com/), the financial research platform whose distinctive visual identity has become a reference point in B2B (read more [here](https://www.milkkarten.net/p/quartr-social-media-design-x?hide_intro_popup=true)), frames the relationship between product and brand as inseparable. \"Separating product and brand is a really bad idea. In software, the best brands and products are cohesive across the entire user journey. The illusion and the product experience also have to be in sync.\" Paul Jun at Ramp sees the same thing from inside a company the entire industry tries to emulate: \"Every agency I talk to says every client says 'we want Ramp's brand.' But what made it work is that it was born from the product.\" His team is accountable for the full journey, from first ad to onboarding to first moment of value. \"Brand is the extension of product. Everyone at a company should feel accountable for brand.\"\n\n<div class=\"img-placeholder\" data-label=\"Quartr \u2014 distinctive brand design examples\" data-src=\"anatomy.png\"></div>\n\nBut does that mean narrative should never run ahead of the product? [Mishti Sharma](https://www.linkedin.com/in/vmsharma/), Head of Narratives at [Clay](https://www.clay.com/), argues the opposite: \"We're pretty comfortable running ahead of the product in some ways, because the reactions we get when we put visions into the world can inform what we build.\" Clay's storytelling around the GTM engineer helped manifest an entire career path, and the community feedback it generated directly informed the product roadmap. The storytelling was doing R&D in public. Importantly, though, this only works when the narrative is grounded in a real point of view about where the world is going, not in a feature list that doesn't exist yet.\n\nJun from Ramp offers a framework for when brand matters most. Every startup goes through three phases: PMF, the features war, then investing in experience. Most companies get stuck in phase two, competing on features that AI will commoditize. The ones that break through invest in how the product feels, not just what it does. \"Product designers are 'form follows function.' Brand designers are 'form follows fantasy.'\" That second skillset, the ability to shape experience and emotion, is what phase three demands, and it's becoming the most desirable in the industry. But if taste compounds, how do you build it? As generation gets democratized, the differentiator becomes the depth of your creative vocabulary, and we're seeing new tooling emerge to enhance and hone this creative skill too. Cosmos, for example, is building the curation layer for this. Co-founder [Andy McCune](https://www.linkedin.com/in/andymccune/) puts it: \"Your output is a reflection of your inputs. The purpose of collecting isn't to revisit something later. It's this act of training your eye and adopting that thing into your taste.\"\n\n### The creative org is consolidating around narrative.\n\nCreative organizations have always evolved in response to new tools. In 1949, Bill Bernbach co-founded DDB and did something no agency had done before: he put copywriters and art directors together as equal partners. His insight, that the best creative work comes from people with different skills solving problems together without handoffs, produced campaigns from Volkswagen's \"Think Small\" to Avis's \"We Try Harder.\"\n\nSomething similar is happening now. Moda's Anvisha Pai sees this happening across every function: \"Every job is turning into more of an orchestration job. The tools that won't be successful are the ones that just give you an output. That works for a lot of things, but not for creative work where there's no objectively correct answer.\" Quartr's Oliver Hamrin describes the hire this creates: \"The ideal creative hire is a deeply curious Swiss army knife. Strong opinions, loosely held. As new tools level the technical playing field, opinions and decisions are the only things that matter.\"\n\nThis shift has created an entirely new role. [LinkedIn job postings including \"storyteller\" doubled in 2025](https://www.wsj.com/articles/companies-are-desperately-seeking-storytellers-7b79f54e). Anthropic and Notion have both gone viral for hiring Heads of Storytelling at striking salaries. Mishti Sharma at Clay explains why: \"Content orgs can seem transactional and removed from comms and PR, and the brand team is completely different. It's a way of unifying disciplines that we didn't think really needed to be siloed.\"\n\nThe reporting structure matters just as much. Bernbach's insight was that the creative team needed to be peers, not a service desk. Paul Jun at Ramp was tasked with building the team to become the bridge between product and brand. The companies getting this right are the Bernbachs of the AI era: they're reorganizing talent around a model that matches the moment.\n\n## The Invisible and the Unforgettable\n\nBrand has two layers, and AI is transforming them in opposite directions. The infrastructure layer is becoming programmable: context, intelligence, generation, precision, evaluation, each is being rebuilt by a new wave of companies making brand work faster, more measurable, and more scalable. That infrastructure will become invisible, embedded in every tool and agent, running in the background the way design systems and CI/CD pipelines do today.\n\nBut the layer that sits on top, the story, remains irreducibly human. Not because the technology is immature, but because the job is different. Trends shift over days and months, and the best creatives set those trends. Effective branding lives in the tension between producing something timeless and capturing the current moment. As Chris He from Osmo put it, \"AI is great at getting you 90% of the way there. But that last 10% still requires a human touch. We are not replacing anybody's creativity. They still need to know what story they want to tell.\"\n\nEvery era of creative tooling has followed the same arc. Barriers fall, the market expands, the premium moves from execution to judgment. We are in the early innings of the third era. The companies building the programmable brand stack will capture enormous value. Further, the companies that use that infrastructure to tell stories people care about, stories that compound over years and become part of how people talk about a category \u2014 those are the ones that will define the next decade.\n\n[Tim Ellis](https://www.linkedin.com/in/tim-ellis-84b9b413), CMO of the NFL, said it best on the [CMO Podcast](https://podcasts.apple.com/ch/podcast/tim-ellis-nfl-how-the-nfl-builds-culture-not-just-fans/id1460604334?i=1000746033947): \"I want to break new ground and do things that haven't been done before, things the world hasn't seen. If AI can help me do that, then awesome, but I won't do something just because it's been successful before. You can't bottle it. Things have their own magic. I have instincts, I believe in myself, I listen, I change my mind. But when I have conviction on something, that is what I am doing.\"\n\nWhen process and generation are commoditized, taste and judgment command a premium. In brand and marketing, that premium is about to get a lot larger.\n\n*This perspective was authored by Libbie Frost and Rayouf Alhumedhi. If you are building in the creative tooling space, reach out to lfrost@bvp.com and ralhumedhi@bvp.com.*\n\n*We are grateful to the founders, operators, and creative leaders who shared their time and perspectives for this piece. Thank you to Dylan Babbs (Profound), Nate Bosshard (Brand.ai), Brandon Fan (Shade), Jamey Gannon (The AI Creative Director), Oliver Hamrin (Quartr), Chris He (Osmo), Ben Huffman & Alison Nulty (Contra), Paul Jun (Ramp), Purvanshi Mehta (Lica), Michelle Lim (Flint), Alejandro Matamala-Ortiz (Runway), Andy McCune (Cosmos), Anvisha Pai (Moda), Joan Rodriguez (Quiver), Mishti Sharma (Clay), and Weber Wong (Flora).*\n\n*Up next in the Creative Conviction series: Part III, Consumer Play.*\n";
 
     marked.use({ breaks: false, gfm: true });
-    document.getElementById('article').innerHTML = marked.parse(MD);
+    var bodyEl = document.getElementById('cc-article-body');
+    bodyEl.innerHTML = marked.parse(MD);
 
-    document.querySelectorAll('.img-placeholder').forEach(div => {
-      const img = document.createElement('img');
-      img.src = BASE + div.dataset.src;
-      img.alt = div.dataset.label || '';
-      img.className = 'article-img';
-      const cap = document.createElement('p');
-      cap.className = 'article-caption';
-      cap.textContent = div.dataset.label || '';
+    // Apply article-body classes via wrappers, then replace img-placeholders.
+    bodyEl.querySelectorAll('.img-placeholder').forEach(function (div) {
+      var src = (div.dataset.src || '').replace(/ /g, '%20');
+      var label = div.dataset.label || '';
+      var img = document.createElement('img');
+      img.src = BASE + src;
+      img.alt = label;
+      img.className = 'cc-article-img';
+      var cap = document.createElement('p');
+      cap.className = 'cc-article-caption';
+      cap.textContent = label;
       div.replaceWith(img, cap);
     });
   </script>

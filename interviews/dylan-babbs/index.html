@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dylan Babbs — Creative Conviction</title>
+  <meta name="description" content="Design as moat, AI marketing infrastructure, and why AI design tools aren't ready. An interview with Dylan Babbs, Co-founder & CTO of Profound." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400..700&display=swap" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --cc-magenta:   #D8016A;
+      --cc-orange:    #FF6514;
+      --cc-blue:      #1A0AE6;
+      --cc-indigo:    #361C76;
+      --cc-magenta-tint: #FBE0EC;
+
+      --cc-paper:        #F7F5FA;
+      --cc-paper-soft:   #F2EFF7;
+      --cc-white:        #FBFAFD;
+
+      --cc-ink:    #1A1130;
+      --cc-ink-2:  #322847;
+      --cc-ink-3:  #6A6378;
+      --cc-ink-4:  #9C97A8;
+      --cc-rule:        #D2CDDB;
+      --cc-rule-soft:   #E5E1ED;
+
+      --fg-1: var(--cc-ink);
+      --fg-2: var(--cc-ink-2);
+      --fg-3: var(--cc-ink-3);
+
+      --font-serif: "EB Garamond", "Iowan Old Style", Charter, Georgia, serif;
+      --font-sans:  "Inter", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+      --ease: cubic-bezier(.2,.6,.2,1);
+      --dur-1: 120ms;
+      --dur-2: 220ms;
+
+      --sidebar-w: 220px;
+    }
+
+    body {
+      background: var(--cc-paper);
+      color: var(--fg-1);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      min-height: 100vh;
+    }
+
+    a { color: var(--cc-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: text-decoration-thickness var(--dur-1) var(--ease); }
+    a:hover { text-decoration-thickness: 2px; }
+    em { font-family: var(--font-serif); font-style: italic; }
+
+    /* ----- Shell + header (matches homepage) ----- */
+    .cc-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 40px 80px;
+    }
+    .cc-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--cc-rule);
+      margin-bottom: 64px;
+    }
+    .cc-mark {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      text-decoration: none;
+      line-height: 1;
+    }
+    .cc-mark em { font-style: italic; color: var(--cc-indigo); font-family: var(--font-serif); }
+    .cc-nav { display: flex; gap: 28px; }
+    .cc-nav-link {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--fg-2);
+      text-decoration: none;
+      transition: color var(--dur-1) var(--ease);
+    }
+    .cc-nav-link:hover { color: var(--cc-ink); }
+
+    /* ----- Article layout (sidebar + main) ----- */
+    .cc-article-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      align-items: start;
+    }
+    @media (min-width: 1060px) {
+      .cc-article-layout {
+        grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+        gap: 56px;
+      }
+    }
+
+    /* ----- Sidebar ----- */
+    .cc-sidebar { display: none; }
+    @media (min-width: 1060px) {
+      .cc-sidebar {
+        display: block;
+        position: sticky;
+        top: 40px;
+        align-self: start;
+        opacity: 0;
+        transform: translateX(-8px);
+        transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+      }
+    }
+    .cc-sidebar.is-visible { opacity: 1; transform: translateX(0); }
+
+    .cc-sidebar-eyebrow {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--fg-3);
+      margin-bottom: 18px;
+    }
+
+    .cc-sidebar-nav { display: flex; align-items: flex-start; gap: 14px; }
+    .cc-sidebar-track {
+      position: relative;
+      width: 1px;
+      flex-shrink: 0;
+      align-self: stretch;
+      background: var(--cc-rule-soft);
+    }
+    .cc-sidebar-track-indicator {
+      position: absolute;
+      width: 100%;
+      background: var(--cc-ink);
+      height: 14px; top: 0;
+      transition: top 0.22s var(--ease), height 0.12s var(--ease);
+    }
+
+    .cc-sidebar-links { display: flex; flex-direction: column; gap: 4px; }
+    .cc-sidebar-link {
+      background: none; border: none; cursor: pointer; padding: 2px 0;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1.4;
+      color: var(--fg-3);
+      text-align: left;
+      transition: color var(--dur-1) var(--ease);
+    }
+    .cc-sidebar-link:hover { color: var(--cc-ink); }
+    .cc-sidebar-link.is-active { color: var(--cc-ink); font-weight: 500; }
+
+    /* ----- Article main ----- */
+    .cc-article { max-width: 640px; margin: 0 auto; }
+    @media (min-width: 1060px) { .cc-article { margin: 0; } }
+
+    .cc-article-header { margin-bottom: 40px; }
+    .cc-article-eyebrow {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 15px;
+      color: var(--fg-3);
+      margin-bottom: 14px;
+    }
+    .cc-article-title {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 4.4vw, 48px);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--cc-ink);
+      margin: 0 0 18px;
+    }
+    .cc-article-title em { font-style: italic; }
+    .cc-article-subtitle {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 19px;
+      color: var(--fg-2);
+      margin: 0 0 10px;
+    }
+    .cc-article-date {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
+
+    .cc-article-dek {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--fg-2);
+      margin: 32px 0 56px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--cc-rule);
+    }
+    .cc-article-dek a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+    }
+
+    .scroll-anchor { scroll-margin-top: 48px; }
+
+    /* ----- Q&A ----- */
+    .cc-qa-list { display: flex; flex-direction: column; gap: 28px; margin-bottom: 80px; }
+    .cc-qa { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: start; }
+    .cc-speaker {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding-top: 6px;
+      line-height: 1.3;
+    }
+    .cc-speaker.is-interviewer { color: var(--fg-3); }
+    .cc-speaker.is-guest { color: var(--cc-ink); }
+
+    .cc-qa-body {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg-2);
+    }
+    .cc-qa-body p { margin-bottom: 14px; }
+    .cc-qa-body p:last-child { margin-bottom: 0; }
+    .cc-qa-body em { font-family: var(--font-serif); font-style: italic; }
+    .cc-qa-body.is-question { color: var(--cc-ink); font-weight: 500; }
+    .cc-qa-body.is-response { font-weight: 400; }
+    .cc-qa-body a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+    /* ----- Pull-quote highlight (indigo at rest, magenta on hover) ----- */
+    .cc-highlight {
+      background: rgba(54, 28, 118, 0.10);
+      color: var(--cc-ink);
+      padding: 1px 4px;
+      transition: background var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+      cursor: default;
+    }
+    .cc-highlight:hover { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
+
+    /* ----- Hot Takes ----- */
+    .cc-hot-takes { padding-top: 32px; border-top: 1px solid var(--cc-rule); }
+    .cc-hot-takes-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      margin: 0 0 32px;
+    }
+    .cc-hot-takes-list { display: flex; flex-direction: column; gap: 32px; }
+    .cc-hot-take { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: start; }
+    .cc-hot-take-num {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 17px;
+      color: var(--fg-3);
+      padding-top: 4px;
+    }
+    .cc-hot-take-q {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--cc-ink);
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+    .cc-hot-take-a {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg-2);
+    }
+    .cc-hot-take-a p { margin-bottom: 12px; }
+    .cc-hot-take-a p:last-child { margin-bottom: 0; }
+
+    /* ----- Footer ----- */
+    .cc-footer { border-top: 1px solid var(--cc-rule); padding: 48px 0 32px; margin-top: 96px; }
+    .cc-footer-meta {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 640px) {
+      .cc-shell { padding: 24px 24px 64px; }
+      .cc-header { margin-bottom: 48px; }
+      .cc-article-header { margin-bottom: 32px; }
+      .cc-article-dek { margin: 24px 0 40px; padding-bottom: 24px; }
+      .cc-qa { grid-template-columns: 1fr; gap: 6px; }
+      .cc-speaker { padding-top: 0; }
+      .cc-hot-take { grid-template-columns: 1fr; gap: 6px; }
+      .cc-hot-take-num { padding-top: 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cc-shell">
+
+    <header class="cc-header">
+      <a class="cc-mark" href="../../">Creative <em>Conviction</em></a>
+      <nav class="cc-nav">
+        <a class="cc-nav-link" href="../../about.html">About</a>
+      </nav>
+    </header>
+
+    <div class="cc-article-layout">
+
+      <aside class="cc-sidebar" id="cc-sidebar">
+        <div class="cc-sidebar-eyebrow">Contents</div>
+        <div class="cc-sidebar-nav">
+          <div class="cc-sidebar-track">
+            <div class="cc-sidebar-track-indicator" id="cc-track-indicator"></div>
+          </div>
+          <div class="cc-sidebar-links" id="cc-sidebar-links">
+            <button class="cc-sidebar-link is-active" data-target="profound-today">Where Profound fits</button>
+            <button class="cc-sidebar-link" data-target="market-opportunity">The 30&times; opportunity</button>
+            <button class="cc-sidebar-link" data-target="taking-action">Taking action</button>
+            <button class="cc-sidebar-link" data-target="creative-platform">Profound as platform</button>
+            <button class="cc-sidebar-link" data-target="building-team">Building the team</button>
+            <button class="cc-sidebar-link" data-target="design-moat">Design as moat</button>
+            <button class="cc-sidebar-link" data-target="ai-design-tools">On AI design tools</button>
+            <button class="cc-sidebar-link" data-target="hot-takes">Hot takes</button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="cc-article">
+
+        <div class="cc-article-header">
+          <p class="cc-article-eyebrow">An interview with Dylan Babbs</p>
+          <h1 class="cc-article-title">Design as moat, AI marketing infrastructure, and why AI design tools aren&rsquo;t ready</h1>
+          <p class="cc-article-subtitle">Co-founder &amp; CTO, Profound</p>
+          <p class="cc-article-date">March 2026</p>
+        </div>
+
+        <p class="cc-article-dek">Dylan Babbs is the Co-founder and CTO of <a href="https://www.profound.com" target="_blank" rel="noopener">Profound</a>, New York&rsquo;s fastest-growing AI marketing company. He came to founding from <a href="https://uber.com" target="_blank" rel="noopener">Uber</a>, where he worked as a design engineer on navigation and maps, the kind of deep craft role that most founders don&rsquo;t come from. In 18 months, Profound went from idea to serving Fortune 500 brands like Apple, Shopify, Ramp, Airbnb, and Meta. We talked with Dylan about why great design is a protected competitive advantage, what it takes to build an AI-native marketing platform, and why he thinks AI design tools are still years away from being useful.</p>
+
+        <div id="profound-today" class="scroll-anchor"></div>
+
+        <div class="cc-qa-list">
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Walk us through Profound, where it started and where it fits now in the AI marketing landscape.</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Dylan</span>
+            <div class="cc-qa-body is-response">
+              <p>We started as the SEO for AI search company, building an analytics layer for brands to understand what people are searching for, what the outputs are, and how they&rsquo;re actually showing up. This was timed well, and we built it at a high quality level, fast. That&rsquo;s led to a lot of our success.</p>
+              <p>But then we learned&hellip; once you know how you rank, the next step is taking action. You always want to improve. The way to do that is writing the most effective content and shaping your digital presence to show up well in ChatGPT and other answer engines. LLMs opened our business in two ways, as a consumer product now approaching a billion monthly active users, and as a technology we could apply directly to our industry.</p>
+              <p>The main thesis of Profound 2.0&hellip; <span class="cc-highlight">how do you help marketers work more efficiently and harness AI to do their work?</span> We want to be the AI-native application layer for marketers, the same way developers have Cursor, lawyers have Harvey, finance has Legora. Profound is that for marketing.</p>
+            </div>
+          </div>
+
+          <div id="market-opportunity" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>How do you think about the size of the opportunity?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Dylan</span>
+            <div class="cc-qa-body is-response">
+              <p>We don&rsquo;t love comping directly to SEO, but for this example&hellip; in 2024, $93 billion were spent on SEO. Only $3 billion was analytics, tools like SEMrush, Ahrefs, Brightedge. The other $90 billion is services. Hiring an SEO agency, a digital marketing agency to do research, write content, build your website. That 3-to-90 is a 30x figure.</p>
+              <p>If we succeed in bringing AI agents to help marketers do their work, that&rsquo;s an enormous market, and we&rsquo;re well positioned to go after it. We already work with Uber, Apple, Walmart, Shopify, Ramp, Brex, Airbnb, Meta, Amazon, and a lot of other enterprise brands. Now it&rsquo;s about upselling the agents product to the same customer base.</p>
+            </div>
+          </div>
+
+          <div id="taking-action" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>How do you define what actions Profound takes for the marketer, and how far does &ldquo;marketing&rdquo; spread beyond just marketing?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Dylan</span>
+            <div class="cc-qa-body is-response">
+              <p>We started quite opinionated. &ldquo;Here are the strategies you should follow.&rdquo; That&rsquo;s shifted. As our vision got broader, we want to be almost completely unopinionated. Strategies are always changing. The best ones people are going to discover themselves. We want to give marketers the creative liberties to find those strategies and then execute on them with Profound.</p>
+              <p>Profound Agents is essentially an agent builder. Deterministic workflows, autonomous agents, full integration with your Profound data so you know exactly how you rank on any given topic, and deep integrations into all your marketing tools. <span class="cc-highlight">That last piece is where it starts to truly differentiate.</span></p>
+            </div>
+          </div>
+
+          <div id="creative-platform" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Do you think of Profound as a creative tool?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Dylan</span>
+            <div class="cc-qa-body is-response">
+              <p>Eventually, yes. In about three years, we won&rsquo;t be doing just web text, we&rsquo;ll move toward image and video generation as well. Right now we have analytics and content generation. The next thing we&rsquo;re building is a content management system. Then you own the ability to publish. <span class="cc-highlight">I joke that we want to own the means of distribution.</span></p>
+              <p>So the full stack becomes&hellip; analytics, generation, publishing. Then you expand the content types, images, video. And you expand across marketing functions. Product marketing, performance, social, brand. It becomes a very different company in three years.</p>
+            </div>
+          </div>
+
+          <div id="building-team" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>You came from the design engineering world at Uber before founding Profound. How has that shaped how you hire and build the team?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Dylan</span>
+            <div class="cc-qa-body is-response">
+              <p>Four things company-wide. First, you have to be an owner. There&rsquo;s not much management at Profound. You carve out your area, set your own roadmap, and are responsible for what happens there. That attracts people who want real impact. Second, curiosity. We&rsquo;re building things that have never been done before. You can&rsquo;t repeat a playbook. You have to want to go learn.</p>
+              <p>Third, being a really good person. We&rsquo;re quite strict on not bringing in the 100x engineer who destroys culture. <span class="cc-highlight">A company, if you boil it down, is just a group of people in a room.</span> You need to be excited to collaborate with your teammates, to be friends with everyone, to be kind. People come in and say it&rsquo;s the most welcoming place they&rsquo;ve ever experienced, that&rsquo;s not an accident. Fourth, you have to work hard. We&rsquo;re quite infamous for Saturday posts.</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>What specifically do you look for in designers?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Dylan</span>
+            <div class="cc-qa-body is-response">
+              <p>Three things. Visual skills. You need to know how to make things look good. That&rsquo;s the taste aspect. Second, <span class="cc-highlight">product design&hellip; do you know how to design for the business, not the user?</span> That&rsquo;s a critical distinction most designers lack unless they&rsquo;ve worked at Meta, Uber, Coinbase, places that actually drill it in. Third, design engineering.</p>
+              <p>At Profound, you need two of three. I wanted all three at first. I had all three, so that was my bar. But I woke up. Those people exist, but they have the freedom to go anywhere and you&rsquo;d have to pay insane amounts. Two of three is the right bar, and we make sure we&rsquo;re not over-indexed on any one combination.</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>How do you think about ratios, PMs, designers, engineers?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Dylan</span>
+            <div class="cc-qa-body is-response">
+              <p>We have rough ratios in mind, but the real philosophy is&hellip; if you find someone good, hire them and figure it out. When you&rsquo;re this picky, good at the job, the four soft qualities, and the role-specific criteria, you&rsquo;ve narrowed to a very specific set of people in the world. It&rsquo;s so rare when you find one that it&rsquo;s almost always worth it. They&rsquo;ll figure out where they fit.</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>What does the design and marketing tech stack look like at Profound?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Dylan</span>
+            <div class="cc-qa-body is-response">
+              <p>Figma, of course. But a lot of our designers are getting deep with Codex and Claude Code, both in standalone prototype sandboxes and directly in our production app. We&rsquo;re a feature flag shop. No staging environment. Everything is a Boolean toggle. Should we show this, should we show that. Designers can start shipping directly within the app, and it takes about 10% of the time it used to, now that you have AI tools.</p>
+              <p>One other example. Our subway ads. All the imagery is AI-generated, done with Higgs Field. People ask us how we got those photos done. We didn&rsquo;t. <span class="cc-highlight">If you look closely, one of the images shows a subway map of New York in the background, it&rsquo;s complete nonsense. Nobody caught it.</span></p>
+            </div>
+          </div>
+
+          <div id="design-moat" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>We&rsquo;ve been writing about how taste and design sensibility may be one of the last defensible advantages. How do you see it playing out at Profound?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Dylan</span>
+            <div class="cc-qa-body is-response">
+              <p>We&rsquo;re in a whole new industry. People are skeptical, anxious, wary of vaporware. <span class="cc-highlight">If you build a beautiful front-end brand and product that delivers a premium experience, that squashes a lot of the preconceptions people have, and it tremendously helps with sales.</span> You still have to do everything else well, product, engineering, sales. But the design layer is a force multiplier.</p>
+              <p>It&rsquo;s also a protected advantage. It&rsquo;s very hard for a founder with an engineering background to just decide &ldquo;we&rsquo;re going to have great design.&rdquo; How do you actually do that? You might find a good designer, but that designer thinks&hellip; this person doesn&rsquo;t really care about this. And they&rsquo;re right. It&rsquo;s hard to execute without genuine conviction at the top. So if you have that advantage, lean into it hard.</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Does that design sensibility have to come from the founding team?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Dylan</span>
+            <div class="cc-qa-body is-response">
+              <p>Yes. I&rsquo;ve learned that everything has to come from the founding team, or someone very close to it. It&rsquo;s all about alignment of priorities. You can&rsquo;t retrofit it.</p>
+            </div>
+          </div>
+
+          <div id="ai-design-tools" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>What do you think of AI design tools, Papr, the emerging Figma competitors? Do you use any internally?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Dylan</span>
+            <div class="cc-qa-body is-response">
+              <p>Controversial opinion. AI design tools are so many years away from being useful. I&rsquo;ve never found them to produce good outputs, or an interface that makes me move faster. I&rsquo;ve spent serious time trying.</p>
+              <p>When I spent two years looking for a business to build before founding Profound, the first lizard-brain idea as a designer is always &ldquo;build a design tool.&rdquo; I looked hard at it and realized&hellip; there&rsquo;s no way this is going to be successful, or if it is, it&rsquo;s a six-year grind. I was not interested in that.</p>
+              <p><span class="cc-highlight">There&rsquo;s so much potential GDP being wasted because brilliant people love design and think they&rsquo;re going to follow their passion and build a design tool. And it&rsquo;s just not going to work out.</span> I think it&rsquo;s almost a whole other topic, smart entrepreneurs living in industries with physical limitations to their success, wasting their time. That&rsquo;s what I realized.</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>What about the future of the user interface more broadly, how much of what we build will just be natural language?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Dylan</span>
+            <div class="cc-qa-body is-response">
+              <p>I like ChatGPT for asking questions. But I&rsquo;m never going to open a chatbot and say &ldquo;order me an Uber to 248 North 8th Street.&rdquo; That&rsquo;s just stupid. And I think that applies to so many categories. Someone has to figure out the interface problem, it&rsquo;s just not clear yet who or when. In a different world three years ago I would have loved to go figure that out. But it&rsquo;s going to be such a grind with no results at the current timing. I&rsquo;ll let someone else figure it out.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <section id="hot-takes" class="cc-hot-takes scroll-anchor">
+          <h2 class="cc-hot-takes-title">Hot takes</h2>
+          <div class="cc-hot-takes-list">
+
+            <div class="cc-hot-take">
+              <span class="cc-hot-take-num">I</span>
+              <div>
+                <div class="cc-hot-take-q">What&rsquo;s the boldest bet you&rsquo;re making on where Profound goes next?</div>
+                <div class="cc-hot-take-a">
+                  <p>Owning the means of distribution. Right now we rely on third-party CMS systems, which is fine. But if we own analytics, generation, and publishing, the full stack, and then expand into images and video, the surface area becomes enormous. In three years, Profound looks very different from what it is today.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="cc-hot-take">
+              <span class="cc-hot-take-num">II</span>
+              <div>
+                <div class="cc-hot-take-q">Biggest mistake design-minded founders make?</div>
+                <div class="cc-hot-take-a">
+                  <p>Building design tools. There are brilliant people who love design, follow their passion, and walk into an industry with physical limitations to their success. It&rsquo;s going to be a six-year grind, at minimum, and most of it won&rsquo;t work. If you have design taste and product instincts, apply them somewhere the market is already moving. The compounding there is just so much faster.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="cc-hot-take">
+              <span class="cc-hot-take-num">III</span>
+              <div>
+                <div class="cc-hot-take-q">One thing investors should actually look for in early-stage founding teams?</div>
+                <div class="cc-hot-take-a">
+                  <p>Whether design conviction comes from inside the founding team. You don&rsquo;t need to see the quality of their output, you just need to know it matters to them. That alignment of priorities can&rsquo;t be hired in after the fact. If it&rsquo;s not there at the start, the product will never feel the way the best ones do. It&rsquo;s that simple, and that rare.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+
+    <footer class="cc-footer">
+      <p class="cc-footer-meta">&copy; 2026 Creative Conviction</p>
+    </footer>
+
+  </div>
+
+  <script>
+    (function () {
+      var sidebar = document.getElementById('cc-sidebar');
+      var indicator = document.getElementById('cc-track-indicator');
+      var links = Array.prototype.slice.call(document.querySelectorAll('.cc-sidebar-link'));
+      if (!sidebar || !indicator || !links.length) return;
+
+      setTimeout(function () { sidebar.classList.add('is-visible'); }, 180);
+
+      links.forEach(function (link) {
+        link.addEventListener('click', function () {
+          var id = link.getAttribute('data-target');
+          var el = document.getElementById(id);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      function update() {
+        var activeIdx = 0;
+        for (var i = links.length - 1; i >= 0; i--) {
+          var id = links[i].getAttribute('data-target');
+          var el = document.getElementById(id);
+          if (el && el.getBoundingClientRect().top <= 130) { activeIdx = i; break; }
+        }
+        links.forEach(function (l, i) { l.classList.toggle('is-active', i === activeIdx); });
+        var activeLink = links[activeIdx];
+        if (activeLink) {
+          indicator.style.top = activeLink.offsetTop + 'px';
+          indicator.style.height = activeLink.offsetHeight + 'px';
+        }
+      }
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    })();
+  </script>
+</body>
+</html>

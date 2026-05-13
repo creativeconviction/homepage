@@ -1,911 +1,441 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Creative Conviction</title>
-  <meta name="description" content="We seek to spark conversation around capital, creative work, and AI." />
+  <meta name="description" content="A platform where we seek to spark conversation around capital, creativity, and AI." />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400..700&display=swap" />
+
   <style>
+    /* ===========================================================
+       Creative Conviction — homepage
+       Tokens lifted from the Creative Conviction design system
+       (colors_and_type.css + ui_kits/homepage/kit.css).
+       =========================================================== */
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #fff8f1;
-      --text: #20124d;
-      --muted: rgba(32, 18, 77, 0.38);
-      --thumb: rgba(20, 10, 50, 0.88);
-      --quote-bg: rgba(32, 18, 77, 0.09);
-      --ui-font: 'Inter', sans-serif;
-      --ui-size: 0.75rem;
-    }
-
-    /* ── TERMINAL ── */
-    body.terminal {
-      --bg: #000;
-      --text: #fff;
-      --muted: rgba(255, 255, 255, 0.4);
-      --thumb: rgba(255, 255, 255, 0.07);
-      --quote-bg: rgba(255, 255, 255, 0.12);
-    }
-    body.terminal, body.terminal * {
-      font-family: 'Courier New', Courier, monospace !important;
-    }
-    body.terminal::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: repeating-linear-gradient(
-        0deg, transparent, transparent 3px,
-        rgba(0,0,0,0.08) 3px, rgba(0,0,0,0.08) 4px
-      );
-      pointer-events: none;
-      z-index: 9999;
-    }
-    body.terminal { font-size: 0.8rem; }
-    body.terminal .hero { padding: 1.25rem 2rem 0.75rem; }
-    body.terminal .hero-tagline { font-size: 0.7rem; line-height: 1.2; }
-    body.terminal .filters { padding: 0 2rem 0.85rem; }
-    body.terminal .card-list { gap: 0.5rem; }
-    body.terminal .card-title { font-size: 0.8rem; line-height: 1.2; }
-    body.terminal .card-desc { font-size: 0.7rem; line-height: 1.2; }
-    body.terminal .card-date { font-size: 0.6rem; }
-    body.terminal .signup { margin-top: 2rem; }
-    body.terminal .signup-title { font-size: 1rem; margin-bottom: 0.75rem; }
-    body.terminal footer { margin-top: 2rem; }
-    body.terminal .card-thumb { border-color: rgba(255,255,255,0.25); }
-    body.terminal .filter-btn.active::before { content: '> '; }
-    body.terminal .corner { border-color: rgba(255,255,255,0.25); }
-
     html { scroll-behavior: smooth; }
 
+    :root {
+      /* Brand accents (use one per screen, with restraint) */
+      --cc-magenta:   #D8016A;
+      --cc-orange:    #FF6514;
+      --cc-blue:      #1A0AE6;
+      --cc-indigo:    #361C76;
+
+      /* Surfaces — indigo-tinted near-white, never pure */
+      --cc-paper:        #F7F5FA;
+      --cc-paper-soft:   #F2EFF7;
+      --cc-white:        #FBFAFD;
+
+      /* Ink + neutrals (indigo-undertoned) */
+      --cc-ink:    #1A1130;
+      --cc-ink-2:  #322847;
+      --cc-ink-3:  #6A6378;
+      --cc-ink-4:  #9C97A8;
+      --cc-rule:        #D2CDDB;
+      --cc-rule-soft:   #E5E1ED;
+
+      --fg-1: var(--cc-ink);
+      --fg-2: var(--cc-ink-2);
+      --fg-3: var(--cc-ink-3);
+      --fg-4: var(--cc-ink-4);
+
+      --font-serif: "EB Garamond", "Iowan Old Style", Charter, Georgia, serif;
+      --font-sans:  "Inter", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+      --ease: cubic-bezier(.2,.6,.2,1);
+      --dur-1: 120ms;
+      --dur-2: 220ms;
+    }
+
     body {
-      font-family: 'EB Garamond', Georgia, serif;
-      background: var(--bg);
-      color: var(--text);
+      background: var(--cc-paper);
+      color: var(--fg-1);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.55;
       -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
       min-height: 100vh;
-      transition: background 0.2s, color 0.2s;
     }
 
-    /* CORNER MARKS */
-    .corner {
-      position: fixed;
-      width: 16px;
-      height: 16px;
-      pointer-events: none;
-      z-index: 50;
-    }
-    .corner-tl { top: 1.25rem; left: 1.25rem; border-top: 1px solid var(--muted); border-left: 1px solid var(--muted); }
-    .corner-tr { top: 1.25rem; right: 1.25rem; border-top: 1px solid var(--muted); border-right: 1px solid var(--muted); }
-    .corner-bl { bottom: 1.25rem; left: 1.25rem; border-bottom: 1px solid var(--muted); border-left: 1px solid var(--muted); }
-    .corner-br { bottom: 1.25rem; right: 1.25rem; border-bottom: 1px solid var(--muted); border-right: 1px solid var(--muted); }
+    a { color: var(--cc-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: text-decoration-thickness var(--dur-1) var(--ease); }
+    a:hover { text-decoration-thickness: 2px; }
+    em { font-family: var(--font-serif); font-style: italic; }
 
-    /* NAV */
-    nav {
-      max-width: 720px;
+    /* ----- Shell ----- */
+    .cc-shell {
+      max-width: 980px;
       margin: 0 auto;
-      padding: 1.75rem 2rem 0;
+      padding: 32px 40px 80px;
+    }
+
+    /* ----- Header ----- */
+    .cc-header {
       display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 1.25rem;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--cc-rule);
+      margin-bottom: 64px;
     }
-
-    .terminal-toggle {
-      background: none;
-      border: 1px solid var(--muted);
-      cursor: pointer;
-      font-family: var(--ui-font);
-      font-size: var(--ui-size);
+    .cc-mark {
+      font-family: var(--font-serif);
+      font-size: 24px;
       font-weight: 400;
-      color: var(--muted);
-      padding: 0.2rem 0.5rem;
-      letter-spacing: 0.05em;
-      transition: color 0.15s, border-color 0.15s;
-      line-height: 1.7;
-    }
-    .terminal-toggle:hover { color: var(--text); border-color: var(--text); }
-
-    .nav-about {
-      font-family: var(--ui-font);
-      font-size: var(--ui-size);
-      font-weight: 400;
-      color: var(--muted);
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
       text-decoration: none;
-      transition: color 0.15s;
+      line-height: 1;
     }
-    .nav-about:hover { color: var(--text); }
-
-    /* HERO */
-    .hero {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 3rem 2rem 2.75rem;
-      text-align: center;
+    .cc-mark em { font-style: italic; color: var(--cc-indigo); font-family: var(--font-serif); }
+    .cc-nav { display: flex; gap: 28px; }
+    .cc-nav-link {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--fg-2);
+      text-decoration: none;
+      transition: color var(--dur-1) var(--ease);
     }
+    .cc-nav-link:hover { color: var(--cc-ink); }
 
-    .hero-title {
-      font-size: clamp(2.9rem, 8.1vw, 5.4rem);
-      font-weight: 600;
-      line-height: 0.93;
-      letter-spacing: -0.04em;
-      color: var(--text);
-      margin-bottom: 1.1rem;
-      min-height: 1em;
-      position: relative;
-      transition: color 0.3s;
-      cursor: default;
-    }
-
-    .hero-cursor {
-      display: inline-block;
-      width: 0.05em;
-      height: 0.82em;
-      background: var(--text);
-      margin-left: 0.04em;
-      vertical-align: middle;
-      animation: blink 0.9s step-end infinite;
-    }
-    .hero-cursor.done { display: none; }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    .hero-tagline {
-      font-size: 1.0625rem;
-      color: var(--muted);
-      line-height: 1.5;
-      max-width: 480px;
-      margin: 0 auto;
-      font-family: 'EB Garamond', Georgia, serif;
-    }
-
-    /* FILTERS */
-    .filters {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 0 2rem 2.25rem;
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .filter-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: var(--ui-font);
-      font-size: var(--ui-size);
-      font-weight: 400;
-      color: var(--muted);
-      padding: 0;
-      transition: color 0.15s;
-    }
-    .filter-btn:hover { color: var(--text); }
-    .filter-btn.active { color: var(--text); font-weight: 500; }
-
-    /* CONTENT */
-    .content {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .card-list {
+    /* ----- Home layout ----- */
+    .cc-home {
+      max-width: 680px;
+      margin: 0;
       display: flex;
       flex-direction: column;
-      gap: 2.25rem;
+      gap: 64px;
     }
 
-    /* CARD */
-    .card {
-      text-decoration: none;
-      color: var(--text);
-      display: flex;
-      gap: 1.25rem;
-      align-items: flex-start;
-      transition: opacity 0.15s;
+    /* ----- Bio ----- */
+    .cc-bio { max-width: 560px; }
+    .cc-lead {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.5;
+      color: var(--cc-ink);
+      margin: 0 0 18px;
+      text-wrap: pretty;
     }
-    .card:hover { opacity: 0.5; }
-
-    .card-thumb {
-      flex-shrink: 0;
-      width: 100px;
-      height: 68px;
-      background: transparent;
-      border-radius: 2px;
-      overflow: hidden;
+    .cc-lead em { font-style: italic; }
+    .cc-body {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg-2);
+      margin: 0 0 16px;
+      text-wrap: pretty;
     }
-    .card-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    @media (min-width: 580px) { .card-thumb { width: 140px; height: 84px; } }
+    .cc-body em { font-family: var(--font-serif); font-style: italic; }
+    .cc-body a { color: var(--cc-ink); }
 
-    .card-body { flex: 1; min-width: 0; }
-
-    .card-title {
-      font-size: 1.3125rem;
-      font-weight: 500;
+    /* ----- Section headings ----- */
+    .cc-h2 {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      font-weight: 400;
       line-height: 1.2;
       letter-spacing: -0.01em;
-      margin-bottom: 0.3rem;
+      margin: 0 0 24px;
+      color: var(--cc-ink);
     }
 
-    .card-desc {
-      font-size: 0.9375rem;
-      color: var(--muted);
-      line-height: 1.4;
+    /* ----- Episodes (scrollable numbered-ish list) ----- */
+    .cc-episodes { margin-bottom: 0; }
+    .cc-episode-scroll {
+      position: relative;
+      max-height: calc(84px * 3);
+      overflow-y: auto;
+      border-top: 1px solid var(--cc-rule);
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .cc-episode-scroll::-webkit-scrollbar { display: none; }
+    .cc-episode-list { list-style: none; margin: 0; padding: 0; }
+    .cc-episode {
+      display: grid;
+      grid-template-columns: 1fr 180px 110px;
+      align-items: baseline;
+      gap: 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--cc-rule-soft);
+      transition: background var(--dur-1) var(--ease);
+    }
+    .cc-episode:hover { background: rgba(26, 17, 48, 0.025); }
+    .cc-episode-title {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.25;
+      color: var(--cc-ink);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .cc-episode-title em { font-style: italic; }
+    .cc-episode:hover .cc-episode-title {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+    }
+    .cc-episode-cat {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--fg-3);
+      text-align: right;
+    }
+    .cc-episode-date {
+      font-family: var(--font-sans);
+      font-variant-numeric: tabular-nums;
+      font-size: 12.5px;
+      color: var(--fg-3);
+      text-align: right;
+    }
+
+    /* ----- Three-column index (homepage bottom block) ----- */
+    .cc-index { margin-top: 0; }
+    .cc-index-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+    .cc-index-col { display: flex; flex-direction: column; gap: 8px; }
+    .cc-index-h {
+      margin: 0 0 6px 0;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
+    .cc-index-link {
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--cc-ink);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+      text-decoration-skip-ink: none;
+      transition: text-decoration-thickness var(--dur-1) var(--ease);
+    }
+    .cc-index-link:hover { text-decoration-thickness: 2px; }
+    .cc-index-overview {
+      margin-top: 4px;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 15px;
+    }
+    .cc-index-arrow {
+      font-family: var(--font-sans);
       font-style: normal;
+      font-size: 14px;
+      color: var(--fg-3);
+      display: inline-block;
+      margin-left: 4px;
+      transition: transform var(--dur-2) var(--ease);
     }
+    .cc-index-overview:hover .cc-index-arrow { transform: translateX(3px); }
 
-    .card-date {
-      font-family: var(--ui-font);
-      font-size: var(--ui-size);
-      font-weight: 400;
-      color: var(--muted);
-      margin-top: 0.4rem;
+    /* ----- Footer ----- */
+    .cc-footer {
+      border-top: 1px solid var(--cc-rule);
+      padding: 48px 0 32px;
+      margin-top: 96px;
     }
-
-    /* EMAIL SIGNUP */
-    .signup {
-      max-width: 720px;
-      margin: 5rem auto 0;
-      padding: 0 2rem;
-    }
-
-    .signup-title {
-      font-size: 1.5rem;
-      font-weight: 500;
-      line-height: 1.15;
-      margin-bottom: 1.25rem;
-      letter-spacing: -0.015em;
-    }
-
-    .signup-underline {
+    .cc-footer-sub {
       display: flex;
-      align-items: center;
-      border-bottom: 1px solid var(--muted);
-      max-width: 380px;
-      padding-bottom: 0.3rem;
-      transition: border-color 0.15s;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+      max-width: 420px;
     }
-    .signup-underline:focus-within { border-color: var(--text); }
-
-    .signup-input {
-      flex: 1;
+    .cc-footer-h {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.2;
+      color: var(--cc-ink);
+      margin: 0;
+    }
+    .cc-input {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--cc-ink);
       background: transparent;
-      border: none;
-      color: var(--text);
-      font-family: var(--ui-font);
-      font-size: var(--ui-size);
-      font-weight: 400;
-      padding: 0.25rem 0;
+      border: 0;
+      border-bottom: 1px solid var(--cc-rule);
+      border-radius: 0;
+      padding: 6px 0;
       outline: none;
+      width: 100%;
+      max-width: 320px;
+      transition: border-color var(--dur-1) var(--ease);
     }
-    .signup-input::placeholder { color: var(--muted); }
-
-    .signup-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: var(--text);
-      font-family: var(--ui-font);
-      font-size: 1rem;
-      padding: 0 0 0 0.5rem;
-      line-height: 1;
-      opacity: 0.45;
-      transition: opacity 0.15s;
-      flex-shrink: 0;
+    .cc-input::placeholder { color: var(--cc-ink-4); }
+    .cc-input:focus { border-bottom-color: var(--cc-ink); }
+    .cc-footer-thanks {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--cc-magenta);
+      margin: 0;
     }
-    .signup-btn:hover { opacity: 1; }
+    .cc-footer-meta {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--fg-3);
+      margin-top: 32px;
+      letter-spacing: 0.02em;
+    }
 
-    /* FOOTER */
-    footer {
-      max-width: 720px;
-      margin: 4.5rem auto 0;
-      padding: 2rem;
-      display: flex;
-      justify-content: space-between;
-      font-family: var(--ui-font);
-      font-size: var(--ui-size);
-      font-weight: 400;
-      color: var(--muted);
+    /* ----- Small-screen ----- */
+    @media (max-width: 640px) {
+      .cc-shell { padding: 24px 24px 64px; }
+      .cc-header { margin-bottom: 48px; }
+      .cc-home { gap: 48px; }
+      .cc-episode { grid-template-columns: 1fr; gap: 4px; padding: 18px 0; }
+      .cc-episode-cat, .cc-episode-date { text-align: left; }
+      .cc-index-grid { grid-template-columns: 1fr; gap: 28px; }
     }
   </style>
 </head>
+
 <body>
-  <script>if(localStorage.getItem('cc-terminal')==='1')document.body.classList.add('terminal');</script>
+  <div class="cc-shell">
 
-  <div class="corner corner-tl"></div>
-  <div class="corner corner-tr"></div>
-  <div class="corner corner-bl"></div>
-  <div class="corner corner-br"></div>
+    <header class="cc-header">
+      <a class="cc-mark" href="./">Creative <em>Conviction</em></a>
+      <nav class="cc-nav">
+        <a class="cc-nav-link" href="./about.html">About</a>
+      </nav>
+    </header>
 
-  <nav>
-    <button class="terminal-toggle" id="terminal-toggle">&gt;_</button>
-    <a class="nav-about" href="./about.html">About</a>
-  </nav>
+    <main class="cc-home">
 
-  <div class="hero">
-    <h1 class="hero-title" id="hero-title"></h1>
-    <p class="hero-tagline">We seek to spark conversation around capital, creative work, and AI</p>
-  </div>
+      <section class="cc-bio">
+        <p class="cc-lead">
+          <em>Creative Conviction</em> is a platform where we seek to spark
+          conversation around capital, creativity, and AI.
+        </p>
+        <p class="cc-body">
+          Our methods include interviews with founders and creative leaders,
+          curated gatherings, and written reports. We are
+          <a href="https://www.linkedin.com/in/libbie-frost-9a20b4195" target="_blank" rel="noopener">Libbie</a>
+          and
+          <a href="https://x.com/rayoufalhumedhi" target="_blank" rel="noopener">Rayouf</a>,
+          two investors at
+          <a href="https://www.bvp.com/" target="_blank" rel="noopener">Bessemer Venture Partners</a>
+          who spend our days at the intersection of creativity, technology, and
+          company building.
+        </p>
+        <p class="cc-body">
+          We started Creative Conviction because we believe that taste and
+          creative ambition are becoming the most important differentiators in
+          the age of AI, and we wanted a place to explore what that means with
+          the people living it.
+        </p>
+      </section>
 
-  <div class="filters">
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="report">Reports</button>
-    <button class="filter-btn" data-filter="interview">Interviews</button>
-  </div>
+      <section class="cc-episodes">
+        <h2 class="cc-h2">Episodes</h2>
+        <div class="cc-episode-scroll" aria-label="Scroll for more episodes">
+          <ul class="cc-episode-list">
 
-  <div class="content">
-    <div class="card-list">
+            <li class="cc-episode" onclick="window.location='interviews/paul-jun/'">
+              <a class="cc-episode-title" href="interviews/paul-jun/">
+                Paul Jun — Brand engineers and the future of creative teams
+              </a>
+              <span class="cc-episode-cat">Creative Director, Ramp</span>
+              <span class="cc-episode-date">April 2026</span>
+            </li>
 
-      <a class="card" href="interviews/paul-jun/" data-type="interview">
-        <div class="card-thumb"></div>
-        <div class="card-body">
-          <div class="card-title">Paul Jun, Creative Director at Ramp</div>
-          <div class="card-desc">Brand engineers and the future of creative teams</div>
-          <div class="card-date">April 2026</div>
+            <li class="cc-episode" onclick="window.location='interviews/dylan-babbs/'">
+              <a class="cc-episode-title" href="interviews/dylan-babbs/">
+                Dylan Babbs — Design as moat
+              </a>
+              <span class="cc-episode-cat">Co-founder, Profound</span>
+              <span class="cc-episode-date">March 2026</span>
+            </li>
+
+          </ul>
         </div>
-      </a>
+      </section>
 
-      <a class="card" href="reports/brand-and-narrative/" data-type="report">
-        <div class="card-thumb"></div>
-        <div class="card-body">
-          <div class="card-title">Brand and Narrative</div>
-          <div class="card-desc">How AI is reshaping brand building, creative storytelling, and narrative strategy.</div>
-          <div class="card-date">April 2026</div>
+      <section class="cc-index">
+        <div class="cc-index-grid">
+
+          <div class="cc-index-col">
+            <h4 class="cc-index-h">Episodes</h4>
+            <a class="cc-index-link" href="interviews/paul-jun/">Paul Jun</a>
+            <a class="cc-index-link" href="interviews/dylan-babbs/">Dylan Babbs</a>
+            <a class="cc-index-link cc-index-overview" href="interviews/">
+              All episodes <span class="cc-index-arrow">→</span>
+            </a>
+          </div>
+
+          <div class="cc-index-col">
+            <h4 class="cc-index-h">Reports</h4>
+            <a class="cc-index-link" href="reports/brand-and-narrative/">Brand and narrative</a>
+            <a class="cc-index-link" href="reports/product-design/">Product design</a>
+            <a class="cc-index-link cc-index-overview" href="reports/">
+              All reports <span class="cc-index-arrow">→</span>
+            </a>
+          </div>
+
         </div>
-      </a>
+      </section>
 
-      <a class="card" href="reports/product-design/" data-type="report">
-        <div class="card-thumb"></div>
-        <div class="card-body">
-          <div class="card-title">Product Design</div>
-          <div class="card-desc">How AI is transforming product design workflows, tooling, and the role of the designer.</div>
-          <div class="card-date">March 2026</div>
-        </div>
-      </a>
+    </main>
 
-      <a class="card" href="reports/welcome/" data-type="report">
-        <div class="card-thumb"></div>
-        <div class="card-body">
-          <div class="card-title">Welcome to Creative Conviction</div>
-          <div class="card-desc">Our thesis on why taste and creative ambition are the last true differentiators in the age of AI.</div>
-          <div class="card-date">February 2026</div>
-        </div>
-      </a>
-
-    </div>
-  </div>
-
-  <div class="signup">
-    <div class="signup-title">Stay in the loop.</div>
-    <div class="signup-underline">
-      <form style="display:contents;" onsubmit="return false;">
-        <input class="signup-input" type="email" placeholder="your@email.com" required />
-        <button class="signup-btn" type="submit" aria-label="Subscribe">&#8594;</button>
+    <footer class="cc-footer">
+      <form class="cc-footer-sub" id="cc-sub" novalidate>
+        <h3 class="cc-footer-h">Stay in the loop</h3>
+        <input
+          class="cc-input"
+          type="email"
+          id="cc-sub-email"
+          placeholder="you@studio.co"
+          aria-label="Email address"
+          required
+        />
+        <p class="cc-footer-thanks" id="cc-sub-thanks" hidden>You rock!</p>
       </form>
-    </div>
-  </div>
+      <p class="cc-footer-meta">&copy; 2026 Creative Conviction</p>
+    </footer>
 
-  <footer>
-    <span>Made in NYC</span>
-    <span>&copy; 2026</span>
-  </footer>
+  </div>
 
   <script>
-  // ── HERO TYPEWRITER ──────────────────────────────────────────────
-  const titleEl = document.getElementById('hero-title');
-  const TEXT = 'Creative Conviction';
-  const CHARS = '0123456789@#$%!?[]{}|<>';
-
-  function typewriter() {
-    const cursor = document.createElement('span');
-    cursor.className = 'hero-cursor';
-    titleEl.appendChild(cursor);
-    let i = 0;
-    function type() {
-      if (i < TEXT.length) {
-        titleEl.insertBefore(document.createTextNode(TEXT[i]), cursor);
-        i++;
-        setTimeout(type, 72);
-      } else {
-        setTimeout(() => cursor.classList.add('done'), 900);
-      }
-    }
-    type();
-  }
-
-  function matrixReveal() {
-    titleEl.textContent = '';
-    let frame = 0;
-    const TOTAL = TEXT.length * 4 + 10;
-    function tick() {
-      const out = TEXT.split('').map((ch, i) => {
-        if (ch === ' ') return ' ';
-        const threshold = i * 4;
-        return frame >= threshold + 4 ? ch : CHARS[Math.random() * CHARS.length | 0];
-      }).join('');
-      titleEl.textContent = out;
-      frame++;
-      if (frame <= TOTAL) setTimeout(tick, 45);
-      else {
-        titleEl.textContent = TEXT;
-        const blink = document.createElement('span');
-        blink.style.cssText = 'animation:blink 0.9s step-end infinite; margin-left:0.04em;';
-        blink.textContent = '_';
-        titleEl.appendChild(blink);
-      }
-    }
-    tick();
-  }
-
-  if (document.body.classList.contains('terminal')) {
-    matrixReveal();
-  } else {
-    typewriter();
-  }
-
-  const toggle = document.getElementById('terminal-toggle');
-  toggle.addEventListener('click', () => {
-    document.body.classList.toggle('terminal');
-    const on = document.body.classList.contains('terminal');
-    localStorage.setItem('cc-terminal', on ? '1' : '0');
-    toggle.textContent = on ? '[exit]' : '>_';
-  });
-
-  // ── FILTERS ──────────────────────────────────────────────────────
-  const btns = document.querySelectorAll('.filter-btn');
-  const cards = document.querySelectorAll('.card');
-  btns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      btns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      cards.forEach(card => {
-        card.style.display = (filter === 'all' || card.dataset.type === filter) ? 'flex' : 'none';
-      });
-    });
-  });
-
-  // ── COSMOS SCROLLING STRIP THUMBNAILS ───────────────────────────
-  const BG_PEACH = '#fff8f1';
-
-  function seededRng(seed) {
-    let s = seed | 0;
-    return function () {
-      s = (Math.imul(s, 1664525) + 1013904223) | 0;
-      return (s >>> 0) / 4294967296;
-    };
-  }
-
-  function makeTape(targetLen, unitPx, colorPalette, seedVal) {
-    const rng = seededRng(seedVal);
-    const blocks = [];
-    let total = 0;
-    let colorIdx = 0;
-    let isColored = rng() > 0.4;
-    const SIZE_MULT = [0.7, 0.85, 1, 1, 1, 1.15, 1.3, 1.6, 2];
-    while (total < targetLen) {
-      const mult = SIZE_MULT[Math.floor(rng() * SIZE_MULT.length)];
-      const size = Math.max(3, Math.round(unitPx * mult));
-      const color = isColored ? colorPalette[colorIdx % colorPalette.length] : BG_PEACH;
-      if (isColored) colorIdx++;
-      blocks.push({ size, color });
-      total += size;
-      isColored = !isColored;
-    }
-    return { blocks, totalLen: total };
-  }
-
-  function findTapeStart(tape, offset) {
-    const { blocks, totalLen } = tape;
-    const off = ((offset % totalLen) + totalLen) % totalLen;
-    let acc = 0;
-    for (let i = 0; i < blocks.length; i++) {
-      if (acc + blocks[i].size > off) return { idx: i, sub: off - acc };
-      acc += blocks[i].size;
-    }
-    return { idx: 0, sub: 0 };
-  }
-
-  function drawTapeStrip(ctx, tape, offset, stripPos, stripThick, isH, W, H, terminal, coloredOnly, getAlpha) {
-    const { blocks } = tape;
-    const { idx: startIdx, sub: subOff } = findTapeStart(tape, offset);
-    const canvasLen = isH ? W : H;
-    let pos = -subOff;
-    let i = startIdx;
-    let drawn = 0;
-    while (pos < canvasLen && drawn < blocks.length + 2) {
-      const blk = blocks[i % blocks.length];
-      const isBg = blk.color === BG_PEACH;
-      if (!coloredOnly || !isBg) {
-        const alpha = (getAlpha && !isBg) ? getAlpha(blk.color) : 1;
-        if (alpha > 0.005) {
-          ctx.globalAlpha = alpha;
-          ctx.fillStyle = terminal ? (isBg ? BG_PEACH : 'rgba(140,140,140,0.9)') : blk.color;
-          if (isH) ctx.fillRect(pos, stripPos, blk.size, stripThick);
-          else      ctx.fillRect(stripPos, pos, stripThick, blk.size);
-          ctx.globalAlpha = 1;
-        }
-      }
-      pos += blk.size;
-      i = (i + 1) % blocks.length;
-      drawn++;
-    }
-  }
-
-  function collectBgRects(tape, offset, stripPos, stripThick, isH, W, H) {
-    const { blocks } = tape;
-    const { idx: startIdx, sub: subOff } = findTapeStart(tape, offset);
-    const canvasLen = isH ? W : H;
-    const rects = [];
-    let pos = -subOff;
-    let i = startIdx;
-    let drawn = 0;
-    while (pos < canvasLen && drawn < blocks.length + 2) {
-      const blk = blocks[i % blocks.length];
-      if (blk.color === BG_PEACH) {
-        const a = Math.max(0, pos);
-        const b = Math.min(canvasLen, pos + blk.size);
-        if (b > a) {
-          rects.push(isH
-            ? { x: a, y: stripPos, w: b - a, h: stripThick }
-            : { x: stripPos, y: a, w: stripThick, h: b - a });
-        }
-      }
-      pos += blk.size;
-      i = (i + 1) % blocks.length;
-      drawn++;
-    }
-    return rects;
-  }
-
-  function initCosmosThumb(container, cardIdx) {
-    const cardEl = container.closest('[data-type]');
-    const type   = cardEl ? cardEl.dataset.type : 'report';
-    const isInterview = type === 'interview';
-
-    const canvas = document.createElement('canvas');
-    canvas.style.cssText = 'display:block;position:absolute;inset:0;width:100%;height:100%;';
-    container.style.position = 'relative';
-    container.innerHTML = '';
-    container.appendChild(canvas);
-
-    const DPR = Math.min(window.devicePixelRatio || 1, 2);
-    const W   = container.offsetWidth  || 140;
-    const H   = container.offsetHeight || 84;
-    canvas.width  = W * DPR;
-    canvas.height = H * DPR;
-    const ctx = canvas.getContext('2d');
-    ctx.scale(DPR, DPR);
-
-    // ── INTERVIEW: waveform renderer ─────────────────────────────
-    if (isInterview) {
-      const palette = ['#7c3aed', '#4A54E1', '#93c5fd', '#1e3a8a', '#ec4899', '#f59e0b'];
-      const rng = seededRng((cardIdx + 1) * 131071);
-      const N = 22;
-      const phases  = Array.from({ length: N }, () => rng() * Math.PI * 2);
-      const speeds2 = Array.from({ length: N }, () => 3.2 + rng() * 4.6);
-      const bases   = Array.from({ length: N }, () => 0.22 + rng() * 0.32);
-
-      container.style.borderColor = 'transparent';
-      requestAnimationFrame(() => { container.style.transition = 'border-color 0.45s'; });
-      setTimeout(() => { container.style.borderColor = ''; },
-        Math.max(0, 1480 - (window.ccIntroStart ? performance.now() - window.ccIntroStart : 0))
-      );
-
-      let lastTs = 0;
-      function waveLoop(ts) {
-        if (ts - lastTs < 33) { requestAnimationFrame(waveLoop); return; }
-        lastTs = ts;
-        const t = ts / 1000;
-
-        ctx.fillStyle = BG_PEACH;
-        ctx.fillRect(0, 0, W, H);
-
-        ctx.strokeStyle = 'rgba(32,18,77,.07)';
-        ctx.lineWidth = 1;
-        ctx.beginPath(); ctx.moveTo(4, H / 2); ctx.lineTo(W - 4, H / 2); ctx.stroke();
-
-        const bMax   = H * 0.7;
-        const bW     = Math.max(2, (W - 8 - (N - 1) * 2) / N);
-        const startX = (W - (N * bW + (N - 1) * 2)) / 2;
-
-        for (let i = 0; i < N; i++) {
-          const bh = Math.max(3, (bases[i] + 0.18 * Math.sin(t * speeds2[i] * 0.5 + phases[i]) + 0.08 * Math.sin(t * speeds2[i] * 0.85 + phases[i] + 1)) * bMax);
-          const x = startX + i * (bW + 2);
-          const y = (H - bh) / 2;
-          ctx.fillStyle = palette[i % palette.length];
-          ctx.fillRect(x, y, bW, bh);
-          ctx.globalAlpha = 0.15;
-          ctx.fillRect(x, H / 2 + (H / 2 - y - bh), bW, bh * 0.4);
-          ctx.globalAlpha = 1;
-        }
-
-        requestAnimationFrame(waveLoop);
-      }
-      requestAnimationFrame(waveLoop);
-      return;
-    }
-
-    // ── REPORT: cosmos strip renderer ────────────────────────────
-    const palette = ['#7c3aed', '#4A54E1', '#93c5fd', '#1e3a8a', '#ec4899', '#f59e0b'];
-
-    const NUM_STRIPS = 14;
-    const crossLen   = W;
-    const scrollLen  = H;
-
-    const CARD_SEED = (cardIdx + 1) * 999983;
-    const cardRng   = seededRng(CARD_SEED);
-
-    const rawR = Array.from({ length: NUM_STRIPS }, () => 0.65 + cardRng() * 0.65);
-    const sumR = rawR.reduce((a, b) => a + b, 0);
-    const THICK_R = rawR.map(r => r * NUM_STRIPS / sumR);
-
-    const thicknesses    = THICK_R.map(r => Math.max(3, Math.round(crossLen * r / NUM_STRIPS)));
-    const stripPositions = [];
-    let crossPos = 0;
-    thicknesses.forEach(t => { stripPositions.push(crossPos); crossPos += t; });
-
-    const unitPx = Math.max(3, Math.round((crossLen / NUM_STRIPS) * 0.9));
-
-    const TARGET_LEN = scrollLen * 6;
-    const tapes = Array.from({ length: NUM_STRIPS }, (_, i) =>
-      makeTape(TARGET_LEN, unitPx, palette, i * 7919 + 3571 + CARD_SEED)
-    );
-
-    const speeds = Array.from({ length: NUM_STRIPS }, () => 0.18 + cardRng() * 0.95);
-
-    const phaseOffset = cardRng();
-    const fwdOff = Array.from({ length: NUM_STRIPS }, (_, i) =>
-      ((i / NUM_STRIPS) + phaseOffset) * tapes[i].totalLen * 0.37
-    );
-    const revOff = Array.from({ length: NUM_STRIPS }, (_, i) =>
-      ((i / NUM_STRIPS) + phaseOffset) * tapes[NUM_STRIPS - 1 - i].totalLen * 0.61
-    );
-
-    let hovering   = false;
-    let hoverAlpha = 0;
-    canvas.addEventListener('mouseenter', () => { hovering = true;  });
-    canvas.addEventListener('mouseleave', () => { hovering = false; });
-
-    const INTRO_PHASES = [
-      { color: '#93c5fd', startMs: 0    },
-      { color: '#f59e0b', startMs: 230  },
-      { color: '#7c3aed', startMs: 460  },
-      { color: '#1e3a8a', startMs: 690  },
-      { color: '#ec4899', startMs: 920  },
-      { color: '#4A54E1', startMs: 1150 },
-    ];
-    const INTRO_FADE_MS   = 380;
-    const BORDER_DELAY_MS = 1480;
-
-    container.style.borderColor = 'transparent';
-    requestAnimationFrame(() => { container.style.transition = 'border-color 0.45s'; });
-    setTimeout(() => { container.style.borderColor = ''; },
-      Math.max(0, BORDER_DELAY_MS - (window.ccIntroStart ? performance.now() - window.ccIntroStart : 0))
-    );
-
-    function getIntroAlpha(color) {
-      if (!window.ccIntroStart) return 1;
-      const elapsed = performance.now() - window.ccIntroStart;
-      const phase = INTRO_PHASES.find(p => p.color === color);
-      if (!phase) return 1;
-      if (elapsed < phase.startMs) return 0;
-      return Math.min(1, (elapsed - phase.startMs) / INTRO_FADE_MS);
-    }
-
-    let lastTs = 0;
-
-    function loop(ts) {
-      if (ts - lastTs < 33) { requestAnimationFrame(loop); return; }
-      lastTs = ts;
-
-      const terminal = document.body.classList.contains('terminal');
-
-      const FADE = 0.09;
-      hoverAlpha = Math.max(0, Math.min(0.75,
-        hoverAlpha + (hovering ? FADE : -FADE)
-      ));
-
-      const speedMul = hovering ? 1.0 : 0.5;
-      for (let i = 0; i < NUM_STRIPS; i++) {
-        fwdOff[i] += speeds[i] * speedMul;
-        revOff[i] -= speeds[NUM_STRIPS - 1 - i] * speedMul;
-      }
-
-      ctx.fillStyle = BG_PEACH;
-      ctx.fillRect(0, 0, W, H);
-
-      for (let i = 0; i < NUM_STRIPS; i++) {
-        drawTapeStrip(ctx, tapes[i], fwdOff[i], stripPositions[i], thicknesses[i],
-          false, W, H, terminal, true, getIntroAlpha);
-      }
-
-      if (hoverAlpha > 0.005) {
-        const bgRects = [];
-        for (let i = 0; i < NUM_STRIPS; i++) {
-          collectBgRects(tapes[i], fwdOff[i], stripPositions[i], thicknesses[i],
-            false, W, H).forEach(r => bgRects.push(r));
-        }
-        if (bgRects.length > 0) {
-          ctx.save();
-          ctx.globalAlpha = hoverAlpha;
-          ctx.beginPath();
-          bgRects.forEach(r => ctx.rect(r.x, r.y, r.w, r.h));
-          ctx.clip();
-          for (let i = 0; i < NUM_STRIPS; i++) {
-            const ri = NUM_STRIPS - 1 - i;
-            drawTapeStrip(ctx, tapes[ri], revOff[ri], stripPositions[i], thicknesses[i],
-              false, W, H, terminal, true, getIntroAlpha);
-          }
-          ctx.restore();
-        }
-      }
-
-      // Document fold — upper-left corner
-      const F = Math.round(Math.min(W, H) * 0.28);
-      ctx.save();
-      ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.lineTo(F, 0);
-      ctx.lineTo(0, F);
-      ctx.closePath();
-      ctx.fillStyle = BG_PEACH;
-      ctx.globalAlpha = 1;
-      ctx.fill();
-      ctx.restore();
-
-      requestAnimationFrame(loop);
-    }
-
-    requestAnimationFrame(loop);
-  }
-
-  // Shared palette constants (used by hero pixel hover)
-  const PURPLE  = '#7c3aed';
-  const MAGENTA = '#ec4899';
-  const ORANGE  = '#f59e0b';
-  const BLUE    = '#4A54E1';
-
-  // ── HERO PIXEL HOVER ─────────────────────────────────────────────
-  const PIXEL_FONT = {
-    'A':[0,1,1,1,0, 1,0,0,0,1, 1,1,1,1,1, 1,0,0,0,1, 1,0,0,0,1],
-    'B':[1,1,1,1,0, 1,0,0,0,1, 1,1,1,1,0, 1,0,0,0,1, 1,1,1,1,0],
-    'C':[0,1,1,1,1, 1,0,0,0,0, 1,0,0,0,0, 1,0,0,0,0, 0,1,1,1,1],
-    'D':[1,1,1,1,0, 1,0,0,0,1, 1,0,0,0,1, 1,0,0,0,1, 1,1,1,1,0],
-    'E':[1,1,1,1,1, 1,0,0,0,0, 1,1,1,1,0, 1,0,0,0,0, 1,1,1,1,1],
-    'F':[1,1,1,1,1, 1,0,0,0,0, 1,1,1,1,0, 1,0,0,0,0, 1,0,0,0,0],
-    'G':[0,1,1,1,1, 1,0,0,0,0, 1,0,0,1,1, 1,0,0,0,1, 0,1,1,1,1],
-    'H':[1,0,0,0,1, 1,0,0,0,1, 1,1,1,1,1, 1,0,0,0,1, 1,0,0,0,1],
-    'I':[1,1,1,1,1, 0,0,1,0,0, 0,0,1,0,0, 0,0,1,0,0, 1,1,1,1,1],
-    'J':[0,1,1,1,1, 0,0,0,1,0, 0,0,0,1,0, 1,0,0,1,0, 0,1,1,0,0],
-    'K':[1,0,0,0,1, 1,0,0,1,0, 1,1,1,0,0, 1,0,0,1,0, 1,0,0,0,1],
-    'L':[1,0,0,0,0, 1,0,0,0,0, 1,0,0,0,0, 1,0,0,0,0, 1,1,1,1,1],
-    'M':[1,0,0,0,1, 1,1,0,1,1, 1,0,1,0,1, 1,0,0,0,1, 1,0,0,0,1],
-    'N':[1,0,0,0,1, 1,1,0,0,1, 1,0,1,0,1, 1,0,0,1,1, 1,0,0,0,1],
-    'O':[0,1,1,1,0, 1,0,0,0,1, 1,0,0,0,1, 1,0,0,0,1, 0,1,1,1,0],
-    'P':[1,1,1,1,0, 1,0,0,0,1, 1,1,1,1,0, 1,0,0,0,0, 1,0,0,0,0],
-    'Q':[0,1,1,1,0, 1,0,0,0,1, 1,0,1,0,1, 1,0,0,1,0, 0,1,1,0,1],
-    'R':[1,1,1,1,0, 1,0,0,0,1, 1,1,1,1,0, 1,0,0,1,0, 1,0,0,0,1],
-    'S':[0,1,1,1,1, 1,0,0,0,0, 0,1,1,1,0, 0,0,0,0,1, 1,1,1,1,0],
-    'T':[1,1,1,1,1, 0,0,1,0,0, 0,0,1,0,0, 0,0,1,0,0, 0,0,1,0,0],
-    'U':[1,0,0,0,1, 1,0,0,0,1, 1,0,0,0,1, 1,0,0,0,1, 0,1,1,1,0],
-    'V':[1,0,0,0,1, 1,0,0,0,1, 1,0,0,0,1, 0,1,0,1,0, 0,0,1,0,0],
-    'W':[1,0,0,0,1, 1,0,0,0,1, 1,0,1,0,1, 1,1,0,1,1, 1,0,0,0,1],
-    'X':[1,0,0,0,1, 0,1,0,1,0, 0,0,1,0,0, 0,1,0,1,0, 1,0,0,0,1],
-    'Y':[1,0,0,0,1, 0,1,0,1,0, 0,0,1,0,0, 0,0,1,0,0, 0,0,1,0,0],
-    'Z':[1,1,1,1,1, 0,0,0,1,0, 0,0,1,0,0, 0,1,0,0,0, 1,1,1,1,1],
-    ' ':[0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0],
-  };
-  const CHAR_W = 5, CHAR_H = 5, LGAP = 1, WGAP = 2;
-
-  function initTitlePixels() {
-    const el = document.getElementById('hero-title');
-    if (!el) return;
-
-    const cnv = document.createElement('canvas');
-    cnv.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transition:opacity 0.3s;';
-    el.appendChild(cnv);
-
-    const DPR = Math.min(window.devicePixelRatio || 1, 2);
-    const W = el.offsetWidth || 400;
-    const H = el.offsetHeight || 80;
-    cnv.width = W * DPR; cnv.height = H * DPR;
-    const ctx = cnv.getContext('2d');
-    ctx.scale(DPR, DPR);
-
-    const TWORDS = ['CREATIVE', 'CONVICTION'];
-    const PALETTE = [PURPLE, MAGENTA, ORANGE, BLUE];
-    const maxLen = Math.max(...TWORDS.map(w => w.length));
-    const gridW = maxLen * CHAR_W + (maxLen - 1) * LGAP;
-    const gridH = TWORDS.length * CHAR_H + (TWORDS.length - 1) * WGAP;
-    const CELL = Math.max(3, Math.floor(Math.min(W * 0.85 / gridW, H * 0.85 / gridH)));
-    const SQ = Math.max(2, CELL - 1);
-    const blockH_px = gridH * CELL;
-    const by = Math.floor((H - blockH_px) / 2);
-
-    const cells = [];
-    TWORDS.forEach((word, li) => {
-      const lineGridW = word.length * CHAR_W + (word.length - 1) * LGAP;
-      const lx = Math.floor((W - lineGridW * CELL) / 2);
-      const ly = by + li * (CHAR_H + WGAP) * CELL;
-      for (let ci = 0; ci < word.length; ci++) {
-        const bits = PIXEL_FONT[word[ci]] || PIXEL_FONT[' '];
-        const cx = lx + ci * (CHAR_W + LGAP) * CELL;
-        for (let row = 0; row < CHAR_H; row++)
-          for (let col = 0; col < CHAR_W; col++) {
-            if (!bits[row * CHAR_W + col]) continue;
-            const ox = cx + col * CELL, oy = ly + row * CELL;
-            cells.push({ ox, oy, px: ox, py: oy, vx: 0, vy: 0,
-              colorIdx: (col + row * 2 + ci * 3 + li * 7) % PALETTE.length,
-              delay: ci * 2 + li * 14 });
-          }
-      }
-    });
-
-    const REPEL_R = Math.max(40, CELL * 9);
-    const REPEL_F = Math.max(8, CELL * 2);
-    const SPRING = 0.1, DAMP = 0.72;
-    let mx = -9999, my = -9999, hovering = false, frame = 0, last = 0;
-
-    el.addEventListener('mouseenter', () => {
-      frame = 0;
-      cells.forEach(c => { c.px = c.ox; c.py = c.oy; c.vx = 0; c.vy = 0; });
-      hovering = true;
-      cnv.style.opacity = '1';
-      el.style.color = 'transparent';
-    });
-    el.addEventListener('mousemove', e => {
-      const rect = cnv.getBoundingClientRect();
-      mx = (e.clientX - rect.left) * (W / rect.width);
-      my = (e.clientY - rect.top)  * (H / rect.height);
-    });
-    el.addEventListener('mouseleave', () => {
-      hovering = false; mx = -9999; my = -9999;
-      cnv.style.opacity = '0';
-      el.style.color = '';
-    });
-
-    function loop(t) {
-      if (hovering && t - last >= 1000 / 30) {
-        const terminal = document.body.classList.contains('terminal');
-        ctx.clearRect(0, 0, W, H);
-        cells.forEach(cell => {
-          const appeared = frame >= cell.delay;
-          if (appeared) {
-            const ddx = cell.px - mx, ddy = cell.py - my;
-            const dist = Math.sqrt(ddx * ddx + ddy * ddy);
-            if (dist < REPEL_R && dist > 0) {
-              const force = (1 - dist / REPEL_R) * REPEL_F;
-              cell.vx += (ddx / dist) * force; cell.vy += (ddy / dist) * force;
-            }
-            cell.vx += (cell.ox - cell.px) * SPRING; cell.vy += (cell.oy - cell.py) * SPRING;
-            cell.vx *= DAMP; cell.vy *= DAMP;
-            cell.px += cell.vx; cell.py += cell.vy;
-            ctx.fillStyle = terminal ? '#fff' : PALETTE[cell.colorIdx];
-            ctx.fillRect(cell.px, cell.py, SQ, SQ);
-          } else if (Math.random() < 0.3) {
-            ctx.fillStyle = terminal ? 'rgba(255,255,255,0.4)' : 'rgba(100,60,200,0.25)';
-            ctx.fillRect(cell.ox, cell.oy, SQ, SQ);
-          }
+    // Email signup posts to a Google Sheet via Apps Script Web App.
+    (function () {
+      var SHEET_URL = 'https://script.google.com/macros/s/AKfycbxN0ifH8CEiArlNTC4i76kfIm0JDhFxjy8TqHq2hvOWAOpbjCvhIDkDGra4eXc7ltMedw/exec';
+      var form   = document.getElementById('cc-sub');
+      var input  = document.getElementById('cc-sub-email');
+      var thanks = document.getElementById('cc-sub-thanks');
+      if (!form) return;
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!input.value || !input.checkValidity()) { input.focus(); return; }
+        fetch(SHEET_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ email: input.value })
         });
-        frame++; last = t;
-      }
-      requestAnimationFrame(loop);
-    }
-    requestAnimationFrame(loop);
-  }
-
-  setTimeout(() => {
-    window.ccIntroStart = performance.now();
-    document.querySelectorAll('.card-thumb').forEach((thumb, idx) => initCosmosThumb(thumb, idx));
-    initTitlePixels();
-  }, 200);
+        input.hidden = true;
+        thanks.hidden = false;
+      });
+    })();
   </script>
-
 </body>
 </html>

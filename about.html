@@ -1,71 +1,201 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About — Creative Conviction</title>
+  <meta name="description" content="About Creative Conviction. We are Libbie and Rayouf, two investors at Bessemer Venture Partners." />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400..700&display=swap" />
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --bg: #fff8f1; --text: #20124d; --muted: rgba(32, 18, 77, 0.38); }
-    body.terminal { --bg: #000; --text: #fff; --muted: rgba(255, 255, 255, 0.4); }
-    body.terminal, body.terminal * { font-family: 'Courier New', Courier, monospace !important; }
-    body.terminal::after { content: ''; position: fixed; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.08) 3px, rgba(0,0,0,0.08) 4px); pointer-events: none; z-index: 9999; }
-    body.terminal .corner { border-color: rgba(255,255,255,0.25); }
     html { scroll-behavior: smooth; }
-    body { font-family: 'EB Garamond', Georgia, serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; min-height: 100vh; transition: background 0.2s, color 0.2s; }
-    .corner { position: fixed; width: 16px; height: 16px; pointer-events: none; z-index: 50; }
-    .corner-tl { top: 1.25rem; left: 1.25rem; border-top: 1px solid var(--muted); border-left: 1px solid var(--muted); }
-    .corner-tr { top: 1.25rem; right: 1.25rem; border-top: 1px solid var(--muted); border-right: 1px solid var(--muted); }
-    .corner-bl { bottom: 1.25rem; left: 1.25rem; border-bottom: 1px solid var(--muted); border-left: 1px solid var(--muted); }
-    .corner-br { bottom: 1.25rem; right: 1.25rem; border-bottom: 1px solid var(--muted); border-right: 1px solid var(--muted); }
-    nav { max-width: 720px; margin: 0 auto; padding: 1.75rem 2rem 0; display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; }
-    .nav-home { font-family: 'EB Garamond', Georgia, serif; font-size: 0.9375rem; color: var(--muted); text-decoration: none; transition: color 0.15s; }
-    .nav-home:hover { color: var(--text); }
-    .terminal-toggle { background: none; border: 1px solid var(--muted); cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.6875rem; color: var(--muted); padding: 0.2rem 0.5rem; letter-spacing: 0.05em; transition: color 0.15s, border-color 0.15s; line-height: 1.7; }
-    .terminal-toggle:hover { color: var(--text); border-color: var(--text); }
-    .nav-about { font-family: 'Inter', sans-serif; font-size: 0.75rem; color: var(--muted); text-decoration: none; transition: color 0.15s; }
-    .nav-about:hover { color: var(--text); }
-    .content { max-width: 540px; margin: 6rem auto 0; padding: 0 2rem; }
-    .about-body { font-family: 'EB Garamond', Georgia, serif; font-size: 1.0625rem; line-height: 1.55; color: var(--muted); }
-    .about-body p + p { margin-top: 1.25rem; }
-    .about-body a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: opacity 0.15s; }
-    .about-body a:hover { opacity: 0.6; }
-    footer { max-width: 720px; margin: 7rem auto 0; padding: 2rem; display: flex; justify-content: space-between; font-family: 'Inter', sans-serif; font-size: 0.75rem; color: var(--muted); }
+
+    :root {
+      --cc-magenta:   #D8016A;
+      --cc-orange:    #FF6514;
+      --cc-blue:      #1A0AE6;
+      --cc-indigo:    #361C76;
+
+      --cc-paper:        #F7F5FA;
+      --cc-paper-soft:   #F2EFF7;
+      --cc-white:        #FBFAFD;
+
+      --cc-ink:    #1A1130;
+      --cc-ink-2:  #322847;
+      --cc-ink-3:  #6A6378;
+      --cc-ink-4:  #9C97A8;
+      --cc-rule:        #D2CDDB;
+      --cc-rule-soft:   #E5E1ED;
+
+      --fg-1: var(--cc-ink);
+      --fg-2: var(--cc-ink-2);
+      --fg-3: var(--cc-ink-3);
+
+      --font-serif: "EB Garamond", "Iowan Old Style", Charter, Georgia, serif;
+      --font-sans:  "Inter", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+      --ease: cubic-bezier(.2,.6,.2,1);
+      --dur-1: 120ms;
+    }
+
+    body {
+      background: var(--cc-paper);
+      color: var(--fg-1);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      min-height: 100vh;
+    }
+
+    a { color: var(--cc-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: text-decoration-thickness var(--dur-1) var(--ease); }
+    a:hover { text-decoration-thickness: 2px; }
+    em { font-family: var(--font-serif); font-style: italic; }
+
+    .cc-shell {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 40px 80px;
+    }
+
+    .cc-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--cc-rule);
+      margin-bottom: 64px;
+    }
+    .cc-mark {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      text-decoration: none;
+      line-height: 1;
+    }
+    .cc-mark em { font-style: italic; color: var(--cc-indigo); font-family: var(--font-serif); }
+    .cc-nav { display: flex; gap: 28px; }
+    .cc-nav-link {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--fg-2);
+      text-decoration: none;
+      transition: color var(--dur-1) var(--ease);
+    }
+    .cc-nav-link:hover { color: var(--cc-ink); }
+    .cc-nav-link.is-current {
+      color: var(--cc-ink);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+    }
+
+    .cc-page {
+      max-width: 680px;
+      margin: 0;
+    }
+
+    .cc-h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(36px, 4.4vw, 52px);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin: 0 0 32px;
+      color: var(--cc-ink);
+    }
+    .cc-h1 em { font-style: italic; }
+
+    .cc-lead {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.5;
+      color: var(--cc-ink);
+      margin: 0 0 18px;
+      text-wrap: pretty;
+    }
+    .cc-lead em { font-style: italic; }
+
+    .cc-body {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg-2);
+      margin: 0 0 16px;
+      text-wrap: pretty;
+    }
+    .cc-body em { font-family: var(--font-serif); font-style: italic; }
+
+    .cc-footer {
+      border-top: 1px solid var(--cc-rule);
+      padding: 48px 0 32px;
+      margin-top: 96px;
+    }
+    .cc-footer-meta {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 640px) {
+      .cc-shell { padding: 24px 24px 64px; }
+      .cc-header { margin-bottom: 48px; }
+    }
   </style>
 </head>
+
 <body>
-  <script>if(localStorage.getItem('cc-terminal')==='1')document.body.classList.add('terminal');</script>
-  <div class="corner corner-tl"></div>
-  <div class="corner corner-tr"></div>
-  <div class="corner corner-bl"></div>
-  <div class="corner corner-br"></div>
-  <nav>
-    <a class="nav-home" href="./">← Creative Conviction</a>
-    <div style="display:flex;align-items:center;gap:1.25rem;">
-      <button class="terminal-toggle" id="terminal-toggle">&gt;_</button>
-      <a class="nav-about" href="./about.html">About</a>
-    </div>
-  </nav>
-  <div class="content">
-    <div class="about-body">
-      <p>We're <a href="https://libbiefrost.com" target="_blank">Libbie</a> and <a href="https://rayouf.com" target="_blank">Rayouf</a>, two investors at <a href="https://www.bvp.com/" target="_blank">Bessemer Venture Partners</a> who spend our days at the intersection of creativity, technology, and company building. We started Creative Conviction because we believe that taste and creative ambition are becoming the most important differentiators in the age of AI, and we wanted a place to explore what that means with the people living it.</p>
-    </div>
+  <div class="cc-shell">
+
+    <header class="cc-header">
+      <a class="cc-mark" href="./">Creative <em>Conviction</em></a>
+      <nav class="cc-nav">
+        <a class="cc-nav-link is-current" href="./about.html">About</a>
+      </nav>
+    </header>
+
+    <main class="cc-page">
+      <h1 class="cc-h1">About</h1>
+
+      <p class="cc-lead">
+        <em>Creative Conviction</em> is a platform where we seek to spark
+        conversation around capital, creativity, and AI.
+      </p>
+
+      <p class="cc-body">
+        We are
+        <a href="https://www.linkedin.com/in/libbie-frost-9a20b4195" target="_blank" rel="noopener">Libbie</a>
+        and
+        <a href="https://x.com/rayoufalhumedhi" target="_blank" rel="noopener">Rayouf</a>,
+        two investors at
+        <a href="https://www.bvp.com/" target="_blank" rel="noopener">Bessemer Venture Partners</a>
+        who spend our days at the intersection of creativity, technology, and
+        company building. We started Creative Conviction because we believe that
+        taste and creative ambition are becoming the most important
+        differentiators in the age of AI, and we wanted a place to explore what
+        that means with the people living it.
+      </p>
+
+      <p class="cc-body">
+        Our methods include interviews with founders and creative leaders,
+        curated gatherings, and written reports. If you would like to suggest a
+        guest, propose a gathering, or send us a note, please reach out.
+      </p>
+    </main>
+
+    <footer class="cc-footer">
+      <p class="cc-footer-meta">&copy; 2026 Creative Conviction</p>
+    </footer>
+
   </div>
-  <footer>
-    <span>Made in NYC</span>
-    <span>&copy; 2026</span>
-  </footer>
-  <script>
-    const toggle = document.getElementById('terminal-toggle');
-    toggle.addEventListener('click', () => {
-      document.body.classList.toggle('terminal');
-      const on = document.body.classList.contains('terminal');
-      localStorage.setItem('cc-terminal', on ? '1' : '0');
-      toggle.textContent = on ? '[exit]' : '>_';
-    });
-  </script>
 </body>
 </html>
