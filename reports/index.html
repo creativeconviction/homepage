@@ -81,7 +81,7 @@
       text-decoration: none;
       line-height: 1;
     }
-    .cc-mark em { font-style: italic; color: var(--cc-indigo); font-family: var(--font-serif); }
+    .cc-mark em { font-style: italic; color: var(--cc-magenta); font-family: var(--font-serif); }
     .cc-nav { display: flex; gap: 28px; }
     .cc-nav-link {
       font-family: var(--font-sans);
@@ -151,6 +151,18 @@
       text-decoration: none;
     }
     .cc-episode-title em { font-style: italic; }
+    .cc-episode-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .cc-episode-thumb {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      flex-shrink: 0;
+      display: block;
+    }
     .cc-episode:hover .cc-episode-title {
       text-decoration: underline;
       text-decoration-thickness: 1px;
@@ -217,28 +229,31 @@
 
       <ul class="cc-episode-list">
 
-        <li class="cc-episode" onclick="window.location='welcome/'">
-          <a class="cc-episode-title" href="welcome/">
-            Welcome to Creative Conviction
+        <li class="cc-episode" onclick="window.location='brand-and-narrative/'">
+          <a class="cc-episode-title" href="brand-and-narrative/">
+            <img class="cc-episode-thumb" src="images/brand-and-narrative.jpg" alt="" width="48" height="48" />
+            <span>Brand &amp; narrative</span>
           </a>
-          <span class="cc-episode-cat">Primer</span>
-          <span class="cc-episode-date">February 2026</span>
+          <span class="cc-episode-cat">Part II</span>
+          <span class="cc-episode-date">April 2026</span>
         </li>
 
         <li class="cc-episode" onclick="window.location='product-design/'">
           <a class="cc-episode-title" href="product-design/">
-            Product design
+            <img class="cc-episode-thumb" src="images/product-design.jpg" alt="" width="48" height="48" />
+            <span>Product design</span>
           </a>
           <span class="cc-episode-cat">Part I</span>
           <span class="cc-episode-date">March 2026</span>
         </li>
 
-        <li class="cc-episode" onclick="window.location='brand-and-narrative/'">
-          <a class="cc-episode-title" href="brand-and-narrative/">
-            Brand &amp; narrative
+        <li class="cc-episode" onclick="window.location='welcome/'">
+          <a class="cc-episode-title" href="welcome/">
+            <img class="cc-episode-thumb" src="images/welcome.jpg" alt="" width="48" height="48" />
+            <span>Welcome to Creative Conviction</span>
           </a>
-          <span class="cc-episode-cat">Part II</span>
-          <span class="cc-episode-date">April 2026</span>
+          <span class="cc-episode-cat">Primer</span>
+          <span class="cc-episode-date">February 2026</span>
         </li>
 
       </ul>

@@ -84,7 +84,7 @@
       text-decoration: none;
       line-height: 1;
     }
-    .cc-mark em { font-style: italic; color: var(--cc-indigo); font-family: var(--font-serif); }
+    .cc-mark em { font-style: italic; color: var(--cc-magenta); font-family: var(--font-serif); }
     .cc-nav { display: flex; gap: 28px; }
     .cc-nav-link {
       font-family: var(--font-sans);
@@ -167,6 +167,13 @@
     @media (min-width: 1060px) { .cc-article { margin: 0; } }
 
     .cc-article-header { margin-bottom: 56px; }
+    .cc-article-thumb {
+      display: block;
+      width: 96px;
+      height: 96px;
+      object-fit: cover;
+      margin: 0 0 28px;
+    }
     .cc-article-eyebrow {
       font-family: var(--font-serif);
       font-style: italic;
@@ -238,7 +245,7 @@
     .cc-highlight:hover { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
 
     /* ----- Hot Takes ----- */
-    .cc-hot-takes { padding-top: 32px; border-top: 1px solid var(--cc-rule); }
+    .cc-hot-takes { padding-top: 32px; }
     .cc-hot-takes-title {
       font-family: var(--font-serif);
       font-size: 28px;
@@ -330,6 +337,7 @@
       <main class="cc-article">
 
         <div class="cc-article-header">
+          <img class="cc-article-thumb" src="../images/paul-jun.jpg" alt="" width="96" height="96" />
           <p class="cc-article-eyebrow">An interview with Paul Jun</p>
           <h1 class="cc-article-title">Brand engineers and the future of creative teams</h1>
           <p class="cc-article-subtitle">Creative Director, Ramp</p>

@@ -292,7 +292,7 @@
       padding: 6px 0;
       outline: none;
       width: 100%;
-      max-width: 320px;
+      max-width: 240px;
       transition: border-color var(--dur-1) var(--ease);
     }
     .cc-input::placeholder { color: var(--cc-ink-4); }
@@ -380,6 +380,42 @@
         </div>
       </section>
 
+      <section class="cc-episodes">
+        <h2 class="cc-h2">Reports</h2>
+        <div class="cc-episode-scroll" aria-label="Scroll for more reports">
+          <ul class="cc-episode-list">
+
+            <li class="cc-episode" onclick="window.location='reports/brand-and-narrative/'">
+              <a class="cc-episode-title" href="reports/brand-and-narrative/">
+                <img class="cc-episode-thumb" src="reports/images/brand-and-narrative.jpg" alt="" width="48" height="48" />
+                <span>Brand &amp; narrative</span>
+              </a>
+              <span class="cc-episode-cat">Part II</span>
+              <span class="cc-episode-date">April 2026</span>
+            </li>
+
+            <li class="cc-episode" onclick="window.location='reports/product-design/'">
+              <a class="cc-episode-title" href="reports/product-design/">
+                <img class="cc-episode-thumb" src="reports/images/product-design.jpg" alt="" width="48" height="48" />
+                <span>Product design</span>
+              </a>
+              <span class="cc-episode-cat">Part I</span>
+              <span class="cc-episode-date">March 2026</span>
+            </li>
+
+            <li class="cc-episode" onclick="window.location='reports/welcome/'">
+              <a class="cc-episode-title" href="reports/welcome/">
+                <img class="cc-episode-thumb" src="reports/images/welcome.jpg" alt="" width="48" height="48" />
+                <span>Welcome to Creative Conviction</span>
+              </a>
+              <span class="cc-episode-cat">Primer</span>
+              <span class="cc-episode-date">February 2026</span>
+            </li>
+
+          </ul>
+        </div>
+      </section>
+
       <section class="cc-index">
         <div class="cc-index-grid">
 
@@ -422,6 +458,7 @@
           class="cc-input"
           type="email"
           id="cc-sub-email"
+          placeholder="..."
           aria-label="Email address"
           required
         />

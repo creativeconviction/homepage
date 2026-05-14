@@ -82,7 +82,7 @@
       text-decoration: none;
       line-height: 1;
     }
-    .cc-mark em { font-style: italic; color: var(--cc-indigo); font-family: var(--font-serif); }
+    .cc-mark em { font-style: italic; color: var(--cc-magenta); font-family: var(--font-serif); }
     .cc-nav { display: flex; gap: 28px; }
     .cc-nav-link {
       font-family: var(--font-sans);
@@ -100,6 +100,13 @@
     }
 
     .cc-article-header { margin-bottom: 48px; }
+    .cc-article-thumb {
+      display: block;
+      width: 96px;
+      height: 96px;
+      object-fit: cover;
+      margin: 0 0 28px;
+    }
     .cc-article-eyebrow {
       font-family: var(--font-serif);
       font-style: italic;
@@ -243,7 +250,7 @@
     <main class="cc-article">
 
       <div class="cc-article-header">
-        
+        <img class="cc-article-thumb" src="../images/welcome.jpg" alt="" width="96" height="96" />
         <h1 class="cc-article-title">Welcome to Creative Conviction</h1>
         <div class="cc-article-meta">
           <span>Libbie Frost &amp; Rayouf Alhumedhi</span>

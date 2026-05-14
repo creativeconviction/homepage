@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Episodes — Creative Conviction</title>
+  <title>Interviews — Creative Conviction</title>
   <meta name="description" content="Conversations with founders, creative leaders, and operators on creative conviction in the AI era." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -81,7 +81,7 @@
       text-decoration: none;
       line-height: 1;
     }
-    .cc-mark em { font-style: italic; color: var(--cc-indigo); font-family: var(--font-serif); }
+    .cc-mark em { font-style: italic; color: var(--cc-magenta); font-family: var(--font-serif); }
     .cc-nav { display: flex; gap: 28px; }
     .cc-nav-link {
       font-family: var(--font-sans);
@@ -142,6 +142,18 @@
       text-decoration: none;
     }
     .cc-episode-title em { font-style: italic; }
+    .cc-episode-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .cc-episode-thumb {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      flex-shrink: 0;
+      display: block;
+    }
     .cc-episode:hover .cc-episode-title {
       text-decoration: underline;
       text-decoration-thickness: 1px;
@@ -197,7 +209,7 @@
     <main class="cc-page">
 
       <div class="cc-page-header">
-        <h1 class="cc-page-title">Episodes</h1>
+        <h1 class="cc-page-title">Interviews</h1>
         <p class="cc-page-dek">
           Conversations with founders, creative leaders, and operators on
           building in the age of AI.
@@ -208,7 +220,8 @@
 
         <li class="cc-episode" onclick="window.location='paul-jun/'">
           <a class="cc-episode-title" href="paul-jun/">
-            Paul Jun &mdash; Brand engineers and the future of creative teams
+            <img class="cc-episode-thumb" src="images/paul-jun.jpg" alt="" width="48" height="48" />
+            <span>Paul Jun &mdash; Brand engineers and the future of creative teams</span>
           </a>
           <span class="cc-episode-cat">Creative Director, Ramp</span>
           <span class="cc-episode-date">April 2026</span>
@@ -216,7 +229,8 @@
 
         <li class="cc-episode" onclick="window.location='dylan-babbs/'">
           <a class="cc-episode-title" href="dylan-babbs/">
-            Dylan Babbs &mdash; Design as moat
+            <img class="cc-episode-thumb" src="images/dylan-babbs.jpg" alt="" width="48" height="48" />
+            <span>Dylan Babbs &mdash; Design as moat</span>
           </a>
           <span class="cc-episode-cat">Co-founder, Profound</span>
           <span class="cc-episode-date">March 2026</span>
