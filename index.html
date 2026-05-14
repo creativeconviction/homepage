@@ -80,20 +80,21 @@
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      padding-bottom: 22px;
+      padding-bottom: 28px;
       border-bottom: 1px solid var(--cc-rule);
       margin-bottom: 64px;
+      gap: 24px;
     }
     .cc-mark {
       font-family: var(--font-serif);
-      font-size: 24px;
+      font-size: clamp(44px, 6vw, 64px);
       font-weight: 400;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
       color: var(--cc-ink);
       text-decoration: none;
       line-height: 1;
     }
-    .cc-mark em { font-style: italic; color: var(--cc-indigo); font-family: var(--font-serif); }
+    .cc-mark em { font-style: italic; color: var(--cc-magenta); font-family: var(--font-serif); }
     .cc-nav { display: flex; gap: 28px; }
     .cc-nav-link {
       font-family: var(--font-sans);
@@ -151,7 +152,7 @@
     .cc-episodes { margin-bottom: 0; }
     .cc-episode-scroll {
       position: relative;
-      max-height: calc(84px * 3);
+      max-height: calc(92px * 3);
       overflow-y: auto;
       border-top: 1px solid var(--cc-rule);
       scrollbar-width: none;
@@ -162,7 +163,7 @@
     .cc-episode {
       display: grid;
       grid-template-columns: 1fr 180px 110px;
-      align-items: baseline;
+      align-items: center;
       gap: 16px;
       padding: 20px 0;
       border-bottom: 1px solid var(--cc-rule-soft);
@@ -176,10 +177,16 @@
       line-height: 1.25;
       color: var(--cc-ink);
       text-decoration: none;
-      display: inline-flex;
-      align-items: baseline;
-      gap: 10px;
-      flex-wrap: wrap;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .cc-episode-thumb {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      flex-shrink: 0;
+      display: block;
     }
     .cc-episode-title em { font-style: italic; }
     .cc-episode:hover .cc-episode-title {
@@ -331,13 +338,12 @@
 
       <section class="cc-bio">
         <p class="cc-lead">
-          <em>Creative Conviction</em> is a platform where we seek to spark
+          Creative <em>Conviction</em> is a platform where we seek to spark
           conversation around capital, creativity, and AI.
         </p>
         <p class="cc-body">
-          Our methods include interviews with founders and creative leaders,
-          curated gatherings, and written reports. We are
-          <a href="https://www.linkedin.com/in/libbie-frost-9a20b4195" target="_blank" rel="noopener">Libbie</a>
+          We are
+          <a href="https://libbiefrost.com" target="_blank" rel="noopener">Libbie</a>
           and
           <a href="https://x.com/rayoufalhumedhi" target="_blank" rel="noopener">Rayouf</a>,
           two investors at
@@ -345,22 +351,17 @@
           who spend our days at the intersection of creativity, technology, and
           company building.
         </p>
-        <p class="cc-body">
-          We started Creative Conviction because we believe that taste and
-          creative ambition are becoming the most important differentiators in
-          the age of AI, and we wanted a place to explore what that means with
-          the people living it.
-        </p>
       </section>
 
       <section class="cc-episodes">
-        <h2 class="cc-h2">Episodes</h2>
-        <div class="cc-episode-scroll" aria-label="Scroll for more episodes">
+        <h2 class="cc-h2">Interviews</h2>
+        <div class="cc-episode-scroll" aria-label="Scroll for more interviews">
           <ul class="cc-episode-list">
 
             <li class="cc-episode" onclick="window.location='interviews/paul-jun/'">
               <a class="cc-episode-title" href="interviews/paul-jun/">
-                Paul Jun — Brand engineers and the future of creative teams
+                <img class="cc-episode-thumb" src="interviews/images/paul-jun.jpg" alt="" width="48" height="48" />
+                <span>Paul Jun &mdash; Brand engineers and the future of creative teams</span>
               </a>
               <span class="cc-episode-cat">Creative Director, Ramp</span>
               <span class="cc-episode-date">April 2026</span>
@@ -368,7 +369,8 @@
 
             <li class="cc-episode" onclick="window.location='interviews/dylan-babbs/'">
               <a class="cc-episode-title" href="interviews/dylan-babbs/">
-                Dylan Babbs — Design as moat
+                <img class="cc-episode-thumb" src="interviews/images/dylan-babbs.jpg" alt="" width="48" height="48" />
+                <span>Dylan Babbs &mdash; Design as moat</span>
               </a>
               <span class="cc-episode-cat">Co-founder, Profound</span>
               <span class="cc-episode-date">March 2026</span>
@@ -382,11 +384,11 @@
         <div class="cc-index-grid">
 
           <div class="cc-index-col">
-            <h4 class="cc-index-h">Episodes</h4>
+            <h4 class="cc-index-h">Interviews</h4>
             <a class="cc-index-link" href="interviews/paul-jun/">Paul Jun</a>
             <a class="cc-index-link" href="interviews/dylan-babbs/">Dylan Babbs</a>
             <a class="cc-index-link cc-index-overview" href="interviews/">
-              All episodes <span class="cc-index-arrow">→</span>
+              All interviews <span class="cc-index-arrow">→</span>
             </a>
           </div>
 
@@ -420,7 +422,6 @@
           class="cc-input"
           type="email"
           id="cc-sub-email"
-          placeholder="you@studio.co"
           aria-label="Email address"
           required
         />
