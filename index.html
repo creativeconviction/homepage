@@ -104,10 +104,12 @@
       font-family: var(--font-sans);
       font-size: 14px;
       color: var(--fg-2);
-      text-decoration: none;
-      transition: color var(--dur-1) var(--ease);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+      transition: color var(--dur-1) var(--ease), text-decoration-thickness var(--dur-1) var(--ease);
     }
-    .cc-nav-link:hover { color: var(--cc-ink); }
+    .cc-nav-link:hover { color: var(--cc-ink); text-decoration-thickness: 2px; }
 
     /* ----- Home layout ----- */
     .cc-home {
@@ -129,7 +131,7 @@
       margin: 0 0 18px;
       text-wrap: pretty;
     }
-    .cc-lead em { font-style: italic; }
+    .cc-lead em { font-style: italic; color: var(--cc-magenta); }
     .cc-body {
       font-family: var(--font-sans);
       font-size: 17px;
@@ -350,7 +352,7 @@
           We spend our days with founders building the most creative companies
           in technology.
         </p>
-        <p class="cc-body">
+        <p class="cc-lead">
           Creative <em>Conviction</em> is where we share what we&rsquo;re
           learning, through interviews, writing, and the gatherings we co-host
           in New York.

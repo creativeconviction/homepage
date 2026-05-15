@@ -90,10 +90,12 @@
       font-family: var(--font-sans);
       font-size: 14px;
       color: var(--fg-2);
-      text-decoration: none;
-      transition: color var(--dur-1) var(--ease);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+      transition: color var(--dur-1) var(--ease), text-decoration-thickness var(--dur-1) var(--ease);
     }
-    .cc-nav-link:hover { color: var(--cc-ink); }
+    .cc-nav-link:hover { color: var(--cc-ink); text-decoration-thickness: 2px; }
     .cc-nav-link.is-current {
       color: var(--cc-ink);
       text-decoration: underline;
@@ -137,11 +139,29 @@
       text-wrap: pretty;
     }
     .cc-body em { font-family: var(--font-serif); font-style: italic; }
+    .cc-body a { color: var(--cc-ink); }
+
+    /* Inline brand name "Creative Conviction" when it appears in body copy.
+       Renders in serif, with the italic Conviction in magenta. */
+    .cc-brand {
+      font-family: var(--font-serif);
+      font-weight: 400;
+    }
+    .cc-brand em {
+      font-style: italic;
+      color: var(--cc-magenta);
+      font-family: var(--font-serif);
+    }
 
     .cc-portraits {
       display: flex;
       gap: 24px;
       margin: 0 0 40px;
+    }
+    .cc-portrait-item {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
     .cc-portrait {
       display: block;
@@ -149,6 +169,17 @@
       height: 168px;
       object-fit: cover;
     }
+    .cc-portrait-caption {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--cc-ink);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+      transition: text-decoration-thickness var(--dur-1) var(--ease);
+    }
+    .cc-portrait-caption:hover { text-decoration-thickness: 2px; }
 
     .cc-section-h {
       font-family: var(--font-serif);
@@ -214,16 +245,22 @@
       <h1 class="cc-h1">About</h1>
 
       <div class="cc-portraits">
-        <img class="cc-portrait" src="images/libbie.jpg" alt="Libbie Frost" width="168" height="168" />
-        <img class="cc-portrait" src="images/rayouf.jpg" alt="Rayouf Alhumedhi" width="168" height="168" />
+        <div class="cc-portrait-item">
+          <img class="cc-portrait" src="images/libbie.jpg" alt="Libbie Frost" width="168" height="168" />
+          <a class="cc-portrait-caption" href="https://libbiefrost.com" target="_blank" rel="noopener">libbiefrost.com</a>
+        </div>
+        <div class="cc-portrait-item">
+          <img class="cc-portrait" src="images/rayouf.jpg" alt="Rayouf Alhumedhi" width="168" height="168" />
+          <a class="cc-portrait-caption" href="https://rayouf.com" target="_blank" rel="noopener">rayouf.com</a>
+        </div>
       </div>
 
       <p class="cc-body">
         We believe taste is becoming the most durable competitive advantage in
         the age of AI. The companies that compound fastest have the clearest
         point of view on how they want to look, feel, and be understood. We
-        started Creative <em>Conviction</em> to explore that with the people
-        living it.
+        started <span class="cc-brand">Creative <em>Conviction</em></span> to
+        explore that with the people living it.
       </p>
 
       <p class="cc-body">
@@ -234,8 +271,8 @@
 
       <h2 class="cc-section-h">Who is this for?</h2>
       <ul class="cc-list">
-        <li>The creative operator who wants to understand how leading brand and design teams are built at scale.</li>
-        <li>The founder who thinks about taste as a strategic asset and wants a capital partner who sees it the same way.</li>
+        <li>The creative operator who seeks to understand how leading brand and design teams are built at scale.</li>
+        <li>The founder who thinks about taste as a strategic asset and seeks a capital partner who sees it the same way.</li>
         <li>The investor or builder curious about creativity as a compounding force in company building.</li>
       </ul>
 

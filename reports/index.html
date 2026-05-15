@@ -91,10 +91,12 @@
       font-family: var(--font-sans);
       font-size: 14px;
       color: var(--fg-2);
-      text-decoration: none;
-      transition: color var(--dur-1) var(--ease);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+      transition: color var(--dur-1) var(--ease), text-decoration-thickness var(--dur-1) var(--ease);
     }
-    .cc-nav-link:hover { color: var(--cc-ink); }
+    .cc-nav-link:hover { color: var(--cc-ink); text-decoration-thickness: 2px; }
 
     /* ----- Page layout ----- */
     .cc-page { max-width: 720px; margin: 0; }
