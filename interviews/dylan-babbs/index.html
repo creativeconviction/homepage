@@ -9,7 +9,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png" />
 
   <title>Dylan Babbs — Creative Conviction</title>
-  <meta name="description" content="Design as moat, AI marketing infrastructure, and why AI design tools aren't ready. An interview with Dylan Babbs, Co-founder & CTO of Profound." />
+  <meta name="description" content="Squashing skepticism in new markets through design. An interview with Dylan Babbs, Co-founder and CTO of Profound." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -66,7 +66,6 @@
     a:hover { text-decoration-thickness: 2px; }
     em { font-family: var(--font-serif); font-style: italic; }
 
-    /* ----- Shell + header (matches homepage) ----- */
     .cc-shell {
       max-width: 1180px;
       margin: 0 auto;
@@ -101,7 +100,6 @@
     }
     .cc-nav-link:hover { color: var(--cc-ink); text-decoration-thickness: 2px; }
 
-    /* ----- Article layout (sidebar + main) ----- */
     .cc-article-layout {
       display: grid;
       grid-template-columns: 1fr;
@@ -115,7 +113,6 @@
       }
     }
 
-    /* ----- Sidebar ----- */
     .cc-sidebar { display: none; }
     @media (min-width: 1060px) {
       .cc-sidebar {
@@ -168,7 +165,6 @@
     .cc-sidebar-link:hover { color: var(--cc-ink); }
     .cc-sidebar-link.is-active { color: var(--cc-ink); font-weight: 500; }
 
-    /* ----- Article main ----- */
     .cc-article { max-width: 640px; margin: 0 auto; }
     @media (min-width: 1060px) { .cc-article { margin: 0; } }
 
@@ -196,14 +192,6 @@
       color: var(--cc-ink);
       margin: 0 0 18px;
     }
-    .cc-article-title em { font-style: italic; }
-    .cc-article-subtitle {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 19px;
-      color: var(--fg-2);
-      margin: 0 0 10px;
-    }
     .cc-article-date {
       font-family: var(--font-sans);
       font-size: 13px;
@@ -227,7 +215,6 @@
 
     .scroll-anchor { scroll-margin-top: 48px; }
 
-    /* ----- Q&A ----- */
     .cc-qa-list { display: flex; flex-direction: column; gap: 28px; margin-bottom: 80px; }
     .cc-qa { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: start; }
     .cc-speaker {
@@ -254,7 +241,6 @@
     .cc-qa-body.is-response { font-weight: 400; }
     .cc-qa-body a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 
-    /* ----- Pull-quote highlight (indigo at rest, magenta on hover) ----- */
     .cc-highlight {
       background: rgba(54, 28, 118, 0.10);
       color: var(--cc-ink);
@@ -264,44 +250,6 @@
     }
     .cc-highlight:hover { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
 
-    /* ----- Hot Takes ----- */
-    .cc-hot-takes { padding-top: 32px; }
-    .cc-hot-takes-title {
-      font-family: var(--font-serif);
-      font-size: 28px;
-      font-weight: 400;
-      line-height: 1.2;
-      letter-spacing: -0.01em;
-      color: var(--cc-ink);
-      margin: 0 0 32px;
-    }
-    .cc-hot-takes-list { display: flex; flex-direction: column; gap: 32px; }
-    .cc-hot-take { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: start; }
-    .cc-hot-take-num {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 17px;
-      color: var(--fg-3);
-      padding-top: 4px;
-    }
-    .cc-hot-take-q {
-      font-family: var(--font-sans);
-      font-size: 17px;
-      font-weight: 500;
-      color: var(--cc-ink);
-      line-height: 1.45;
-      margin-bottom: 10px;
-    }
-    .cc-hot-take-a {
-      font-family: var(--font-sans);
-      font-size: 17px;
-      line-height: 1.6;
-      color: var(--fg-2);
-    }
-    .cc-hot-take-a p { margin-bottom: 12px; }
-    .cc-hot-take-a p:last-child { margin-bottom: 0; }
-
-    /* ----- Footer ----- */
     .cc-footer { padding: 48px 0 32px; margin-top: 96px; }
     .cc-footer-meta {
       font-family: var(--font-sans);
@@ -314,11 +262,9 @@
       .cc-shell { padding: 24px 24px 64px; }
       .cc-header { margin-bottom: 48px; }
       .cc-article-header { margin-bottom: 32px; }
-      .cc-article-dek { margin: 24px 0 40px; padding-bottom: 24px; }
+      .cc-article-dek { margin: 24px 0 40px; }
       .cc-qa { grid-template-columns: 1fr; gap: 6px; }
       .cc-speaker { padding-top: 0; }
-      .cc-hot-take { grid-template-columns: 1fr; gap: 6px; }
-      .cc-hot-take-num { padding-top: 0; }
     }
   </style>
 </head>
@@ -342,14 +288,15 @@
             <div class="cc-sidebar-track-indicator" id="cc-track-indicator"></div>
           </div>
           <div class="cc-sidebar-links" id="cc-sidebar-links">
-            <button class="cc-sidebar-link is-active" data-target="profound-today">Where Profound fits</button>
-            <button class="cc-sidebar-link" data-target="market-opportunity">The 30&times; opportunity</button>
-            <button class="cc-sidebar-link" data-target="taking-action">Taking action</button>
-            <button class="cc-sidebar-link" data-target="creative-platform">Profound as platform</button>
-            <button class="cc-sidebar-link" data-target="building-team">Building the team</button>
-            <button class="cc-sidebar-link" data-target="design-moat">Design as moat</button>
-            <button class="cc-sidebar-link" data-target="ai-design-tools">On AI design tools</button>
-            <button class="cc-sidebar-link" data-target="hot-takes">Hot takes</button>
+            <button class="cc-sidebar-link is-active" data-target="second-chapter">The second chapter of Profound</button>
+            <button class="cc-sidebar-link" data-target="analytics-to-action">From analytics to action</button>
+            <button class="cc-sidebar-link" data-target="means-of-distribution">Owning the means of distribution</button>
+            <button class="cc-sidebar-link" data-target="hiring">Hiring for taste and ownership</button>
+            <button class="cc-sidebar-link" data-target="designing-inside">Designing inside the app</button>
+            <button class="cc-sidebar-link" data-target="ai-design-tools">AI design tools today</button>
+            <button class="cc-sidebar-link" data-target="future-interface">The future of the interface</button>
+            <button class="cc-sidebar-link" data-target="brand-advantage">Brand as protected advantage</button>
+            <button class="cc-sidebar-link" data-target="starts-with-founder">Why it starts with the founder</button>
           </div>
         </div>
       </aside>
@@ -358,69 +305,50 @@
 
         <div class="cc-article-header">
           <img class="cc-article-thumb" src="../images/dylan-babbs.jpg" alt="" width="168" height="168" />
-          <p class="cc-article-eyebrow">An interview with Dylan Babbs</p>
-          <h1 class="cc-article-title">Design as moat, AI marketing infrastructure, and why AI design tools aren&rsquo;t ready</h1>
-          <p class="cc-article-subtitle">Co-founder &amp; CTO, Profound</p>
-          <p class="cc-article-date">March 2026</p>
+          <p class="cc-article-eyebrow">An interview with Dylan Babbs, Co-founder and CTO of Profound</p>
+          <h1 class="cc-article-title">Squashing skepticism in new markets through design</h1>
+          <p class="cc-article-date">June 2026</p>
         </div>
 
-        <p class="cc-article-dek">Dylan Babbs is the Co-founder and CTO of <a href="https://www.profound.com" target="_blank" rel="noopener">Profound</a>, New York&rsquo;s fastest-growing AI marketing company. He came to founding from <a href="https://uber.com" target="_blank" rel="noopener">Uber</a>, where he worked as a design engineer on navigation and maps, the kind of deep craft role that most founders don&rsquo;t come from. In 18 months, Profound went from idea to serving Fortune 500 brands like Apple, Shopify, Ramp, Airbnb, and Meta. We talked with Dylan about why great design is a protected competitive advantage, what it takes to build an AI-native marketing platform, and why he thinks AI design tools are still years away from being useful.</p>
+        <p class="cc-article-dek">Most of what Creative Conviction studies lives at a seam &mdash; the place where product, GTM, and brand stop being separate disciplines and start being one thing. <a href="https://www.linkedin.com/in/babbsdj" target="_blank" rel="noopener">Dylan Babbs</a> is building a company that sits right on it. He is co-founder and CTO of <a href="http://tryprofound.com" target="_blank" rel="noopener">Profound</a>, which began as the SEO for AI search &mdash; the analytics layer that helps brands see what people are asking and how they show up inside answers from the models most people use. Built fast and at a high quality bar, it landed Uber, Apple, Walmart, General Mills, Shopify, Ramp, Airbnb, CVS, Meta, and Amazon. Now Profound is into what Dylan calls its second chapter. The bet is that the same way Cursor is to developers, Profound can be the AI native application layer where marketers do their work. Before Profound, Dylan was a design engineer before that was a common thing to be, back at Uber, and he has strong opinions about most of what follows. He thinks design founders win on an advantage engineers can&rsquo;t easily copy. He thinks a lot of brilliant people are pouring their lives into businesses with physical limits on how far they can go. And he has a view on the one thing nobody has solved yet &mdash; what the interface of an AI native product should even be.</p>
 
-        <div id="profound-today" class="scroll-anchor"></div>
+        <div id="second-chapter" class="scroll-anchor"></div>
 
         <div class="cc-qa-list">
 
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
             <div class="cc-qa-body is-question">
-              <p>Walk us through Profound, where it started and where it fits now in the AI marketing landscape.</p>
+              <p>Tell us about Profound and where you think it fits in this future of being the infrastructure for brand and marketing.</p>
             </div>
           </div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Dylan</span>
             <div class="cc-qa-body is-response">
-              <p>We started as the SEO for AI search company, building an analytics layer for brands to understand what people are searching for, what the outputs are, and how they&rsquo;re actually showing up. This was timed well, and we built it at a high quality level, fast. That&rsquo;s led to a lot of our success.</p>
-              <p>But then we learned&hellip; once you know how you rank, the next step is taking action. You always want to improve. The way to do that is writing the most effective content and shaping your digital presence to show up well in ChatGPT and other answer engines. LLMs opened our business in two ways, as a consumer product now approaching a billion monthly active users, and as a technology we could apply directly to our industry.</p>
-              <p>The main thesis of Profound 2.0&hellip; <span class="cc-highlight">how do you help marketers work more efficiently and harness AI to do their work?</span> We want to be the AI-native application layer for marketers, the same way developers have Cursor, lawyers have Harvey, finance has Legora. Profound is that for marketing.</p>
+              <p>We started off as the SEO for AI search company. We built this analytics layer to help brands see what people are searching for, what the outputs of their searches are, and how they&rsquo;re actually showing up. The timing was good, and we also built it at a very high quality level really fast, which led to a lot of our success.</p>
+              <p>What we learned along the way is that once you know how you rank, the next thing you want is to make a change and take action, because you always want to improve and be at the top of your industry. The way to do that is all about writing the most effective content and shaping your digital presence to show up the best in ChatGPT. LLMs opened up our business in two ways. There&rsquo;s the first order effect, this new consumer product where the answer is in ChatGPT, which is at nearly a billion monthly active users now. And there&rsquo;s the second order effect, where LLMs are a piece of technology you can apply to our own industry.</p>
+              <p><span class="cc-highlight">The main thesis of the second chapter is how do you help marketers work more efficiently and harness AI to do their work.</span> We want to be synonymous with marketing the same way Cursor is for developers, Harvey is for lawyers, Hebbia and others are for finance. Profound will be that AI native application layer for marketers to go do their work.</p>
+              <p>We don&rsquo;t normally like to comp ourselves directly to the SEO industry, but I&rsquo;ll do it for this example. In 2024, $93 billion was spent on SEO. Out of that, only $3 billion was spent on analytics, the measurement tools like Semrush, BrightEdge, Ahrefs. The other $90 billion is the services industry, hiring an SEO agency or a digital marketing agency to research how to position your brand, write content, build your websites. So 3 to 90 is a 30x bigger market. We were the leading provider on the analytics side and got these enterprise deals with Uber, Apple, Walmart, General Mills, Shopify, Ramp, Airbnb, CVS, Meta, Amazon, a lot of Fortune 500. Now it comes down to whether we can build the product they want.</p>
             </div>
           </div>
 
-          <div id="market-opportunity" class="scroll-anchor"></div>
+          <div id="analytics-to-action" class="scroll-anchor"></div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
             <div class="cc-qa-body is-question">
-              <p>How do you think about the size of the opportunity?</p>
+              <p>How do you define how Profound takes action, and what kinds of actions it takes for the marketer? Where are you leaning in first, and what are you not going to do?</p>
             </div>
           </div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Dylan</span>
             <div class="cc-qa-body is-response">
-              <p>We don&rsquo;t love comping directly to SEO, but for this example&hellip; in 2024, $93 billion were spent on SEO. Only $3 billion was analytics, tools like SEMrush, Ahrefs, Brightedge. The other $90 billion is services. Hiring an SEO agency, a digital marketing agency to do research, write content, build your website. That 3-to-90 is a 30x figure.</p>
-              <p>If we succeed in bringing AI agents to help marketers do their work, that&rsquo;s an enormous market, and we&rsquo;re well positioned to go after it. We already work with Uber, Apple, Walmart, Shopify, Ramp, Brex, Airbnb, Meta, Amazon, and a lot of other enterprise brands. Now it&rsquo;s about upselling the agents product to the same customer base.</p>
+              <p>We started off quite opinionated. It was, okay, we&rsquo;re going to build these models that tell you the most effective strategies to follow. That shifted over time as our vision got broader, to where we almost want to be unopinionated and just give tools to marketers. The reason is that the strategies are always changing. You&rsquo;re never going to know them perfectly or keep up to date, and the best strategies people are going to come up with themselves. We want to give them the creative liberties to find them and then execute on them with Profound.</p>
+              <p>So phase two, what we&rsquo;re calling Profound Agents, is an agent builder. You have the deterministic workflows, like Zapier, and you also have the ability to have agents that run on their own. What makes the difference for us is full integration with your Profound data. You actually know how well you&rsquo;re ranking in certain topics, keywords, sites, and you feed those into the agents so they can run on their own. The third piece is really deep integrations into all your marketing tools. <span class="cc-highlight">That&rsquo;s where you start to differentiate.</span></p>
             </div>
           </div>
-
-          <div id="taking-action" class="scroll-anchor"></div>
-
-          <div class="cc-qa">
-            <span class="cc-speaker is-interviewer">LF + RA</span>
-            <div class="cc-qa-body is-question">
-              <p>How do you define what actions Profound takes for the marketer, and how far does &ldquo;marketing&rdquo; spread beyond just marketing?</p>
-            </div>
-          </div>
-
-          <div class="cc-qa">
-            <span class="cc-speaker is-guest">Dylan</span>
-            <div class="cc-qa-body is-response">
-              <p>We started quite opinionated. &ldquo;Here are the strategies you should follow.&rdquo; That&rsquo;s shifted. As our vision got broader, we want to be almost completely unopinionated. Strategies are always changing. The best ones people are going to discover themselves. We want to give marketers the creative liberties to find those strategies and then execute on them with Profound.</p>
-              <p>Profound Agents is essentially an agent builder. Deterministic workflows, autonomous agents, full integration with your Profound data so you know exactly how you rank on any given topic, and deep integrations into all your marketing tools. <span class="cc-highlight">That last piece is where it starts to truly differentiate.</span></p>
-            </div>
-          </div>
-
-          <div id="creative-platform" class="scroll-anchor"></div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
@@ -432,100 +360,73 @@
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Dylan</span>
             <div class="cc-qa-body is-response">
-              <p>Eventually, yes. In about three years, we won&rsquo;t be doing just web text, we&rsquo;ll move toward image and video generation as well. Right now we have analytics and content generation. The next thing we&rsquo;re building is a content management system. Then you own the ability to publish. <span class="cc-highlight">I joke that we want to own the means of distribution.</span></p>
-              <p>So the full stack becomes&hellip; analytics, generation, publishing. Then you expand the content types, images, video. And you expand across marketing functions. Product marketing, performance, social, brand. It becomes a very different company in three years.</p>
+              <p>Eventually, in about three years, we&rsquo;re not going to be doing just web text content. It&rsquo;s going to go toward image and video generation as well. Right now what we have is the analytics, how your content&rsquo;s performing, and the ability to generate content.</p>
             </div>
           </div>
 
-          <div id="building-team" class="scroll-anchor"></div>
+          <div id="means-of-distribution" class="scroll-anchor"></div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
             <div class="cc-qa-body is-question">
-              <p>You came from the design engineering world at Uber before founding Profound. How has that shaped how you hire and build the team?</p>
+              <p>When you own the question of what to push out, it&rsquo;s so much easier to build the infrastructure for pushing it out. Such an interesting position to own the means of distribution.</p>
             </div>
           </div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Dylan</span>
             <div class="cc-qa-body is-response">
-              <p>Four things company-wide. First, you have to be an owner. There&rsquo;s not much management at Profound. You carve out your area, set your own roadmap, and are responsible for what happens there. That attracts people who want real impact. Second, curiosity. We&rsquo;re building things that have never been done before. You can&rsquo;t repeat a playbook. You have to want to go learn.</p>
-              <p>Third, being a really good person. We&rsquo;re quite strict on not bringing in the 100x engineer who destroys culture. <span class="cc-highlight">A company, if you boil it down, is just a group of people in a room.</span> You need to be excited to collaborate with your teammates, to be friends with everyone, to be kind. People come in and say it&rsquo;s the most welcoming place they&rsquo;ve ever experienced, that&rsquo;s not an accident. Fourth, you have to work hard. We&rsquo;re quite infamous for Saturday posts.</p>
+              <p>The next thing we&rsquo;re building is a content management system, because then you have the ability to publish. Relying on third party systems is fine right now, but you almost want to own the means of distribution. Then you have the full stack, analytics, publishing, generation. And you might as well go on the other axis too. What types of content could you do? You move beyond text into images and video. So maybe there&rsquo;s a world in two or three years where we&rsquo;re kind of like Higgsfield as well. We have very grand ambitions for Profound. Then there&rsquo;s another axis, almost a three dimensional chart, where it&rsquo;s product marketing, performance marketing, social media marketing, brand marketing.</p>
             </div>
           </div>
+
+          <div id="hiring" class="scroll-anchor"></div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
             <div class="cc-qa-body is-question">
-              <p>What specifically do you look for in designers?</p>
+              <p>Coming from the design engineering world, how have you been opinionated about the skills you look for, and how you&rsquo;ve set up your design and product marketing org?</p>
             </div>
           </div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Dylan</span>
             <div class="cc-qa-body is-response">
-              <p>Three things. Visual skills. You need to know how to make things look good. That&rsquo;s the taste aspect. Second, <span class="cc-highlight">product design&hellip; do you know how to design for the business, not the user?</span> That&rsquo;s a critical distinction most designers lack unless they&rsquo;ve worked at Meta, Uber, Coinbase, places that actually drill it in. Third, design engineering.</p>
-              <p>At Profound, you need two of three. I wanted all three at first. I had all three, so that was my bar. But I woke up. Those people exist, but they have the freedom to go anywhere and you&rsquo;d have to pay insane amounts. Two of three is the right bar, and we make sure we&rsquo;re not over-indexed on any one combination.</p>
+              <p>We can start general. For every function you have to be an expert in your field. If you&rsquo;re going to be a software engineer, you have to be a good engineer. Beyond that we look for four soft qualities. One is you have to be an owner. Profound was really never much about management. You&rsquo;re going to get your area, carve it out, and be the person in charge, setting your own roadmap and being responsible for what&rsquo;s going on. That attracts a lot of good people, knowing they actually have an impact.</p>
+              <p>Number two is curiosity. We&rsquo;re building things that have never been done before, so you can&rsquo;t just repeat a playbook. You want to go learn and try and do things and be excited about what else is out there. Number three is being a really good person. One thing we&rsquo;ve been strict on that&rsquo;s worked out well is not hiring the 100x engineer who&rsquo;s an asshole and destroys the culture. <span class="cc-highlight">At the end of the day a company is just a group of people in a room, and you need to be excited to collaborate.</span> I&rsquo;m surprised at how many people come in and say it&rsquo;s the most welcoming experience they&rsquo;ve ever had. The fourth one is you have to work hard. We&rsquo;re quite infamous for our Saturdays.</p>
+              <p>For design specifically there are three things I look for. One is visual skills, knowing how to make things look good, the taste aspect. The second is product design, knowing how to design for the business, not the user. That&rsquo;s an important one most designers lack unless they&rsquo;ve worked at a Meta, Uber, or Coinbase where they drill it into you. The third is the design engineering side. We&rsquo;ve been strict that if you&rsquo;re going to be a designer at Profound you have to have two out of three of those. In the beginning I wanted someone with all three because I had all three, but I realized that was unrealistic. Those people exist, but you have to pay them an insane amount of money or they have the freedom to go do whatever they want.</p>
             </div>
           </div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
             <div class="cc-qa-body is-question">
-              <p>How do you think about ratios, PMs, designers, engineers?</p>
+              <p>Do you think about hiring within your R&amp;D org in terms of ratios, one PM and one designer for every five engineers?</p>
             </div>
           </div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Dylan</span>
             <div class="cc-qa-body is-response">
-              <p>We have rough ratios in mind, but the real philosophy is&hellip; if you find someone good, hire them and figure it out. When you&rsquo;re this picky, good at the job, the four soft qualities, and the role-specific criteria, you&rsquo;ve narrowed to a very specific set of people in the world. It&rsquo;s so rare when you find one that it&rsquo;s almost always worth it. They&rsquo;ll figure out where they fit.</p>
+              <p>We roughly have ratios we want to maintain, but I&rsquo;ve realized that when you&rsquo;re this picky, you have to be good at your job, plus the four soft things company wide, plus the specific things for the role. You get down to a very specific set of people who actually exist in the world. So our philosophy is if you find someone good, hire them and you&rsquo;ll figure it out. We&rsquo;re never going to say we won&rsquo;t hire this PM because we don&rsquo;t need one right now. There&rsquo;s nuance for some roles, but in general if you come across someone you want, it&rsquo;s so rare that they&rsquo;ll just figure it out.</p>
             </div>
           </div>
+
+          <div id="designing-inside" class="scroll-anchor"></div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
             <div class="cc-qa-body is-question">
-              <p>What does the design and marketing tech stack look like at Profound?</p>
+              <p>What does the tech stack look like across R&amp;D and brand and marketing?</p>
             </div>
           </div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Dylan</span>
             <div class="cc-qa-body is-response">
-              <p>Figma, of course. But a lot of our designers are getting deep with Codex and Claude Code, both in standalone prototype sandboxes and directly in our production app. We&rsquo;re a feature flag shop. No staging environment. Everything is a Boolean toggle. Should we show this, should we show that. Designers can start shipping directly within the app, and it takes about 10% of the time it used to, now that you have AI tools.</p>
-              <p>One other example. Our subway ads. All the imagery is AI-generated, done with Higgs Field. People ask us how we got those photos done. We didn&rsquo;t. <span class="cc-highlight">If you look closely, one of the images shows a subway map of New York in the background, it&rsquo;s complete nonsense. Nobody caught it.</span></p>
-            </div>
-          </div>
-
-          <div id="design-moat" class="scroll-anchor"></div>
-
-          <div class="cc-qa">
-            <span class="cc-speaker is-interviewer">LF + RA</span>
-            <div class="cc-qa-body is-question">
-              <p>We&rsquo;ve been writing about how taste and design sensibility may be one of the last defensible advantages. How do you see it playing out at Profound?</p>
-            </div>
-          </div>
-
-          <div class="cc-qa">
-            <span class="cc-speaker is-guest">Dylan</span>
-            <div class="cc-qa-body is-response">
-              <p>We&rsquo;re in a whole new industry. People are skeptical, anxious, wary of vaporware. <span class="cc-highlight">If you build a beautiful front-end brand and product that delivers a premium experience, that squashes a lot of the preconceptions people have, and it tremendously helps with sales.</span> You still have to do everything else well, product, engineering, sales. But the design layer is a force multiplier.</p>
-              <p>It&rsquo;s also a protected advantage. It&rsquo;s very hard for a founder with an engineering background to just decide &ldquo;we&rsquo;re going to have great design.&rdquo; How do you actually do that? You might find a good designer, but that designer thinks&hellip; this person doesn&rsquo;t really care about this. And they&rsquo;re right. It&rsquo;s hard to execute without genuine conviction at the top. So if you have that advantage, lean into it hard.</p>
-            </div>
-          </div>
-
-          <div class="cc-qa">
-            <span class="cc-speaker is-interviewer">LF + RA</span>
-            <div class="cc-qa-body is-question">
-              <p>Does that design sensibility have to come from the founding team?</p>
-            </div>
-          </div>
-
-          <div class="cc-qa">
-            <span class="cc-speaker is-guest">Dylan</span>
-            <div class="cc-qa-body is-response">
-              <p>Yes. I&rsquo;ve learned that everything has to come from the founding team, or someone very close to it. It&rsquo;s all about alignment of priorities. You can&rsquo;t retrofit it.</p>
+              <p>We could talk about design, that&rsquo;s more interesting. Of course it&rsquo;s Figma, but a lot of the designers are getting quite deep with Codex or Claude Code, both in standalone prototype sandboxes and in our production app. We&rsquo;re a feature flag shop, which means there&rsquo;s no staging environment. Everything is a little Boolean toggle. Should we show that, should we show that. There are a lot of downsides to that approach, but the cool thing is you can turn things on just for employees, or for specific customers, and get feedback quickly.</p>
+              <p>A lot of designers start doing that directly within the app. That&rsquo;s always been possible, I was doing it four or five years ago at Uber, but the difference now is it&rsquo;s way faster. You can do it in maybe 10% of the time it used to take now that you have all these AI tools.</p>
+              <p><span class="cc-highlight">Another interesting one, our subway ads, the imagery is all AI generated.</span> That was all done with Higgsfield, which is pretty cool. If you really want, you can go look at the details and identify that it was AI generated. One of the images, someone&rsquo;s on a subway and there&rsquo;s a map of New York in the back, and it&rsquo;s a nonsense map. I don&rsquo;t think anyone would catch it unless you&rsquo;re a map person like me. There&rsquo;s another one about vibe coding, and you can&rsquo;t tell it&rsquo;s AI generated because we put a mask over the screen, but in the IDE it&rsquo;s just random characters of some space language instead of actual letters. People ask us how we got the photos done. We didn&rsquo;t.</p>
             </div>
           </div>
 
@@ -534,71 +435,124 @@
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
             <div class="cc-qa-body is-question">
-              <p>What do you think of AI design tools, Papr, the emerging Figma competitors? Do you use any internally?</p>
+              <p>Do you use Paper internally?</p>
             </div>
           </div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Dylan</span>
             <div class="cc-qa-body is-response">
-              <p>Controversial opinion. AI design tools are so many years away from being useful. I&rsquo;ve never found them to produce good outputs, or an interface that makes me move faster. I&rsquo;ve spent serious time trying.</p>
-              <p>When I spent two years looking for a business to build before founding Profound, the first lizard-brain idea as a designer is always &ldquo;build a design tool.&rdquo; I looked hard at it and realized&hellip; there&rsquo;s no way this is going to be successful, or if it is, it&rsquo;s a six-year grind. I was not interested in that.</p>
-              <p><span class="cc-highlight">There&rsquo;s so much potential GDP being wasted because brilliant people love design and think they&rsquo;re going to follow their passion and build a design tool. And it&rsquo;s just not going to work out.</span> I think it&rsquo;s almost a whole other topic, smart entrepreneurs living in industries with physical limitations to their success, wasting their time. That&rsquo;s what I realized.</p>
+              <p>No. I&rsquo;ll give you a controversial opinion. I&rsquo;m sure the product is somewhat nice, but I just think AI design tools are so many years away from being useful.</p>
             </div>
           </div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
             <div class="cc-qa-body is-question">
-              <p>What about the future of the user interface more broadly, how much of what we build will just be natural language?</p>
+              <p>Why is that? Where is the block today?</p>
             </div>
           </div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Dylan</span>
             <div class="cc-qa-body is-response">
-              <p>I like ChatGPT for asking questions. But I&rsquo;m never going to open a chatbot and say &ldquo;order me an Uber to 248 North 8th Street.&rdquo; That&rsquo;s just stupid. And I think that applies to so many categories. Someone has to figure out the interface problem, it&rsquo;s just not clear yet who or when. In a different world three years ago I would have loved to go figure that out. But it&rsquo;s going to be such a grind with no results at the current timing. I&rsquo;ll let someone else figure it out.</p>
+              <p>It&rsquo;s hard for me to even articulate it. They&rsquo;re not helpful. I&rsquo;ve never figured out how to use them in a way that&hellip; maybe it&rsquo;s a user problem on my side, I&rsquo;m too constrained to the old ways, but I never found them to be good on the outputs, or to be the interface in a way that makes me move faster. I spent two years before I started Profound wandering the world looking for a business to build, and of course the first lizard brain idea as a designer is a design tool. I was looking into it, and I thought, there&rsquo;s no way this is going to be successful. Or if it is, it&rsquo;s going to be a six year grind, which I was not interested in. I very much wanted to build something now.</p>
+              <p><span class="cc-highlight">This is almost a whole other topic, but I feel like there are so many smart entrepreneurs living in industries where there are physical limitations to their success, and they&rsquo;re wasting their life away.</span> There&rsquo;s so much potential GDP being wasted because this brilliant person loves design and says I&rsquo;m going to follow my passion and build a design tool, and it&rsquo;s just not going to work out.</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Try Paper. We were pleasantly surprised with the output. They launched an MCP for Claude Code last week, and the outputs are significantly better, in my opinion, than the other turnkey Lovables of the world. Curious if that changes your perspective.</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Dylan</span>
+            <div class="cc-qa-body is-response">
+              <p>I&rsquo;ll be sure to give it a shot. The next related topic is the SaaS apocalypse. Are these guys just the first to get murdered by it? It&rsquo;s almost the second derivative of the SaaS apocalypse. Sure, Figma may die from the SaaS apocalypse, but they&rsquo;re going to murder Paper first.</p>
+            </div>
+          </div>
+
+          <div id="future-interface" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>What is the long term future of the user interface? How much of the future of SaaS or AI native products is going to be solutions where we get answers via natural language, voice, text, or otherwise?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Dylan</span>
+            <div class="cc-qa-body is-response">
+              <p>I don&rsquo;t like the chatbot. Let me rephrase. I like the chatbot of ChatGPT, I like asking a question. But I&rsquo;m never going to go to a chatbot and say order me an Uber to 248 N 8th St. That&rsquo;s just stupid, and it applies to so many other things. Someone has to figure something out on the interface. In a different world three years ago I would have loved to go figure that out. But I tie it back into, oh my God, that&rsquo;s going to be such a grind with no results, not the right timing. So I&rsquo;ll let someone else figure that out.</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>What you&rsquo;re describing might be a dream scenario, if we can trust it, if it&rsquo;s 100% accurate, if we know we&rsquo;re not going to get hacked.</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Dylan</span>
+            <div class="cc-qa-body is-response">
+              <p>Those have to be solved, and that&rsquo;s going to take years for the infrastructure to get there. The whole design and AI thing is very interesting. It&rsquo;s kind of a headache. I probably sound like such a pessimist.</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>It&rsquo;s good. Honestly, I would have assumed more designers would be optimistic and visionary about the future, but I find most are more in the pessimistic camp, because they&rsquo;re so detail oriented and perfectionist driven. That&rsquo;s a broad characterization of the designer persona, but I don&rsquo;t think you&rsquo;re alone in thinking this way.</p>
+            </div>
+          </div>
+
+          <div id="brand-advantage" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Dylan</span>
+            <div class="cc-qa-body is-response">
+              <p>Let me add my own context here. On the topic of design, branding, and quality, I think we&rsquo;ve done a very good job at Profound, and that&rsquo;s been one of the reasons we&rsquo;ve gone really far ahead in our category. We&rsquo;re basically in a whole new industry that didn&rsquo;t exist before. SEO existed and it&rsquo;s similar, but this is a whole new thing, and people are skeptical, anxious, wary of being sold vaporware. <span class="cc-highlight">If you build a really beautiful front end brand and product that delivers a premium feeling experience, that squashes a lot of the preconceptions and biases people have, and it tremendously helps with sales.</span> You have to be doing a good job on everything else too, the product, the engineering, the sales.</p>
+              <p>Because it&rsquo;s such a taste factor, it&rsquo;s very much a protected advantage if you know how to do it. It&rsquo;d be very hard for a founder with an engineering background to just say we&rsquo;re going to have good design here, because how do you actually do that? You have to go find the right people. You might find a nice designer, but then the designer says, well, I don&rsquo;t want to work for this engineering person who doesn&rsquo;t actually care about this. So it&rsquo;s very hard to execute on. If you have that advantage, really lean into it and invest in it, and you&rsquo;ll have really good returns.</p>
+            </div>
+          </div>
+
+          <div id="starts-with-founder" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Do you think that has to come from the founding team?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Dylan</span>
+            <div class="cc-qa-body is-response">
+              <p>Probably, that&rsquo;s my guess. At this point I&rsquo;ve learned that everything has to come from the founding team, or someone very close to it. It&rsquo;s all about alignment of priorities.</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>If you were an investor, would you be evaluating the personal websites and portfolios of founding teams?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Dylan</span>
+            <div class="cc-qa-body is-response">
+              <p>I don&rsquo;t know if it&rsquo;s that. It&rsquo;s probably pretty obvious when there&rsquo;s a design founder there. You don&rsquo;t have to see the quality of their design, you just know that it&rsquo;s important to them.</p>
             </div>
           </div>
 
         </div>
-
-        <section id="hot-takes" class="cc-hot-takes scroll-anchor">
-          <h2 class="cc-hot-takes-title">Hot takes</h2>
-          <div class="cc-hot-takes-list">
-
-            <div class="cc-hot-take">
-              <span class="cc-hot-take-num">I</span>
-              <div>
-                <div class="cc-hot-take-q">What&rsquo;s the boldest bet you&rsquo;re making on where Profound goes next?</div>
-                <div class="cc-hot-take-a">
-                  <p>Owning the means of distribution. Right now we rely on third-party CMS systems, which is fine. But if we own analytics, generation, and publishing, the full stack, and then expand into images and video, the surface area becomes enormous. In three years, Profound looks very different from what it is today.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="cc-hot-take">
-              <span class="cc-hot-take-num">II</span>
-              <div>
-                <div class="cc-hot-take-q">Biggest mistake design-minded founders make?</div>
-                <div class="cc-hot-take-a">
-                  <p>Building design tools. There are brilliant people who love design, follow their passion, and walk into an industry with physical limitations to their success. It&rsquo;s going to be a six-year grind, at minimum, and most of it won&rsquo;t work. If you have design taste and product instincts, apply them somewhere the market is already moving. The compounding there is just so much faster.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="cc-hot-take">
-              <span class="cc-hot-take-num">III</span>
-              <div>
-                <div class="cc-hot-take-q">One thing investors should actually look for in early-stage founding teams?</div>
-                <div class="cc-hot-take-a">
-                  <p>Whether design conviction comes from inside the founding team. You don&rsquo;t need to see the quality of their output, you just need to know it matters to them. That alignment of priorities can&rsquo;t be hired in after the fact. If it&rsquo;s not there at the start, the product will never feel the way the best ones do. It&rsquo;s that simple, and that rare.</p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </section>
 
       </main>
 
