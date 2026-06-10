@@ -540,44 +540,14 @@
     </main>
 
     <footer class="cc-footer">
-      <form class="cc-footer-sub" id="cc-sub" novalidate>
-        <h3 class="cc-footer-h">Stay in the loop</h3>
-        <input
-          class="cc-input"
-          type="email"
-          id="cc-sub-email"
-          placeholder="..."
-          aria-label="Email address"
-          required
-        />
-        <p class="cc-footer-thanks" id="cc-sub-thanks" hidden>You rock!</p>
-      </form>
+      <div class="cc-footer-sub">
+        <h3 class="cc-footer-h">Subscribe to future reports and interviews</h3>
+        <iframe src="https://creativeconvictionpress.substack.com/embed" width="480" height="150" style="border:none; background:transparent;" frameborder="0" scrolling="no"></iframe>
+      </div>
       <p class="cc-footer-meta">&copy; 2026 Creative Conviction</p>
     </footer>
 
   </div>
 
-  <script>
-    // Email signup posts to a Google Sheet via Apps Script Web App.
-    (function () {
-      var SHEET_URL = 'https://script.google.com/macros/s/AKfycbxN0ifH8CEiArlNTC4i76kfIm0JDhFxjy8TqHq2hvOWAOpbjCvhIDkDGra4eXc7ltMedw/exec';
-      var form   = document.getElementById('cc-sub');
-      var input  = document.getElementById('cc-sub-email');
-      var thanks = document.getElementById('cc-sub-thanks');
-      if (!form) return;
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        if (!input.value || !input.checkValidity()) { input.focus(); return; }
-        fetch(SHEET_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ email: input.value })
-        });
-        input.hidden = true;
-        thanks.hidden = false;
-      });
-    })();
-  </script>
 </body>
 </html>
