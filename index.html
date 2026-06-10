@@ -427,6 +427,15 @@
               <span class="cc-episode-date">Coming soon</span>
             </li>
 
+            <li class="cc-episode">
+              <span class="cc-episode-title">
+                <img class="cc-episode-thumb" src="interviews/images/stephen-haney.jpg" alt="" width="48" height="48" />
+                <span>Stephen Haney &mdash; Care that compounds</span>
+              </span>
+              <span class="cc-episode-cat">Founder &amp; CEO, Paper</span>
+              <span class="cc-episode-date">Coming soon</span>
+            </li>
+
           </ul>
         </div>
       </section>
@@ -540,7 +549,9 @@
   </div>
 
   <script>
+    // Email signup posts to a Google Sheet via Apps Script Web App.
     (function () {
+      var SHEET_URL = 'https://script.google.com/macros/s/AKfycbxN0ifH8CEiArlNTC4i76kfIm0JDhFxjy8TqHq2hvOWAOpbjCvhIDkDGra4eXc7ltMedw/exec';
       var form   = document.getElementById('cc-sub');
       var input  = document.getElementById('cc-sub-email');
       var thanks = document.getElementById('cc-sub-thanks');
@@ -548,7 +559,12 @@
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         if (!input.value || !input.checkValidity()) { input.focus(); return; }
-        window.open('https://creativeconvictionpress.substack.com/subscribe?email=' + encodeURIComponent(input.value), '_blank');
+        fetch(SHEET_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ email: input.value })
+        });
         input.hidden = true;
         thanks.hidden = false;
       });
