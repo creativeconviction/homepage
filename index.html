@@ -296,6 +296,40 @@
       max-width: 500px;
       overflow: visible;
     }
+
+    .cc-subscribe {
+      display: flex;
+      align-items: stretch;
+      width: 100%;
+      max-width: 440px;
+      border: 1px solid var(--cc-magenta);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #ECE9F1;
+    }
+    .cc-subscribe-input {
+      flex: 1;
+      font-family: var(--font-sans);
+      font-size: 16px;
+      color: var(--cc-ink);
+      background: transparent;
+      border: 0;
+      outline: none;
+      padding: 14px 18px;
+    }
+    .cc-subscribe-input::placeholder { color: var(--cc-ink-4); }
+    .cc-subscribe-btn {
+      font-family: var(--font-sans);
+      font-size: 16px;
+      font-weight: 500;
+      color: #fff;
+      background: var(--cc-magenta);
+      border: 0;
+      padding: 14px 28px;
+      cursor: pointer;
+      transition: background var(--dur-1) var(--ease);
+    }
+    .cc-subscribe-btn:hover { background: #B80159; }
     .cc-footer-h {
       font-family: var(--font-serif);
       font-weight: 400;
@@ -543,7 +577,11 @@
     <footer class="cc-footer">
       <div class="cc-footer-sub">
         <h3 class="cc-footer-h">Subscribe to future interviews and reports</h3>
-        <iframe src="https://creativeconvictionpress.substack.com/embed" width="500" height="150" style="border:none; background:transparent; transform:translateX(-48px);" frameborder="0" scrolling="no"></iframe>
+        <form class="cc-subscribe" action="https://creativeconvictionpress.substack.com/api/v1/free" method="post" target="_blank">
+          <input class="cc-subscribe-input" type="email" name="email" placeholder="Type your email&hellip;" required />
+          <input type="hidden" name="first_url" value="https://creativeconvictionpress.substack.com" />
+          <button class="cc-subscribe-btn" type="submit">Subscribe</button>
+        </form>
       </div>
       <p class="cc-footer-meta">&copy; 2026 Creative Conviction</p>
     </footer>
