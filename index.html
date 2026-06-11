@@ -377,6 +377,9 @@
       .cc-episode { grid-template-columns: 1fr; gap: 4px; padding: 18px 0; }
       .cc-episode-cat, .cc-episode-date { text-align: left; }
       .cc-index-grid { grid-template-columns: 1fr; gap: 28px; }
+      .cc-episode-scroll { max-height: calc(112px * 3); }
+      .cc-footer-sub { max-width: 100%; width: 100%; }
+      .cc-subscribe { max-width: 100%; width: 100%; }
     }
   </style>
 </head>
@@ -486,6 +489,7 @@
 
       <section class="cc-episodes">
         <h2 class="cc-h2"><a class="cc-h2" href="reports/">Reports</a></h2>
+        <div class="cc-episode-scroll">
           <ul class="cc-episode-list">
 
             <li class="cc-episode" onclick="window.location='reports/welcome/'">
@@ -516,6 +520,7 @@
             </li>
 
           </ul>
+        </div>
       </section>
 
       <section class="cc-episodes">
