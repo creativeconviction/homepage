@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png" />
+
+  <title>Stephen Haney &mdash; Creative Conviction</title>
+  <meta name="cc-person" content="Stephen Haney">
+  <meta name="cc-role" content="Founder &amp; CEO, Paper">
+  <meta name="description" content="Care that compounds. An interview with Stephen Haney, Founder and CEO of Paper." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400..700&display=swap" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --cc-magenta:   #D8016A;
+      --cc-orange:    #FF6514;
+      --cc-blue:      #1A0AE6;
+      --cc-indigo:    #361C76;
+      --cc-magenta-tint: #FBE0EC;
+
+      --cc-paper:        #F7F5FA;
+      --cc-paper-soft:   #F2EFF7;
+      --cc-white:        #FBFAFD;
+
+      --cc-ink:    #1A1130;
+      --cc-ink-2:  #322847;
+      --cc-ink-3:  #6A6378;
+      --cc-ink-4:  #9C97A8;
+      --cc-rule:        #D2CDDB;
+      --cc-rule-soft:   #E5E1ED;
+
+      --fg-1: var(--cc-ink);
+      --fg-2: var(--cc-ink-2);
+      --fg-3: var(--cc-ink-3);
+
+      --font-serif: "EB Garamond", "Iowan Old Style", Charter, Georgia, serif;
+      --font-sans:  "Inter", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+      --ease: cubic-bezier(.2,.6,.2,1);
+      --dur-1: 120ms;
+      --dur-2: 220ms;
+
+      --sidebar-w: 220px;
+    }
+
+    body {
+      background: var(--cc-paper);
+      color: var(--fg-1);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      min-height: 100vh;
+    }
+
+    a { color: var(--cc-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: text-decoration-thickness var(--dur-1) var(--ease); }
+    a:hover { text-decoration-thickness: 2px; }
+    em { font-family: var(--font-serif); font-style: italic; }
+
+    .cc-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 40px 80px;
+    }
+    .cc-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-bottom: 22px;
+      margin-bottom: 64px;
+    }
+    .cc-mark {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      text-decoration: none;
+      line-height: 1;
+    }
+    .cc-mark em { font-style: italic; color: var(--cc-magenta); font-family: var(--font-serif); }
+    .cc-nav { display: flex; gap: 28px; }
+    .cc-nav-link {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--fg-2);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+      transition: color var(--dur-1) var(--ease), text-decoration-thickness var(--dur-1) var(--ease);
+    }
+    .cc-nav-link:hover { color: var(--cc-ink); text-decoration-thickness: 2px; }
+
+    .cc-article-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      align-items: start;
+    }
+    @media (min-width: 1060px) {
+      .cc-article-layout {
+        grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+        gap: 56px;
+      }
+    }
+
+    .cc-sidebar { display: none; }
+    @media (min-width: 1060px) {
+      .cc-sidebar {
+        display: block;
+        position: sticky;
+        top: 40px;
+        align-self: start;
+        opacity: 0;
+        transform: translateX(-8px);
+        transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+      }
+    }
+    .cc-sidebar.is-visible { opacity: 1; transform: translateX(0); }
+
+    .cc-sidebar-eyebrow {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--fg-3);
+      margin-bottom: 18px;
+    }
+
+    .cc-sidebar-nav { display: flex; align-items: flex-start; gap: 14px; }
+    .cc-sidebar-track {
+      position: relative;
+      width: 1px;
+      flex-shrink: 0;
+      align-self: stretch;
+      background: var(--cc-rule-soft);
+    }
+    .cc-sidebar-track-indicator {
+      position: absolute;
+      width: 100%;
+      background: var(--cc-ink);
+      height: 14px; top: 0;
+      transition: top 0.22s var(--ease), height 0.12s var(--ease);
+    }
+
+    .cc-sidebar-links { display: flex; flex-direction: column; gap: 4px; }
+    .cc-sidebar-link {
+      background: none; border: none; cursor: pointer; padding: 2px 0;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1.4;
+      color: var(--fg-3);
+      text-align: left;
+      transition: color var(--dur-1) var(--ease);
+    }
+    .cc-sidebar-link:hover { color: var(--cc-ink); }
+    .cc-sidebar-link.is-active { color: var(--cc-ink); font-weight: 500; }
+
+    .cc-article { max-width: 640px; margin: 0 auto; }
+    @media (min-width: 1060px) { .cc-article { margin: 0; } }
+
+    .cc-article-header { margin-bottom: 56px; }
+    .cc-article-thumb {
+      display: block;
+      width: 168px;
+      height: 168px;
+      object-fit: cover;
+      margin: 0 0 28px;
+    }
+    .cc-article-eyebrow {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 15px;
+      color: var(--fg-3);
+      margin-bottom: 14px;
+    }
+    .cc-article-title {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 4.4vw, 48px);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--cc-ink);
+      margin: 0 0 18px;
+    }
+    .cc-article-title em { font-style: italic; }
+    .cc-article-subtitle {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 19px;
+      color: var(--fg-2);
+      margin: 0 0 10px;
+    }
+    .cc-article-date {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
+
+    .cc-article-substack {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      margin: 8px 0 0;
+    }
+    .cc-article-substack a.cc-highlight {
+      color: var(--cc-ink);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .cc-article-substack a.cc-highlight:hover { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
+
+    .cc-article-dek {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--fg-2);
+      margin: 32px 0 56px;
+    }
+    .cc-article-dek p + p { margin-top: 16px; }
+    .cc-article-dek a { color: inherit; }
+
+    .scroll-anchor { scroll-margin-top: 48px; }
+
+    .cc-qa-list { display: flex; flex-direction: column; gap: 28px; margin-bottom: 80px; }
+    .cc-qa { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: start; }
+    .cc-speaker {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding-top: 6px;
+      line-height: 1.3;
+    }
+    .cc-speaker.is-interviewer { color: var(--fg-3); }
+    .cc-speaker.is-guest { color: var(--cc-ink); }
+
+    .cc-qa-body {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg-2);
+    }
+    .cc-qa-body p { margin-bottom: 14px; }
+    .cc-qa-body p:last-child { margin-bottom: 0; }
+    .cc-qa-body em { font-family: var(--font-serif); font-style: italic; }
+    .cc-qa-body.is-question { color: var(--cc-ink); font-weight: 500; }
+    .cc-qa-body.is-response { font-weight: 400; }
+    .cc-qa-body a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+    .cc-highlight {
+      background: rgba(54, 28, 118, 0.10);
+      color: var(--cc-ink);
+      padding: 1px 4px;
+      transition: background var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+      cursor: default;
+    }
+    .cc-highlight:hover { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
+
+    .cc-hot-takes { padding-top: 32px; }
+    .cc-hot-takes-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      margin: 0 0 32px;
+    }
+    .cc-hot-takes-list { display: flex; flex-direction: column; gap: 32px; }
+    .cc-hot-take { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: start; }
+    .cc-hot-take-num {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 17px;
+      color: var(--fg-3);
+      padding-top: 4px;
+    }
+    .cc-hot-take-q {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--cc-ink);
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+    .cc-hot-take-a {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg-2);
+    }
+    .cc-hot-take-a p { margin-bottom: 12px; }
+    .cc-hot-take-a p:last-child { margin-bottom: 0; }
+    .cc-hot-take-a a { color: inherit; }
+
+    .cc-footer { padding: 48px 0 32px; margin-top: 96px; }
+    .cc-footer-meta {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 640px) {
+      .cc-shell { padding: 24px 24px 64px; }
+      .cc-header { margin-bottom: 48px; }
+      .cc-article-header { margin-bottom: 40px; }
+      .cc-qa { grid-template-columns: 1fr; gap: 6px; }
+      .cc-speaker { padding-top: 0; }
+      .cc-hot-take { grid-template-columns: 1fr; gap: 6px; }
+      .cc-hot-take-num { padding-top: 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cc-shell">
+
+    <header class="cc-header">
+      <a class="cc-mark" href="../../">Creative <em>Conviction</em></a>
+      <nav class="cc-nav">
+        <a class="cc-nav-link" href="../../about.html">About</a>
+      </nav>
+    </header>
+
+    <div class="cc-article-layout">
+
+      <aside class="cc-sidebar" id="cc-sidebar">
+        <div class="cc-sidebar-eyebrow">Contents</div>
+        <div class="cc-sidebar-nav">
+          <div class="cc-sidebar-track">
+            <div class="cc-sidebar-track-indicator" id="cc-track-indicator"></div>
+          </div>
+          <div class="cc-sidebar-links" id="cc-sidebar-links">
+            <button class="cc-sidebar-link is-active" data-target="three-identities">Three identities, one tool</button>
+            <button class="cc-sidebar-link" data-target="what-paper-is">What Paper is</button>
+            <button class="cc-sidebar-link" data-target="color-picker">The color picker</button>
+            <button class="cc-sidebar-link" data-target="care-differentiator">Care as differentiator</button>
+            <button class="cc-sidebar-link" data-target="figma-question">The Figma question</button>
+            <button class="cc-sidebar-link" data-target="irreducible-human">The irreducible human part</button>
+            <button class="cc-sidebar-link" data-target="how-success-looks">How success looks</button>
+            <button class="cc-sidebar-link" data-target="least-sure-bet">The bet he&rsquo;s least sure about</button>
+            <button class="cc-sidebar-link" data-target="rapid-fire">Rapid fire</button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="cc-article">
+
+        <div class="cc-article-header">
+          <img class="cc-article-thumb" src="../images/stephen-haney.jpg" alt="" width="168" height="168" />
+          <p class="cc-article-eyebrow">An interview with Stephen Haney, Founder and CEO of Paper</p>
+          <h1 class="cc-article-title">Care that compounds</h1>
+          <p class="cc-article-date">June 2026</p>
+          <p class="cc-article-substack"><a href="https://creativeconvictionpress.substack.com/p/stephen-haney" target="_blank" rel="noopener" class="cc-highlight">Substack version</a></p>
+        </div>
+
+        <div class="cc-article-dek">
+          <p>Prior to founding <a href="https://paper.design" target="_blank" rel="noopener">Paper</a>, <a href="https://www.linkedin.com/in/s-haney" target="_blank" rel="noopener">Stephen Haney</a> spent his life refusing to pick a lane. He was coding by twelve, designing in Photoshop, and learning the web by trying to rebuild other people&rsquo;s sites pixel for pixel during what he calls a wildly artistic moment for the medium, before vector workflows flattened everyone into the same toolset. Engineer, designer, game dev, product lead. Each of those identities looked like a separate career at the time. In hindsight they read as training for this moment.</p>
+          <p>Paper is the infinite-canvas design tool. Built on HTML and CSS, a technical bet that was not possible years ago, it was deliberately made as the best human design tool first, before agents were folded in. It also turned out that agents love working with HTML too. The wager underneath it is that design is a forcing function for decision making inside organizations, and that the part of the job worth protecting, exploring the possibility space, aligning teams, understanding users, does not disappear in the age of AI. If anything, Stephen argues, you get more of that opportunity, not less.</p>
+          <p>We talked with Stephen about how he poured a month of his life into a color picker, why cultural impact is their north star, the companies whose craft he studies, the discipline of not getting too attached to what is already working, and why, when asked about an uncertain future, his answer comes down to talking to users every day and staying informed enough to keep placing good bets.</p>
+        </div>
+
+        <div id="three-identities" class="scroll-anchor"></div>
+
+        <div class="cc-qa-list">
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>You have been a designer, an engineer, a game dev. Is Paper the first tool that requires all three of these identities you have crafted in your past?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Stephen</span>
+            <div class="cc-qa-body is-response">
+              <p>I grew up not knowing which career I wanted to do. I was coding at a very young age, twelve, fourteen, and I was also designing. I had this cracked version of Photoshop, as we all did in the 90s when I was growing up, and I just loved that space. I learned by trying to recreate other people&rsquo;s websites in Photoshop at the time, and it was such an artistic time for the web. We weren&rsquo;t working in these vector workflows yet, so everyone was experimenting with crazy graphics, 3D. There was a program called Bryce that would do these 3D renders, or 3D Studio Max. I grew up in this time where there was no &ldquo;engineer, designer, 3D.&rdquo; You were just building stuff, and I loved that.</p>
+              <p>So it does feel like all of those things were training for Paper, and this is everything coming together. One of the reasons I chose Paper was that I wanted to work and problem solve for creative professionals. That is the thing that keeps me going. I wake up in the morning and think, who am I solving problems with, who am I having Zoom calls with, and for me that is creative professionals. And second, the canvas technology is a lot like game dev. I had an indie game dev side project, and the canvas is like a 2D game world, very similar to graphics programming, which I love doing. For a lot of the people at Paper &mdash; it feels like this is their life&rsquo;s work. The previous stuff we have done has been training for this moment, and that happened organically. I want to keep it that way as we grow.</p>
+            </div>
+          </div>
+
+          <div id="what-paper-is" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Could you give a brief overview of what Paper is today, and the grand mission or vision you are shooting toward?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">SH</span>
+            <div class="cc-qa-body is-response">
+              <p>It really was born out of a love for this space. It wasn&rsquo;t like there was some solution in my brain where I thought, &ldquo;I have to ship this particular product.&rdquo; It was more, &ldquo;I want to work in this space, what are the problems we have today, and what can we figure out how to solve.&rdquo; One of the problems I saw is that there was one dominant design tool and not enough innovation and alternatives. Designers are pretty sensitive to that and want underground tools. They want art tools. I think Figma is going to keep doing well, but as they grow up there is space for the next underground tool too.</p>
+              <p>We started this before agents were really a thing, and we did this on purpose. We built the human design tool first, because we didn&rsquo;t want to lean into AI too early. So we built the best human design tool we could. Infinite canvas &mdash; we believe in the expression, the spatial relationships, the exploration. That is the design job. <span class="cc-highlight">We ship pixels at the end of the day, but the reason people hire designers is to make decisions. Design is a forcing function for decision making in organizations, and that is not a role that goes away with AI. If anything, you have more decisions to make.</span></p>
+              <p>We built on top of HTML and CSS, which you couldn&rsquo;t have done eight or ten years ago because the performance wasn&rsquo;t there. It is still very hard today, something we spend a lot of R&amp;D on, but it lets us move the designer into the rest of the building stack. Engineers are used to jumping between tools, and the designer is used to being stuck in one. By making the design tool speak code natively, you get less handoff, better accuracy, and people can jump into both sides more easily. And when agents really took off, they turned out to be very good at HTML, so Paper ended up being agent native. We didn&rsquo;t do that on purpose, but we had a feeling it might work out, and it has.</p>
+            </div>
+          </div>
+
+          <div id="color-picker" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Paper has a real feeling of lightweightness, and there are a lot of small features that add to the delight of using it. Of the many features you have shipped, what is a tiny design detail you are obsessed with that maybe no one has noticed?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">SH</span>
+            <div class="cc-qa-body is-response">
+              <p>We spend so much time on this, it is one of the reasons we chose to work in this space. <span class="cc-highlight">In design tools, the best product often wins</span>, and I love that, because you get to actually spend time on quality. An example that jumps to mind is our color picker. As far as I know, it is the world&rsquo;s first OKLCH native, uniform color space picker that feels conventional to use. If you understand that, you know why it is cool. If you don&rsquo;t, what it means is you get more accurate colors as you pick. You don&rsquo;t get drift between purples and blues like traditional color pickers do.</p>
+              <p>We invested a solid month of my life in it. We made it in WebGL, so it is all written in shaders. It taught me so much about color space and color theory and how these things interact. <span class="cc-highlight">We actually asked Bj&ouml;rn Ottosson, who invented OKLCH, to come and review the Paper color picker to make sure it was right, which was an honor for us.</span> That is a good example of pouring probably too much love and attention into something that some people will notice and think is cool, and a lot of designers will never notice but will just benefit from. It is just better. Along with that came P3 color support, so we support some of these more advanced color things natively, without workarounds. We apply that same level of care to everything we do.</p>
+            </div>
+          </div>
+
+          <div id="care-differentiator" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Do you think that is what makes Paper fundamentally different, all these little details that compound over time, or is it something else?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">SH</span>
+            <div class="cc-qa-body is-response">
+              <p>The care is huge. A lot of people get into startups to make money or to be founders. When we started getting successful, I was a little sad, because I had to do more founder stuff rather than build the product. We just care a lot. We have all been the person we are building the product for. <span class="cc-highlight">And we hold a really high bar for engineering quality. These days that is more rare. Companies are moving faster than ever, and sometimes you can make money without holding the bar that high, so it is easy to let it slip.</span> We are just not going to. We will see how that plays out, maybe we should focus more on money. But if you do the right things, a lot of times the money tends to work out.</p>
+            </div>
+          </div>
+
+          <div id="figma-question" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Figma maybe had that ambition too, but they got enterprisey. Is that something you think about &mdash; how not to go down that path?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">SH</span>
+            <div class="cc-qa-body is-response">
+              <p>We love what Figma does and what they have done for the design community and the industry. It is a really hard thing for every company as they get bigger and more successful. You have to get enterprise contracts, you have to hire way more people, market clock stuff happens to everyone. It is a good problem to have, because it means you are very successful. And probably if you are a bigger company you can solve bigger types of problems that are just as compelling. But it does create an advantage for startups. <span class="cc-highlight">It is the old innovator&rsquo;s dilemma. That is how startups can win, otherwise they wouldn&rsquo;t work at all.</span></p>
+              <p>I really admire the team there. The team now is great, and the original team, Rasmus and Evan Wallace, and Dylan has obviously done a great job. They had that in the early days too. They are a company I admire and look up to. Google Docs is another one I reference, the engineering quality and product quality. There aren&rsquo;t that many cloud collaboration tools at that level. You think of Figma, of Google Docs. It is hard to name companies at that level, and that is what we aspire to.</p>
+            </div>
+          </div>
+
+          <div id="irreducible-human" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>You have talked about cultivating empathy in designers and keeping the designer at the center as AI absorbs the production work. What is the irreducible human part of design you want to protect as you build Paper?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">SH</span>
+            <div class="cc-qa-body is-response">
+              <p>I think a lot of people don&rsquo;t understand the role of the designer. <span class="cc-highlight">Everyone thinks it is the UI you ship at the end, the handoff that goes to developers. I really think it is not that. It is about connecting people, competitive research, exploring the possibility space.</span> Basecamp has this hill chart idea, where the first half of a project you are going up a hill, trying to figure out what is even going on, and once you have mapped the problem space it is like going down a hill, the execution part. Design is involved in the whole thing, but especially impactful in that problem space exploration. What is possible. Set aside what we have bandwidth for, what can we actually do, and define what does perfect look like? And then negotiate down from that into what we can achieve.</p>
+              <p>User research, talking to users, understanding users, user empathy. None of that sounds like AI to me at all, or even technical. It is a human empathy thing that designers solve. Some of the best designers I know are not very technical at all. It is great when someone can be technical, but <span class="cc-highlight">sometimes it is helpful not to be technical, because you don&rsquo;t know the limits, so you don&rsquo;t get stuck on &ldquo;we won&rsquo;t be able to do this.&rdquo; You are free to design the best possible thing. So I see none of that changing in the age of AI.</span></p>
+              <p>The question is how we use AI to let designers move faster, because engineering teams are certainly moving faster. One of the big design problems right now is overload and fear, because the industry is changing, the tools haven&rsquo;t caught up, and engineering teams are moving so fast. How do you keep up with them as a designer? But there is a lot of boilerplate work in design right now, creating a mobile version of something, applying tokens. That is the kind of work we can help the designer move a lot faster with. We are focused on the problems of today and projecting out a little bit. That is a good way to meet the market and help people where they are.</p>
+            </div>
+          </div>
+
+          <div id="how-success-looks" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>How do you know that Paper is a successful tool? Is it people saying they love it, people using it a lot, or specific stories where you see Paper coming to life?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">SH</span>
+            <div class="cc-qa-body is-response">
+              <p><span class="cc-highlight">Big picture for us, it is cultural impact even more than just financial success.</span> We were doing some of our first merch recently, and it barely says Paper on it, because we just wanted to make the coolest shirt possible. You can see this in some of the cool stuff Figma did. Rasmus made Inter while he was at Figma, and Inter has had huge cultural impact. It is the default font for so many designers. So seeing Paper Shaders start to show up everywhere is the equivalent for us. Cursor used a Paper Shader in their new glass announcement, and I thought, that is super cool. <span class="cc-highlight">If we can help move the design conversation forward as a whole, that is really cool.</span></p>
+              <p>Tactically as a business, success is solving our problems right now. What makes me feel successful right now is being part of the conversation, which is a very hard thing to do as a startup. There are so many design tools, why are people talking about us? You have to get out there and talk about yourself and your values, and I feel like we have achieved that. The next thing that will feel like success is reaching beyond the early adopters. The tastemakers love Paper. If you are on Twitter all day, you probably like Paper. But there is a huge portion of designers who you don&rsquo;t see on Twitter, and that is actually way more folks. How do we explain Paper to them in a way they understand and find valuable? I don&rsquo;t think we are there yet. You shouldn&rsquo;t have to be a turbo Twitter nerd to understand the value. But the big picture is having the same kind of impact as the tools I admire, what Photoshop did, what Sketch did, what Figma did.</p>
+            </div>
+          </div>
+
+          <div id="least-sure-bet" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>What is the bet you are making with Paper that you are least sure about?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">SH</span>
+            <div class="cc-qa-body is-response">
+              <p>There is always an opportunity cost to everything you are doing. Paper is working now, growth is going well, but how much better could it be if we tried something new? Trying to keep that day one energy, where you don&rsquo;t get stuck in your ways just because something is working. Maybe we should help prototyping tools more, or motion. We get asked a lot to make Paper for video and motion, and I think, that sounds great, maybe there is a really cool market we could help there. So the bet I am least sure about is what else we could be doing with our time, because there are so many cool ideas to go after. I love what we are doing and I believe in it the most.</p>
+              <p>A lot of the bets we have made &mdash; betting on HTML and CSS, starting a design tool before it was obvious there would be space for another one &mdash; have actually worked out so far. <span class="cc-highlight">So we just try to talk to users every day, stay informed, and keep placing good bets.</span></p>
+            </div>
+          </div>
+
+        </div>
+
+        <section id="rapid-fire" class="cc-hot-takes scroll-anchor">
+          <h2 class="cc-hot-takes-title">Rapid fire</h2>
+          <div class="cc-hot-takes-list">
+
+            <div class="cc-hot-take">
+              <span class="cc-hot-take-num">I</span>
+              <div>
+                <div class="cc-hot-take-q">Are you exploring anything outside of company building?</div>
+                <div class="cc-hot-take-a">
+                  <p>Our baby daughter is pretty much all consuming outside of work, and it is amazing. A lot of life right now is imagining the future twenty years out for our kid. Other hobbies have gotten squeezed out, but I am always into music. I play guitar, and I just found this hand maker, Hansen Guitars in Denmark. He has only made about 600 guitars total, all by hand, and I am speccing out a custom T-type. I have too many guitars already, but one more can&rsquo;t hurt.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="cc-hot-take">
+              <span class="cc-hot-take-num">II</span>
+              <div>
+                <div class="cc-hot-take-q">Where do you go or what do you do to feel inspired?</div>
+                <div class="cc-hot-take-a">
+                  <p>I hike a lot. I love walking, it clears your head. Down here in Southern California we have great hikes, beach hikes, that kind of thing. It really resets me, like meditation through movement. I couldn&rsquo;t live without it.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="cc-hot-take">
+              <span class="cc-hot-take-num">III</span>
+              <div>
+                <div class="cc-hot-take-q">Is there a company or brand you particularly admire and look up to?</div>
+                <div class="cc-hot-take-a">
+                  <p>Linear, the way they have built their company, small elite team, not scaling before it is good, always caring about quality. Apple, of course, if you are in design, their history and marketing are amazing, and you can still learn from studying them. And we look back on Adobe products a lot. We have Photoshop and Illustrator open all the time, and Sketch and Figma, because we are studying these things constantly.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="cc-hot-take">
+              <span class="cc-hot-take-num">IV</span>
+              <div>
+                <div class="cc-hot-take-q">Where should people go to learn more about Paper, and are you hiring?</div>
+                <div class="cc-hot-take-a">
+                  <p><a href="https://paper.design" target="_blank" rel="noopener">Paper.design</a>, check it out. We have a community Slack and Discord linked in the footer, and the whole team is in there. We are always hiring. No roles posted right now, but we look for brilliant generalists who are very curious and have a passion for the art of software, design and engineering and product all together. People can always email <a href="mailto:join@paper.design">join@paper.design</a> and send over a portfolio!</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+
+    <footer class="cc-footer">
+      <p class="cc-footer-meta">&copy; 2026 Creative Conviction</p>
+    </footer>
+
+  </div>
+
+  <script>
+    (function () {
+      var sidebar = document.getElementById('cc-sidebar');
+      var indicator = document.getElementById('cc-track-indicator');
+      var links = Array.prototype.slice.call(document.querySelectorAll('.cc-sidebar-link'));
+      if (!sidebar || !indicator || !links.length) return;
+
+      setTimeout(function () { sidebar.classList.add('is-visible'); }, 180);
+
+      links.forEach(function (link) {
+        link.addEventListener('click', function () {
+          var id = link.getAttribute('data-target');
+          var el = document.getElementById(id);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      function update() {
+        var activeIdx = 0;
+        for (var i = links.length - 1; i >= 0; i--) {
+          var id = links[i].getAttribute('data-target');
+          var el = document.getElementById(id);
+          if (el && el.getBoundingClientRect().top <= 130) { activeIdx = i; break; }
+        }
+        links.forEach(function (l, i) { l.classList.toggle('is-active', i === activeIdx); });
+        var activeLink = links[activeIdx];
+        if (activeLink) {
+          indicator.style.top = activeLink.offsetTop + 'px';
+          indicator.style.height = activeLink.offsetHeight + 'px';
+        }
+      }
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    })();
+  </script>
+  <script src="../../share-quote.js"></script>
+</body>
+</html>
