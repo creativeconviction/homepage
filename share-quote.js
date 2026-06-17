@@ -261,7 +261,7 @@
     ctx.font         = 'italic ' + lsz + 'px ' + SERIF;
     var kw           = ctx.measureText('Conviction').width;
     var lx           = CARD_W - PAD - cw - kw;
-    var ly           = CARD_H - PAD;
+    var ly           = ROLE ? (CARD_H - PAD - 80 + 38) : (CARD_H - PAD - 80);
     ctx.font         = lsz + 'px ' + SERIF;
     ctx.fillStyle    = INK;
     ctx.fillText('Creative ', lx, ly);
