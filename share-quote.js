@@ -238,36 +238,42 @@
     var y          = PAD + 222;
     lines.forEach(function (l, i) { ctx.fillText(l, PAD, y + i * lineH); });
 
-    // Attribution — name + role, no rule
-    if (PERSON) {
-      var attrY = CARD_H - PAD - 80;
-      ctx.fillStyle = INK;
-      ctx.font      = '500 28px ' + SANS;
-      ctx.fillText(PERSON, PAD, attrY);
+    // Shared bottom edge for byline and logo
+    var bottomY = CARD_H - PAD;
 
+    // Attribution — name + role, no rule. Anchored to the bottom edge.
+    if (PERSON) {
+      ctx.textAlign    = 'left';
+      ctx.textBaseline = 'bottom';
       if (ROLE) {
         ctx.fillStyle = 'rgba(26,17,48,.48)';
         ctx.font      = '22px ' + SANS;
-        ctx.fillText(ROLE, PAD, attrY + 38);
+        ctx.fillText(ROLE, PAD, bottomY);
+        ctx.fillStyle = INK;
+        ctx.font      = '500 28px ' + SANS;
+        ctx.fillText(PERSON, PAD, bottomY - 34);
+      } else {
+        ctx.fillStyle = INK;
+        ctx.font      = '500 28px ' + SANS;
+        ctx.fillText(PERSON, PAD, bottomY);
       }
     }
 
-    // Logo bottom right: Creative Conviction
+    // Logo bottom right: Creative Conviction — same bottom edge
     var lsz = 30;
-    ctx.textBaseline = 'alphabetic';
+    ctx.textBaseline = 'bottom';
     ctx.textAlign    = 'left';
     ctx.font         = lsz + 'px ' + SERIF;
     var cw           = ctx.measureText('Creative ').width;
     ctx.font         = 'italic ' + lsz + 'px ' + SERIF;
     var kw           = ctx.measureText('Conviction').width;
     var lx           = CARD_W - PAD - cw - kw;
-    var ly           = ROLE ? (CARD_H - PAD - 80 + 38) : (CARD_H - PAD - 80);
     ctx.font         = lsz + 'px ' + SERIF;
     ctx.fillStyle    = INK;
-    ctx.fillText('Creative ', lx, ly);
+    ctx.fillText('Creative ', lx, bottomY);
     ctx.font         = 'italic ' + lsz + 'px ' + SERIF;
     ctx.fillStyle    = MAGENTA;
-    ctx.fillText('Conviction', lx + cw, ly);
+    ctx.fillText('Conviction', lx + cw, bottomY);
 
     return cv.toDataURL('image/png');
   }
