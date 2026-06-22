@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png" />
+
+  <title>Hiring list &mdash; June 22, 2026 &mdash; Creative Conviction</title>
+  <meta name="description" content="Health tech companies hiring for designers, June 22, 2026." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400..700&display=swap" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --cc-magenta:   #D8016A;
+      --cc-indigo:    #361C76;
+
+      --cc-paper:        #F7F5FA;
+      --cc-paper-soft:   #F2EFF7;
+      --cc-white:        #FBFAFD;
+
+      --cc-ink:    #1A1130;
+      --cc-ink-2:  #322847;
+      --cc-ink-3:  #6A6378;
+      --cc-ink-4:  #9C97A8;
+      --cc-rule:        #D2CDDB;
+      --cc-rule-soft:   #E5E1ED;
+
+      --fg-1: var(--cc-ink);
+      --fg-2: var(--cc-ink-2);
+      --fg-3: var(--cc-ink-3);
+
+      --font-serif: "EB Garamond", "Iowan Old Style", Charter, Georgia, serif;
+      --font-sans:  "Inter", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+      --ease: cubic-bezier(.2,.6,.2,1);
+      --dur-1: 120ms;
+      --dur-2: 220ms;
+    }
+
+    body {
+      background: var(--cc-paper);
+      color: var(--fg-1);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      min-height: 100vh;
+    }
+
+    a { color: var(--cc-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: text-decoration-thickness var(--dur-1) var(--ease); }
+    a:hover { text-decoration-thickness: 2px; }
+    em { font-family: var(--font-serif); font-style: italic; }
+
+    .cc-shell {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 40px 80px;
+    }
+
+    .cc-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-bottom: 22px;
+      margin-bottom: 80px;
+    }
+    .cc-mark {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      text-decoration: none;
+      line-height: 1;
+    }
+    .cc-mark em { font-style: italic; color: var(--cc-magenta); font-family: var(--font-serif); }
+    .cc-nav { display: flex; gap: 28px; }
+    .cc-nav-link {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--fg-2);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+      transition: color var(--dur-1) var(--ease), text-decoration-thickness var(--dur-1) var(--ease);
+    }
+    .cc-nav-link:hover { color: var(--cc-ink); text-decoration-thickness: 2px; }
+
+    .cc-page { max-width: 820px; margin: 0; }
+
+    .cc-page-header { margin-bottom: 56px; }
+    .cc-page-title {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 2.75vw, 28px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--cc-ink);
+      margin: 0 0 16px;
+    }
+    .cc-hiring-date {
+      font-family: var(--font-sans);
+      font-size: 16px;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+      margin: 8px 0 0;
+    }
+
+    .cc-hiring-list {
+      list-style: disc;
+      margin: 0;
+      padding-left: 24px;
+    }
+    .cc-hiring-item {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--fg-1);
+      margin-bottom: 12px;
+      padding-left: 6px;
+    }
+    .cc-hiring-item:last-child { margin-bottom: 0; }
+    .cc-hiring-item::marker { color: var(--cc-ink-4); }
+    .cc-hiring-item a {
+      color: var(--cc-magenta);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+    }
+    .cc-hiring-item a:hover { text-decoration: none; }
+
+    .cc-footer {
+      padding-top: 32px;
+      margin-top: 96px;
+    }
+    .cc-footer-meta {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 640px) {
+      .cc-shell { padding: 24px 24px 64px; }
+      .cc-header { margin-bottom: 56px; }
+      .cc-page-header { margin-bottom: 36px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cc-shell">
+
+    <header class="cc-header">
+      <a class="cc-mark" href="../../">Creative <em>Conviction</em></a>
+      <nav class="cc-nav">
+        <a class="cc-nav-link" href="../../about.html">About</a>
+      </nav>
+    </header>
+
+    <main class="cc-page">
+
+      <div class="cc-page-header">
+        <h1 class="cc-page-title">Health tech companies hiring for designers</h1>
+        <p class="cc-hiring-date">June 22, 2026</p>
+      </div>
+
+      <ul class="cc-hiring-list">
+
+        <li class="cc-hiring-item">
+          Counsel Health (<a href="https://counselhealth.com" target="_blank" rel="noopener">counselhealth.com</a>); AI-enabled medical group (series A); <a href="https://jobs.ashbyhq.com/counsel" target="_blank" rel="noopener">sr product designer (nyc)</a>
+        </li>
+
+        <li class="cc-hiring-item">
+          Abridge (<a href="https://abridge.com" target="_blank" rel="noopener">abridge.com</a>); AI for clinical conversations (series E); <a href="https://jobs.ashbyhq.com/abridge" target="_blank" rel="noopener">multiple roles (sf, nyc)</a>
+        </li>
+
+        <li class="cc-hiring-item">
+          Amperos (<a href="https://amperos.com" target="_blank" rel="noopener">amperos.com</a>); AI-native denial mgmt and revenue recovery platform (series A); <a href="https://jobs.ashbyhq.com/amperos/7170a997-79ef-4988-869d-f3099e794c72" target="_blank" rel="noopener">founding product designer (nyc)</a>
+        </li>
+
+        <li class="cc-hiring-item">
+          Hinge Health (<a href="https://hingehealth.com" target="_blank" rel="noopener">hingehealth.com</a>); AI-powered human-centered care model for MSK conditions; <a href="https://jobs.ashbyhq.com/hinge-health" target="_blank" rel="noopener">multiple roles (sf)</a>
+        </li>
+
+        <li class="cc-hiring-item">
+          Nolla (<a href="https://nollahealth.com" target="_blank" rel="noopener">nollahealth.com</a>); AI doctors, starting with medical skincare treatment (seed); <a href="https://jobs.ashbyhq.com/nollahealth/55c1d255-d7cf-4dde-8f4a-946d678a6562" target="_blank" rel="noopener">founding product designer (nyc)</a>
+        </li>
+
+        <li class="cc-hiring-item">
+          Maven Clinic (<a href="https://mavenclinic.com" target="_blank" rel="noopener">mavenclinic.com</a>); virtual clinic for women; <a href="https://mavenclinic.com/careers" target="_blank" rel="noopener">multiple roles (nyc, sf, remote)</a>
+        </li>
+
+        <li class="cc-hiring-item">
+          Oura (<a href="https://ouraring.com" target="_blank" rel="noopener">ouraring.com</a>); personal health ring (series E); <a href="https://ouraring.com/careers#open-positions" target="_blank" rel="noopener">multiple roles (sf)</a>
+        </li>
+
+        <li class="cc-hiring-item">
+          Whoop (<a href="https://whoop.com" target="_blank" rel="noopener">whoop.com</a>); fitness watch (series G); <a href="https://www.whoop.com/us/en/careers/" target="_blank" rel="noopener">multiple roles (boston)</a>
+        </li>
+
+        <li class="cc-hiring-item">
+          Superpower (<a href="https://superpower.com" target="_blank" rel="noopener">superpower.com</a>); lab testing + AI doctor (series A); <a href="https://jobs.ashbyhq.com/superpower?departmentId=df1ca496-9d3d-4b46-a223-233b62cdad43" target="_blank" rel="noopener">multiple roles (sf)</a>
+        </li>
+
+      </ul>
+
+    </main>
+
+    <footer class="cc-footer">
+      <p class="cc-footer-meta">&copy; 2026 Creative Conviction</p>
+    </footer>
+
+  </div>
+</body>
+</html>
