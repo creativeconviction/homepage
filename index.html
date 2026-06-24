@@ -244,19 +244,23 @@
     .cc-caret {
       display: flex;
       justify-content: center;
-      margin-top: 8px;
+      margin-top: 20px;
       color: var(--cc-indigo);
       pointer-events: none;
-      transition: opacity var(--dur-2) var(--ease);
+      opacity: 1;
     }
     .cc-caret svg { transition: transform var(--dur-2) var(--ease); }
     .cc-caret.nudge svg { animation: ccNudge 1.8s var(--ease) infinite; }
     @keyframes ccNudge {
-      0%, 100% { transform: translateY(0); opacity: .55; }
-      50% { transform: translateY(3px); opacity: 1; }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(3px); }
     }
     .cc-caret.up svg { transform: rotate(180deg); }
-    .cc-episodes:hover .cc-caret { opacity: 0; }
+    .cc-caret.up.nudge svg { animation: ccNudgeUp 1.8s var(--ease) infinite; }
+    @keyframes ccNudgeUp {
+      0%, 100% { transform: rotate(180deg) translateY(0); }
+      50% { transform: rotate(180deg) translateY(3px); }
+    }
 
     /* ----- Three-column index (homepage bottom block) ----- */
     .cc-index { margin-top: 0; }
@@ -472,13 +476,13 @@
               <span class="cc-episode-date">June 2026</span>
             </li>
 
-            <li class="cc-episode">
-              <span class="cc-episode-title">
+            <li class="cc-episode" onclick="window.location='interviews/nir-zicherman/'">
+              <a class="cc-episode-title" href="interviews/nir-zicherman/">
                 <img class="cc-episode-thumb" src="interviews/images/nir-zicherman.jpg" alt="" width="64" height="64" />
                 <span>Nir Zicherman &mdash; Building the generalized learning platform</span>
-              </span>
+              </a>
               <span class="cc-episode-cat">Co-founder &amp; CEO, Oboe</span>
-              <span class="cc-episode-date">Coming soon</span>
+              <span class="cc-episode-date">June 2026</span>
             </li>
 
             <li class="cc-episode">
@@ -636,8 +640,8 @@
   </div>
 
   <script>
-    // Scroll caret: hides on hover (rail showing), points down when more below,
-    // flips up at the bottom, pulses only at the very top.
+    // Scroll caret: always solid, points down when more below,
+    // flips up at the bottom, pulses gently at the very top.
     document.querySelectorAll('.cc-episodes').forEach(function (section) {
       var scroll = section.querySelector('.cc-episode-scroll');
       var caret = section.querySelector('.cc-caret');
