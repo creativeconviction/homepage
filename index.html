@@ -181,13 +181,10 @@
       overflow-y: auto;
       overflow-x: hidden;
       padding-right: 14px;
-      scrollbar-width: thin;
-      scrollbar-color: var(--cc-indigo) var(--cc-rule-soft);
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
-    .cc-episode-scroll::-webkit-scrollbar { width: 4px; height: 0; }
-    .cc-episode-scroll::-webkit-scrollbar:horizontal { height: 0; display: none; }
-    .cc-episode-scroll::-webkit-scrollbar-track { background: var(--cc-rule-soft); border-radius: 99px; margin: 2px 0; }
-    .cc-episode-scroll::-webkit-scrollbar-thumb { background: var(--cc-indigo); border-radius: 99px; }
+    .cc-episode-scroll::-webkit-scrollbar { width: 0; height: 0; display: none; }
     .cc-episode {
       display: grid;
       grid-template-columns: 1fr 170px 104px;
@@ -413,7 +410,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
       }
-      .cc-episode-scroll { max-height: 360px; }
+      .cc-episode-scroll { max-height: 480px; }
       .cc-footer-sub { max-width: 100%; width: 100%; }
       .cc-subscribe { max-width: 100%; width: 100%; }
       .cc-subscribe-btn { padding-right: 12px; padding-left: 12px; }
@@ -529,7 +526,7 @@
       </section>
 
       <section class="cc-episodes">
-        <h2 class="cc-h2"><a class="cc-h2" href="reports/">Reports</a></h2>
+        <h2 class="cc-h2"><a class="cc-h2" href="reports/">Essays</a></h2>
         <div class="cc-episode-scroll">
           <ul class="cc-episode-list">
 
@@ -628,7 +625,7 @@
 
     <footer class="cc-footer">
       <div class="cc-footer-sub">
-        <h3 class="cc-footer-h">Subscribe to future interviews and reports</h3>
+        <h3 class="cc-footer-h">Subscribe to future interviews and essays</h3>
         <form class="cc-subscribe" onsubmit="return ccSubscribe(event)">
           <input class="cc-subscribe-input" type="email" name="email" placeholder="Email address" required />
           <button class="cc-subscribe-btn" type="submit">Subscribe &rarr;</button>
