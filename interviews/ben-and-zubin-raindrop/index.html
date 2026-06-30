@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png" />
+
+  <title>Ben Hylak and Zubin Singh Koticha — Creative Conviction</title>
+  <meta name="cc-person" content="Ben and Zubin">
+  <meta name="cc-role" content="Raindrop">
+  <meta name="description" content="Being honest with yourself. An interview with Ben Hylak and Zubin Singh Koticha, co-founders of Raindrop." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400..700&display=swap" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --cc-magenta:   #D8016A;
+      --cc-orange:    #FF6514;
+      --cc-blue:      #1A0AE6;
+      --cc-indigo:    #361C76;
+      --cc-magenta-tint: #FBE0EC;
+
+      --cc-paper:        #F7F5FA;
+      --cc-paper-soft:   #F2EFF7;
+      --cc-white:        #FBFAFD;
+
+      --cc-ink:    #1A1130;
+      --cc-ink-2:  #322847;
+      --cc-ink-3:  #6A6378;
+      --cc-ink-4:  #9C97A8;
+      --cc-rule:        #D2CDDB;
+      --cc-rule-soft:   #E5E1ED;
+
+      --fg-1: var(--cc-ink);
+      --fg-2: var(--cc-ink-2);
+      --fg-3: var(--cc-ink-3);
+
+      --font-serif: "EB Garamond", "Iowan Old Style", Charter, Georgia, serif;
+      --font-sans:  "Inter", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+      --ease: cubic-bezier(.2,.6,.2,1);
+      --dur-1: 120ms;
+      --dur-2: 220ms;
+
+      --sidebar-w: 220px;
+    }
+
+    body {
+      background: var(--cc-paper);
+      color: var(--fg-1);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      min-height: 100vh;
+    }
+
+    a { color: var(--cc-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: text-decoration-thickness var(--dur-1) var(--ease); }
+    a:hover { text-decoration-thickness: 2px; }
+    em { font-family: var(--font-serif); font-style: italic; }
+
+    /* ----- Shell + header ----- */
+    .cc-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 40px 80px;
+    }
+    .cc-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-bottom: 22px;
+      margin-bottom: 64px;
+    }
+    .cc-mark {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      text-decoration: none;
+      line-height: 1;
+    }
+    .cc-mark em { font-style: italic; color: var(--cc-magenta); font-family: var(--font-serif); }
+    .cc-nav { display: flex; gap: 28px; }
+    .cc-nav-link {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--fg-2);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+      transition: color var(--dur-1) var(--ease), text-decoration-thickness var(--dur-1) var(--ease);
+    }
+    .cc-nav-link:hover { color: var(--cc-ink); text-decoration-thickness: 2px; }
+
+    /* ----- Article layout ----- */
+    .cc-article-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      align-items: start;
+    }
+    @media (min-width: 1060px) {
+      .cc-article-layout {
+        grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+        gap: 56px;
+      }
+    }
+
+    /* ----- Sidebar ----- */
+    .cc-sidebar { display: none; }
+    @media (min-width: 1060px) {
+      .cc-sidebar {
+        display: block;
+        position: sticky;
+        top: 40px;
+        align-self: start;
+        opacity: 0;
+        transform: translateX(-8px);
+        transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+      }
+    }
+    .cc-sidebar.is-visible { opacity: 1; transform: translateX(0); }
+
+    .cc-sidebar-eyebrow {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--fg-3);
+      margin-bottom: 18px;
+    }
+
+    .cc-sidebar-nav { display: flex; align-items: flex-start; gap: 14px; }
+    .cc-sidebar-track {
+      position: relative;
+      width: 1px;
+      flex-shrink: 0;
+      align-self: stretch;
+      background: var(--cc-rule-soft);
+    }
+    .cc-sidebar-track-indicator {
+      position: absolute;
+      width: 100%;
+      background: var(--cc-ink);
+      height: 14px; top: 0;
+      transition: top 0.22s var(--ease), height 0.12s var(--ease);
+    }
+
+    .cc-sidebar-links { display: flex; flex-direction: column; gap: 4px; }
+    .cc-sidebar-link {
+      background: none; border: none; cursor: pointer; padding: 2px 0;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1.4;
+      color: var(--fg-3);
+      text-align: left;
+      transition: color var(--dur-1) var(--ease);
+    }
+    .cc-sidebar-link:hover { color: var(--cc-ink); }
+    .cc-sidebar-link.is-active { color: var(--cc-ink); font-weight: 500; }
+
+    /* ----- Article main ----- */
+    .cc-article { max-width: 640px; margin: 0 auto; }
+    @media (min-width: 1060px) { .cc-article { margin: 0; } }
+
+    .cc-article-header { margin-bottom: 56px; }
+    .cc-article-thumb {
+      display: block;
+      width: 168px;
+      height: 168px;
+      object-fit: cover;
+      margin: 0 0 28px;
+    }
+    .cc-article-eyebrow {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 15px;
+      color: var(--fg-3);
+      margin-bottom: 14px;
+    }
+    .cc-article-title {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 4.4vw, 48px);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--cc-ink);
+      margin: 0 0 18px;
+    }
+    .cc-article-title em { font-style: italic; }
+    .cc-article-subtitle {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 19px;
+      color: var(--fg-2);
+      margin: 0 0 10px;
+    }
+    .cc-article-date {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
+
+    .scroll-anchor { scroll-margin-top: 48px; }
+
+    /* ----- Intro dek ----- */
+    .cc-article-dek {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--fg-2);
+      margin: 32px 0 56px;
+    }
+    .cc-article-dek a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+    }
+
+    /* ----- Q&A ----- */
+    .cc-qa-list { display: flex; flex-direction: column; gap: 28px; margin-bottom: 80px; }
+    .cc-qa { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: start; }
+    .cc-speaker {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding-top: 6px;
+      line-height: 1.3;
+    }
+    .cc-speaker.is-interviewer { color: var(--fg-3); }
+    .cc-speaker.is-guest { color: var(--cc-ink); }
+
+    .cc-qa-body {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg-2);
+    }
+    .cc-qa-body p { margin-bottom: 14px; }
+    .cc-qa-body p:last-child { margin-bottom: 0; }
+
+    .cc-list {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg-2);
+      margin: 0 0 14px;
+      padding-left: 22px;
+    }
+    .cc-list li { margin-bottom: 10px; }
+    .cc-list li:last-child { margin-bottom: 0; }
+    .cc-qa-body em { font-family: var(--font-serif); font-style: italic; }
+    .cc-qa-body.is-question { color: var(--cc-ink); font-weight: 500; }
+    .cc-qa-body.is-response { font-weight: 400; }
+    .cc-qa-body a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+    /* ----- Pull-quote highlight ----- */
+    .cc-highlight {
+      background: rgba(54, 28, 118, 0.10);
+      color: var(--cc-ink);
+      padding: 1px 4px;
+      transition: background var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+      cursor: default;
+    }
+    .cc-highlight:hover { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
+
+    /* ----- Rapid Fire ----- */
+    .cc-hot-takes { padding-top: 32px; }
+    .cc-hot-takes-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      margin: 0 0 32px;
+    }
+    .cc-hot-takes-list { display: flex; flex-direction: column; gap: 32px; }
+    .cc-hot-take { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: start; }
+    .cc-hot-take-num {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 17px;
+      color: var(--fg-3);
+      padding-top: 4px;
+    }
+    .cc-hot-take-q {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--cc-ink);
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+    .cc-hot-take-a {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg-2);
+    }
+    .cc-hot-take-a p { margin-bottom: 12px; }
+    .cc-hot-take-a p:last-child { margin-bottom: 0; }
+
+    /* ----- Footer ----- */
+    .cc-footer { padding: 48px 0 32px; margin-top: 96px; }
+    .cc-footer-meta {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 640px) {
+      .cc-shell { padding: 24px 24px 64px; }
+      .cc-header { margin-bottom: 48px; }
+      .cc-article-header { margin-bottom: 40px; }
+      .cc-qa { grid-template-columns: 1fr; gap: 6px; }
+      .cc-speaker { padding-top: 0; }
+      .cc-hot-take { grid-template-columns: 1fr; gap: 6px; }
+      .cc-hot-take-num { padding-top: 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cc-shell">
+
+    <header class="cc-header">
+      <a class="cc-mark" href="../../">Creative <em>Conviction</em></a>
+      <nav class="cc-nav">
+        <a class="cc-nav-link" href="../../about.html">About</a>
+      </nav>
+    </header>
+
+    <div class="cc-article-layout">
+
+      <aside class="cc-sidebar" id="cc-sidebar">
+        <div class="cc-sidebar-eyebrow">Contents</div>
+        <div class="cc-sidebar-nav">
+          <div class="cc-sidebar-track">
+            <div class="cc-sidebar-track-indicator" id="cc-track-indicator"></div>
+          </div>
+          <div class="cc-sidebar-links" id="cc-sidebar-links">
+            <button class="cc-sidebar-link is-active" data-target="founding-team">The founding team</button>
+            <button class="cc-sidebar-link" data-target="leaving-apple">Leaving Apple</button>
+            <button class="cc-sidebar-link" data-target="sidekick-to-raindrop">From Sidekick to Raindrop</button>
+            <button class="cc-sidebar-link" data-target="what-failure-means">What failure really means</button>
+            <button class="cc-sidebar-link" data-target="being-honest">Being honest with yourself</button>
+            <button class="cc-sidebar-link" data-target="design-unraveling">Design as unraveling</button>
+            <button class="cc-sidebar-link" data-target="self-healing">Self-healing</button>
+            <button class="cc-sidebar-link" data-target="hot-takes">Rapid Fire</button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="cc-article">
+
+        <div class="cc-article-header">
+          <img class="cc-article-thumb" src="../images/ben-hylak.jpg" alt="" width="168" height="168" />
+          <p class="cc-article-eyebrow">An interview with Ben Hylak and Zubin Singh Koticha, co-founders of Raindrop</p>
+          <h1 class="cc-article-title">Being honest with yourself</h1>
+          <p class="cc-article-date">June 2026</p>
+        </div>
+
+        <p class="cc-article-dek">When Ben, Zubin, and Alexis started building tools to understand where their own AI agents were failing in production, there was no production observability platform for agents. The platforms that existed counted tokens, scored hallucinations, or tagged sentiment, but none of them told you whether your agent did the thing the user wanted. So they built the thing they needed, and found that everyone building an agent had the same problem. This became <a href="https://raindrop.ai" target="_blank" rel="noopener">Raindrop</a>. Ben came to this from a unique background, four years at Apple as an engineer and then a designer, working on projects like the Vision Pro before his cofounder Zubin pulled him away after ChatGPT arrived. The teams&rsquo; design sense shows up everywhere in Raindrop, though not in the way you might expect. We talked about why observability became more important as agents got more capable, the internal language Raindrop invented to make a brand new problem comprehensible, and the small product details that separate tools people tolerate from tools people love.</p>
+
+        <div id="founding-team" class="scroll-anchor"></div>
+
+        <div class="cc-qa-list">
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Let&rsquo;s start with introductions. How did the three of you come together, and how do you complement each other?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Zubin</span>
+            <div class="cc-qa-body is-response">
+              <p>Ben and I used to live together &mdash; best friends. Alexis and I met in college and quickly became really close friends, started a company, took it through the Series B, sold it to Coinbase. This was around the time ChatGPT came out. Ben was a designer at Apple, first an engineer then a designer, and just one of the most talented people I have ever met, and a close friend. So we started hacking on things together after ChatGPT came out, and quickly realized we had so much fun working together that we had to do something. We were able to lure him away from Apple after four years there.</p>
+              <p>The way we complement each other is interesting. We always joke that for any given thing, one of us is the best in the world at it, another is kind of mid, and the third is somewhere in between. For example, on prioritization, one of us is best in the world at knowing what is important and what is not. But then on something else, like remembering the things that need to get done, it will be someone else.</p>
+            </div>
+          </div>
+
+          <div id="leaving-apple" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>You had this incredible IC career at Apple. What did you have to unlearn to become a founder?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Ben</span>
+            <div class="cc-qa-body is-response">
+              <p>If you look at designers who leave Apple, you will notice there are not many successful founders that come out of that. It is not because they are not talented. I think if you look at the design team specifically, it is very easy to feel like the success of something is because of you, because industrial design is the most important thing. But you can mistake the &ldquo;designing the iPhone part&rdquo; for the success of the iPhone part, feeling like you built the iPhone, when a lot of the iPhone&rsquo;s success comes down to how you translate what the thing is to people.</p>
+              <p>The other thing that is very different is that when you are at Apple &ndash; everyone cares about what you are making. The whole world. Even the Vision Pro, which I do not think is Apple&rsquo;s most successful product, the whole world saw it and engaged with it and talked about it. Whereas the default for startups is that no one cares. Even if everyone cares for a minute, they forget instantly. So you have to learn this sense of rejection, of people not running toward what you are doing right away.</p>
+            </div>
+          </div>
+
+          <div id="sidekick-to-raindrop" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Take us through how the company evolved. What were you building first, and how did you get to Raindrop?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Zubin</span>
+            <div class="cc-qa-body is-response">
+              <p>The first thing we worked on was a tool called Sidekick. This was over three years ago. Cursor had just pivoted, they were originally building an IDE in Rust and then moved to VS Code. We were all engineers, and we had this idea. There used to be a class of scribes who were the only people able to write. So all of history only reflects the class of people designated as scribes. We felt like we were entering a new era where engineers are the scribes of code, and now everyone is going to be able to code. That was very exciting to us.</p>
+              <p>We built for engineers. Our own AI product with Sidekick was pretty successful, but it was actually very hard to get a sense of where our agents were failing in production. There was all this data, and using that understanding to make the product better &mdash; that whole loop did not exist. So we started building tools for ourselves, and then realized that everyone building an agent, which was going to be everyone, had this problem. So we launched what became Raindrop last summer, and it was insanely resonant. Some of the best AI companies in the world, the Vercel all the way to Fortune 500s, are using us. <span class="cc-highlight">We have started calling it humanity&rsquo;s last problem internally, because agents are being deployed in finance, military, healthcare, and when they fail it is catastrophic.</span></p>
+            </div>
+          </div>
+
+          <div id="what-failure-means" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Why is your team set up to solve the problem of agents failing?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Ben</span>
+            <div class="cc-qa-body is-response">
+              <p>The really weird thing is what a failure even means. A year or two ago, the failures people thought about were things like outputting JSON incorrectly, or hallucinating something completely random. Those still happen. But a lot of what people mean by failure now is that the agent did not do the thing they wanted, which is a little different.</p>
+              <p>There was this lawsuit with Air Canada where a user requested a refund and the agent gave it to them, and then the company said no, we do not refund that, and the user said but you told me I would get it, and they won. The customer won, because you cannot tell people they are going to get a refund if they are not. There was another with Virgin where the chat would end whenever someone used the word Virgin, because it flagged as NSFW, so it would say it could not engage with that language. Any of those things, a different person might have wanted the agent to actually give the refund, or to check first. So it comes down to what you actually want the agent to do.</p>
+              <p><span class="cc-highlight">This is the thread that runs through everything for me. I always chase design problems that feel unbounded, where the input space and the output space are both very large.</span> You can come to an agent and say anything, and it can do anything. How do you create some framework around that without limiting it, without constraining it, but still letting people comprehend it. That is where our team really shines. It is a lot of applied ML but you also see product making a huge difference in how people actually use it.</p>
+            </div>
+          </div>
+
+          <div id="being-honest" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>If you are a designer or product engineer at Raindrop, what do you have to be really good at?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Ben</span>
+            <div class="cc-qa-body is-response">
+              <p>One is being honest with yourself. This is one of the hardest things for designers to do, and it is why <span class="cc-highlight">our team would never want to build in a space where we were not also the user.</span> It is so easy to fool yourself into thinking, oh, I would love to have X button or X feature, when nobody wants that. Or the classic, what if we did not do this, and you realize it would be fine. So everyone has to be an actual user. We use Raindrop a ton internally.</p>
+              <p>We look for people who are very curious in general. From a product design standpoint, I almost see design as unraveling fundamental rules about the universe. It sounds grand, but think about working on the Vision Pro. From an OS perspective, we had to figure out the right way to do it. What is an app, what is a window, how do you move windows, how do they interact, how do you think about a VR app versus a window. The answers seem a lot more obvious now. Regardless of whether the Vision Pro goes anywhere, those ideas feel like they unraveled something true about how to design that kind of thing.</p>
+              <p>We feel the same way about Raindrop. When we started, there really was no production observability platform for agents. Every single platform at the time would just do token counting, maybe a hallucination score, or sentiment, positive or negative, which is completely useless. If someone says I hate my life, that is super negative sentiment and it does not mean anything. It was super contrarian at the time. The predominant wisdom was that every team needs to write a ton of evals, and we are building agents, and we do not love writing evals, the same way we do not write that many unit tests except for the core parts of the app. What we love is that we have Sentry, and when something goes wrong we get an alert, and that lets us ship really fast on the things that are less critical. That is what we wanted. I got into a Twitter fight with one of the big eval companies of the time over this, and they said it was completely wrong.</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Was that because people viewed evals as too crucial to skip?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Ben</span>
+            <div class="cc-qa-body is-response">
+              <p>No, it was the complete opposite. Nobody really thought it mattered, which is crazy. There was a lot of cognitive dissonance. You have something that is working and you do not want to change it. We were also really early. A lot of products were not at the scale yet where it mattered. <span class="cc-highlight">We have this idea internally we call a tsunami of capabilities. The problem becomes more important as agents become more complex, because their capabilities become more open ended, the things they can do are wider and harder to test in advance &ndash; especially as agents become more capable they get deployed at higher and higher stakes, in healthcare, in law.</span> At the time, even the biggest companies besides ChatGPT only had a few thousand interactions, so it did not really matter. Now we have customers with millions and millions a day, and that is where professional observability really matters.</p>
+            </div>
+          </div>
+
+          <div id="design-unraveling" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>There is a sense of taste that Raindrop has. How does that show up when customers choose you, and how does it show up in how you tell the story?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Ben</span>
+            <div class="cc-qa-body is-response">
+              <p>As an engineering company, <span class="cc-highlight">the most core part of taste is the nouns we have, the way people understand our platform.</span> We have core pillars. The first is what we call stumbles. Every time a user in your app hits any kind of trouble, it shows up as a stumble. It is a firehose of stumbles. Not all of them are things you want to fix, but these are the problems people are having. Then if there is a real issue, something new breaks, a tool breaks, you push a change and suddenly the agent is lying to people or does not know who they are, that graduates into what we call an issue. An issue shows you how many people are affected and all the relevant tags. For very long running things, issues are meant to be solvable. But there are kinds of things in AI products that are not solvable. People complaining about aesthetics, for instance. If you are making a vibe coding platform, people will complain no matter what, because not everyone is at the same skill level. What you want to do there is track it over time, see if it spikes, and use it in experiments and A/B tests. That leads to the last unit we have, which is an experiment. You can test a feature flag, test a model, and see how things changed. Pretty much every other platform ends up either complicated or having a weird story where you have to buy into some whole world rather than just plugging into the agent you are building. One of the founders of a very large coding company said the other day that we are the only people who actually made the right solution in this space, in terms of his mental model for it. And that mental model translates to the SDKs, to the UI, even through MCP, the parts you do not see as UI. It permeates through.</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>You launched an open source project a little bit ago, Workshop. What was the idea behind it?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Ben</span>
+            <div class="cc-qa-body is-response">
+              <p>It is another example of being honest with ourselves. We try to use Raindrop the most. Up until we released <a href="https://www.raindrop.ai/workshop/" target="_blank" rel="noopener">Workshop</a>, everybody working on agents locally would use some remote eval or tracing dashboard, whether Raindrop or something else, to see their traces. But you are waiting seconds for things to show up. At one point I had Raindrop side by side with the agent, watching the agent stream every token in, watching things show up one span at a time, and thought, this is kind of silly. If I am running my agent locally I should be able to see my traces locally. And wouldn&rsquo;t it be cool if my coding agent could see my traces, without even needing a server. Someone could just build it, and there are really nice things about us being the ones to build it, because it can be tightly integrated with the rest of our platform. That is the being honest with yourself part. A lot of people would rather cram it into their app somehow, and we would rather build the thing that should exist.</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>How do you think about agent experience versus developer experience, and discoverability?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Ben</span>
+            <div class="cc-qa-body is-response">
+              <p>Raindrop is designed for agents as much as for humans. It makes sense, because a lot of the way humans use us now is through agents. We had a launch with Devin from Cognition recently where Raindrop has first party support for Devin to do auto self healing loops. Raindrop finds an issue, pushes that to Devin, and Devin fixes the problem in your agent based on all the context Raindrop has. That will only become more true.</p>
+              <p>The most important thing is the vocabulary. Imagine if we did not call issues issues, if we called them alerts. A user comes and asks what issues exist, and you have to say there are no issues. Weird things like that. <span class="cc-highlight">Creating and defining your own vocabulary, because this is an entirely new problem set, is very important.</span> The hardest thing is keeping that vocabulary clear and consistent, especially because the space is changing constantly. The reason our company is doing well right now is that we are constantly at the bleeding edge of what is possible and how agents are changing, building the tools people will need a month or so out. Keeping the nouns consistent all the way down to the DB layer, for users and for agents and in the SDK, is hard.</p>
+            </div>
+          </div>
+
+          <div id="self-healing" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>What trend are you most excited about that your customers are excited about too?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Ben</span>
+            <div class="cc-qa-body is-response">
+              <p><span class="cc-highlight">Right now it is self healing, and making that real.</span> Everyone&rsquo;s sales pitch in the last month or two has been self improving, self healing, and mostly it just does not work. That is the being honest with yourself part too. I think what we have built actually works. We recorded a video with the CTO of Speak the other day, the language learning app with 15 million users, talking about exactly how they use it and how it heals itself. There are right ways to do it, and a lot of our launches are laying the groundwork. Workshop is part of that. You can ask Devin to install Workshop, run your agent, and check the traces in Workshop, reducing latency a ton, isolated from your production data from a security perspective.</p>
+              <p>None of these launches are random. The whole next phase of agents has two buckets of issues. There are issues you can just fix, something breaks, a tool stops returning data, it times out. Then there is another class that is longer running and more behavioral, around personalization or tone. Those you cannot just fix. You have to run experiments. That is what we are focused on.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <section id="hot-takes" class="cc-hot-takes scroll-anchor">
+          <h2 class="cc-hot-takes-title">Rapid Fire</h2>
+          <div class="cc-hot-takes-list">
+
+            <div class="cc-hot-take">
+              <span class="cc-hot-take-num">I</span>
+              <div>
+                <div class="cc-hot-take-q">Outside of Raindrop, what are you exploring right now?</div>
+                <div class="cc-hot-take-a">
+                  <p>Honestly, there is not that much outside Raindrop for me. There are a lot of philosophies for running a company, but I am pretty much all in. My brain does not really go elsewhere that much. Around Christmas there was a day or two where I was hacking on source control stuff, better diff viewing and code review tools, and I usually do that when I get fed up with a problem. Then I take it to a team that is actually building it and say, guys, look at this, just do this. There is a whole umbrella of problems we work on, so there is no shortage.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="cc-hot-take">
+              <span class="cc-hot-take-num">II</span>
+              <div>
+                <div class="cc-hot-take-q">What is one of the most positive experiences you have had using AI as a consumer?</div>
+                <div class="cc-hot-take-a">
+                  <p>Devin. I wrote a post called <a href="https://x.com/benhylak/status/2059683327150575706?s=20" target="_blank" rel="noopener">How to Eval</a> that was really inspired by it. The difference between Devin and other products is that it works much more reliably, and it surprises me with capabilities that are different from the kind that something like Claude Code impresses you with. Other products make you choose what git repository you are working in. Devin is almost more like a computer. I was iterating on a static site and did not feel like deploying it, so I asked if it could just show me a link, and it said yes, I can expose a port from my VM, so as long as the VM is running you can see it. Or if you open a PR and someone else merges a PR doing the same thing, it updates you in Slack and says, actually Pavel already merged this, I am going to close mine. A very smart model does not replace a software engineer. There are so many random things that are part of the software engineering life cycle, and those details are what closes the gap.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="cc-hot-take">
+              <span class="cc-hot-take-num">III</span>
+              <div>
+                <div class="cc-hot-take-q">Are there any brands you really admire?</div>
+                <div class="cc-hot-take-a">
+                  <p>Apple is the obvious one. I have admired Apple since I was five, which is why working there was a life dream, so I joined right after college. On the company side, Vercel is one I always look at. They did a great job showing how making something 100x easier is really useful even for hardcore engineers, and you will pay more for that experience, and from there they go and solve deeply technical problems. PostHog as a company philosophy is aspirational for me, the way it is organized internally, the documentation and technical guides they write. In our early days, a lot of how I learned ClickHouse was going through that kind of content. <span class="cc-highlight">Right now everyone is pushing out slop content, which is bad for humanity, so I appreciate companies that are actually sharing knowledge.</span></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="cc-hot-take">
+              <span class="cc-hot-take-num">IV</span>
+              <div>
+                <div class="cc-hot-take-q">Who are you hiring for?</div>
+                <div class="cc-hot-take-a">
+                  <p>Everything. We look for people who almost want to be a founder in some way, deeply curious, technical, product minded, who want to learn. A lot of us come from weird backgrounds. People who were at Apple for almost a decade, and one of our engineers did not graduate high school but was doing on prem ClickHouse deployments at a security company for years, one of the best engineers we have ever met. We are hiring senior software engineering roles, sales, marketing, and product engineering roles. <a href="https://www.raindrop.ai/careers/" target="_blank" rel="noopener">raindrop.ai/careers</a></p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+
+    <footer class="cc-footer">
+      <p class="cc-footer-meta">&copy; 2026 Creative Conviction</p>
+    </footer>
+
+  </div>
+
+  <script>
+    (function () {
+      var sidebar = document.getElementById('cc-sidebar');
+      var indicator = document.getElementById('cc-track-indicator');
+      var links = Array.prototype.slice.call(document.querySelectorAll('.cc-sidebar-link'));
+      if (!sidebar || !indicator || !links.length) return;
+
+      setTimeout(function () { sidebar.classList.add('is-visible'); }, 180);
+
+      links.forEach(function (link) {
+        link.addEventListener('click', function () {
+          var id = link.getAttribute('data-target');
+          var el = document.getElementById(id);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      function update() {
+        var activeIdx = 0;
+        for (var i = links.length - 1; i >= 0; i--) {
+          var id = links[i].getAttribute('data-target');
+          var el = document.getElementById(id);
+          if (el && el.getBoundingClientRect().top <= 130) { activeIdx = i; break; }
+        }
+        links.forEach(function (l, i) { l.classList.toggle('is-active', i === activeIdx); });
+        var activeLink = links[activeIdx];
+        if (activeLink) {
+          indicator.style.top = activeLink.offsetTop + 'px';
+          indicator.style.height = activeLink.offsetHeight + 'px';
+        }
+      }
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    })();
+  </script>
+  <script src="../../share-quote.js"></script>
+</body>
+</html>
