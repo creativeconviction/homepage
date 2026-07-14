@@ -191,6 +191,7 @@
     .cc-episode:hover { background: rgba(26, 17, 48, 0.04); }
     .cc-episode-title {
       grid-area: title;
+      min-width: 0;
       font-family: var(--font-serif);
       font-weight: 400;
       font-size: 20px;
@@ -201,6 +202,7 @@
       align-items: center;
       gap: 14px;
     }
+    .cc-episode-title span { min-width: 0; overflow-wrap: break-word; }
     .cc-episode-thumb {
       width: 56px;
       height: 56px;
@@ -322,11 +324,7 @@
         margin: 0 -14px;
       }
       .cc-episode-cat, .cc-episode-date { text-align: left; align-self: auto; }
-      .cc-episode-title span {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
+      .cc-episode-title { align-items: flex-start; }
       .cc-footer-sub { max-width: 100%; width: 100%; }
       .cc-subscribe { max-width: 100%; width: 100%; }
       .cc-subscribe-btn { padding-right: 12px; padding-left: 12px; }
