@@ -174,7 +174,7 @@
     .cc-article { max-width: 640px; margin: 0 auto; }
     @media (min-width: 1060px) { .cc-article { margin: 0; } }
 
-    .cc-article-header { margin-bottom: 56px; }
+    .cc-article-header { margin-bottom: 40px; }
     .cc-article-thumb {
       display: block;
       width: 168px;
@@ -212,6 +212,16 @@
       color: var(--fg-3);
       letter-spacing: 0.02em;
     }
+
+    .cc-article-dek {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--fg-2);
+      margin: 32px 0 56px;
+    }
+    .cc-article-dek p { margin-bottom: 16px; }
+    .cc-article-dek p:last-child { margin-bottom: 0; }
 
     .scroll-anchor { scroll-margin-top: 48px; }
 
@@ -252,7 +262,7 @@
     }
     .cc-highlight:hover { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
 
-    /* ----- Hot Takes ----- */
+    /* ----- Rapid fire ----- */
     .cc-hot-takes { padding-top: 32px; }
     .cc-hot-takes-title {
       font-family: var(--font-serif);
@@ -302,6 +312,7 @@
       .cc-shell { padding: 24px 24px 64px; }
       .cc-header { margin-bottom: 48px; }
       .cc-article-header { margin-bottom: 40px; }
+      .cc-article-dek { margin: 24px 0 40px; }
       .cc-qa { grid-template-columns: 1fr; gap: 6px; }
       .cc-speaker { padding-top: 0; }
       .cc-hot-take { grid-template-columns: 1fr; gap: 6px; }
@@ -329,15 +340,15 @@
             <div class="cc-sidebar-track-indicator" id="cc-track-indicator"></div>
           </div>
           <div class="cc-sidebar-links" id="cc-sidebar-links">
-            <button class="cc-sidebar-link is-active" data-target="brand-in-the-org">Brand&rsquo;s place in the org</button>
+            <button class="cc-sidebar-link is-active" data-target="brand-under-marketing">Brand under marketing</button>
             <button class="cc-sidebar-link" data-target="three-phases">The three phases</button>
             <button class="cc-sidebar-link" data-target="product-vs-brand">Product vs. brand designers</button>
-            <button class="cc-sidebar-link" data-target="brand-as-behavior">Brand as behavior</button>
-            <button class="cc-sidebar-link" data-target="programmable-brand">Making brand programmable</button>
-            <button class="cc-sidebar-link" data-target="skills-and-systems">The skills and systems layer</button>
-            <button class="cc-sidebar-link" data-target="tooling">Tooling and experimentation</button>
+            <button class="cc-sidebar-link" data-target="why-divide">Why the divide happened</button>
+            <button class="cc-sidebar-link" data-target="brand-extension">Brand as extension of product and team</button>
+            <button class="cc-sidebar-link" data-target="brand-programmable">Making brand programmable</button>
+            <button class="cc-sidebar-link" data-target="problem-opportunity">Problem solving vs. opportunity seeking</button>
             <button class="cc-sidebar-link" data-target="time-for-creatives">The time for creatives</button>
-            <button class="cc-sidebar-link" data-target="hot-takes">Hot takes</button>
+            <button class="cc-sidebar-link" data-target="rapid-fire">Rapid fire</button>
           </div>
         </div>
       </aside>
@@ -352,22 +363,28 @@
           <p class="cc-article-date">July 2026</p>
         </div>
 
-        <div id="brand-in-the-org" class="scroll-anchor"></div>
+        <div class="cc-article-dek">
+          <p>Paul Jun leads brand design at Ramp, where he owns the brand identity, the visual and verbal language, and the tooling and systems that touch the brand across a company of nearly 1,800 people. He has spent seventeen years in the industry, and for most of that time he was frustrated by how tech treated brand design. His view is that AI is the change agent that finally shifts that perception, and he wants to be one of the people who shows what is possible.</p>
+          <p>Paul has completely crossed the line from designer to designer and builder. A month after Cursor came out, he built a Figma plugin in days, and he&rsquo;s now rebuilt Ramp&rsquo;s tone of voice in between meetings with Claude Code and the Figma MCP. He is now building Slack bots, review agents, and skill libraries so that anyone at Ramp can ship near-finished work without a designer in the room.</p>
+          <p>The conversation moves through why brand and product were ever split apart, what happens when a brand team stops solving requests and starts seeking opportunities, and why Paul thinks designers are uniquely equipped for a world where one person can build a product end to end. He calls this the dial-up era of AI, and he is clearly enjoying being at the front of the roller coaster.</p>
+        </div>
+
+        <div id="brand-under-marketing" class="scroll-anchor"></div>
 
         <div class="cc-qa-list">
 
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
             <div class="cc-qa-body is-question">
-              <p>What changes when brand reports into product and engineering versus marketing? And what does that look like at Ramp today?</p>
+              <p>What changes when brand reports into product and engineering versus when it reports into marketing? And what does that look like at Ramp today?</p>
             </div>
           </div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Paul</span>
             <div class="cc-qa-body is-response">
-              <p>A lot of startups place brand under marketing, and it&rsquo;s a strange thing. My sense is that early-stage companies influence this org chart decision without much thought. At the end of the day, product design and brand design is just design. <span class="cc-highlight">Product design is form follows function. Brand design is form follows fantasy.</span> Both require form and both require a customer to experience it.</p>
-              <p>In my past two jobs before Ramp, I always negotiated that I would not report to a CMO. I want to report to a designer and a builder. My team still works with marketing. We create the templates, the guidelines, the assets. But I think before the age of AI, most leaders and CEOs, because they don&rsquo;t understand branding, just placed brand designers on marketing teams. This idea of an &ldquo;in-house agency&rdquo; was a trend for the last 20 years. I personally think that idea is horrendous. I don&rsquo;t think it&rsquo;s working at all, and you&rsquo;re going to lose a lot of good designers that way.</p>
+              <p>Typically a lot of startups place brand under marketing, and it&rsquo;s a strange thing. At the end of the day, product design and brand design is just design. <span class="cc-highlight">Product design is form follows function, brand design is form follows fantasy. Both require form, and both require a customer to experience that.</span></p>
+              <p>In my past two jobs before Ramp, I always negotiated that I would report to a designer and a builder, not a CMO. My team still works with marketing &mdash; we create the templates, the guidelines, the assets. But before the age of AI, most leaders and executives didn&rsquo;t understand branding, so they just placed brand designers under marketing. This idea of an in-house agency was a trend for the last 20 years, and it&rsquo;s not working &mdash; you&rsquo;re going to lose a lot of good designers that way.</p>
             </div>
           </div>
 
@@ -376,31 +393,17 @@
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
             <div class="cc-qa-body is-question">
-              <p>Can you walk us through how you see startups evolving on this?</p>
+              <p>You mentioned startups move through phases. Can you walk through those?</p>
             </div>
           </div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Paul</span>
             <div class="cc-qa-body is-response">
-              <p>Every startup goes through phases. First, you have to find product-market fit. Brand design is influencing things like marketing campaigns, emails, the identity itself, the website. Important, but functional.</p>
-              <p>Second phase is what I&rsquo;d call the features war. One company builds a feature, another company says &ldquo;we have that too, but better.&rdquo; Companies get stuck in this world trying to out-feature each other, and I think that&rsquo;s a race to the bottom.</p>
-              <p><span class="cc-highlight">Phase three is where you&rsquo;re investing in experience, which is really asking yourself&hellip; what does the product feel like when I use it?</span> Not just what job is it doing, but how does it feel when I do the job? And I think brand designers are the most poised to figure out what that means.</p>
-              <p>The best designers can do both product design and brand design. I know maybe three of them out of the hundreds I&rsquo;ve worked with. These people can build you an entire product, but then they can also think about the motion states, how color is used, how typography is used, what the onboarding feels like, how the product upsell feels. Most product designers think of it very narrowly.</p>
-            </div>
-          </div>
-
-          <div class="cc-qa">
-            <span class="cc-speaker is-interviewer">LF + RA</span>
-            <div class="cc-qa-body is-question">
-              <p>What&rsquo;s the scope of your team&rsquo;s accountability at Ramp?</p>
-            </div>
-          </div>
-
-          <div class="cc-qa">
-            <span class="cc-speaker is-guest">Paul</span>
-            <div class="cc-qa-body is-response">
-              <p>My team is accountable for thinking about the entire arc, from the first performance ad to the homepage, to a demo, to a sales conversation, the sales deck, even the language the sales team uses, all the way to onboarding into the product, your first moment of value, and inviting a colleague. That is all brand. And I&rsquo;m not saying it just falls on the brand team. Everyone at a company should feel like they&rsquo;re accountable for the brand.</p>
+              <p>Every startup goes through phases.</p>
+              <p>The first phase is PMF, where you just have to find product market fit. Brand design is influencing marketing campaigns, emails, images, the identity, the web. These things matter.</p>
+              <p>The second phase is a features war. One company builds a feature, another company says they have it too, but better. Companies get stuck in this world trying to out-feature each other, and it can be a race to the bottom.</p>
+              <p><span class="cc-highlight">The third phase is unique. You&rsquo;re no longer just shipping features &mdash; you&rsquo;re investing in experience. That&rsquo;s really asking what the product feels like when you use it &mdash; not just what job it&rsquo;s doing, but how it feels when you do the job. I think brand designers are the most poised to figure out what that means.</span> My team at Ramp is accountable for the entire experience, from the first performance ad to the homepage, to a demo, to a sales conversation, the sales deck, the language the sales team uses, all the way up to onboarding into the product, your first moment of value, and inviting a colleague. That&rsquo;s all brand. I&rsquo;m not saying it all falls on the brand team, but rather everyone at a company should feel accountable for the brand.</p>
             </div>
           </div>
 
@@ -409,107 +412,83 @@
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
             <div class="cc-qa-body is-question">
-              <p>You said most product designers don&rsquo;t think this way and you only have a handful of people that can do both. Why is that? And how do people upskill?</p>
+              <p>You said most product designers don&rsquo;t think this way, that they&rsquo;re too narrow, and that only a handful can do both. Why is that, and how do people upskill into being an all-encompassing brand and product designer?</p>
             </div>
           </div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Paul</span>
             <div class="cc-qa-body is-response">
-              <p>Some of it is honestly just luck. You have to work at a place where you have the right design leadership that shows you can be both, that you can use both sides of your brain.</p>
-              <p>This might be a cynical take, but I think the growth era where everything was about moving fast, the low interest rate economy, I think product design fell to a shallow game. Product designers were held to certain numbers and outcomes that they had to game at big companies, and it created some bad habits. They were forced to play the wrong game. They never learned brand because they were stuck in their own world being managed by PMs or engineering teams. And those two worlds never talked to each other.</p>
-              <p><span class="cc-highlight">At the end of the day, we are all designers. We are all making rectangles and squares on our screens.</span> We all have to think about the customer, the product, the business, and the customer mindset. Why is there such a separation between these two disciplines? I think a lot of it was economic.</p>
-              <p>Both product design and brand design were born in Photoshop. At some point, a tech company said &ldquo;product design, you go over there and work with eng. Brand design, you more artistic types, you go work with marketing. We don&rsquo;t know what to do with you.&rdquo; And that&rsquo;s how it happened. It came from the FAANG companies, and because we&rsquo;re social animals, startups looked at what was working, copied it, and it created this weird expectation.</p>
+              <p><span class="cc-highlight">The best designers can do both product design and brand design.</span> These people can build you an entire product, but they can also think about the motion states, how color is used, how typography is used, what the onboarding feels like, what the upsell feels like. Most product designers think very narrowly. Brand designers elevate it by thinking about the feeling of the experience, and not just in that one product moment, but the entire experience.</p>
+              <p>This is not the best answer, but some of it is luck. <span class="cc-highlight">You have to work at a place with the right design leadership, somewhere that shows you can use both sides of your brain.</span> I have a maybe cynical take, but I think the growth era, when everything was about moving fast in a low interest rate economy, pushed product design into a shallow game. That&rsquo;s why product design became so boring and why everything looks the same. We figured out how to make frictionless apps, and product designers were held to numbers and outcomes they had to game at big companies. It created bad habits. They were forced to play the wrong game, and they never learned brand because they were stuck in their own world, managed by PMs or engineering teams, teams that never talked to each other.</p>
             </div>
           </div>
 
-          <div id="brand-as-behavior" class="scroll-anchor"></div>
+          <div id="why-divide" class="scroll-anchor"></div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
             <div class="cc-qa-body is-question">
-              <p>Something we&rsquo;ve been thinking about, and probably arguing, is that brand in a lot of ways comes from the founding team&rsquo;s vision. And it&rsquo;s the product made visible. How do you think about how much of Ramp&rsquo;s edge is product versus brand versus team?</p>
+              <p>Where do you think the divide between brand and product actually came from?</p>
             </div>
           </div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Paul</span>
             <div class="cc-qa-body is-response">
-              <p>Every single prospect or agency I talk to mentions Ramp&rsquo;s brand as being iconic. I was talking to an agency the other day and they were like, &ldquo;literally every client call, they say they want something like Ramp&rsquo;s brand.&rdquo; I take no credit for that. The team before me did a great job of creating something truly differentiated in the financial space, which is often seen as esoteric, intimidating, and high barrier to entry. Ramp&rsquo;s brand is very quiet and confident. Not loud and in your face.</p>
-              <p>What brought me to Ramp, other than the brand being so strong, was that the engineering is clearly world class. Every friend I told I was interviewing said &ldquo;Ramp is next level, they have some of the best engineers.&rdquo; And it&rsquo;s clear because the product just works. It&rsquo;s that fast and that automatic.</p>
-              <p>Now Ramp is at the phase where you&rsquo;re not a startup anymore. You&rsquo;re scaling up, reaching new audiences, new verticals, building a ton of new products. <span class="cc-highlight">When you&rsquo;re a startup, you can sound like a fifth grade band recital and still succeed. Now it&rsquo;s about performing like a symphony.</span></p>
-              <p>I always say brand is behavior. What are the things we&rsquo;re going to do that get talked about within the cultures we want to be a part of? How do our ideas make it into that culture so that other people start referencing our ways of working and our ways of thinking?</p>
+              <p>Design was born in Photoshop, and so was brand design. But at some point a tech company said &ldquo;product design, you go over there and work with eng,&rdquo; and &ldquo;brand design, you more artistic types, go work with marketing.&rdquo;</p>
+              <p>A lot of this came from FAANG companies. Many startups are social animals &mdash; they look at what&rsquo;s working and copy it. They saw the big companies separate brand and product, so they did the same, and it created this weird expectation. I hope it completely changes. There&rsquo;s a parallel with designers learning to code. There was a period early in my career where everyone said designers had to learn to code, and the ones who did were able to differentiate themselves. With AI, it&rsquo;s no longer an excuse.</p>
             </div>
           </div>
 
-          <div id="programmable-brand" class="scroll-anchor"></div>
+          <div id="brand-extension" class="scroll-anchor"></div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
             <div class="cc-qa-body is-question">
-              <p>We&rsquo;ve been writing about how all these sub-processes of brand are becoming programmatic or programmable. But there are some aspects of cohesive narrative building that you just need creatives in the loop for. How do you think about that? What are the sub-processes you&rsquo;re automating first versus not?</p>
+              <p>We&rsquo;ve been arguing that brand comes from the founding team&rsquo;s vision and is the product made visible, that it&rsquo;s an extension of both product and team. Do you agree, or push back?</p>
             </div>
           </div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Paul</span>
             <div class="cc-qa-body is-response">
-              <p>Something I said to my team my second or third week at Ramp, and something I still deeply believe, is&hellip; <span class="cc-highlight">make the brand easy to love and impossible to misuse. And that&rsquo;s on us.</span></p>
-              <p>We&rsquo;re building a Slack bot right now that can generate a brief for a product area, turn that brief into a deck, and turn that deck into different assets. All of it happening just in Slack. I&rsquo;m working with one design engineer on it.</p>
-              <p>I have a Notion doc where I break down the requests my team gets. Tier one is high craft, the most important projects, the biggest launches, the biggest bets. All the way down to tier three, which might be something like &ldquo;I need a LinkedIn image promoting that we have stablecoins.&rdquo; Someone should be able to do that in five minutes. Before AI, that may have taken a brand designer an hour, a full day, multiple rounds with stakeholders. I want to create a world where no one on my team ever has to touch a tier three asset again, maybe even a tier two. All of the human talent and energy gets dedicated to the biggest bets and to the future.</p>
-              <p>I think there are two modes that brand design teams work in. Problem solving versus opportunity seeking. I would say 99% of their energy is spent problem solving. Doing other people&rsquo;s requests. Make me a deck, make me a sticker, I need swag, I need this logo resized on this sales deck because I don&rsquo;t know how to do it. I want to flip that completely and have us spending time thinking about the future and building it. Because if we figure that out first, we&rsquo;re staying ahead of competitors.</p>
+              <p>I think so. Even when I talk to prospects or agencies, every single one mentions Ramp&rsquo;s brand as iconic. The team that built it before me did a great job creating something truly differentiated in the financial space, which is often esoteric, intimidating, high barrier to entry, with obscure language. A lot of those identities feel too intense. Ramp is quiet and confident, not loud and in your face. I take no credit for that.</p>
+              <p>The other thing that brought me to Ramp was that the engineering is clearly world class. When I was interviewing, every friend I told said Ramp was next level, that they have some of the best engineers. It&rsquo;s clear because the product just works. It&rsquo;s insanely great, and it&rsquo;s that fast and automatic.</p>
+              <p><span class="cc-highlight">Now Ramp is scaling up, reaching new audiences, building new verticals. It&rsquo;s like performing a symphony. When you&rsquo;re a startup, you can sound like a fifth grade band recital and still succeed. Now it&rsquo;s about how we continuously ship things that are on brand and meet the customer&rsquo;s needs. I always say brand is behavior. What are the things we do that get talked about within the cultures we want to be part of? How do our ideas make it into that culture so other people start referencing our ways of working and thinking?</span></p>
             </div>
           </div>
+
+          <div id="brand-programmable" class="scroll-anchor"></div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
             <div class="cc-qa-body is-question">
-              <p>Has that shift started happening yet? Have you seen a designer with extra time pursuing a new opportunity because of this?</p>
+              <p>We&rsquo;re seeing how sub-processes of brand are becoming programmable, while some parts of cohesive narrative building still need creatives in the loop. Does that resonate with what you&rsquo;re seeing at Ramp?</p>
             </div>
           </div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Paul</span>
             <div class="cc-qa-body is-response">
-              <p>Not yet. I&rsquo;m 10 weeks into the job and there&rsquo;s so much foundational stuff I&rsquo;m fixing and changing. But my hope is that every single designer on my team can plug into any team at Ramp and within a couple weeks, that team&rsquo;s output is 10x better. The quality of their writing, the way they launch things. One person goes into a team, works with dozens of people, 10x their output, then leaves it better than they found it and moves on to the next team.</p>
+              <p><span class="cc-highlight">We need to make the brand easy to love and impossible to misuse.</span> We&rsquo;re building a Slack bot right now that can generate a brief for a product area, turn that brief into a deck, then turn that deck into different assets, all inside Slack. I&rsquo;m working with just one design engineer on it.</p>
+              <p>I have a Notion doc where I break down the requests my team gets and tier them. Tier one is high craft, the biggest launches and bets in the company. A tier three might be a LinkedIn image promoting that we have stablecoins. Someone should be able to do that in five minutes. Before AI, that might have taken a brand designer a full day with multiple back and forths. <span class="cc-highlight">I want a world where no one ever has to touch a tier three asset again, maybe even as bold as no one touching a tier two asset, so that all the human talent and energy is dedicated to the biggest bets and the future.</span></p>
             </div>
           </div>
 
-          <div id="skills-and-systems" class="scroll-anchor"></div>
+          <div id="problem-opportunity" class="scroll-anchor"></div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
             <div class="cc-qa-body is-question">
-              <p>Earlier you mentioned the idea that brand designers need to become &ldquo;brand engineers.&rdquo; Can you expand on what that means in practice?</p>
+              <p>How does brand work start to shift once more AI is utilized more?</p>
             </div>
           </div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Paul</span>
             <div class="cc-qa-body is-response">
-              <p>The future is that brand designers need to become brand engineers. You have to learn Claude Code and Cursor. You have to learn how to build tools. The question becomes&hellip; how might a brand team create the systems, the agents, the skills, the prompt libraries, the patterns that every team uses?</p>
-              <p>I went to the SEO team last week and asked, &ldquo;what do you need to represent the brand well without a designer in the room?&rdquo; They need the Ramp tone of voice, the brand strategy, persona and ICP data from product marketing, research from the research team, a library of product graphics for articles, a library of assets for blog hero images. So you go make friends with these teams, deeply understand what they&rsquo;re accountable for and what outcomes they&rsquo;re driving, and then reverse engineer it. What are the skills, the prompts, the agents they need to be set up for success?</p>
-              <p>Right now a lot of people at Ramp create Claude skills, which is fantastic. But when I look at some of them, they&rsquo;re not properly formatted, they don&rsquo;t have the right content, they don&rsquo;t have the right connections. <span class="cc-highlight">The way I described it to someone today was&hellip; there are a lot of tentacles but there&rsquo;s no brain. We need to create the brain of the octopus.</span> Because your skill for campaign writing, if it&rsquo;s not connected to your personas, your ICP, your Snowflake data about your latest campaigns, then what is that skill really doing?</p>
-              <p>It&rsquo;s also dangerous if you&rsquo;re creating a skill outside your expertise, because you don&rsquo;t know how to pressure test it. You don&rsquo;t know how to validate whether it&rsquo;s working. I encourage people to create the skills that are based on their expert knowledge and then distribute those to others. Don&rsquo;t try to create a skill that falls in my domain because you have no idea what you&rsquo;re doing. You&rsquo;re just going to create slop.</p>
-            </div>
-          </div>
-
-          <div id="tooling" class="scroll-anchor"></div>
-
-          <div class="cc-qa">
-            <span class="cc-speaker is-interviewer">LF + RA</span>
-            <div class="cc-qa-body is-question">
-              <p>From your perspective, have you seen any creative tools that have stuck or that you&rsquo;ve gotten real value out of? And are there gaps where you&rsquo;re still spending manual time that you think could be interesting?</p>
-            </div>
-          </div>
-
-          <div class="cc-qa">
-            <span class="cc-speaker is-guest">Paul</span>
-            <div class="cc-qa-body is-response">
-              <p>We&rsquo;ve been playing with Paper, that Figma competitor, and it&rsquo;s shown some pretty impressive output. At Ramp we encourage everyone to try to break things. Use a tool, connect it to Claude, and try to imagine an end-to-end process. Let&rsquo;s say you wanted to build a landing page. Do you have the design systems? The components? The right skills? Does it understand your Figma files? Do you have recipes that understand what a good landing page looks like on a pixel level?</p>
-              <p>The way I frame it to my team is&hellip; you are the expert of your craft. I need you to test these tools and tell me whether they have any feasibility. If you tell me they don&rsquo;t, I&rsquo;ll leave you alone. But I need you to explore that.</p>
-              <p>One major thing I&rsquo;m accountable for is&hellip; how might anyone at Ramp ship a landing page that is nine out of ten quality without a designer doing it for them? So we&rsquo;re creating an agent that reviews your landing page and gives you a summary. I&rsquo;ve taken vibe-coded slop HTML examples from other teams, run it through this review bot, and it said &ldquo;this is a four out of ten, here&rsquo;s why.&rdquo; Then in just a couple prompts in Claude, I could get it to a seven out of ten.</p>
-              <p>A designer named Mary on our team figured out how to point it at hundreds of our shipped landing pages and atomize, on a pixel level, our spacing, our radii, our typography, our information hierarchy, how we tell stories on these pages. It&rsquo;s early. We haven&rsquo;t released it company-wide. But it&rsquo;s promising.</p>
+              <p><span class="cc-highlight">There are two modes brand teams work in. Problem solving is asking what&rsquo;s wrong. Opportunity seeking is asking what if.</span> I&rsquo;d say 99 percent of their energy is spent problem solving, doing other people&rsquo;s requests &mdash; &ldquo;make me a deck, make me a sticker, I need swag, resize this logo on my sales deck.&rdquo; A lot of designers waste time on that. My goal is to flip it completely, so we&rsquo;re spending time thinking about the future and building it, almost trying to wreck ourselves, because if we figure that out before our competitors, we stay ahead.</p>
             </div>
           </div>
 
@@ -518,33 +497,30 @@
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
             <div class="cc-qa-body is-question">
-              <p>What gives you conviction that this is the right moment for creatives?</p>
+              <p>Is this a good moment for creatives?</p>
             </div>
           </div>
 
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Paul</span>
             <div class="cc-qa-body is-response">
-              <p>I started using Cursor a month after it came out. It was the end of 2023, I had a week or two off from work, and I downloaded it and told myself&hellip; I&rsquo;m just going to sit here, I don&rsquo;t care how frustrated I get, I&rsquo;m just going to push myself. In three days, I built a Figma plugin that I couldn&rsquo;t believe I built. I sent it to an engineer and asked him to review the code. He called me and said &ldquo;you know how to code?&rdquo; I said no, I used this tool called Cursor. He said &ldquo;this is 95% good, this is something I would have written myself.&rdquo; This was an early design engineer at Facebook before that was even a title.</p>
-              <p>I remember thinking&hellip; everything is about to change. And for the first time in my career, I felt like I was ahead of the curve.</p>
-              <p>I built the entire Ramp tone of voice in between meetings with Claude Code and Figma MCP. That would have taken an agency six to eight weeks and probably over $100k. I don&rsquo;t know why people aren&rsquo;t rushing to learn this stuff faster.</p>
-              <p><span class="cc-highlight">I think designers are uniquely positioned for this moment. A good brand-product designer with deep experience can build a product, brand it, write for it, build the website, build the marketing materials, and make the product better over time. Designers can do everything end to end.</span></p>
-              <p>Candidly, I think we are in the dial-up phase of AI. We are in the AOL.com phase right now. Very early. And the more time goes on, the more overwhelmed you get if you haven&rsquo;t started. At my previous job, a month after I discovered Cursor, I went to my VP and said we need to activate this for everyone. Within three months we had over 60 product designers using Cursor to prototype. I don&rsquo;t think anyone was moving that fast other than Ramp or maybe a handful of other companies.</p>
+              <p>For the first time in my career I feel like I&rsquo;m ahead of the curve, which I&rsquo;ve never felt in my life. The things I can do now in Claude Code blow my mind. I built the entire Ramp tone of voice in between meetings with Claude Code and the Figma MCP. That would have taken an agency six to eight weeks and $100k+.</p>
+              <p><span class="cc-highlight">But it&rsquo;s not just the tools. You also have to have the ambition to execute on it.</span> There are so many people in the bucket of fear who don&rsquo;t want to touch it, who say it isn&rsquo;t quality. I&rsquo;ve onboarded so many friends who were skeptics, who read the wrong threads and let the wrong ideas into their brains. But when I sit them down and show them something on their screen they couldn&rsquo;t have built before, it blows their mind. If that doesn&rsquo;t excite you, you&rsquo;re in the wrong field. We&rsquo;re in the dial-up phase of AI right now, the AOL.com phase. It&rsquo;s very early, and the more time goes on, the more overwhelmed people get. A lot of roles are going to be compressed, but I&rsquo;m excited for designers, because they&rsquo;re well equipped to live in a world where they can do everything end to end. A good brand product designer with deep experience can build a product, brand it, write for it, build the website, build the marketing materials, and make the product better over time. Designers are uniquely positioned to become that.</p>
             </div>
           </div>
 
         </div>
 
-        <section id="hot-takes" class="cc-hot-takes scroll-anchor">
-          <h2 class="cc-hot-takes-title">Hot takes</h2>
+        <section id="rapid-fire" class="cc-hot-takes scroll-anchor">
+          <h2 class="cc-hot-takes-title">Rapid fire</h2>
           <div class="cc-hot-takes-list">
 
             <div class="cc-hot-take">
               <span class="cc-hot-take-num">I</span>
               <div>
-                <div class="cc-hot-take-q">What&rsquo;s one thing you think most tech companies get wrong about brand?</div>
+                <div class="cc-hot-take-q">Which companies feel aligned with how you think about moving fast and creativity?</div>
                 <div class="cc-hot-take-a">
-                  <p>I can probably count on one hand the amount of companies that know what good brand design is or how to work with a good brand designer. For a long time, I was frustrated by how tech viewed brand design. But now I think AI is going to be the change agent that shifts this perception entirely. It&rsquo;s going to be someone, hopefully me, who shows what&rsquo;s possible and where the future is going.</p>
+                  <p>Shopify. They&rsquo;ve always been design minded, but they&rsquo;ve turned something around in the last two years. Vercel was quite early too, with a great design team. Honestly though, I feel like most of the market is behind.</p>
                 </div>
               </div>
             </div>
@@ -552,9 +528,9 @@
             <div class="cc-hot-take">
               <span class="cc-hot-take-num">II</span>
               <div>
-                <div class="cc-hot-take-q">Which companies do you think are at the cutting edge of creative and AI right now?</div>
+                <div class="cc-hot-take-q">When did it click for you that everything was about to change?</div>
                 <div class="cc-hot-take-a">
-                  <p>I would put Shopify. They&rsquo;ve turned something around in the last two years. They&rsquo;ve always been very design minded, but recently they&rsquo;re doing some interesting stuff. Vercel was quite early, they have a pretty cracked design team. But honestly, I feel like most of the market is behind. When I talk to friends outside of tech at agencies, their adoption was slow and it wasn&rsquo;t because of curiosity. It&rsquo;s because clients were coming to them and going, &ldquo;I need you to build me a tool that scales this brand.&rdquo; And they&rsquo;re like, &ldquo;what are you talking about?&rdquo;</p>
+                  <p>End of 2023. I had a week or two off and downloaded Cursor, told myself I&rsquo;d push through no matter how frustrated I got. In three days I built a Figma plugin I couldn&rsquo;t believe I&rsquo;d built. I sent it to an engineer and he called me asking how I knew how to code.</p>
                 </div>
               </div>
             </div>
@@ -562,9 +538,9 @@
             <div class="cc-hot-take">
               <span class="cc-hot-take-num">III</span>
               <div>
-                <div class="cc-hot-take-q">What&rsquo;s the most useful AI workflow tip you&rsquo;d share with another creative?</div>
+                <div class="cc-hot-take-q">What&rsquo;s the one belief you keep repeating to your team?</div>
                 <div class="cc-hot-take-a">
-                  <p>Go into Claude Code, have it scrape the best practices from OpenAI and Anthropic from the last three to six months, create a skill on what makes a good system prompt, then store it in memory so that anytime you create a new skill, it triggers that other skill to review your markdown file and reformat it for maximum effectiveness. The output will be a lot better. So much of this is information-sharing that doesn&rsquo;t happen because there&rsquo;s too much noise.</p>
+                  <p>Make the brand easy to love and impossible to misuse.</p>
                 </div>
               </div>
             </div>
