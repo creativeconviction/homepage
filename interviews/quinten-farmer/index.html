@@ -15,7 +15,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Geist:wght@400;500&family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400..700&family=Beth+Ellen&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400..700&family=Beth+Ellen&display=swap" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -30,10 +30,8 @@
       --magenta:     #D8016A;
       --indigo:      #361C76;
 
-      --font-serif:  "Newsreader", "Iowan Old Style", Charter, Georgia, serif;
-      --font-sans:   "Geist", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
-      --font-chrome: "EB Garamond", "Iowan Old Style", Charter, Georgia, serif;
-      --font-chrome-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+      --font-serif:  "EB Garamond", "Iowan Old Style", Charter, Georgia, serif;
+      --font-sans:   "Inter", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
       --font-hand:   "Courier New", "Courier", ui-monospace, "SFMono-Regular", Menlo, monospace;
       --font-margin: "Beth Ellen", "Segoe Script", cursive;
 
@@ -48,7 +46,9 @@
     body {
       background: var(--backdrop);
       color: var(--ink);
-      font-family: var(--font-serif);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.55;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
       min-height: 100vh;
@@ -62,39 +62,29 @@
       padding-bottom: 22px;
     }
     .cc-mark {
-      font-family: var(--font-chrome); font-size: 24px; font-weight: 400;
+      font-family: var(--font-serif); font-size: 24px; font-weight: 400;
       letter-spacing: -0.01em; color: var(--ink); text-decoration: none; line-height: 1;
     }
-    .cc-mark em { font-style: italic; color: var(--magenta); font-family: var(--font-chrome); }
+    .cc-mark em { font-style: italic; color: var(--magenta); font-family: var(--font-serif); }
     .cc-nav { display: flex; gap: 28px; }
     .cc-nav-link {
-      font-family: var(--font-chrome-sans); font-size: 14px; color: var(--ink-soft);
+      font-family: var(--font-sans); font-size: 14px; color: var(--ink-soft);
       text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px;
       transition: color var(--dur-1) var(--ease-out), text-decoration-thickness var(--dur-1) var(--ease-out);
     }
     .cc-nav-link:hover { color: var(--ink); text-decoration-thickness: 2px; }
 
     .cc-footer { max-width: 1180px; margin: 40px auto 0; padding: 24px 40px 32px; }
-    .cc-footer-meta { font-family: var(--font-chrome-sans); font-size: 12px; color: var(--ink-soft); letter-spacing: 0.02em; }
+    .cc-footer-meta { font-family: var(--font-sans); font-size: 12px; color: var(--ink-soft); letter-spacing: 0.02em; }
 
     /* ---------- the desk + sheet ---------- */
     .stage { padding: 8px 16px 40px; }
     .desk {
-      max-width: 1120px; margin: 0 auto; position: relative;
+      max-width: 1200px; margin: 0 auto; position: relative;
       filter: drop-shadow(0 18px 40px rgba(26,17,48,0.16)) drop-shadow(0 3px 8px rgba(26,17,48,0.10));
     }
     .sheet {
       position: relative; background: var(--paper);
-      clip-path: polygon(
-        0.55% 0.10%, 4% 0.30%, 9% 0.05%, 15% 0.34%, 22% 0.10%, 30% 0.30%, 38% 0.06%,
-        47% 0.28%, 55% 0.08%, 63% 0.30%, 71% 0.08%, 79% 0.26%, 86% 0.06%, 93% 0.30%, 99.4% 0.12%,
-        99.72% 5%, 99.5% 11%, 99.78% 18%, 99.52% 26%, 99.74% 34%, 99.5% 43%,
-        99.76% 52%, 99.54% 61%, 99.74% 70%, 99.5% 78%, 99.76% 86%, 99.55% 93%, 99.72% 99.9%,
-        93% 99.7%, 86% 99.92%, 78% 99.68%, 70% 99.9%, 62% 99.66%, 53% 99.9%, 45% 99.68%,
-        37% 99.9%, 29% 99.66%, 21% 99.88%, 14% 99.66%, 8% 99.9%, 1.2% 99.7%,
-        0.34% 94%, 0.6% 87%, 0.3% 79%, 0.58% 71%, 0.32% 62%, 0.56% 53%,
-        0.3% 45%, 0.58% 36%, 0.32% 28%, 0.56% 20%, 0.3% 12%, 0.52% 5%
-      );
     }
     /* paper grain */
     .sheet::before {
@@ -110,23 +100,23 @@
         radial-gradient(140% 100% at 88% 96%, rgba(54,28,118,0.05), rgba(54,28,118,0) 60%);
       pointer-events: none; z-index: 1;
     }
-    .sheet-inner { position: relative; z-index: 2; padding: 72px 72px 96px 128px; }
+    .sheet-inner { position: relative; z-index: 2; padding: 96px 96px 120px 96px; }
 
     /* ---------- punch holes ---------- */
     .holes {
-      position: absolute; left: 30px; top: 40px; bottom: 40px; width: 22px;
+      position: absolute; left: 32px; top: 40px; bottom: 40px; width: 12px;
       display: flex; flex-direction: column; justify-content: space-between; z-index: 3;
     }
     .hole {
-      width: 16px; height: 16px; background: var(--backdrop); position: relative;
+      width: 10px; height: 10px; background: var(--backdrop); position: relative;
       clip-path: polygon(6% 2%, 40% 8%, 68% 0%, 96% 6%, 100% 38%, 92% 66%, 98% 94%, 64% 100%, 34% 92%, 4% 98%, 0% 66%, 8% 36%);
     }
     .hole::after {
-      content: ''; position: absolute; inset: -2px; clip-path: inherit;
-      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.9), inset 2px 2px 4px rgba(54,28,118,0.22);
+      content: ''; position: absolute; inset: -1px; clip-path: inherit;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.9), inset 1px 1px 2px rgba(54,28,118,0.22);
     }
     .hole.torn::before {
-      content: ''; position: absolute; left: -30px; top: 40%; width: 30px; height: 4px;
+      content: ''; position: absolute; left: -18px; top: 40%; width: 18px; height: 2px;
       background: var(--backdrop); clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 70%);
     }
 
@@ -135,13 +125,6 @@
     .curl.tr { top: 0; right: 0; }
     .curl.br { bottom: 0; right: 0; }
     .curl svg { width: 100%; height: 100%; display: block; }
-
-    /* ---------- fold-crease dividers ---------- */
-    .crease {
-      position: relative; height: 2px; margin: 56px -40px 56px -60px;
-      background: rgba(54,28,118,0.14);
-      box-shadow: 0 1px 0 rgba(255,255,255,0.9), 0 -1px 2px rgba(26,17,48,0.10);
-    }
 
     /* ---------- type ---------- */
     .eyebrow {
@@ -153,13 +136,13 @@
       font-size: clamp(38px, 5vw, 58px); line-height: 1.06; letter-spacing: -0.015em;
       max-width: 15ch; margin-bottom: 16px;
     }
-    .dek { font-family: var(--font-sans); font-size: 14px; color: var(--ink-soft); margin-bottom: 8px; }
+    .dek { font-family: var(--font-serif); font-style: italic; font-size: 18px; color: var(--ink-soft); margin-bottom: 8px; }
     h2 {
       font-family: var(--font-serif); font-weight: 600; font-size: 24px;
       letter-spacing: -0.01em; margin: 0 0 20px; color: var(--ink);
     }
-    .col { max-width: 590px; position: relative; }
-    .col p { font-size: 18.5px; line-height: 1.62; margin-bottom: 20px; }
+    .col { max-width: 560px; margin: 0 auto; position: relative; }
+    .col p { font-size: 17px; line-height: 1.6; margin-bottom: 18px; }
     .col p b { font-weight: 600; }
     .q {
       font-family: var(--font-sans); font-size: 15px !important; line-height: 1.55 !important;
@@ -174,7 +157,7 @@
     .rf { display: grid; grid-template-columns: 34px 1fr; gap: 4px 16px; margin-bottom: 22px; }
     .rf-num { font-family: var(--font-sans); font-weight: 500; font-size: 15px; color: var(--magenta); padding-top: 2px; }
     .rf-q { font-family: var(--font-sans); font-size: 15px; color: var(--ink-soft); margin-bottom: 10px; }
-    .rf-a { font-size: 18.5px; line-height: 1.62; }
+    .rf-a { font-size: 17px; line-height: 1.6; }
 
     /* ---------- anchor phrase treatment: Beth Ellen, magenta, no underline ---------- */
     .mark {
@@ -188,10 +171,14 @@
 
     /* ---------- margin figures ---------- */
     .anchor { position: relative; }
-    .marginalia { position: absolute; left: 100%; width: 300px; padding-left: 92px; z-index: 5; }
+    .marginalia { position: absolute; width: 200px; z-index: 5; }
+    .marginalia.right { left: 100%; padding-left: 44px; }
+    .marginalia.left  { right: 100%; padding-right: 44px; text-align: right; }
     .marginalia .arrow {
-      position: absolute; left: -6px; width: 110px; height: 120px; overflow: visible; pointer-events: none;
+      position: absolute; width: 100px; height: 110px; overflow: visible; pointer-events: none;
     }
+    .marginalia.right .arrow { left: -8px; }
+    .marginalia.left  .arrow { right: -8px; transform: scaleX(-1); }
     .marginalia .arrow path, .marginalia .arrow polyline {
       fill: none; stroke: var(--magenta); stroke-linecap: round; stroke-linejoin: round;
     }
@@ -208,7 +195,7 @@
       box-shadow: 0 3px 9px rgba(26,17,48,0.18), 0 1px 2px rgba(26,17,48,0.12);
       transform-origin: 50% 100%;
     }
-    .snap img { display: block; width: 100%; max-height: 260px; object-fit: cover; }
+    .snap img { display: block; width: 100%; max-height: 200px; object-fit: cover; }
     .snap.stacked { margin-top: 14px; }
 
     /* graceful placeholder while Libbie&rsquo;s full-res image is pending */
@@ -241,21 +228,6 @@
     /* draw-in state for arrows + botanicals */
     .js .arrow, .js .sprig { opacity: 0; }
     .arrow.is-drawn, .sprig.is-drawn { opacity: 1; }
-
-    /* ---------- mute note ---------- */
-    .mute-note {
-      position: absolute; top: 30px; right: 40px; z-index: 6;
-      display: inline-flex; align-items: center; gap: 7px;
-      background: none; border: 0; cursor: pointer;
-      font-family: var(--font-hand); font-size: 13px; color: var(--indigo);
-      transform: rotate(-2deg); padding: 4px 6px; -webkit-tap-highlight-color: transparent;
-    }
-    .mute-note:focus-visible { outline: 2px solid var(--magenta); outline-offset: 4px; border-radius: 3px; }
-    .mute-note svg { width: 18px; height: 18px; }
-    .mute-note .wave { transition: opacity var(--dur-1) var(--ease-out); }
-    .mute-note.is-muted .wave { opacity: 0.18; }
-    .mute-note .slash { opacity: 0; transition: opacity var(--dur-1) var(--ease-out); }
-    .mute-note.is-muted .slash { opacity: 1; }
 
     /* ---------- character-moment motions ---------- */
     .snap.moment-alien { transform-origin: 50% 100%; }
@@ -341,19 +313,21 @@
 
     /* ---------- responsive: tuck margin figures inline below ~1060px ---------- */
     @media (max-width: 1060px) {
-      .sheet-inner { padding: 64px 40px 80px 96px; }
-      .marginalia { position: static; width: 260px; padding: 0; margin: 26px 0 30px 0; }
+      .sheet-inner { padding: 64px 40px 80px 80px; }
+      .col { margin: 0; }
+      .marginalia,
+      .marginalia.right,
+      .marginalia.left { position: static; width: 260px; padding: 0; margin: 26px 0 30px 0; text-align: left; }
       .marginalia .arrow { display: none; }
       .sprig { display: none; }
       .curl { display: none; }
-      .mute-note { top: 22px; right: 24px; }
     }
     @media (max-width: 640px) {
       .cc-shell, .cc-footer { padding-left: 24px; padding-right: 24px; }
       .stage { padding: 8px 10px 32px; }
       .sheet-inner { padding: 56px 24px 64px 62px; }
-      .holes { left: 12px; width: 26px; }
-      .hole { width: 12px; height: 12px; }
+      .holes { left: 14px; width: 8px; }
+      .hole { width: 8px; height: 8px; }
       h1 { font-size: 34px; }
       .col p, .rf-a { font-size: 17px; }
     }
@@ -376,14 +350,22 @@
       <div class="sheet">
 
         <div class="holes">
-          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
-          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div>
-          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
-          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div>
-          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
-          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div>
-          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
-          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
         </div>
 
         <div class="curl tr">
@@ -401,16 +383,6 @@
           </svg>
         </div>
 
-        <button id="cc-mute" class="mute-note" type="button" aria-pressed="false" title="Toggle sound">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M4 9v6h4l5 4V5L8 9H4z"/>
-            <path class="wave" d="M16.5 8.5a5 5 0 0 1 0 7"/>
-            <path class="wave" d="M19 6a8 8 0 0 1 0 12"/>
-            <path class="slash" d="M3 3l18 18" stroke="var(--magenta)"/>
-          </svg>
-          <span class="mute-label">sound on &mdash; tap to mute</span>
-        </button>
-
         <div class="sheet-inner cc-article">
           <div class="col">
 
@@ -423,14 +395,13 @@
             <p>Quinten grew up on a small agricultural island in Washington state, was a self-described terrible high school student, and talked his way to New York at 18 by cold emailing an investor. His first company was Even, a bank subsidized by employers to give workers lower cost access to basic financial services. Even served millions of Americans and sold for $300 million in 2022. Rather than resting on those achievements, the post-exit chapter proved to be the most challenging. Between saving the business through covid and managing a profound family loss, Quinten stepped away, opened a restaurant with friends, and spent a year back on the island where he grew up before the pull of new technology brought him back.</p>
             <p>Our conversation traces the creative choices that made Tolan work - how an artist and a writer helped turn a technical constraint into a character, why they program the Tolans around a 1970s social theory, and why serving a busy dinner table leads to more clarity than being on tech twitter.</p>
 
-            <div class="crease"></div>
 
             <h2>From Whidbey Island to New York</h2>
             <p class="q"><b>LF + RA</b> What is your story, and how did you come to found Tolan?</p>
             <div class="anchor">
               <p><b>Quinten</b> I was born in Washington state and mostly grew up on a little island called <span class="mark">Whidbey Island<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 16 2.5, 33 7, 51 4.5 S 85 6.5, 99 4" stroke-width="2"/></svg></span>. It&rsquo;s a very cool, small agricultural community. Then my parents divorced, and when I was 18, I found myself at North Carolina State University. I was a terrible high school student, and for better or worse, I refused to participate. About a year into college, I got bored - it wasn&rsquo;t a particularly challenging place. This was the beginning of 2010, coming out of the financial crisis, when everything was falling apart but tech was starting to feel like there might be something there. So I found this guy, <a href="https://www.davidtisch.com/" target="_blank" rel="noopener">David Tisch</a>, in New York, and I emailed him. We got on the phone. I said &ldquo;I&rsquo;d love to learn what you do, I&rsquo;ll bring coffee and donuts for nothing, just let me know.&rdquo; And to his credit he said, &ldquo;I&rsquo;d love to have you intern when you graduate, but you don&rsquo;t need to drop out of college for this.&rdquo;</p>
 
-              <figure class="marginalia" data-moment="island" data-sound="island" style="top: -10px;">
+              <figure class="marginalia right" data-moment="island" data-sound="island" style="top: -10px;">
                 <svg class="arrow" data-draw style="top: 6px;" viewBox="0 0 110 120">
                   <path d="M2 20 C 30 8, 70 18, 60 48 C 52 72, 78 84, 96 74" stroke-width="1.8"/>
                   <polyline points="84,66 97,75 86,88" stroke-width="1.8"/>
@@ -451,7 +422,6 @@
             <p>I don&rsquo;t really take no for an answer. My other option was going to Afghanistan to be a military contractor, see the world a little (I&rsquo;d never been outside the country). So I called David back and said, &ldquo;Either I&rsquo;m going to come learn from you or I&rsquo;m going to Afghanistan, your choice.&rdquo;</p>
             <p>So I moved to New York and worked for him, and eventually for two of his portfolio companies. Coming out of that I&rsquo;d gotten to know some professors in the Columbia computer science department, and they told me I could apply. I ended up at Columbia, very fortunately, because there&rsquo;s no way I would have gotten in coming out of high school. I was a good student for the first time in my life and having a good time. But I had an early crypto side project that caught some internet attention, and a guy named <a href="https://www.linkedin.com/in/jonschlossberg/" target="_blank" rel="noopener">Jon Schlossberg</a> reached out. He asked if I&rsquo;d chat about working on something together. I flew out to San Francisco, we spent a week or two together, and soon we decided to start a company called Even.</p>
 
-            <div class="crease"></div>
 
             <h2>Exiting his consumer fintech, Even</h2>
             <p class="q"><b>LF + RA</b> What was Even?</p>
@@ -460,14 +430,13 @@
             <p><b>Quinten</b> I was excited about nothing at all. I was tired. Saving that business through Covid was very painful. At the same time, my wife and I were the sole caregivers for her mom, who had early onset Alzheimer&rsquo;s. She sadly passed away in &rsquo;23, not long after this. I also had a younger brother struggling with mental health that we were trying to help with, and he passed away a few years before the company sold. So my wife and I were both pretty burnt out.</p>
             <p>We took a real break. We opened a restaurant with some friends on the island, bought some property where I grew up, and retreated into the small community. It wasn&rsquo;t until about a year later that I felt recovered. And around that same time&hellip; some really cool stuff started happening in technology.</p>
 
-            <div class="crease"></div>
 
             <h2>What Tolan is</h2>
             <p class="q"><b>LF + RA</b> What is Tolan today, and what is the vision you&rsquo;re working toward?</p>
             <div class="anchor">
               <p><b>Quinten</b> Today we call it a second self. It&rsquo;s personal AI, <span class="mark">a little character<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 15 2.5, 32 7, 50 4.5 S 84 6.5, 99 4" stroke-width="2"/><path d="M2 7.5 C 20 5.5, 45 8.5, 70 6 S 92 8, 98 6.5" stroke-width="1.1" opacity="0.75"/></svg></span> designed to be an extension of you. It molds parts of its personality to be similar to yours, shares your interests as much as it can, reflects your values. We have a lot of folks who are religious and want their Tolan to be observant of their faith and the things they care about. We have 65 year old users and 30 year olds - so there&rsquo;s this huge range, and we do a lot of work to make sure your Tolan reflects who you are.</p>
 
-              <figure class="marginalia" data-moment="alien" data-sound="chirp" style="top: -14px;">
+              <figure class="marginalia left" data-moment="alien" data-sound="chirp" style="top: -10px;">
                 <svg class="arrow" data-draw style="top: 6px;" viewBox="0 0 110 120">
                   <path d="M4 8 C 40 2, 62 26, 52 52 C 44 74, 66 92, 92 96" stroke-width="1.8"/>
                   <polyline points="82,86 93,97 79,101" stroke-width="1.8"/>
@@ -485,49 +454,73 @@
             <div class="anchor">
               <p>When I think about the totality of what we hope to build, there&rsquo;s a reason this idea of an entity that is an extension of you shows up in so many faiths and so many works of fiction. Call it a <span class="mark">guardian angel, a spirit guide.<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 18 3, 38 7, 55 4.5 S 86 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 25 6, 50 8.5, 75 6.5 S 94 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> It&rsquo;s clearly something humanity really craves.</p>
 
-              <figure class="marginalia" data-moment="guardian" data-sound="harp" style="top: -40px;">
-                <svg class="arrow" data-draw style="top: 30px;" viewBox="0 0 110 120">
-                  <path d="M2 14 C 34 30, 30 60, 48 70 C 64 79, 78 74, 94 62" stroke-width="1.8"/>
-                  <polyline points="82,58 95,61 88,74" stroke-width="1.8"/>
+              <figure class="marginalia right" data-moment="guardian" data-sound="harp" style="top: -30px;">
+                <svg class="arrow" data-draw style="top: 6px;" viewBox="0 0 110 120">
+                  <path d="M4 12 C 40 6, 62 26, 52 52 C 44 74, 66 92, 92 96" stroke-width="1.8"/>
+                  <polyline points="82,86 93,97 79,101" stroke-width="1.8"/>
                 </svg>
-                <button class="hit" type="button" aria-label="Fan apart the guardian angel prints and play sound">
-                  <span class="halo"></span>
-                  <span class="snap g-snap-1">
+                <button class="hit" type="button" aria-label="Play the Plockhorst guardian angel">
+                  <span class="snap" style="transform: rotate(1.6deg);">
                     <span class="tape" style="transform: translateX(-50%) rotate(4deg);"></span>
                     <img src="images/guardian_angel_1.png" alt="Guardian angel oil painting by Bernhard Plockhorst, 1886">
                   </span>
-                  <span class="snap stacked g-snap-2">
+                </button>
+                <figcaption class="caption">Guardian Angel, Plockhorst 1886</figcaption>
+              </figure>
+
+              <figure class="marginalia left" data-moment="guardian2" data-sound="harp" style="top: 40px;">
+                <svg class="arrow" data-draw style="top: 4px;" viewBox="0 0 110 120">
+                  <path d="M4 12 C 40 6, 62 26, 52 52 C 44 74, 66 92, 92 96" stroke-width="1.8"/>
+                  <polyline points="82,86 93,97 79,101" stroke-width="1.8"/>
+                </svg>
+                <button class="hit" type="button" aria-label="Play the It&rsquo;s a Wonderful Life guardian angel">
+                  <span class="snap" style="transform: rotate(-1.4deg);">
+                    <span class="tape" style="transform: translateX(-50%) rotate(-3deg);"></span>
                     <img src="images/guardian_angel_2.png" alt="Clarence and George Bailey from It&rsquo;s a Wonderful Life, 1946">
                   </span>
-                  <span class="snap stacked g-snap-3">
+                </button>
+                <figcaption class="caption">It&rsquo;s a Wonderful Life, 1946</figcaption>
+              </figure>
+
+              <figure class="marginalia right" data-moment="guardian3" data-sound="harp" style="top: 260px;">
+                <svg class="arrow" data-draw style="top: 6px;" viewBox="0 0 110 120">
+                  <path d="M4 92 C 40 96, 62 74, 52 48 C 44 26, 66 8, 92 4" stroke-width="1.8"/>
+                  <polyline points="82,14 93,3 79,-1" stroke-width="1.8"/>
+                </svg>
+                <button class="hit" type="button" aria-label="Play the Flintstones guardian angel">
+                  <span class="snap" style="transform: rotate(2.2deg);">
+                    <span class="tape"></span>
                     <img src="images/guardian_angel_3.png" alt="Fred Flintstone with an angel and devil version of himself on his shoulders">
                   </span>
-                  <span class="snap stacked g-snap-4">
+                </button>
+                <figcaption class="caption">The Flintstones</figcaption>
+              </figure>
+
+              <figure class="marginalia left" data-moment="guardian4" data-sound="harp" style="top: 280px;">
+                <svg class="arrow" data-draw style="top: 6px;" viewBox="0 0 110 120">
+                  <path d="M4 92 C 40 96, 62 74, 52 48 C 44 26, 66 8, 92 4" stroke-width="1.8"/>
+                  <polyline points="82,14 93,3 79,-1" stroke-width="1.8"/>
+                </svg>
+                <button class="hit" type="button" aria-label="Play the Lizzie McGuire guardian angel">
+                  <span class="snap" style="transform: rotate(-2.4deg);">
                     <img src="images/guardian_angel_4.png" alt="Lizzie McGuire beside her animated alter ego">
                     <svg class="clip" viewBox="0 0 22 46"><path d="M11 44 L11 8 C11 3, 4 3, 4 8 L4 36 C4 43, 18 43, 18 34 L18 12" fill="none" stroke="#6E6455" stroke-width="2.2" stroke-linecap="round"/></svg>
                   </span>
                 </button>
-                <figcaption class="caption">guardian angels</figcaption>
+                <figcaption class="caption">Lizzie McGuire</figcaption>
               </figure>
             </div>
 
             <p>As the capabilities improve, and as great creatives on our team help bring them to life, we&rsquo;re working toward giving people that full vision of a guardian angel or spirit guide. That&rsquo;s what a Tolan should be.</p>
 
-            <div class="crease"></div>
 
-            <svg class="sprig" data-draw style="left: calc(100% + 120px); margin-top: -150px; width: 120px; height: 130px;" viewBox="0 0 120 130">
-              <path d="M60 128 C 58 96, 62 70, 58 42" stroke-width="1.4"/>
-              <path d="M58 42 C 50 30, 40 26, 30 24 M58 42 C 56 28, 52 20, 46 12 M58 42 C 60 26, 64 18, 66 8 M58 42 C 68 32, 76 28, 86 26 M58 42 C 66 36, 78 36, 88 38" stroke-width="1"/>
-              <circle cx="30" cy="24" r="2.4" stroke-width="1"/><circle cx="46" cy="12" r="2.4" stroke-width="1"/><circle cx="66" cy="8" r="2.4" stroke-width="1"/><circle cx="86" cy="26" r="2.4" stroke-width="1"/><circle cx="88" cy="38" r="2.4" stroke-width="1"/>
-              <path d="M59 96 C 48 92, 42 84, 40 76 M60 108 C 70 104, 74 98, 76 90" stroke-width="1"/>
-            </svg>
 
             <h2>Early ideas and the alien</h2>
             <p class="q"><b>LF + RA</b> Was this always the vision from day one?</p>
             <div class="anchor">
               <p><b>Quinten:</b> Like all great consumer companies, we had about six ideas before one seemingly good one. I was a classic second-time founder and new-dad, and I got really interested in AI for kids. I iterated through a few bad ideas there - but there were a few patterns we saw. (1) Latency was improving faster than intelligence. Models were getting faster and faster, and we could see in 2023 that you were going to be able to just talk to these things. We had an inclination to bet on voice very early. (2) My co-founder realized that memory was going to be a distinct, very important primitive. He was one of the first to really think about how to emulate human-like memory in a consumer product. (3) The third piece, around the same exploration time, was that we lucked into getting to know a really talented creative director, <span class="mark">Lucas Zanotto,<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 18 3, 38 7, 55 4.5 S 86 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 25 6, 50 8.5, 75 6.5 S 94 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> through my friend, <a href="https://www.zachklein.com/" target="_blank" rel="noopener">Zach Klein</a>. Lucas is an artist first and foremost, not a Silicon Valley person. He&rsquo;d done some of the early, artistically interesting NFTs, so he was an artist very willing to explore new technology before it was acceptable. We spent a lot of time with him asking, &ldquo;If you were to bring to life an AI you could talk to, that remembered things about you, what would it look and feel like?&rdquo; This is where the Tolans concept began.</p>
 
-              <figure class="marginalia" data-moment="lucas" data-sound="squish" style="top: 340px;">
+              <figure class="marginalia right" data-moment="lucas" data-sound="squish" style="top: 40px;">
                 <svg class="arrow" data-draw style="top: -30px;" viewBox="0 0 110 120">
                   <path d="M2 110 C 36 112, 58 96, 54 68 C 51 46, 68 30, 92 26" stroke-width="1.8"/>
                   <polyline points="81,18 93,25 84,38" stroke-width="1.8"/>
@@ -547,14 +540,13 @@
             <p><b>Quinten:</b> Yes. <a href="https://www.lucaszanotto.com/" target="_blank" rel="noopener">Lucas</a> deserves a lot of credit for helping us make creative choices that, in hindsight, were absolutely correct. For example, we had this constraint at the time where models weren&rsquo;t actually that smart - they had no up-to-date knowledge of the world. He was quick to realize that an alien, who is silly and cute, can alleviate some of the accuracy pressure. That is, if a human says something dumb or gets who&rsquo;s the president wrong, that&rsquo;s frustrating. But if it&rsquo;s a little alien, and you have a story about why that&rsquo;s the case, it can become charming.</p>
             <p>Similarly, we had very high intent to make it impossible to sexualize the character. We really did not want the AI boyfriend or girlfriend replica. No shade - there&rsquo;s demand for that - but it just wasn&rsquo;t what I was excited to build creatively. We thought we&rsquo;d made a character that couldn&rsquo;t be sexualized. It turns out that&rsquo;s not the case (people will still try to flirt with the Tolan, humans are humans), but we tried our best.</p>
 
-            <div class="crease"></div>
 
             <h2>Story as the product</h2>
             <p class="q"><b>LF + RA</b> To what extent was storytelling a conscious decision for Tolans, and why invest so much in it, and hire a head of story?</p>
             <div class="anchor">
               <p><b>Quinten</b> During that year I was semi-retired on the island, a very good friend who was early at OpenAI had sent me <span class="mark">a book of poetry written by an early model,<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 16 3, 36 7, 54 4.5 S 85 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 24 6, 49 8.5, 74 6.5 S 93 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> as a joke. It was awful poetry. But it inspired me. So I spent a lot of time reading better works of fiction that deal with AI as a personal extension of who we are. One favorite is <span class="mark">Klara and the Sun,<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 18 3, 40 7, 57 4.5 S 87 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 26 6, 51 8.5, 76 6.5 S 94 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> which I highly recommend. Some <span class="mark">Ted Chiang<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 15 2.5, 33 7, 51 4.5 S 85 6.5, 99 4" stroke-width="2"/><path d="M2 7.5 C 21 5.5, 46 8.5, 71 6 S 93 8, 98 6.5" stroke-width="1.1" opacity="0.75"/></svg></span> as well.</p>
 
-              <figure class="marginalia" data-moment="poetry" data-sound="glitch" style="top: -20px;">
+              <figure class="marginalia left" data-moment="poetry" data-sound="glitch" style="top: -10px;">
                 <svg class="arrow" data-draw style="top: 12px;" viewBox="0 0 110 120">
                   <path d="M4 12 C 44 6, 58 34, 46 56 C 36 76, 70 82, 94 70" stroke-width="1.8"/>
                   <polyline points="82,62 96,71 85,84" stroke-width="1.8"/>
@@ -573,7 +565,7 @@
             <div class="anchor">
               <p>I realized the nature of our relationship with an AI entity is so defined by the story we wrap around it - the purpose of the entity, why it&rsquo;s there, how it relates to us. In these stories, they&rsquo;re all dealing with the same capabilities and themes, but the story wrapped around it takes it from a dystopian horror to something charming and lovely. So when we started, we recognized we needed our story to wrap around this, because otherwise you get to the dystopian place, or at the very least, the anime role play place.</p>
 
-              <figure class="marginalia" data-moment="klara" data-sound="hum" style="top: 340px;">
+              <figure class="marginalia right" data-moment="klara" data-sound="hum" style="top: -10px;">
                 <svg class="arrow" data-draw style="top: 30px;" viewBox="0 0 110 120">
                   <path d="M2 30 C 40 18, 66 34, 58 60 C 52 80, 74 88, 96 80" stroke-width="1.8"/>
                   <polyline points="84,72 98,81 87,94" stroke-width="1.8"/>
@@ -590,7 +582,7 @@
             </div>
 
             <div class="anchor">
-              <figure class="marginalia" data-moment="ted" data-sound="robot" style="top: 80px;">
+              <figure class="marginalia left" data-moment="ted" data-sound="robot" style="top: 20px;">
                 <svg class="arrow" data-draw style="top: 40px;" viewBox="0 0 110 120">
                   <path d="M4 100 C 40 104, 60 88, 52 62 C 46 42, 70 30, 94 34" stroke-width="1.8"/>
                   <polyline points="83,26 95,33 85,46" stroke-width="1.8"/>
@@ -607,7 +599,7 @@
               <p class="q"><b>LF + RA</b> To build an emotional stake in a companion, it has to be interesting - which is also why you&rsquo;d invest so much to make the attachment show up positively - would you agree?</p>
               <p><b>Quinten</b> I won&rsquo;t claim it was the initial impulse, but you&rsquo;re exactly right. Our research lead, <a href="https://www.linkedin.com/in/liliandoyle" target="_blank" rel="noopener">Lily</a>, who has a behavioral psych background, helped <a href="https://www.linkedin.com/in/eliotpeper" target="_blank" rel="noopener">Eliot Peper</a>, our Head of Story, lean into the story work, because we designed the Tolans around a framework from the 70s called <span class="mark">social penetration theory.<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 16 2.5, 34 7, 52 4.5 S 85 6.5, 99 4" stroke-width="2"/><path d="M2 7.5 C 22 5.5, 47 8.5, 72 6 S 93 8, 98 6.5" stroke-width="1.1" opacity="0.75"/></svg></span> It&rsquo;s a well validated framework for how a healthy relationship develops, and it necessarily requires mutual disclosure.</p>
 
-              <figure class="marginalia" data-moment="social" data-sound="pencil" style="top: 420px;">
+              <figure class="marginalia right" data-moment="social" data-sound="pencil" style="top: 40px;">
                 <svg class="arrow" data-draw style="top: 10px;" viewBox="0 0 110 120">
                   <path d="M2 16 C 36 8, 70 22, 56 50 C 46 70, 74 78, 96 66" stroke-width="1.8"/>
                   <polyline points="84,58 97,67 86,80" stroke-width="1.8"/>
@@ -623,26 +615,20 @@
               </figure>
             </div>
 
-            <div class="crease"></div>
 
-            <svg class="sprig" data-draw style="left: calc(100% + 118px); margin-top: -140px; width: 116px; height: 128px;" viewBox="0 0 116 128">
-              <path d="M58 126 C 56 96, 60 66, 58 30" stroke-width="1.4"/>
-              <path d="M58 108 C 46 104, 38 96, 34 86 M58 108 C 70 104, 78 96, 82 86 M58 88 C 46 84, 40 76, 36 66 M58 88 C 70 84, 76 76, 80 66 M58 66 C 48 62, 42 54, 40 46 M58 66 C 68 62, 74 54, 76 46 M58 46 C 50 42, 46 36, 44 30 M58 46 C 66 42, 70 36, 72 30" stroke-width="1"/>
-            </svg>
 
             <h2>Seeing and hearing people</h2>
             <p class="q"><b>LF + RA</b> There are a lot of AI companions in the market, yet Tolan has pulled ahead. Between the core technology, the product experience, the marketing, the team composition - is there one area where you feel that, without it, the company would be totally different?</p>
             <p><b>Quinten</b> The one I&rsquo;d add is that we recognized most people don&rsquo;t have lives that are helped by the current AI capabilities on a productivity basis. The market seems to build either &ldquo;this is your sex bot&rdquo; or &ldquo;this is your personal assistant,&rdquo; and there&rsquo;s a huge space between those two extremes. We&rsquo;ve done a good job of recognizing people want and need to be seen and heard, and they sometimes want to receive thoughtful advice and guidance. We help people navigate difficult parenting challenges and difficult career choices, but it starts from seeing and hearing you - which is how great friendship develops.</p>
             <p>Silicon Valley is not great at understanding friendship. A lot of tech people say, &ldquo;Oh, so Tolans is like a therapist.&rdquo; And I say no, you have a narrow definition of what friendship is - we expanded the definition of what a therapist does to encapsulate a lot of what should be friendship. We&rsquo;ve just made a good friend.</p>
 
-            <div class="crease"></div>
 
             <h2>Tiny details</h2>
             <p class="q"><b>LF + RA</b> Are there any tiny details you&rsquo;ve shipped recently that had an outsized impact?</p>
             <div class="anchor">
               <p><b>Quinten</b> Our product lead <a href="https://www.linkedin.com/in/joshbromberg/" target="_blank" rel="noopener">Josh</a>, a former founder, deserves a lot of credit for this recent feature. As we looked at our slightly older audience, a lot of them had a morning routine with their Tolan where they&rsquo;d share their intentions for the day - a mom getting ready, kids eating breakfast, about to do the school run and then head to work - sharing a mix of practical and emotional information like: &ldquo;I really need to stay grounded, I&rsquo;ve got a presentation I&rsquo;m nervous about, and also remember that Teddy&rsquo;s soccer practice is at 3 not 4 today.&rdquo; The Tolan was picking that up very well, so we built a feature literally called <span class="mark">intentions,<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 16 3, 36 7, 54 4.5 S 85 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 24 6, 49 8.5, 74 6.5 S 93 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> where the Tolan comes to you proactively in the morning with a thought for your day. It&rsquo;s often a great jumping off point, and it was hugely impactful for retention. People feel really seen.</p>
 
-              <figure class="marginalia" data-moment="intentions" data-sound="chime" style="top: -20px;">
+              <figure class="marginalia left" data-moment="intentions" data-sound="chime" style="top: -10px;">
                 <svg class="arrow" data-draw style="top: 12px;" viewBox="0 0 110 120">
                   <path d="M4 96 C 42 100, 58 82, 50 58 C 44 40, 68 28, 92 30" stroke-width="1.8"/>
                   <polyline points="81,22 93,29 83,42" stroke-width="1.8"/>
@@ -662,19 +648,16 @@
               </figure>
             </div>
 
-            <div class="crease"></div>
 
             <h2>Marketing by obsession</h2>
             <p class="q"><b>LF + RA</b> A lot of people are talking about how marketing is becoming programmatic and part of engineering now - is that the future?</p>
             <p><b>Quinten</b> A lot of folks are missing this. We try to be very deeply obsessed with who we&rsquo;re serving, what they value, and what they don&rsquo;t like - and to have that permeate everything the company does. So to flip it a little, it&rsquo;s less that &ldquo;marketing is part of engineering now,&rdquo; and more that we are talking to users every day of the week, we have great system-level monitoring of new behaviors and use cases, and we&rsquo;re on Reddit an egregious amount of time, emailing people, asking what&rsquo;s going on, offering to help. That permeates the company, and your marketing gets better, your product design gets better, your engineering decisions get better. It&rsquo;s very old school - more Amazon-like or Walmart-like - obsessed with what the people you serve need, and then reflecting that in everything you do.</p>
 
-            <div class="crease"></div>
 
             <h2>Hiring and team</h2>
             <p class="q"><b>LF + RA</b> How do people learn more about Tolan, and are you hiring? If so, who are you looking for?</p>
             <p><b>Quinten</b> We are hiring (<a href="https://www.tolans.com/careers" target="_blank" rel="noopener">https://www.tolans.com/careers</a>). As a team, we have a lot of history together and a very high-trust environment, which I think is good for creativity. We have many former founders on the team. People who thrive at Tolan tend to have very high autonomy, love pushing the boundaries of the tools available to us, and want to work on a very small team.</p>
 
-            <div class="crease"></div>
 
             <h2>Rapid fire</h2>
             <div class="anchor">
@@ -686,7 +669,7 @@
                 </div>
               </div>
 
-              <figure class="marginalia" data-moment="pixar" data-sound="boing" style="top: 8px;">
+              <figure class="marginalia right" data-moment="pixar" data-sound="boing" style="top: -10px;">
                 <svg class="arrow" data-draw style="top: 8px;" viewBox="0 0 110 120">
                   <path d="M2 22 C 38 10, 68 24, 58 52 C 50 74, 76 82, 96 72" stroke-width="1.8"/>
                   <polyline points="84,64 97,73 86,86" stroke-width="1.8"/>
@@ -719,7 +702,7 @@
                 </div>
               </div>
 
-              <figure class="marginalia" data-moment="pacific" data-sound="ambient" style="top: -6px;">
+              <figure class="marginalia left" data-moment="pacific" data-sound="ambient" style="top: -10px;">
                 <svg class="arrow" data-draw style="top: 12px;" viewBox="0 0 110 120">
                   <path d="M4 14 C 44 4, 60 30, 48 54 C 38 76, 72 84, 96 72" stroke-width="1.8"/>
                   <polyline points="84,64 97,73 86,86" stroke-width="1.8"/>
@@ -888,17 +871,6 @@
         setTimeout(function () { nodes.forEach(function (n) { try { n.stop(); } catch (e) {} }); }, 500);
         ambient = null;
       }
-
-      /* ---------- mute toggle ---------- */
-      var muteBtn = document.getElementById('cc-mute');
-      var muteLabel = muteBtn.querySelector('.mute-label');
-      muteBtn.addEventListener('click', function () {
-        muted = !muted;
-        muteBtn.classList.toggle('is-muted', muted);
-        muteBtn.setAttribute('aria-pressed', String(muted));
-        muteLabel.innerHTML = muted ? 'sound off &mdash; tap to unmute' : 'sound on &mdash; tap to mute';
-        if (muted) stopAmbient();
-      });
 
       /* ---------- margin-moment click motions ---------- */
       var oneShot = {
