@@ -120,12 +120,6 @@
       background: var(--backdrop); clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 70%);
     }
 
-    /* ---------- curled corners ---------- */
-    .curl { position: absolute; width: 84px; height: 84px; z-index: 4; pointer-events: none; }
-    .curl.tr { top: 0; right: 0; }
-    .curl.br { bottom: 0; right: 0; }
-    .curl svg { width: 100%; height: 100%; display: block; }
-
     /* ---------- type ---------- */
     .eyebrow {
       font-family: var(--font-sans); font-size: 12px; letter-spacing: 0.14em;
@@ -171,14 +165,13 @@
 
     /* ---------- margin figures ---------- */
     .anchor { position: relative; }
-    .marginalia { position: absolute; width: 200px; z-index: 5; }
+    .marginalia { position: absolute; width: 240px; z-index: 5; }
     .marginalia.right { left: 100%; padding-left: 44px; }
     .marginalia.left  { right: 100%; padding-right: 44px; text-align: right; }
     .marginalia .arrow {
-      position: absolute; width: 100px; height: 110px; overflow: visible; pointer-events: none;
+      position: absolute; left: 0; top: 0; width: 1px; height: 1px;
+      overflow: visible; pointer-events: none;
     }
-    .marginalia.right .arrow { left: -8px; }
-    .marginalia.left  .arrow { right: -8px; transform: scaleX(-1); }
     .marginalia .arrow path, .marginalia .arrow polyline {
       fill: none; stroke: var(--magenta); stroke-linecap: round; stroke-linejoin: round;
     }
@@ -195,7 +188,7 @@
       box-shadow: 0 3px 9px rgba(26,17,48,0.18), 0 1px 2px rgba(26,17,48,0.12);
       transform-origin: 50% 100%;
     }
-    .snap img { display: block; width: 100%; max-height: 200px; object-fit: cover; }
+    .snap img { display: block; width: 100%; max-height: 240px; object-fit: cover; }
     .snap.stacked { margin-top: 14px; }
 
     /* graceful placeholder while Libbie&rsquo;s full-res image is pending */
@@ -211,15 +204,10 @@
     .tape {
       position: absolute; top: -12px; left: 50%; width: 78px; height: 26px;
       transform: translateX(-50%) rotate(-3deg);
-      background: rgba(226, 205, 140, 0.55); box-shadow: 0 1px 2px rgba(26,17,48,0.12);
+      background: rgba(255, 255, 255, 0.78); box-shadow: 0 1px 3px rgba(26,17,48,0.16);
       clip-path: polygon(2% 8%, 98% 0%, 100% 88%, 96% 100%, 3% 94%, 0% 76%, 2% 40%);
     }
     .clip { position: absolute; top: -16px; right: 14px; width: 22px; height: 46px; z-index: 2; }
-
-    .caption {
-      font-family: var(--font-hand); font-size: 15px; line-height: 1.3; letter-spacing: -0.01em;
-      color: var(--indigo); margin-top: 10px; transform: rotate(-1.4deg);
-    }
 
     /* ---------- botanical sprigs ---------- */
     .sprig { position: absolute; pointer-events: none; z-index: 3; }
@@ -236,7 +224,7 @@
       .moment-island .snap-drift { animation: island-drift 9s var(--ease-inout) infinite; }
       .moment-pacific .snap-drift { animation: pacific-shimmer 6s var(--ease-inout) infinite; }
     }
-    @keyframes alien-sway { 0%,100% { transform: rotate(-2deg); } 50% { transform: rotate(1.6deg); } }
+    @keyframes alien-sway { 0%,100% { transform: rotate(-3.5deg); } 50% { transform: rotate(2.6deg); } }
     @keyframes alien-bounce {
       0%   { transform: translateY(0) scale(1,1); }
       18%  { transform: translateY(0) scale(1.16,0.82); }
@@ -244,13 +232,13 @@
       68%  { transform: translateY(0) scale(1.1,0.9); }
       100% { transform: translateY(0) scale(1,1); }
     }
-    .moment-lucas { transform: rotate(-1.8deg); }
+    .moment-lucas { transform: rotate(-4deg); }
     @keyframes lucas-wobble {
-      0%   { transform: rotate(-1.8deg) scale(1,1); }
-      22%  { transform: rotate(-1.8deg) scale(1.08,0.9); }
-      46%  { transform: rotate(-1.8deg) scale(0.93,1.07); }
-      72%  { transform: rotate(-1.8deg) scale(1.04,0.97); }
-      100% { transform: rotate(-1.8deg) scale(1,1); }
+      0%   { transform: rotate(-4deg) scale(1,1); }
+      22%  { transform: rotate(-4deg) scale(1.08,0.9); }
+      46%  { transform: rotate(-4deg) scale(0.93,1.07); }
+      72%  { transform: rotate(-4deg) scale(1.04,0.97); }
+      100% { transform: rotate(-4deg) scale(1,1); }
     }
     @keyframes island-drift { 0%,100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
     @keyframes pacific-shimmer { 0%,100% { filter: brightness(1); } 50% { filter: brightness(1.06); } }
@@ -293,8 +281,8 @@
     /* intentions: the blue Tolan peeks from the torn edge, then pops up on click */
     .marginalia[data-moment="intentions"] .snap { transition: transform 0.6s var(--ease-spring); }
     .marginalia[data-moment="intentions"] .snap.stacked { transform: translateX(46px) rotate(4deg); }
-    .marginalia.is-popped .snap.stacked { transform: translateX(0) rotate(-1.5deg); }
-    .marginalia.is-popped .snap:first-of-type { transform: rotate(1.5deg); }
+    .marginalia.is-popped .snap.stacked { transform: translateX(0) rotate(-3.5deg); }
+    .marginalia.is-popped .snap:first-of-type { transform: rotate(3.5deg); }
 
     /* warm ray for Klara */
     .ray-cover { position: relative; overflow: hidden; }
@@ -320,7 +308,6 @@
       .marginalia.left { position: static; width: 260px; padding: 0; margin: 26px 0 30px 0; text-align: left; }
       .marginalia .arrow { display: none; }
       .sprig { display: none; }
-      .curl { display: none; }
     }
     @media (max-width: 640px) {
       .cc-shell, .cc-footer { padding-left: 24px; padding-right: 24px; }
@@ -367,22 +354,6 @@
           <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
           <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
         </div>
-
-        <div class="curl tr">
-          <svg viewBox="0 0 84 84">
-            <path d="M84 0 L84 60 C60 58, 34 42, 24 0 Z" fill="#FFFFFF"/>
-            <path d="M24 0 C34 42, 60 58, 84 60 L84 46 C58 40, 40 26, 34 0 Z" fill="#E7E2F0"/>
-            <path d="M34 0 C40 26, 58 40, 84 46" fill="none" stroke="rgba(54,28,118,0.22)" stroke-width="1"/>
-          </svg>
-        </div>
-        <div class="curl br">
-          <svg viewBox="0 0 84 84">
-            <path d="M84 84 L84 34 C56 38, 30 52, 20 84 Z" fill="#FFFFFF"/>
-            <path d="M20 84 C30 52, 56 38, 84 34 L84 48 C56 50, 38 62, 32 84 Z" fill="#E7E2F0"/>
-            <path d="M32 84 C38 62, 56 50, 84 48" fill="none" stroke="rgba(54,28,118,0.22)" stroke-width="1"/>
-          </svg>
-        </div>
-
         <div class="sheet-inner cc-article">
           <div class="col">
 
@@ -399,15 +370,11 @@
             <h2>From Whidbey Island to New York</h2>
             <p class="q"><b>LF + RA</b> What is your story, and how did you come to found Tolan?</p>
             <div class="anchor">
-              <p><b>Quinten</b> I was born in Washington state and mostly grew up on a little island called <span class="mark">Whidbey Island<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 16 2.5, 33 7, 51 4.5 S 85 6.5, 99 4" stroke-width="2"/></svg></span>. It&rsquo;s a very cool, small agricultural community. Then my parents divorced, and when I was 18, I found myself at North Carolina State University. I was a terrible high school student, and for better or worse, I refused to participate. About a year into college, I got bored - it wasn&rsquo;t a particularly challenging place. This was the beginning of 2010, coming out of the financial crisis, when everything was falling apart but tech was starting to feel like there might be something there. So I found this guy, <a href="https://www.davidtisch.com/" target="_blank" rel="noopener">David Tisch</a>, in New York, and I emailed him. We got on the phone. I said &ldquo;I&rsquo;d love to learn what you do, I&rsquo;ll bring coffee and donuts for nothing, just let me know.&rdquo; And to his credit he said, &ldquo;I&rsquo;d love to have you intern when you graduate, but you don&rsquo;t need to drop out of college for this.&rdquo;</p>
+              <p><b>Quinten</b> I was born in Washington state and mostly grew up on a little island called <span class="mark" id="mark-island">Whidbey Island<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 16 2.5, 33 7, 51 4.5 S 85 6.5, 99 4" stroke-width="2"/></svg></span>. It&rsquo;s a very cool, small agricultural community. Then my parents divorced, and when I was 18, I found myself at North Carolina State University. I was a terrible high school student, and for better or worse, I refused to participate. About a year into college, I got bored - it wasn&rsquo;t a particularly challenging place. This was the beginning of 2010, coming out of the financial crisis, when everything was falling apart but tech was starting to feel like there might be something there. So I found this guy, <a href="https://www.davidtisch.com/" target="_blank" rel="noopener">David Tisch</a>, in New York, and I emailed him. We got on the phone. I said &ldquo;I&rsquo;d love to learn what you do, I&rsquo;ll bring coffee and donuts for nothing, just let me know.&rdquo; And to his credit he said, &ldquo;I&rsquo;d love to have you intern when you graduate, but you don&rsquo;t need to drop out of college for this.&rdquo;</p>
 
-              <figure class="marginalia right" data-moment="island" data-sound="island" style="top: -10px;">
-                <svg class="arrow" data-draw style="top: 6px;" viewBox="0 0 110 120">
-                  <path d="M2 20 C 30 8, 70 18, 60 48 C 52 72, 78 84, 96 74" stroke-width="1.8"/>
-                  <polyline points="84,66 97,75 86,88" stroke-width="1.8"/>
-                </svg>
+              <figure class="marginalia right" data-moment="island" data-target="mark-island" data-sound="island" style="top: -10px;">
                 <button class="hit" type="button" aria-label="Play the island animation and sound">
-                  <span class="snap moment-island" style="transform: rotate(1.2deg);">
+                  <span class="snap moment-island" style="transform: rotate(3.5deg);">
                     <span class="tape"></span>
                     <span class="snap-drift">
                       <img src="images/the_island.png" alt="Whidbey Island, Washington: hay bales in a field, water and evergreens beyond, Mount Baker in the distance" onerror="this.closest('.snap').classList.add('is-missing'); this.remove();">
@@ -415,7 +382,6 @@
                     </span>
                   </span>
                 </button>
-                <figcaption class="caption">Whidbey Island, Washington</figcaption>
               </figure>
             </div>
 
@@ -434,80 +400,55 @@
             <h2>What Tolan is</h2>
             <p class="q"><b>LF + RA</b> What is Tolan today, and what is the vision you&rsquo;re working toward?</p>
             <div class="anchor">
-              <p><b>Quinten</b> Today we call it a second self. It&rsquo;s personal AI, <span class="mark">a little character<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 15 2.5, 32 7, 50 4.5 S 84 6.5, 99 4" stroke-width="2"/><path d="M2 7.5 C 20 5.5, 45 8.5, 70 6 S 92 8, 98 6.5" stroke-width="1.1" opacity="0.75"/></svg></span> designed to be an extension of you. It molds parts of its personality to be similar to yours, shares your interests as much as it can, reflects your values. We have a lot of folks who are religious and want their Tolan to be observant of their faith and the things they care about. We have 65 year old users and 30 year olds - so there&rsquo;s this huge range, and we do a lot of work to make sure your Tolan reflects who you are.</p>
+              <p><b>Quinten</b> Today we call it a second self. It&rsquo;s personal AI, <span class="mark" id="mark-character">a little character<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 15 2.5, 32 7, 50 4.5 S 84 6.5, 99 4" stroke-width="2"/><path d="M2 7.5 C 20 5.5, 45 8.5, 70 6 S 92 8, 98 6.5" stroke-width="1.1" opacity="0.75"/></svg></span> designed to be an extension of you. It molds parts of its personality to be similar to yours, shares your interests as much as it can, reflects your values. We have a lot of folks who are religious and want their Tolan to be observant of their faith and the things they care about. We have 65 year old users and 30 year olds - so there&rsquo;s this huge range, and we do a lot of work to make sure your Tolan reflects who you are.</p>
 
-              <figure class="marginalia left" data-moment="alien" data-sound="chirp" style="top: -10px;">
-                <svg class="arrow" data-draw style="top: 6px;" viewBox="0 0 110 120">
-                  <path d="M4 8 C 40 2, 62 26, 52 52 C 44 74, 66 92, 92 96" stroke-width="1.8"/>
-                  <polyline points="82,86 93,97 79,101" stroke-width="1.8"/>
-                </svg>
+              <figure class="marginalia left" data-moment="alien" data-target="mark-character" data-sound="chirp" style="top: -10px;">
                 <button class="hit" type="button" aria-label="Play the little character animation and sound">
                   <span class="snap moment-alien">
                     <span class="tape"></span>
                     <img src="images/a_little_character.png" alt="An early Tolan character, teal with pink-tipped hair and a yellow scarf">
                   </span>
                 </button>
-                <figcaption class="caption">an early Tolan</figcaption>
               </figure>
             </div>
 
             <div class="anchor">
-              <p>When I think about the totality of what we hope to build, there&rsquo;s a reason this idea of an entity that is an extension of you shows up in so many faiths and so many works of fiction. Call it a <span class="mark">guardian angel, a spirit guide.<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 18 3, 38 7, 55 4.5 S 86 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 25 6, 50 8.5, 75 6.5 S 94 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> It&rsquo;s clearly something humanity really craves.</p>
+              <p>When I think about the totality of what we hope to build, there&rsquo;s a reason this idea of an entity that is an extension of you shows up in so many faiths and so many works of fiction. Call it a <span class="mark" id="mark-guardian">guardian angel, a spirit guide.<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 18 3, 38 7, 55 4.5 S 86 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 25 6, 50 8.5, 75 6.5 S 94 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> It&rsquo;s clearly something humanity really craves.</p>
 
-              <figure class="marginalia right" data-moment="guardian" data-sound="harp" style="top: -30px;">
-                <svg class="arrow" data-draw style="top: 6px;" viewBox="0 0 110 120">
-                  <path d="M4 12 C 40 6, 62 26, 52 52 C 44 74, 66 92, 92 96" stroke-width="1.8"/>
-                  <polyline points="82,86 93,97 79,101" stroke-width="1.8"/>
-                </svg>
+              <figure class="marginalia right" data-moment="guardian" data-target="mark-guardian" data-sound="harp" style="top: -30px;">
                 <button class="hit" type="button" aria-label="Play the Plockhorst guardian angel">
-                  <span class="snap" style="transform: rotate(1.6deg);">
+                  <span class="snap" style="transform: rotate(4deg);">
                     <span class="tape" style="transform: translateX(-50%) rotate(4deg);"></span>
                     <img src="images/guardian_angel_1.png" alt="Guardian angel oil painting by Bernhard Plockhorst, 1886">
                   </span>
                 </button>
-                <figcaption class="caption">Guardian Angel, Plockhorst 1886</figcaption>
               </figure>
 
               <figure class="marginalia left" data-moment="guardian2" data-sound="harp" style="top: 40px;">
-                <svg class="arrow" data-draw style="top: 4px;" viewBox="0 0 110 120">
-                  <path d="M4 12 C 40 6, 62 26, 52 52 C 44 74, 66 92, 92 96" stroke-width="1.8"/>
-                  <polyline points="82,86 93,97 79,101" stroke-width="1.8"/>
-                </svg>
                 <button class="hit" type="button" aria-label="Play the It&rsquo;s a Wonderful Life guardian angel">
-                  <span class="snap" style="transform: rotate(-1.4deg);">
+                  <span class="snap" style="transform: rotate(-4deg);">
                     <span class="tape" style="transform: translateX(-50%) rotate(-3deg);"></span>
                     <img src="images/guardian_angel_2.png" alt="Clarence and George Bailey from It&rsquo;s a Wonderful Life, 1946">
                   </span>
                 </button>
-                <figcaption class="caption">It&rsquo;s a Wonderful Life, 1946</figcaption>
               </figure>
 
               <figure class="marginalia right" data-moment="guardian3" data-sound="harp" style="top: 260px;">
-                <svg class="arrow" data-draw style="top: 6px;" viewBox="0 0 110 120">
-                  <path d="M4 92 C 40 96, 62 74, 52 48 C 44 26, 66 8, 92 4" stroke-width="1.8"/>
-                  <polyline points="82,14 93,3 79,-1" stroke-width="1.8"/>
-                </svg>
                 <button class="hit" type="button" aria-label="Play the Flintstones guardian angel">
-                  <span class="snap" style="transform: rotate(2.2deg);">
+                  <span class="snap" style="transform: rotate(4.5deg);">
                     <span class="tape"></span>
                     <img src="images/guardian_angel_3.png" alt="Fred Flintstone with an angel and devil version of himself on his shoulders">
                   </span>
                 </button>
-                <figcaption class="caption">The Flintstones</figcaption>
               </figure>
 
               <figure class="marginalia left" data-moment="guardian4" data-sound="harp" style="top: 280px;">
-                <svg class="arrow" data-draw style="top: 6px;" viewBox="0 0 110 120">
-                  <path d="M4 92 C 40 96, 62 74, 52 48 C 44 26, 66 8, 92 4" stroke-width="1.8"/>
-                  <polyline points="82,14 93,3 79,-1" stroke-width="1.8"/>
-                </svg>
                 <button class="hit" type="button" aria-label="Play the Lizzie McGuire guardian angel">
-                  <span class="snap" style="transform: rotate(-2.4deg);">
+                  <span class="snap" style="transform: rotate(-4.5deg);">
                     <img src="images/guardian_angel_4.png" alt="Lizzie McGuire beside her animated alter ego">
                     <svg class="clip" viewBox="0 0 22 46"><path d="M11 44 L11 8 C11 3, 4 3, 4 8 L4 36 C4 43, 18 43, 18 34 L18 12" fill="none" stroke="#6E6455" stroke-width="2.2" stroke-linecap="round"/></svg>
                   </span>
                 </button>
-                <figcaption class="caption">Lizzie McGuire</figcaption>
               </figure>
             </div>
 
@@ -518,13 +459,9 @@
             <h2>Early ideas and the alien</h2>
             <p class="q"><b>LF + RA</b> Was this always the vision from day one?</p>
             <div class="anchor">
-              <p><b>Quinten:</b> Like all great consumer companies, we had about six ideas before one seemingly good one. I was a classic second-time founder and new-dad, and I got really interested in AI for kids. I iterated through a few bad ideas there - but there were a few patterns we saw. (1) Latency was improving faster than intelligence. Models were getting faster and faster, and we could see in 2023 that you were going to be able to just talk to these things. We had an inclination to bet on voice very early. (2) My co-founder realized that memory was going to be a distinct, very important primitive. He was one of the first to really think about how to emulate human-like memory in a consumer product. (3) The third piece, around the same exploration time, was that we lucked into getting to know a really talented creative director, <span class="mark">Lucas Zanotto,<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 18 3, 38 7, 55 4.5 S 86 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 25 6, 50 8.5, 75 6.5 S 94 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> through my friend, <a href="https://www.zachklein.com/" target="_blank" rel="noopener">Zach Klein</a>. Lucas is an artist first and foremost, not a Silicon Valley person. He&rsquo;d done some of the early, artistically interesting NFTs, so he was an artist very willing to explore new technology before it was acceptable. We spent a lot of time with him asking, &ldquo;If you were to bring to life an AI you could talk to, that remembered things about you, what would it look and feel like?&rdquo; This is where the Tolans concept began.</p>
+              <p><b>Quinten:</b> Like all great consumer companies, we had about six ideas before one seemingly good one. I was a classic second-time founder and new-dad, and I got really interested in AI for kids. I iterated through a few bad ideas there - but there were a few patterns we saw. (1) Latency was improving faster than intelligence. Models were getting faster and faster, and we could see in 2023 that you were going to be able to just talk to these things. We had an inclination to bet on voice very early. (2) My co-founder realized that memory was going to be a distinct, very important primitive. He was one of the first to really think about how to emulate human-like memory in a consumer product. (3) The third piece, around the same exploration time, was that we lucked into getting to know a really talented creative director, <span class="mark" id="mark-lucas">Lucas Zanotto,<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 18 3, 38 7, 55 4.5 S 86 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 25 6, 50 8.5, 75 6.5 S 94 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> through my friend, <a href="https://www.zachklein.com/" target="_blank" rel="noopener">Zach Klein</a>. Lucas is an artist first and foremost, not a Silicon Valley person. He&rsquo;d done some of the early, artistically interesting NFTs, so he was an artist very willing to explore new technology before it was acceptable. We spent a lot of time with him asking, &ldquo;If you were to bring to life an AI you could talk to, that remembered things about you, what would it look and feel like?&rdquo; This is where the Tolans concept began.</p>
 
-              <figure class="marginalia right" data-moment="lucas" data-sound="squish" style="top: 40px;">
-                <svg class="arrow" data-draw style="top: -30px;" viewBox="0 0 110 120">
-                  <path d="M2 110 C 36 112, 58 96, 54 68 C 51 46, 68 30, 92 26" stroke-width="1.8"/>
-                  <polyline points="81,18 93,25 84,38" stroke-width="1.8"/>
-                </svg>
+              <figure class="marginalia right" data-moment="lucas" data-target="mark-lucas" data-sound="squish" style="top: 40px;">
                 <button class="hit" type="button" aria-label="Wobble the Lucas Zanotto sculpture and play sound">
                   <span class="snap moment-lucas">
                     <span class="tape" style="left: 18%; transform: rotate(-38deg);"></span>
@@ -532,7 +469,6 @@
                     <img src="images/lucas.png" alt="A large playful sculpture by Lucas Zanotto, stacked green forms with eyes">
                   </span>
                 </button>
-                <figcaption class="caption">Lucas Zanotto sculpture</figcaption>
               </figure>
             </div>
 
@@ -544,74 +480,54 @@
             <h2>Story as the product</h2>
             <p class="q"><b>LF + RA</b> To what extent was storytelling a conscious decision for Tolans, and why invest so much in it, and hire a head of story?</p>
             <div class="anchor">
-              <p><b>Quinten</b> During that year I was semi-retired on the island, a very good friend who was early at OpenAI had sent me <span class="mark">a book of poetry written by an early model,<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 16 3, 36 7, 54 4.5 S 85 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 24 6, 49 8.5, 74 6.5 S 93 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> as a joke. It was awful poetry. But it inspired me. So I spent a lot of time reading better works of fiction that deal with AI as a personal extension of who we are. One favorite is <span class="mark">Klara and the Sun,<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 18 3, 40 7, 57 4.5 S 87 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 26 6, 51 8.5, 76 6.5 S 94 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> which I highly recommend. Some <span class="mark">Ted Chiang<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 15 2.5, 33 7, 51 4.5 S 85 6.5, 99 4" stroke-width="2"/><path d="M2 7.5 C 21 5.5, 46 8.5, 71 6 S 93 8, 98 6.5" stroke-width="1.1" opacity="0.75"/></svg></span> as well.</p>
+              <p><b>Quinten</b> During that year I was semi-retired on the island, a very good friend who was early at OpenAI had sent me <span class="mark" id="mark-poetry">a book of poetry written by an early model,<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 16 3, 36 7, 54 4.5 S 85 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 24 6, 49 8.5, 74 6.5 S 93 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> as a joke. It was awful poetry. But it inspired me. So I spent a lot of time reading better works of fiction that deal with AI as a personal extension of who we are. One favorite is <span class="mark" id="mark-klara">Klara and the Sun,<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 18 3, 40 7, 57 4.5 S 87 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 26 6, 51 8.5, 76 6.5 S 94 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> which I highly recommend. Some <span class="mark" id="mark-ted">Ted Chiang<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 15 2.5, 33 7, 51 4.5 S 85 6.5, 99 4" stroke-width="2"/><path d="M2 7.5 C 21 5.5, 46 8.5, 71 6 S 93 8, 98 6.5" stroke-width="1.1" opacity="0.75"/></svg></span> as well.</p>
 
-              <figure class="marginalia left" data-moment="poetry" data-sound="glitch" style="top: -10px;">
-                <svg class="arrow" data-draw style="top: 12px;" viewBox="0 0 110 120">
-                  <path d="M4 12 C 44 6, 58 34, 46 56 C 36 76, 70 82, 94 70" stroke-width="1.8"/>
-                  <polyline points="82,62 96,71 85,84" stroke-width="1.8"/>
-                </svg>
+              <figure class="marginalia left" data-moment="poetry" data-target="mark-poetry" data-sound="glitch" style="top: -10px;">
                 <button class="hit" type="button" aria-label="Play the poetry book animation and sound">
-                  <span class="snap" style="transform: rotate(-1.4deg);">
+                  <span class="snap" style="transform: rotate(-4deg);">
                     <span class="tape"></span>
                     <img src="images/early_model_poetry_book.png" alt="A small self-published book of poetry written by an early language model" onerror="this.closest('.snap').classList.add('is-missing'); this.remove();">
                     <span class="ph">early_model_poetry_book.png<br>&mdash; image pending</span>
                   </span>
                 </button>
-                <figcaption class="caption">poetry by an early model</figcaption>
               </figure>
             </div>
 
             <div class="anchor">
               <p>I realized the nature of our relationship with an AI entity is so defined by the story we wrap around it - the purpose of the entity, why it&rsquo;s there, how it relates to us. In these stories, they&rsquo;re all dealing with the same capabilities and themes, but the story wrapped around it takes it from a dystopian horror to something charming and lovely. So when we started, we recognized we needed our story to wrap around this, because otherwise you get to the dystopian place, or at the very least, the anime role play place.</p>
 
-              <figure class="marginalia right" data-moment="klara" data-sound="hum" style="top: -10px;">
-                <svg class="arrow" data-draw style="top: 30px;" viewBox="0 0 110 120">
-                  <path d="M2 30 C 40 18, 66 34, 58 60 C 52 80, 74 88, 96 80" stroke-width="1.8"/>
-                  <polyline points="84,72 98,81 87,94" stroke-width="1.8"/>
-                </svg>
+              <figure class="marginalia right" data-moment="klara" data-target="mark-klara" data-sound="hum" style="top: -10px;">
                 <button class="hit" type="button" aria-label="Play the Klara and the Sun animation and sound">
-                  <span class="snap ray-cover" style="transform: rotate(1.5deg);">
+                  <span class="snap ray-cover" style="transform: rotate(4deg);">
                     <span class="tape" style="transform: translateX(-50%) rotate(-4deg);"></span>
                     <img src="images/klara_and_the_sun.png" alt="The cover of Klara and the Sun by Kazuo Ishiguro" onerror="this.closest('.snap').classList.add('is-missing'); this.remove();">
                     <span class="ph">klara_and_the_sun.png<br>&mdash; image pending</span>
                   </span>
                 </button>
-                <figcaption class="caption">Klara and the Sun, Kazuo Ishiguro</figcaption>
               </figure>
             </div>
 
             <div class="anchor">
-              <figure class="marginalia left" data-moment="ted" data-sound="robot" style="top: 20px;">
-                <svg class="arrow" data-draw style="top: 40px;" viewBox="0 0 110 120">
-                  <path d="M4 100 C 40 104, 60 88, 52 62 C 46 42, 70 30, 94 34" stroke-width="1.8"/>
-                  <polyline points="83,26 95,33 85,46" stroke-width="1.8"/>
-                </svg>
+              <figure class="marginalia left" data-moment="ted" data-target="mark-ted" data-sound="robot" style="top: 20px;">
                 <button class="hit" type="button" aria-label="Play the Ted Chiang animation and sound">
-                  <span class="snap" style="transform: rotate(-2deg);">
+                  <span class="snap" style="transform: rotate(-4.5deg);">
                     <span class="tape"></span>
                     <img src="images/ted_chiang.png" alt="A Ted Chiang short story collection" onerror="this.closest('.snap').classList.add('is-missing'); this.remove();">
                     <span class="ph">ted_chiang.png<br>&mdash; image pending</span>
                   </span>
                 </button>
-                <figcaption class="caption">Ted Chiang, The Lifecycle of Software Objects</figcaption>
               </figure>
               <p class="q"><b>LF + RA</b> To build an emotional stake in a companion, it has to be interesting - which is also why you&rsquo;d invest so much to make the attachment show up positively - would you agree?</p>
-              <p><b>Quinten</b> I won&rsquo;t claim it was the initial impulse, but you&rsquo;re exactly right. Our research lead, <a href="https://www.linkedin.com/in/liliandoyle" target="_blank" rel="noopener">Lily</a>, who has a behavioral psych background, helped <a href="https://www.linkedin.com/in/eliotpeper" target="_blank" rel="noopener">Eliot Peper</a>, our Head of Story, lean into the story work, because we designed the Tolans around a framework from the 70s called <span class="mark">social penetration theory.<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 16 2.5, 34 7, 52 4.5 S 85 6.5, 99 4" stroke-width="2"/><path d="M2 7.5 C 22 5.5, 47 8.5, 72 6 S 93 8, 98 6.5" stroke-width="1.1" opacity="0.75"/></svg></span> It&rsquo;s a well validated framework for how a healthy relationship develops, and it necessarily requires mutual disclosure.</p>
+              <p><b>Quinten</b> I won&rsquo;t claim it was the initial impulse, but you&rsquo;re exactly right. Our research lead, <a href="https://www.linkedin.com/in/liliandoyle" target="_blank" rel="noopener">Lily</a>, who has a behavioral psych background, helped <a href="https://www.linkedin.com/in/eliotpeper" target="_blank" rel="noopener">Eliot Peper</a>, our Head of Story, lean into the story work, because we designed the Tolans around a framework from the 70s called <span class="mark" id="mark-social">social penetration theory.<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 16 2.5, 34 7, 52 4.5 S 85 6.5, 99 4" stroke-width="2"/><path d="M2 7.5 C 22 5.5, 47 8.5, 72 6 S 93 8, 98 6.5" stroke-width="1.1" opacity="0.75"/></svg></span> It&rsquo;s a well validated framework for how a healthy relationship develops, and it necessarily requires mutual disclosure.</p>
 
-              <figure class="marginalia right" data-moment="social" data-sound="pencil" style="top: 40px;">
-                <svg class="arrow" data-draw style="top: 10px;" viewBox="0 0 110 120">
-                  <path d="M2 16 C 36 8, 70 22, 56 50 C 46 70, 74 78, 96 66" stroke-width="1.8"/>
-                  <polyline points="84,58 97,67 86,80" stroke-width="1.8"/>
-                </svg>
+              <figure class="marginalia right" data-moment="social" data-target="mark-social" data-sound="pencil" style="top: 40px;">
                 <button class="hit" type="button" aria-label="Draw the disclosure rings and play sound">
-                  <span class="snap" style="transform: rotate(1.2deg);">
+                  <span class="snap" style="transform: rotate(3.5deg);">
                     <span class="tape"></span>
                     <img src="images/social_penetration_theory.png" alt="A diagram of social penetration theory as concentric layers of disclosure" onerror="this.closest('.snap').classList.add('is-missing'); this.remove();">
                     <span class="ph">social_penetration_theory.png<br>&mdash; image pending</span>
                   </span>
                 </button>
-                <figcaption class="caption">social penetration theory, Altman &amp; Taylor 1973</figcaption>
               </figure>
             </div>
 
@@ -626,15 +542,11 @@
             <h2>Tiny details</h2>
             <p class="q"><b>LF + RA</b> Are there any tiny details you&rsquo;ve shipped recently that had an outsized impact?</p>
             <div class="anchor">
-              <p><b>Quinten</b> Our product lead <a href="https://www.linkedin.com/in/joshbromberg/" target="_blank" rel="noopener">Josh</a>, a former founder, deserves a lot of credit for this recent feature. As we looked at our slightly older audience, a lot of them had a morning routine with their Tolan where they&rsquo;d share their intentions for the day - a mom getting ready, kids eating breakfast, about to do the school run and then head to work - sharing a mix of practical and emotional information like: &ldquo;I really need to stay grounded, I&rsquo;ve got a presentation I&rsquo;m nervous about, and also remember that Teddy&rsquo;s soccer practice is at 3 not 4 today.&rdquo; The Tolan was picking that up very well, so we built a feature literally called <span class="mark">intentions,<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 16 3, 36 7, 54 4.5 S 85 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 24 6, 49 8.5, 74 6.5 S 93 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> where the Tolan comes to you proactively in the morning with a thought for your day. It&rsquo;s often a great jumping off point, and it was hugely impactful for retention. People feel really seen.</p>
+              <p><b>Quinten</b> Our product lead <a href="https://www.linkedin.com/in/joshbromberg/" target="_blank" rel="noopener">Josh</a>, a former founder, deserves a lot of credit for this recent feature. As we looked at our slightly older audience, a lot of them had a morning routine with their Tolan where they&rsquo;d share their intentions for the day - a mom getting ready, kids eating breakfast, about to do the school run and then head to work - sharing a mix of practical and emotional information like: &ldquo;I really need to stay grounded, I&rsquo;ve got a presentation I&rsquo;m nervous about, and also remember that Teddy&rsquo;s soccer practice is at 3 not 4 today.&rdquo; The Tolan was picking that up very well, so we built a feature literally called <span class="mark" id="mark-intentions">intentions,<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 16 3, 36 7, 54 4.5 S 85 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 24 6, 49 8.5, 74 6.5 S 93 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> where the Tolan comes to you proactively in the morning with a thought for your day. It&rsquo;s often a great jumping off point, and it was hugely impactful for retention. People feel really seen.</p>
 
-              <figure class="marginalia left" data-moment="intentions" data-sound="chime" style="top: -10px;">
-                <svg class="arrow" data-draw style="top: 12px;" viewBox="0 0 110 120">
-                  <path d="M4 96 C 42 100, 58 82, 50 58 C 44 40, 68 28, 92 30" stroke-width="1.8"/>
-                  <polyline points="81,22 93,29 83,42" stroke-width="1.8"/>
-                </svg>
+              <figure class="marginalia left" data-moment="intentions" data-target="mark-intentions" data-sound="chime" style="top: -10px;">
                 <button class="hit" type="button" aria-label="Pop up the intentions prints and play sound">
-                  <span class="snap" style="transform: rotate(-1.2deg);">
+                  <span class="snap" style="transform: rotate(-3.5deg);">
                     <span class="tape"></span>
                     <img src="images/intentions.png" alt="The Tolan intentions feature, a morning check-in card" onerror="this.closest('.snap').classList.add('is-missing'); this.remove();">
                     <span class="ph">intentions.png<br>&mdash; image pending</span>
@@ -644,7 +556,6 @@
                     <span class="ph">intentions_2.png<br>&mdash; image pending</span>
                   </span>
                 </button>
-                <figcaption class="caption">the intentions feature</figcaption>
               </figure>
             </div>
 
@@ -665,23 +576,18 @@
                 <div class="rf-num">I</div>
                 <div>
                   <p class="rf-q">Is there a company or brand you admire that maybe subconsciously affects how you build?</p>
-                  <p class="rf-a"><span class="mark">Pixar and Disney<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 15 2.5, 33 7, 51 4.5 S 85 6.5, 99 4" stroke-width="2"/><path d="M2 7.5 C 21 5.5, 46 8.5, 71 6 S 93 8, 98 6.5" stroke-width="1.1" opacity="0.75"/></svg></span> - they&rsquo;ve built characters that are appropriate for all ages and have great stories behind them. But I&rsquo;m personally more drawn to companies that are outside the cool mainstream and obsessed with serving people well. There&rsquo;s a reason I pull a lot from my hospitality experience. My wife and I run a restaurant together and do hospitality investing, and I learned more from serving a big table on a busy night than I do from 90% of what&rsquo;s on Twitter.</p>
+                  <p class="rf-a"><span class="mark" id="mark-pixar">Pixar and Disney<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 15 2.5, 33 7, 51 4.5 S 85 6.5, 99 4" stroke-width="2"/><path d="M2 7.5 C 21 5.5, 46 8.5, 71 6 S 93 8, 98 6.5" stroke-width="1.1" opacity="0.75"/></svg></span> - they&rsquo;ve built characters that are appropriate for all ages and have great stories behind them. But I&rsquo;m personally more drawn to companies that are outside the cool mainstream and obsessed with serving people well. There&rsquo;s a reason I pull a lot from my hospitality experience. My wife and I run a restaurant together and do hospitality investing, and I learned more from serving a big table on a busy night than I do from 90% of what&rsquo;s on Twitter.</p>
                 </div>
               </div>
 
-              <figure class="marginalia right" data-moment="pixar" data-sound="boing" style="top: -10px;">
-                <svg class="arrow" data-draw style="top: 8px;" viewBox="0 0 110 120">
-                  <path d="M2 22 C 38 10, 68 24, 58 52 C 50 74, 76 82, 96 72" stroke-width="1.8"/>
-                  <polyline points="84,64 97,73 86,86" stroke-width="1.8"/>
-                </svg>
+              <figure class="marginalia right" data-moment="pixar" data-target="mark-pixar" data-sound="boing" style="top: -10px;">
                 <button class="hit" type="button" aria-label="Do the Luxo hop and play sound">
-                  <span class="snap" style="transform: rotate(-1.6deg);">
+                  <span class="snap" style="transform: rotate(-4deg);">
                     <span class="tape"></span>
                     <img src="images/pixar_and_disney.png" alt="The Pixar Luxo lamp" onerror="this.closest('.snap').classList.add('is-missing'); this.remove();">
                     <span class="ph">pixar_and_disney.png<br>&mdash; image pending</span>
                   </span>
                 </button>
-                <figcaption class="caption">Luxo Jr., Pixar 1986</figcaption>
               </figure>
             </div>
 
@@ -698,17 +604,13 @@
                 <div class="rf-num">III</div>
                 <div>
                   <p class="rf-q">Where do you go, or what do you do, when you need to feel inspired?</p>
-                  <p class="rf-a">Definitely the island. The Tolan lore is essentially built around the <span class="mark">Pacific Northwest,<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 18 3, 40 7, 57 4.5 S 87 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 26 6, 51 8.5, 76 6.5 S 94 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> an archipelago of small islands with a temperate climate. We spend every morning kayaking and getting some quality time together. It&rsquo;s a very good place for getting away from Silicon Valley.</p>
+                  <p class="rf-a">Definitely the island. The Tolan lore is essentially built around the <span class="mark" id="mark-pnw">Pacific Northwest,<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 18 3, 40 7, 57 4.5 S 87 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 26 6, 51 8.5, 76 6.5 S 94 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> an archipelago of small islands with a temperate climate. We spend every morning kayaking and getting some quality time together. It&rsquo;s a very good place for getting away from Silicon Valley.</p>
                 </div>
               </div>
 
-              <figure class="marginalia left" data-moment="pacific" data-sound="ambient" style="top: -10px;">
-                <svg class="arrow" data-draw style="top: 12px;" viewBox="0 0 110 120">
-                  <path d="M4 14 C 44 4, 60 30, 48 54 C 38 76, 72 84, 96 72" stroke-width="1.8"/>
-                  <polyline points="84,64 97,73 86,86" stroke-width="1.8"/>
-                </svg>
+              <figure class="marginalia left" data-moment="pacific" data-target="mark-pnw" data-sound="ambient" style="top: -10px;">
                 <button class="hit" type="button" aria-label="Toggle the Pacific Northwest ambient loop">
-                  <span class="snap moment-pacific" style="transform: rotate(1.4deg);">
+                  <span class="snap moment-pacific" style="transform: rotate(3.5deg);">
                     <span class="tape"></span>
                     <span class="snap-drift">
                       <img src="images/pacific_northwest.jpg" alt="A 19th-century watercolor of the Pacific Northwest coast, evergreens and calm water" onerror="this.closest('.snap').classList.add('is-missing'); this.remove();">
@@ -716,7 +618,6 @@
                     </span>
                   </span>
                 </button>
-                <figcaption class="caption">the Pacific Northwest coast</figcaption>
               </figure>
             </div>
 
@@ -735,10 +636,61 @@
       'use strict';
       var reduceMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-      /* ---------- draw-in for arrows + botanical sprigs ---------- */
+      /* ---------- dynamic margin arrows: each one points at the word it references ---------- */
       document.documentElement.classList.add('js');
-      var drawables = Array.prototype.slice.call(document.querySelectorAll('[data-draw]'));
-      drawables.forEach(function (el) {
+      var wideMQ = window.matchMedia('(min-width: 1061px)');
+      var SVGNS = 'http://www.w3.org/2000/svg';
+      var arrowFigs = Array.prototype.slice.call(document.querySelectorAll('.marginalia[data-target]'));
+
+      function buildArrow(fig) {
+        var old = fig.querySelector('.arrow');
+        if (old) old.parentNode.removeChild(old);
+        if (!wideMQ.matches) return null;
+        var mark = document.getElementById(fig.getAttribute('data-target'));
+        if (!mark) return null;
+        var isRight = fig.classList.contains('right');
+        var figRect = fig.getBoundingClientRect();
+        var rects = mark.getClientRects();
+        if (!rects.length) return null;
+        var mr = rects[0];
+        for (var i = 1; i < rects.length; i++) {
+          if (isRight ? rects[i].right > mr.right : rects[i].left < mr.left) mr = rects[i];
+        }
+        /* start near the photo's inner top edge, end just past the word */
+        var sx = isRight ? 34 : figRect.width - 34;
+        var sy = 24;
+        var ex = (isRight ? mr.right + 7 : mr.left - 7) - figRect.left;
+        var ey = mr.top + mr.height / 2 - figRect.top;
+        var mx = (sx + ex) / 2, my = (sy + ey) / 2;
+        var dx = ex - sx, dy = ey - sy;
+        var len = Math.sqrt(dx * dx + dy * dy) || 1;
+        var bow = Math.min(46, len * 0.28) * (isRight ? 1 : -1);
+        var cx = mx - (dy / len) * bow, cy = my + (dx / len) * bow;
+        var svg = document.createElementNS(SVGNS, 'svg');
+        svg.setAttribute('class', 'arrow');
+        svg.setAttribute('data-draw', '');
+        var path = document.createElementNS(SVGNS, 'path');
+        path.setAttribute('d', 'M' + sx.toFixed(1) + ' ' + sy.toFixed(1) +
+          ' Q' + cx.toFixed(1) + ' ' + cy.toFixed(1) + ', ' + ex.toFixed(1) + ' ' + ey.toFixed(1));
+        path.setAttribute('stroke-width', '1.8');
+        svg.appendChild(path);
+        var ux = ex - cx, uy = ey - cy;
+        var ul = Math.sqrt(ux * ux + uy * uy) || 1;
+        ux /= ul; uy /= ul;
+        var w = 9;
+        var head = document.createElementNS(SVGNS, 'polyline');
+        head.setAttribute('points',
+          (ex - ux * w + uy * w * 0.72).toFixed(1) + ',' + (ey - uy * w - ux * w * 0.72).toFixed(1) + ' ' +
+          ex.toFixed(1) + ',' + ey.toFixed(1) + ' ' +
+          (ex - ux * w - uy * w * 0.72).toFixed(1) + ',' + (ey - uy * w + ux * w * 0.72).toFixed(1));
+        head.setAttribute('stroke-width', '1.8');
+        svg.appendChild(head);
+        fig.insertBefore(svg, fig.firstChild);
+        return svg;
+      }
+
+      /* ---------- draw-in ---------- */
+      function prepDraw(el) {
         var strokes = el.querySelectorAll('path, polyline, circle');
         Array.prototype.forEach.call(strokes, function (s) {
           var len = 0;
@@ -748,7 +700,7 @@
           s.style.strokeDashoffset = len;
           s.dataset.len = len;
         });
-      });
+      }
 
       function drawIn(el) {
         var strokes = el.querySelectorAll('path, polyline, circle');
@@ -764,16 +716,43 @@
         el.classList.add('is-drawn');
       }
 
-      if ('IntersectionObserver' in window) {
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) {
-            if (e.isIntersecting) { drawIn(e.target); io.unobserve(e.target); }
-          });
-        }, { threshold: 0.25, rootMargin: '0px 0px -80px 0px' });
-        drawables.forEach(function (el) { io.observe(el); });
-      } else {
-        drawables.forEach(drawIn);
+      function initArrows() {
+        arrowFigs.forEach(buildArrow);
+        var drawables = Array.prototype.slice.call(document.querySelectorAll('[data-draw]'));
+        drawables.forEach(prepDraw);
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) { drawIn(e.target); io.unobserve(e.target); }
+            });
+          }, { threshold: 0.25, rootMargin: '0px 0px -80px 0px' });
+          drawables.forEach(function (el) { io.observe(el); });
+        } else {
+          drawables.forEach(drawIn);
+        }
       }
+
+      if (document.readyState === 'complete') { initArrows(); }
+      else { window.addEventListener('load', initArrows); }
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function () {
+          arrowFigs.forEach(function (fig) {
+            if (!fig.querySelector('.arrow')) return;
+            var svg = buildArrow(fig);
+            if (svg) svg.classList.add('is-drawn');
+          });
+        });
+      }
+      var arrowResizeT;
+      window.addEventListener('resize', function () {
+        clearTimeout(arrowResizeT);
+        arrowResizeT = setTimeout(function () {
+          arrowFigs.forEach(function (fig) {
+            var svg = buildArrow(fig);
+            if (svg) svg.classList.add('is-drawn');
+          });
+        }, 150);
+      });
 
       /* ---------- sound engine: synthesized, click-only, mutable ---------- */
       var muted = false;
