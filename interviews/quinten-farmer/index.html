@@ -184,11 +184,12 @@
     .hit:focus-visible { outline: 2px solid var(--magenta); outline-offset: 8px; border-radius: 3px; }
 
     .snap {
-      position: relative; background: #FFFFFF; padding: 7px 7px 8px;
+      display: block; position: relative; background: #FFFFFF; padding: 7px 7px 8px;
       box-shadow: 0 3px 9px rgba(26,17,48,0.18), 0 1px 2px rgba(26,17,48,0.12);
       transform-origin: 50% 100%;
     }
     .snap img { display: block; width: 100%; max-height: 240px; object-fit: cover; }
+    .snap-drift { display: block; }
     .snap.stacked { margin-top: 14px; }
 
     /* graceful placeholder while Libbie&rsquo;s full-res image is pending */
@@ -207,6 +208,8 @@
       background: rgba(255, 255, 255, 0.78); box-shadow: 0 1px 3px rgba(26,17,48,0.16);
       clip-path: polygon(2% 8%, 98% 0%, 100% 88%, 96% 100%, 3% 94%, 0% 76%, 2% 40%);
     }
+    .tape.tl { left: -16px; top: -10px; width: 62px; transform: rotate(-42deg); }
+    .tape.tr { left: auto; right: -16px; top: -10px; width: 62px; transform: rotate(42deg); }
     .clip { position: absolute; top: -16px; right: 14px; width: 22px; height: 46px; z-index: 2; }
 
     /* ---------- botanical sprigs ---------- */
@@ -359,10 +362,10 @@
 
             <p class="eyebrow">Behind the creative process</p>
             <h1>Why a little alien is a good friend</h1>
-            <p class="dek">Quinten Farmer &middot; Tolan &middot; July 2026</p>
+            <p class="dek">Quinten Farmer &middot; Founder, CEO at Tolan &middot; July 2026</p>
 
             <h2 style="margin-top:44px;">Intro</h2>
-            <p>Tolan is a second self, a little character designed to be an extension of you, and about 150,000 people pay to spend time with theirs every month. What draws us to Quinten is his conviction that a companion becomes meaningful through the story wrapped around it, and that the creative choices behind that story carry the product.</p>
+            <p><a href="https://www.tolans.com" target="_blank" rel="noopener">Tolan</a> is a second self, a little character designed to be an extension of you, and about 150,000 people pay to spend time with theirs every month. What draws us to <a href="https://www.linkedin.com/in/quintendf/" target="_blank" rel="noopener">Quinten</a> is his conviction that a companion becomes meaningful through the story wrapped around it, and that the creative choices behind that story carry the product.</p>
             <p>Quinten grew up on a small agricultural island in Washington state, was a self-described terrible high school student, and talked his way to New York at 18 by cold emailing an investor. His first company was Even, a bank subsidized by employers to give workers lower cost access to basic financial services. Even served millions of Americans and sold for $300 million in 2022. Rather than resting on those achievements, the post-exit chapter proved to be the most challenging. Between saving the business through covid and managing a profound family loss, Quinten stepped away, opened a restaurant with friends, and spent a year back on the island where he grew up before the pull of new technology brought him back.</p>
             <p>Our conversation traces the creative choices that made Tolan work - how an artist and a writer helped turn a technical constraint into a character, why they program the Tolans around a 1970s social theory, and why serving a busy dinner table leads to more clarity than being on tech twitter.</p>
 
@@ -375,7 +378,8 @@
               <figure class="marginalia right" data-moment="island" data-target="mark-island" data-sound="island" style="top: -10px;">
                 <button class="hit" type="button" aria-label="Play the island animation and sound">
                   <span class="snap moment-island" style="transform: rotate(3.5deg);">
-                    <span class="tape"></span>
+                    <span class="tape tl"></span>
+                    <span class="tape tr"></span>
                     <span class="snap-drift">
                       <img src="images/the_island.png" alt="Whidbey Island, Washington: hay bales in a field, water and evergreens beyond, Mount Baker in the distance" onerror="this.closest('.snap').classList.add('is-missing'); this.remove();">
                       <span class="ph">the_island.png<br>&mdash; image pending</span>
@@ -418,7 +422,7 @@
               <figure class="marginalia right" data-moment="guardian" data-target="mark-guardian" data-sound="harp" style="top: -30px;">
                 <button class="hit" type="button" aria-label="Play the Plockhorst guardian angel">
                   <span class="snap" style="transform: rotate(4deg);">
-                    <span class="tape" style="transform: translateX(-50%) rotate(4deg);"></span>
+                    <span class="tape tr"></span>
                     <img src="images/guardian_angel_1.png" alt="Guardian angel oil painting by Bernhard Plockhorst, 1886">
                   </span>
                 </button>
@@ -427,7 +431,7 @@
               <figure class="marginalia left" data-moment="guardian2" data-sound="harp" style="top: 40px;">
                 <button class="hit" type="button" aria-label="Play the It&rsquo;s a Wonderful Life guardian angel">
                   <span class="snap" style="transform: rotate(-4deg);">
-                    <span class="tape" style="transform: translateX(-50%) rotate(-3deg);"></span>
+                    <span class="tape tl"></span>
                     <img src="images/guardian_angel_2.png" alt="Clarence and George Bailey from It&rsquo;s a Wonderful Life, 1946">
                   </span>
                 </button>
@@ -436,7 +440,7 @@
               <figure class="marginalia right" data-moment="guardian3" data-sound="harp" style="top: 260px;">
                 <button class="hit" type="button" aria-label="Play the Flintstones guardian angel">
                   <span class="snap" style="transform: rotate(4.5deg);">
-                    <span class="tape"></span>
+                    <span class="tape tr"></span>
                     <img src="images/guardian_angel_3.png" alt="Fred Flintstone with an angel and devil version of himself on his shoulders">
                   </span>
                 </button>
@@ -464,8 +468,8 @@
               <figure class="marginalia right" data-moment="lucas" data-target="mark-lucas" data-sound="squish" style="top: 40px;">
                 <button class="hit" type="button" aria-label="Wobble the Lucas Zanotto sculpture and play sound">
                   <span class="snap moment-lucas">
-                    <span class="tape" style="left: 18%; transform: rotate(-38deg);"></span>
-                    <span class="tape" style="left: 84%; transform: rotate(34deg);"></span>
+                    <span class="tape tl"></span>
+                    <span class="tape tr"></span>
                     <img src="images/lucas.png" alt="A large playful sculpture by Lucas Zanotto, stacked green forms with eyes">
                   </span>
                 </button>
@@ -499,7 +503,8 @@
               <figure class="marginalia right" data-moment="klara" data-target="mark-klara" data-sound="hum" style="top: -10px;">
                 <button class="hit" type="button" aria-label="Play the Klara and the Sun animation and sound">
                   <span class="snap ray-cover" style="transform: rotate(4deg);">
-                    <span class="tape" style="transform: translateX(-50%) rotate(-4deg);"></span>
+                    <span class="tape tl"></span>
+                    <span class="tape tr"></span>
                     <img src="images/klara_and_the_sun.png" alt="The cover of Klara and the Sun by Kazuo Ishiguro" onerror="this.closest('.snap').classList.add('is-missing'); this.remove();">
                     <span class="ph">klara_and_the_sun.png<br>&mdash; image pending</span>
                   </span>
@@ -511,7 +516,7 @@
               <figure class="marginalia left" data-moment="ted" data-target="mark-ted" data-sound="robot" style="top: 20px;">
                 <button class="hit" type="button" aria-label="Play the Ted Chiang animation and sound">
                   <span class="snap" style="transform: rotate(-4.5deg);">
-                    <span class="tape"></span>
+                    <span class="tape tl"></span>
                     <img src="images/ted_chiang.png" alt="A Ted Chiang short story collection" onerror="this.closest('.snap').classList.add('is-missing'); this.remove();">
                     <span class="ph">ted_chiang.png<br>&mdash; image pending</span>
                   </span>
@@ -583,7 +588,7 @@
               <figure class="marginalia right" data-moment="pixar" data-target="mark-pixar" data-sound="boing" style="top: -10px;">
                 <button class="hit" type="button" aria-label="Do the Luxo hop and play sound">
                   <span class="snap" style="transform: rotate(-4deg);">
-                    <span class="tape"></span>
+                    <span class="tape tr"></span>
                     <img src="images/pixar_and_disney.png" alt="The Pixar Luxo lamp" onerror="this.closest('.snap').classList.add('is-missing'); this.remove();">
                     <span class="ph">pixar_and_disney.png<br>&mdash; image pending</span>
                   </span>
@@ -608,10 +613,11 @@
                 </div>
               </div>
 
-              <figure class="marginalia left" data-moment="pacific" data-target="mark-pnw" data-sound="ambient" style="top: -10px;">
+              <figure class="marginalia left" data-moment="pacific" data-target="mark-pnw" data-sound="ambient" style="top: -10px; width: 300px;">
                 <button class="hit" type="button" aria-label="Toggle the Pacific Northwest ambient loop">
                   <span class="snap moment-pacific" style="transform: rotate(3.5deg);">
-                    <span class="tape"></span>
+                    <span class="tape tl"></span>
+                      <span class="tape tr"></span>
                     <span class="snap-drift">
                       <img src="images/pacific_northwest.jpg" alt="A 19th-century watercolor of the Pacific Northwest coast, evergreens and calm water" onerror="this.closest('.snap').classList.add('is-missing'); this.remove();">
                       <span class="ph">pacific_northwest.jpg<br>&mdash; image pending</span>
@@ -636,53 +642,93 @@
       'use strict';
       var reduceMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-      /* ---------- dynamic margin arrows: each one points at the word it references ---------- */
+      /* ---------- margin figures: align to referenced word, short loose arrows pointing at the photo ---------- */
       document.documentElement.classList.add('js');
       var wideMQ = window.matchMedia('(min-width: 1061px)');
       var SVGNS = 'http://www.w3.org/2000/svg';
-      var arrowFigs = Array.prototype.slice.call(document.querySelectorAll('.marginalia[data-target]'));
+      var allFigs = Array.prototype.slice.call(document.querySelectorAll('.marginalia'));
+      var arrowFigs = allFigs.filter(function (f) { return f.hasAttribute('data-target'); });
 
-      function buildArrow(fig) {
-        var old = fig.querySelector('.arrow');
-        if (old) old.parentNode.removeChild(old);
-        if (!wideMQ.matches) return null;
+      function markRect(fig) {
         var mark = document.getElementById(fig.getAttribute('data-target'));
         if (!mark) return null;
-        var isRight = fig.classList.contains('right');
-        var figRect = fig.getBoundingClientRect();
         var rects = mark.getClientRects();
         if (!rects.length) return null;
+        var isRight = fig.classList.contains('right');
         var mr = rects[0];
         for (var i = 1; i < rects.length; i++) {
           if (isRight ? rects[i].right > mr.right : rects[i].left < mr.left) mr = rects[i];
         }
-        /* start near the photo's inner top edge, end just past the word */
-        var sx = isRight ? 34 : figRect.width - 34;
-        var sy = 24;
-        var ex = (isRight ? mr.right + 7 : mr.left - 7) - figRect.left;
-        var ey = mr.top + mr.height / 2 - figRect.top;
-        var mx = (sx + ex) / 2, my = (sy + ey) / 2;
-        var dx = ex - sx, dy = ey - sy;
+        return mr;
+      }
+
+      /* place each targeted figure so its photo sits on the same line as its word,
+         then push any overlapping same-side figures apart */
+      function layoutFigs() {
+        if (!wideMQ.matches) {
+          arrowFigs.forEach(function (f) { f.style.top = ''; });
+          return;
+        }
+        arrowFigs.forEach(function (fig) {
+          var mr = markRect(fig);
+          var anchor = fig.offsetParent;
+          if (!mr || !anchor) return;
+          var ar = anchor.getBoundingClientRect();
+          fig.style.top = Math.round(mr.top - ar.top - 8) + 'px';
+        });
+        ['left', 'right'].forEach(function (side) {
+          var sideFigs = allFigs.filter(function (f) { return f.classList.contains(side); });
+          sideFigs.sort(function (a, b) { return a.getBoundingClientRect().top - b.getBoundingClientRect().top; });
+          for (var i = 1; i < sideFigs.length; i++) {
+            var prev = sideFigs[i - 1].getBoundingClientRect();
+            var cur = sideFigs[i];
+            var overlap = prev.bottom + 22 - cur.getBoundingClientRect().top;
+            if (overlap > 0) {
+              var curTop = parseFloat(cur.style.top) || parseFloat(getComputedStyle(cur).top) || 0;
+              cur.style.top = Math.round(curTop + overlap) + 'px';
+            }
+          }
+        });
+      }
+
+      function buildArrow(fig, idx) {
+        var old = fig.querySelector('.arrow');
+        if (old) old.parentNode.removeChild(old);
+        if (!wideMQ.matches) return null;
+        var mr = markRect(fig);
+        if (!mr) return null;
+        var isRight = fig.classList.contains('right');
+        var figRect = fig.getBoundingClientRect();
+        var rnd = (((idx + 1) * 37) % 13) / 13 - 0.5; /* stable -0.5..0.5 wobble per figure */
+        /* head: lands on the photo's inner top corner */
+        var hx = isRight ? 46 : figRect.width - 46;
+        var hy = 30 + rnd * 8;
+        /* tail: floats in the gutter on the word's line, never stretches to the word */
+        var tx = isRight ? -14 : figRect.width + 14;
+        var ty = mr.top + mr.height / 2 - figRect.top + rnd * 5;
+        ty = Math.max(hy - 70, Math.min(ty, hy + 70));
+        var mx = (tx + hx) / 2, my = (ty + hy) / 2;
+        var dx = hx - tx, dy = hy - ty;
         var len = Math.sqrt(dx * dx + dy * dy) || 1;
-        var bow = Math.min(46, len * 0.28) * (isRight ? 1 : -1);
+        var bow = (15 + Math.abs(rnd) * 16) * (isRight ? -1 : 1);
         var cx = mx - (dy / len) * bow, cy = my + (dx / len) * bow;
         var svg = document.createElementNS(SVGNS, 'svg');
         svg.setAttribute('class', 'arrow');
         svg.setAttribute('data-draw', '');
         var path = document.createElementNS(SVGNS, 'path');
-        path.setAttribute('d', 'M' + sx.toFixed(1) + ' ' + sy.toFixed(1) +
-          ' Q' + cx.toFixed(1) + ' ' + cy.toFixed(1) + ', ' + ex.toFixed(1) + ' ' + ey.toFixed(1));
+        path.setAttribute('d', 'M' + tx.toFixed(1) + ' ' + ty.toFixed(1) +
+          ' Q' + cx.toFixed(1) + ' ' + cy.toFixed(1) + ', ' + hx.toFixed(1) + ' ' + hy.toFixed(1));
         path.setAttribute('stroke-width', '1.8');
         svg.appendChild(path);
-        var ux = ex - cx, uy = ey - cy;
+        var ux = hx - cx, uy = hy - cy;
         var ul = Math.sqrt(ux * ux + uy * uy) || 1;
         ux /= ul; uy /= ul;
         var w = 9;
         var head = document.createElementNS(SVGNS, 'polyline');
         head.setAttribute('points',
-          (ex - ux * w + uy * w * 0.72).toFixed(1) + ',' + (ey - uy * w - ux * w * 0.72).toFixed(1) + ' ' +
-          ex.toFixed(1) + ',' + ey.toFixed(1) + ' ' +
-          (ex - ux * w - uy * w * 0.72).toFixed(1) + ',' + (ey - uy * w + ux * w * 0.72).toFixed(1));
+          (hx - ux * w + uy * w * 0.72).toFixed(1) + ',' + (hy - uy * w - ux * w * 0.72).toFixed(1) + ' ' +
+          hx.toFixed(1) + ',' + hy.toFixed(1) + ' ' +
+          (hx - ux * w - uy * w * 0.72).toFixed(1) + ',' + (hy - uy * w + ux * w * 0.72).toFixed(1));
         head.setAttribute('stroke-width', '1.8');
         svg.appendChild(head);
         fig.insertBefore(svg, fig.firstChild);
@@ -716,42 +762,39 @@
         el.classList.add('is-drawn');
       }
 
-      function initArrows() {
-        arrowFigs.forEach(buildArrow);
-        var drawables = Array.prototype.slice.call(document.querySelectorAll('[data-draw]'));
-        drawables.forEach(prepDraw);
-        if ('IntersectionObserver' in window) {
-          var io = new IntersectionObserver(function (entries) {
-            entries.forEach(function (e) {
-              if (e.isIntersecting) { drawIn(e.target); io.unobserve(e.target); }
-            });
-          }, { threshold: 0.25, rootMargin: '0px 0px -80px 0px' });
-          drawables.forEach(function (el) { io.observe(el); });
-        } else {
-          drawables.forEach(drawIn);
+      function rebuildAll(animate) {
+        layoutFigs();
+        arrowFigs.forEach(function (fig, idx) {
+          var svg = buildArrow(fig, idx);
+          if (svg && !animate) svg.classList.add('is-drawn');
+        });
+        if (animate) {
+          var drawables = Array.prototype.slice.call(document.querySelectorAll('[data-draw]'));
+          drawables.forEach(prepDraw);
+          if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+              entries.forEach(function (e) {
+                if (e.isIntersecting) { drawIn(e.target); io.unobserve(e.target); }
+              });
+            }, { threshold: 0.25, rootMargin: '0px 0px -80px 0px' });
+            drawables.forEach(function (el) { io.observe(el); });
+          } else {
+            drawables.forEach(drawIn);
+          }
         }
       }
 
-      if (document.readyState === 'complete') { initArrows(); }
-      else { window.addEventListener('load', initArrows); }
+      if (document.readyState === 'complete') { rebuildAll(true); }
+      else { window.addEventListener('load', function () { rebuildAll(true); }); }
       if (document.fonts && document.fonts.ready) {
         document.fonts.ready.then(function () {
-          arrowFigs.forEach(function (fig) {
-            if (!fig.querySelector('.arrow')) return;
-            var svg = buildArrow(fig);
-            if (svg) svg.classList.add('is-drawn');
-          });
+          if (document.readyState === 'complete') rebuildAll(false);
         });
       }
       var arrowResizeT;
       window.addEventListener('resize', function () {
         clearTimeout(arrowResizeT);
-        arrowResizeT = setTimeout(function () {
-          arrowFigs.forEach(function (fig) {
-            var svg = buildArrow(fig);
-            if (svg) svg.classList.add('is-drawn');
-          });
-        }, 150);
+        arrowResizeT = setTimeout(function () { rebuildAll(false); }, 150);
       });
 
       /* ---------- sound engine: synthesized, click-only, mutable ---------- */
