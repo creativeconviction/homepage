@@ -170,7 +170,7 @@
     .marginalia.left  { right: 100%; padding-right: 44px; text-align: right; }
     .marginalia .arrow {
       position: absolute; left: 0; top: 0; width: 1px; height: 1px;
-      overflow: visible; pointer-events: none;
+      overflow: visible; pointer-events: none; z-index: 6;
     }
     .marginalia .arrow path, .marginalia .arrow polyline {
       fill: none; stroke: var(--magenta); stroke-linecap: round; stroke-linejoin: round;
@@ -210,7 +210,6 @@
     }
     .tape.tl { left: -16px; top: -10px; width: 62px; transform: rotate(-42deg); }
     .tape.tr { left: auto; right: -16px; top: -10px; width: 62px; transform: rotate(42deg); }
-    .clip { position: absolute; top: -16px; right: 14px; width: 22px; height: 46px; z-index: 2; }
 
     /* ---------- botanical sprigs ---------- */
     .sprig { position: absolute; pointer-events: none; z-index: 3; }
@@ -283,7 +282,7 @@
 
     /* intentions: the blue Tolan peeks from the torn edge, then pops up on click */
     .marginalia[data-moment="intentions"] .snap { transition: transform 0.6s var(--ease-spring); }
-    .marginalia[data-moment="intentions"] .snap.stacked { transform: translateX(46px) rotate(4deg); }
+    .marginalia[data-moment="intentions"] .snap.stacked { transform: translateX(-46px) rotate(4deg); }
     .marginalia.is-popped .snap.stacked { transform: translateX(0) rotate(-3.5deg); }
     .marginalia.is-popped .snap:first-of-type { transform: rotate(3.5deg); }
 
@@ -449,8 +448,8 @@
               <figure class="marginalia left" data-moment="guardian4" data-sound="harp" style="top: 280px;">
                 <button class="hit" type="button" aria-label="Play the Lizzie McGuire guardian angel">
                   <span class="snap" style="transform: rotate(-4.5deg);">
+                    <span class="tape tr"></span>
                     <img src="images/guardian_angel_4.png" alt="Lizzie McGuire beside her animated alter ego">
-                    <svg class="clip" viewBox="0 0 22 46"><path d="M11 44 L11 8 C11 3, 4 3, 4 8 L4 36 C4 43, 18 43, 18 34 L18 12" fill="none" stroke="#6E6455" stroke-width="2.2" stroke-linecap="round"/></svg>
                   </span>
                 </button>
               </figure>
