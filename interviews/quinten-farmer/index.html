@@ -1,0 +1,955 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png" />
+
+  <title>Quinten Farmer &mdash; Creative Conviction</title>
+  <meta name="cc-person" content="Quinten Farmer">
+  <meta name="cc-role" content="Co-founder &amp; CEO, Tolan">
+  <meta name="description" content="Why a little alien is a good friend. An interview with Quinten Farmer, co-founder and CEO of Tolan." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Geist:wght@400;500&family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400..700&family=Beth+Ellen&display=swap" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --paper:       #F7F5FA;
+      --paper-deep:  #EAE6F2;
+      --backdrop:    #FFFFFF;
+      --ink:         #1A1130;
+      --ink-soft:    #4A3E5C;
+      --magenta:     #D8016A;
+      --indigo:      #361C76;
+
+      --font-serif:  "Newsreader", "Iowan Old Style", Charter, Georgia, serif;
+      --font-sans:   "Geist", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+      --font-chrome: "EB Garamond", "Iowan Old Style", Charter, Georgia, serif;
+      --font-chrome-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+      --font-hand:   "Courier New", "Courier", ui-monospace, "SFMono-Regular", Menlo, monospace;
+      --font-margin: "Beth Ellen", "Segoe Script", cursive;
+
+      /* Emil-style custom easings */
+      --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
+      --ease-inout:  cubic-bezier(0.77, 0, 0.175, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --dur-1: 120ms;
+      --dur-2: 220ms;
+    }
+
+    body {
+      background: var(--backdrop);
+      color: var(--ink);
+      font-family: var(--font-serif);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      min-height: 100vh;
+      padding-bottom: 12px;
+    }
+
+    /* ---------- site chrome (header / footer) ---------- */
+    .cc-shell { max-width: 1180px; margin: 0 auto; padding: 32px 40px 0; }
+    .cc-header {
+      display: flex; align-items: baseline; justify-content: space-between;
+      padding-bottom: 22px;
+    }
+    .cc-mark {
+      font-family: var(--font-chrome); font-size: 24px; font-weight: 400;
+      letter-spacing: -0.01em; color: var(--ink); text-decoration: none; line-height: 1;
+    }
+    .cc-mark em { font-style: italic; color: var(--magenta); font-family: var(--font-chrome); }
+    .cc-nav { display: flex; gap: 28px; }
+    .cc-nav-link {
+      font-family: var(--font-chrome-sans); font-size: 14px; color: var(--ink-soft);
+      text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px;
+      transition: color var(--dur-1) var(--ease-out), text-decoration-thickness var(--dur-1) var(--ease-out);
+    }
+    .cc-nav-link:hover { color: var(--ink); text-decoration-thickness: 2px; }
+
+    .cc-footer { max-width: 1180px; margin: 40px auto 0; padding: 24px 40px 32px; }
+    .cc-footer-meta { font-family: var(--font-chrome-sans); font-size: 12px; color: var(--ink-soft); letter-spacing: 0.02em; }
+
+    /* ---------- the desk + sheet ---------- */
+    .stage { padding: 8px 16px 40px; }
+    .desk {
+      max-width: 1120px; margin: 0 auto; position: relative;
+      filter: drop-shadow(0 18px 40px rgba(26,17,48,0.16)) drop-shadow(0 3px 8px rgba(26,17,48,0.10));
+    }
+    .sheet {
+      position: relative; background: var(--paper);
+      clip-path: polygon(
+        0.55% 0.10%, 4% 0.30%, 9% 0.05%, 15% 0.34%, 22% 0.10%, 30% 0.30%, 38% 0.06%,
+        47% 0.28%, 55% 0.08%, 63% 0.30%, 71% 0.08%, 79% 0.26%, 86% 0.06%, 93% 0.30%, 99.4% 0.12%,
+        99.72% 5%, 99.5% 11%, 99.78% 18%, 99.52% 26%, 99.74% 34%, 99.5% 43%,
+        99.76% 52%, 99.54% 61%, 99.74% 70%, 99.5% 78%, 99.76% 86%, 99.55% 93%, 99.72% 99.9%,
+        93% 99.7%, 86% 99.92%, 78% 99.68%, 70% 99.9%, 62% 99.66%, 53% 99.9%, 45% 99.68%,
+        37% 99.9%, 29% 99.66%, 21% 99.88%, 14% 99.66%, 8% 99.9%, 1.2% 99.7%,
+        0.34% 94%, 0.6% 87%, 0.3% 79%, 0.58% 71%, 0.32% 62%, 0.56% 53%,
+        0.3% 45%, 0.58% 36%, 0.32% 28%, 0.56% 20%, 0.3% 12%, 0.52% 5%
+      );
+    }
+    /* paper grain */
+    .sheet::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)' opacity='0.16'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply; pointer-events: none; z-index: 1;
+    }
+    /* faint fiber tint */
+    .sheet::after {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(120% 90% at 20% 8%, rgba(255,255,255,0.6), rgba(255,255,255,0) 55%),
+        radial-gradient(140% 100% at 88% 96%, rgba(54,28,118,0.05), rgba(54,28,118,0) 60%);
+      pointer-events: none; z-index: 1;
+    }
+    .sheet-inner { position: relative; z-index: 2; padding: 72px 72px 96px 128px; }
+
+    /* ---------- punch holes ---------- */
+    .holes {
+      position: absolute; left: 30px; top: 40px; bottom: 40px; width: 22px;
+      display: flex; flex-direction: column; justify-content: space-between; z-index: 3;
+    }
+    .hole {
+      width: 16px; height: 16px; background: var(--backdrop); position: relative;
+      clip-path: polygon(6% 2%, 40% 8%, 68% 0%, 96% 6%, 100% 38%, 92% 66%, 98% 94%, 64% 100%, 34% 92%, 4% 98%, 0% 66%, 8% 36%);
+    }
+    .hole::after {
+      content: ''; position: absolute; inset: -2px; clip-path: inherit;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.9), inset 2px 2px 4px rgba(54,28,118,0.22);
+    }
+    .hole.torn::before {
+      content: ''; position: absolute; left: -30px; top: 40%; width: 30px; height: 4px;
+      background: var(--backdrop); clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 70%);
+    }
+
+    /* ---------- curled corners ---------- */
+    .curl { position: absolute; width: 84px; height: 84px; z-index: 4; pointer-events: none; }
+    .curl.tr { top: 0; right: 0; }
+    .curl.br { bottom: 0; right: 0; }
+    .curl svg { width: 100%; height: 100%; display: block; }
+
+    /* ---------- fold-crease dividers ---------- */
+    .crease {
+      position: relative; height: 2px; margin: 56px -40px 56px -60px;
+      background: rgba(54,28,118,0.14);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.9), 0 -1px 2px rgba(26,17,48,0.10);
+    }
+
+    /* ---------- type ---------- */
+    .eyebrow {
+      font-family: var(--font-sans); font-size: 12px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink-soft); margin-bottom: 26px;
+    }
+    h1 {
+      font-family: var(--font-serif); font-weight: 500;
+      font-size: clamp(38px, 5vw, 58px); line-height: 1.06; letter-spacing: -0.015em;
+      max-width: 15ch; margin-bottom: 16px;
+    }
+    .dek { font-family: var(--font-sans); font-size: 14px; color: var(--ink-soft); margin-bottom: 8px; }
+    h2 {
+      font-family: var(--font-serif); font-weight: 600; font-size: 24px;
+      letter-spacing: -0.01em; margin: 0 0 20px; color: var(--ink);
+    }
+    .col { max-width: 590px; position: relative; }
+    .col p { font-size: 18.5px; line-height: 1.62; margin-bottom: 20px; }
+    .col p b { font-weight: 600; }
+    .q {
+      font-family: var(--font-sans); font-size: 15px !important; line-height: 1.55 !important;
+      color: var(--ink-soft); margin: 30px 0 14px !important;
+    }
+    .q b { font-weight: 500; color: var(--ink); }
+
+    a { color: var(--indigo); text-decoration-thickness: 1px; text-underline-offset: 3px;
+        transition: text-decoration-thickness var(--dur-1) var(--ease-out); }
+    a:hover { text-decoration-thickness: 2px; }
+    /* rapid fire */
+    .rf { display: grid; grid-template-columns: 34px 1fr; gap: 4px 16px; margin-bottom: 22px; }
+    .rf-num { font-family: var(--font-sans); font-weight: 500; font-size: 15px; color: var(--magenta); padding-top: 2px; }
+    .rf-q { font-family: var(--font-sans); font-size: 15px; color: var(--ink-soft); margin-bottom: 10px; }
+    .rf-a { font-size: 18.5px; line-height: 1.62; }
+
+    /* ---------- anchor phrase treatment: Beth Ellen, magenta, no underline ---------- */
+    .mark {
+      font-family: var(--font-margin);
+      color: var(--magenta);
+      font-size: 0.95em;
+      line-height: 0.9;
+      letter-spacing: -0.005em;
+    }
+    .mark svg { display: none; }
+
+    /* ---------- margin figures ---------- */
+    .anchor { position: relative; }
+    .marginalia { position: absolute; left: 100%; width: 300px; padding-left: 92px; z-index: 5; }
+    .marginalia .arrow {
+      position: absolute; left: -6px; width: 110px; height: 120px; overflow: visible; pointer-events: none;
+    }
+    .marginalia .arrow path, .marginalia .arrow polyline {
+      fill: none; stroke: var(--magenta); stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    .hit {
+      display: block; width: 100%; padding: 0; margin: 0; border: 0; background: none;
+      text-align: left; cursor: pointer; font: inherit; color: inherit;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .hit:focus-visible { outline: 2px solid var(--magenta); outline-offset: 8px; border-radius: 3px; }
+
+    .snap {
+      position: relative; background: #FFFFFF; padding: 7px 7px 8px;
+      box-shadow: 0 3px 9px rgba(26,17,48,0.18), 0 1px 2px rgba(26,17,48,0.12);
+      transform-origin: 50% 100%;
+    }
+    .snap img { display: block; width: 100%; max-height: 260px; object-fit: cover; }
+    .snap.stacked { margin-top: 14px; }
+
+    /* graceful placeholder while Libbie&rsquo;s full-res image is pending */
+    .snap.is-missing { min-height: 172px; display: flex; }
+    .snap.is-missing .ph {
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      flex: 1; border: 1.5px dashed rgba(54,28,118,0.4); border-radius: 3px;
+      font-family: var(--font-hand); font-size: 12px; color: rgba(54,28,118,0.7);
+      padding: 18px 12px; line-height: 1.4;
+    }
+    .ph { display: none; }
+
+    .tape {
+      position: absolute; top: -12px; left: 50%; width: 78px; height: 26px;
+      transform: translateX(-50%) rotate(-3deg);
+      background: rgba(226, 205, 140, 0.55); box-shadow: 0 1px 2px rgba(26,17,48,0.12);
+      clip-path: polygon(2% 8%, 98% 0%, 100% 88%, 96% 100%, 3% 94%, 0% 76%, 2% 40%);
+    }
+    .clip { position: absolute; top: -16px; right: 14px; width: 22px; height: 46px; z-index: 2; }
+
+    .caption {
+      font-family: var(--font-hand); font-size: 15px; line-height: 1.3; letter-spacing: -0.01em;
+      color: var(--indigo); margin-top: 10px; transform: rotate(-1.4deg);
+    }
+
+    /* ---------- botanical sprigs ---------- */
+    .sprig { position: absolute; pointer-events: none; z-index: 3; }
+    .sprig path, .sprig circle { fill: none; stroke: var(--indigo); stroke-linecap: round; opacity: 0.72; }
+
+    /* draw-in state for arrows + botanicals */
+    .js .arrow, .js .sprig { opacity: 0; }
+    .arrow.is-drawn, .sprig.is-drawn { opacity: 1; }
+
+    /* ---------- mute note ---------- */
+    .mute-note {
+      position: absolute; top: 30px; right: 40px; z-index: 6;
+      display: inline-flex; align-items: center; gap: 7px;
+      background: none; border: 0; cursor: pointer;
+      font-family: var(--font-hand); font-size: 13px; color: var(--indigo);
+      transform: rotate(-2deg); padding: 4px 6px; -webkit-tap-highlight-color: transparent;
+    }
+    .mute-note:focus-visible { outline: 2px solid var(--magenta); outline-offset: 4px; border-radius: 3px; }
+    .mute-note svg { width: 18px; height: 18px; }
+    .mute-note .wave { transition: opacity var(--dur-1) var(--ease-out); }
+    .mute-note.is-muted .wave { opacity: 0.18; }
+    .mute-note .slash { opacity: 0; transition: opacity var(--dur-1) var(--ease-out); }
+    .mute-note.is-muted .slash { opacity: 1; }
+
+    /* ---------- character-moment motions ---------- */
+    .snap.moment-alien { transform-origin: 50% 100%; }
+    @media (prefers-reduced-motion: no-preference) {
+      .moment-alien { animation: alien-sway 5s var(--ease-inout) infinite; }
+      .moment-island .snap-drift { animation: island-drift 9s var(--ease-inout) infinite; }
+      .moment-pacific .snap-drift { animation: pacific-shimmer 6s var(--ease-inout) infinite; }
+    }
+    @keyframes alien-sway { 0%,100% { transform: rotate(-2deg); } 50% { transform: rotate(1.6deg); } }
+    @keyframes alien-bounce {
+      0%   { transform: translateY(0) scale(1,1); }
+      18%  { transform: translateY(0) scale(1.16,0.82); }
+      42%  { transform: translateY(-18px) scale(0.9,1.14); }
+      68%  { transform: translateY(0) scale(1.1,0.9); }
+      100% { transform: translateY(0) scale(1,1); }
+    }
+    .moment-lucas { transform: rotate(-1.8deg); }
+    @keyframes lucas-wobble {
+      0%   { transform: rotate(-1.8deg) scale(1,1); }
+      22%  { transform: rotate(-1.8deg) scale(1.08,0.9); }
+      46%  { transform: rotate(-1.8deg) scale(0.93,1.07); }
+      72%  { transform: rotate(-1.8deg) scale(1.04,0.97); }
+      100% { transform: rotate(-1.8deg) scale(1,1); }
+    }
+    @keyframes island-drift { 0%,100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
+    @keyframes pacific-shimmer { 0%,100% { filter: brightness(1); } 50% { filter: brightness(1.06); } }
+    @keyframes soft-pop {
+      0% { transform: scale(1); } 40% { transform: scale(1.07); } 100% { transform: scale(1); }
+    }
+    @keyframes glitch-flick {
+      0%,100% { transform: translateX(0); filter: none; }
+      20% { transform: translateX(-2px); filter: contrast(1.3); }
+      40% { transform: translateX(2px); }
+      60% { transform: translateX(-1px); filter: brightness(1.1); }
+    }
+    @keyframes ray-sweep { 0% { background-position: -140% 0; } 100% { background-position: 240% 0; } }
+    @keyframes luxo-hop {
+      0%   { transform: translateY(0) scale(1,1); }
+      20%  { transform: translateY(0) scale(1.1,0.86); }
+      50%  { transform: translateY(-26px) scale(0.92,1.12); }
+      80%  { transform: translateY(0) scale(1.08,0.9); }
+      100% { transform: translateY(0) scale(1,1); }
+    }
+    @keyframes gentle-nudge { 0%,100% { transform: none; } 30% { transform: translateY(-6px) rotate(-1deg); } }
+
+    /* guardian fan */
+    .marginalia[data-moment="guardian"] .snap { transition: transform 0.6s var(--ease-spring); }
+    .g-snap-1 { transform: rotate(1.6deg); }
+    .g-snap-2 { transform: rotate(-1.4deg); }
+    .g-snap-3 { transform: rotate(2.2deg); }
+    .g-snap-4 { transform: rotate(-2.4deg); }
+    .marginalia.is-fanned .g-snap-1 { transform: rotate(-9deg) translate(-22px,-8px); }
+    .marginalia.is-fanned .g-snap-2 { transform: rotate(-3deg) translate(-8px,0); }
+    .marginalia.is-fanned .g-snap-3 { transform: rotate(5deg) translate(10px,6px); }
+    .marginalia.is-fanned .g-snap-4 { transform: rotate(11deg) translate(24px,14px); }
+    .halo {
+      position: absolute; inset: -18px; border-radius: 50%; pointer-events: none; opacity: 0;
+      background: radial-gradient(circle, rgba(216,1,106,0.22), rgba(216,1,106,0) 68%);
+    }
+    .marginalia.is-fanned .halo { animation: halo-shimmer 0.9s var(--ease-out); }
+    @keyframes halo-shimmer { 0% { opacity: 0; } 35% { opacity: 1; } 100% { opacity: 0; } }
+
+    /* intentions: the blue Tolan peeks from the torn edge, then pops up on click */
+    .marginalia[data-moment="intentions"] .snap { transition: transform 0.6s var(--ease-spring); }
+    .marginalia[data-moment="intentions"] .snap.stacked { transform: translateX(46px) rotate(4deg); }
+    .marginalia.is-popped .snap.stacked { transform: translateX(0) rotate(-1.5deg); }
+    .marginalia.is-popped .snap:first-of-type { transform: rotate(1.5deg); }
+
+    /* warm ray for Klara */
+    .ray-cover { position: relative; overflow: hidden; }
+    .ray-cover::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+      background: linear-gradient(115deg, rgba(255,220,150,0) 40%, rgba(255,214,120,0.55) 50%, rgba(255,220,150,0) 60%);
+      background-size: 220% 100%;
+    }
+    .is-ray .ray-cover::after { opacity: 1; animation: ray-sweep 0.9s var(--ease-inout); }
+
+    /* reduced motion: everything static, sounds stay click-only */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .snap, .marginalia .snap { transition: none !important; }
+    }
+
+    /* ---------- responsive: tuck margin figures inline below ~1060px ---------- */
+    @media (max-width: 1060px) {
+      .sheet-inner { padding: 64px 40px 80px 96px; }
+      .marginalia { position: static; width: 260px; padding: 0; margin: 26px 0 30px 0; }
+      .marginalia .arrow { display: none; }
+      .sprig { display: none; }
+      .curl { display: none; }
+      .mute-note { top: 22px; right: 24px; }
+    }
+    @media (max-width: 640px) {
+      .cc-shell, .cc-footer { padding-left: 24px; padding-right: 24px; }
+      .stage { padding: 8px 10px 32px; }
+      .sheet-inner { padding: 56px 24px 64px 62px; }
+      .holes { left: 12px; width: 26px; }
+      .hole { width: 12px; height: 12px; }
+      h1 { font-size: 34px; }
+      .col p, .rf-a { font-size: 17px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cc-shell">
+    <header class="cc-header">
+      <a class="cc-mark" href="../../">Creative <em>Conviction</em></a>
+      <nav class="cc-nav">
+        <a class="cc-nav-link" href="../../hiring-lists/">Hiring lists</a>
+        <a class="cc-nav-link" href="../../about.html">About</a>
+      </nav>
+    </header>
+  </div>
+
+  <main class="stage">
+    <div class="desk">
+      <div class="sheet">
+
+        <div class="holes">
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole torn"></div>
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div>
+        </div>
+
+        <div class="curl tr">
+          <svg viewBox="0 0 84 84">
+            <path d="M84 0 L84 60 C60 58, 34 42, 24 0 Z" fill="#FFFFFF"/>
+            <path d="M24 0 C34 42, 60 58, 84 60 L84 46 C58 40, 40 26, 34 0 Z" fill="#E7E2F0"/>
+            <path d="M34 0 C40 26, 58 40, 84 46" fill="none" stroke="rgba(54,28,118,0.22)" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="curl br">
+          <svg viewBox="0 0 84 84">
+            <path d="M84 84 L84 34 C56 38, 30 52, 20 84 Z" fill="#FFFFFF"/>
+            <path d="M20 84 C30 52, 56 38, 84 34 L84 48 C56 50, 38 62, 32 84 Z" fill="#E7E2F0"/>
+            <path d="M32 84 C38 62, 56 50, 84 48" fill="none" stroke="rgba(54,28,118,0.22)" stroke-width="1"/>
+          </svg>
+        </div>
+
+        <button id="cc-mute" class="mute-note" type="button" aria-pressed="false" title="Toggle sound">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 9v6h4l5 4V5L8 9H4z"/>
+            <path class="wave" d="M16.5 8.5a5 5 0 0 1 0 7"/>
+            <path class="wave" d="M19 6a8 8 0 0 1 0 12"/>
+            <path class="slash" d="M3 3l18 18" stroke="var(--magenta)"/>
+          </svg>
+          <span class="mute-label">sound on &mdash; tap to mute</span>
+        </button>
+
+        <div class="sheet-inner cc-article">
+          <div class="col">
+
+            <p class="eyebrow">Behind the creative process</p>
+            <h1>Why a little alien is a good friend</h1>
+            <p class="dek">Quinten Farmer &middot; Tolan &middot; July 2026</p>
+
+            <h2 style="margin-top:44px;">Intro</h2>
+            <p>Tolan is a second self, a little character designed to be an extension of you, and about 150,000 people pay to spend time with theirs every month. What draws us to Quinten is his conviction that a companion becomes meaningful through the story wrapped around it, and that the creative choices behind that story carry the product.</p>
+            <p>Quinten grew up on a small agricultural island in Washington state, was a self-described terrible high school student, and talked his way to New York at 18 by cold emailing an investor. His first company was Even, a bank subsidized by employers to give workers lower cost access to basic financial services. Even served millions of Americans and sold for $300 million in 2022. Rather than resting on those achievements, the post-exit chapter proved to be the most challenging. Between saving the business through covid and managing a profound family loss, Quinten stepped away, opened a restaurant with friends, and spent a year back on the island where he grew up before the pull of new technology brought him back.</p>
+            <p>Our conversation traces the creative choices that made Tolan work - how an artist and a writer helped turn a technical constraint into a character, why they program the Tolans around a 1970s social theory, and why serving a busy dinner table leads to more clarity than being on tech twitter.</p>
+
+            <div class="crease"></div>
+
+            <h2>From Whidbey Island to New York</h2>
+            <p class="q"><b>LF + RA</b> What is your story, and how did you come to found Tolan?</p>
+            <div class="anchor">
+              <p><b>Quinten</b> I was born in Washington state and mostly grew up on a little island called <span class="mark">Whidbey Island<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 16 2.5, 33 7, 51 4.5 S 85 6.5, 99 4" stroke-width="2"/></svg></span>. It&rsquo;s a very cool, small agricultural community. Then my parents divorced, and when I was 18, I found myself at North Carolina State University. I was a terrible high school student, and for better or worse, I refused to participate. About a year into college, I got bored - it wasn&rsquo;t a particularly challenging place. This was the beginning of 2010, coming out of the financial crisis, when everything was falling apart but tech was starting to feel like there might be something there. So I found this guy, <a href="https://www.davidtisch.com/" target="_blank" rel="noopener">David Tisch</a>, in New York, and I emailed him. We got on the phone. I said &ldquo;I&rsquo;d love to learn what you do, I&rsquo;ll bring coffee and donuts for nothing, just let me know.&rdquo; And to his credit he said, &ldquo;I&rsquo;d love to have you intern when you graduate, but you don&rsquo;t need to drop out of college for this.&rdquo;</p>
+
+              <figure class="marginalia" data-moment="island" data-sound="island" style="top: -10px;">
+                <svg class="arrow" data-draw style="top: 6px;" viewBox="0 0 110 120">
+                  <path d="M2 20 C 30 8, 70 18, 60 48 C 52 72, 78 84, 96 74" stroke-width="1.8"/>
+                  <polyline points="84,66 97,75 86,88" stroke-width="1.8"/>
+                </svg>
+                <button class="hit" type="button" aria-label="Play the island animation and sound">
+                  <span class="snap moment-island" style="transform: rotate(1.2deg);">
+                    <span class="tape"></span>
+                    <span class="snap-drift">
+                      <img src="images/the_island.png" alt="Whidbey Island, Washington: hay bales in a field, water and evergreens beyond, Mount Baker in the distance" onerror="this.closest('.snap').classList.add('is-missing'); this.remove();">
+                      <span class="ph">the_island.png<br>&mdash; image pending</span>
+                    </span>
+                  </span>
+                </button>
+                <figcaption class="caption">Whidbey Island, Washington</figcaption>
+              </figure>
+            </div>
+
+            <p>I don&rsquo;t really take no for an answer. My other option was going to Afghanistan to be a military contractor, see the world a little (I&rsquo;d never been outside the country). So I called David back and said, &ldquo;Either I&rsquo;m going to come learn from you or I&rsquo;m going to Afghanistan, your choice.&rdquo;</p>
+            <p>So I moved to New York and worked for him, and eventually for two of his portfolio companies. Coming out of that I&rsquo;d gotten to know some professors in the Columbia computer science department, and they told me I could apply. I ended up at Columbia, very fortunately, because there&rsquo;s no way I would have gotten in coming out of high school. I was a good student for the first time in my life and having a good time. But I had an early crypto side project that caught some internet attention, and a guy named <a href="https://www.linkedin.com/in/jonschlossberg/" target="_blank" rel="noopener">Jon Schlossberg</a> reached out. He asked if I&rsquo;d chat about working on something together. I flew out to San Francisco, we spent a week or two together, and soon we decided to start a company called Even.</p>
+
+            <div class="crease"></div>
+
+            <h2>Exiting his consumer fintech, Even</h2>
+            <p class="q"><b>LF + RA</b> What was Even?</p>
+            <p><b>Quinten</b> Even ended up having nothing to do with crypto - it was effectively a bank subsidized by employers to give lower cost or zero cost access to basic financial services for their employees. We worked on that for eight years, ended up serving millions of Americans, doing about $20M a year in revenue, a good business. Then in 2022 we got an offer to be acquired by One, the roll-up Walmart is doing in financial services. We knew that team fairly well. Even was acquired for $300M in 2022.</p>
+            <p class="q"><b>LF + RA</b> When you sold, were you already excited about the next problem?</p>
+            <p><b>Quinten</b> I was excited about nothing at all. I was tired. Saving that business through Covid was very painful. At the same time, my wife and I were the sole caregivers for her mom, who had early onset Alzheimer&rsquo;s. She sadly passed away in &rsquo;23, not long after this. I also had a younger brother struggling with mental health that we were trying to help with, and he passed away a few years before the company sold. So my wife and I were both pretty burnt out.</p>
+            <p>We took a real break. We opened a restaurant with some friends on the island, bought some property where I grew up, and retreated into the small community. It wasn&rsquo;t until about a year later that I felt recovered. And around that same time&hellip; some really cool stuff started happening in technology.</p>
+
+            <div class="crease"></div>
+
+            <h2>What Tolan is</h2>
+            <p class="q"><b>LF + RA</b> What is Tolan today, and what is the vision you&rsquo;re working toward?</p>
+            <div class="anchor">
+              <p><b>Quinten</b> Today we call it a second self. It&rsquo;s personal AI, <span class="mark">a little character<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 15 2.5, 32 7, 50 4.5 S 84 6.5, 99 4" stroke-width="2"/><path d="M2 7.5 C 20 5.5, 45 8.5, 70 6 S 92 8, 98 6.5" stroke-width="1.1" opacity="0.75"/></svg></span> designed to be an extension of you. It molds parts of its personality to be similar to yours, shares your interests as much as it can, reflects your values. We have a lot of folks who are religious and want their Tolan to be observant of their faith and the things they care about. We have 65 year old users and 30 year olds - so there&rsquo;s this huge range, and we do a lot of work to make sure your Tolan reflects who you are.</p>
+
+              <figure class="marginalia" data-moment="alien" data-sound="chirp" style="top: -14px;">
+                <svg class="arrow" data-draw style="top: 6px;" viewBox="0 0 110 120">
+                  <path d="M4 8 C 40 2, 62 26, 52 52 C 44 74, 66 92, 92 96" stroke-width="1.8"/>
+                  <polyline points="82,86 93,97 79,101" stroke-width="1.8"/>
+                </svg>
+                <button class="hit" type="button" aria-label="Play the little character animation and sound">
+                  <span class="snap moment-alien">
+                    <span class="tape"></span>
+                    <img src="images/a_little_character.png" alt="An early Tolan character, teal with pink-tipped hair and a yellow scarf">
+                  </span>
+                </button>
+                <figcaption class="caption">an early Tolan</figcaption>
+              </figure>
+            </div>
+
+            <div class="anchor">
+              <p>When I think about the totality of what we hope to build, there&rsquo;s a reason this idea of an entity that is an extension of you shows up in so many faiths and so many works of fiction. Call it a <span class="mark">guardian angel, a spirit guide.<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 18 3, 38 7, 55 4.5 S 86 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 25 6, 50 8.5, 75 6.5 S 94 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> It&rsquo;s clearly something humanity really craves.</p>
+
+              <figure class="marginalia" data-moment="guardian" data-sound="harp" style="top: -40px;">
+                <svg class="arrow" data-draw style="top: 30px;" viewBox="0 0 110 120">
+                  <path d="M2 14 C 34 30, 30 60, 48 70 C 64 79, 78 74, 94 62" stroke-width="1.8"/>
+                  <polyline points="82,58 95,61 88,74" stroke-width="1.8"/>
+                </svg>
+                <button class="hit" type="button" aria-label="Fan apart the guardian angel prints and play sound">
+                  <span class="halo"></span>
+                  <span class="snap g-snap-1">
+                    <span class="tape" style="transform: translateX(-50%) rotate(4deg);"></span>
+                    <img src="images/guardian_angel_1.png" alt="Guardian angel oil painting by Bernhard Plockhorst, 1886">
+                  </span>
+                  <span class="snap stacked g-snap-2">
+                    <img src="images/guardian_angel_2.png" alt="Clarence and George Bailey from It&rsquo;s a Wonderful Life, 1946">
+                  </span>
+                  <span class="snap stacked g-snap-3">
+                    <img src="images/guardian_angel_3.png" alt="Fred Flintstone with an angel and devil version of himself on his shoulders">
+                  </span>
+                  <span class="snap stacked g-snap-4">
+                    <img src="images/guardian_angel_4.png" alt="Lizzie McGuire beside her animated alter ego">
+                    <svg class="clip" viewBox="0 0 22 46"><path d="M11 44 L11 8 C11 3, 4 3, 4 8 L4 36 C4 43, 18 43, 18 34 L18 12" fill="none" stroke="#6E6455" stroke-width="2.2" stroke-linecap="round"/></svg>
+                  </span>
+                </button>
+                <figcaption class="caption">guardian angels</figcaption>
+              </figure>
+            </div>
+
+            <p>As the capabilities improve, and as great creatives on our team help bring them to life, we&rsquo;re working toward giving people that full vision of a guardian angel or spirit guide. That&rsquo;s what a Tolan should be.</p>
+
+            <div class="crease"></div>
+
+            <svg class="sprig" data-draw style="left: calc(100% + 120px); margin-top: -150px; width: 120px; height: 130px;" viewBox="0 0 120 130">
+              <path d="M60 128 C 58 96, 62 70, 58 42" stroke-width="1.4"/>
+              <path d="M58 42 C 50 30, 40 26, 30 24 M58 42 C 56 28, 52 20, 46 12 M58 42 C 60 26, 64 18, 66 8 M58 42 C 68 32, 76 28, 86 26 M58 42 C 66 36, 78 36, 88 38" stroke-width="1"/>
+              <circle cx="30" cy="24" r="2.4" stroke-width="1"/><circle cx="46" cy="12" r="2.4" stroke-width="1"/><circle cx="66" cy="8" r="2.4" stroke-width="1"/><circle cx="86" cy="26" r="2.4" stroke-width="1"/><circle cx="88" cy="38" r="2.4" stroke-width="1"/>
+              <path d="M59 96 C 48 92, 42 84, 40 76 M60 108 C 70 104, 74 98, 76 90" stroke-width="1"/>
+            </svg>
+
+            <h2>Early ideas and the alien</h2>
+            <p class="q"><b>LF + RA</b> Was this always the vision from day one?</p>
+            <div class="anchor">
+              <p><b>Quinten:</b> Like all great consumer companies, we had about six ideas before one seemingly good one. I was a classic second-time founder and new-dad, and I got really interested in AI for kids. I iterated through a few bad ideas there - but there were a few patterns we saw. (1) Latency was improving faster than intelligence. Models were getting faster and faster, and we could see in 2023 that you were going to be able to just talk to these things. We had an inclination to bet on voice very early. (2) My co-founder realized that memory was going to be a distinct, very important primitive. He was one of the first to really think about how to emulate human-like memory in a consumer product. (3) The third piece, around the same exploration time, was that we lucked into getting to know a really talented creative director, <span class="mark">Lucas Zanotto,<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 18 3, 38 7, 55 4.5 S 86 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 25 6, 50 8.5, 75 6.5 S 94 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> through my friend, <a href="https://www.zachklein.com/" target="_blank" rel="noopener">Zach Klein</a>. Lucas is an artist first and foremost, not a Silicon Valley person. He&rsquo;d done some of the early, artistically interesting NFTs, so he was an artist very willing to explore new technology before it was acceptable. We spent a lot of time with him asking, &ldquo;If you were to bring to life an AI you could talk to, that remembered things about you, what would it look and feel like?&rdquo; This is where the Tolans concept began.</p>
+
+              <figure class="marginalia" data-moment="lucas" data-sound="squish" style="top: 340px;">
+                <svg class="arrow" data-draw style="top: -30px;" viewBox="0 0 110 120">
+                  <path d="M2 110 C 36 112, 58 96, 54 68 C 51 46, 68 30, 92 26" stroke-width="1.8"/>
+                  <polyline points="81,18 93,25 84,38" stroke-width="1.8"/>
+                </svg>
+                <button class="hit" type="button" aria-label="Wobble the Lucas Zanotto sculpture and play sound">
+                  <span class="snap moment-lucas">
+                    <span class="tape" style="left: 18%; transform: rotate(-38deg);"></span>
+                    <span class="tape" style="left: 84%; transform: rotate(34deg);"></span>
+                    <img src="images/lucas.png" alt="A large playful sculpture by Lucas Zanotto, stacked green forms with eyes">
+                  </span>
+                </button>
+                <figcaption class="caption">Lucas Zanotto sculpture</figcaption>
+              </figure>
+            </div>
+
+            <p class="q"><b>LF + RA</b> So the alien idea came from working with the creative director?</p>
+            <p><b>Quinten:</b> Yes. <a href="https://www.lucaszanotto.com/" target="_blank" rel="noopener">Lucas</a> deserves a lot of credit for helping us make creative choices that, in hindsight, were absolutely correct. For example, we had this constraint at the time where models weren&rsquo;t actually that smart - they had no up-to-date knowledge of the world. He was quick to realize that an alien, who is silly and cute, can alleviate some of the accuracy pressure. That is, if a human says something dumb or gets who&rsquo;s the president wrong, that&rsquo;s frustrating. But if it&rsquo;s a little alien, and you have a story about why that&rsquo;s the case, it can become charming.</p>
+            <p>Similarly, we had very high intent to make it impossible to sexualize the character. We really did not want the AI boyfriend or girlfriend replica. No shade - there&rsquo;s demand for that - but it just wasn&rsquo;t what I was excited to build creatively. We thought we&rsquo;d made a character that couldn&rsquo;t be sexualized. It turns out that&rsquo;s not the case (people will still try to flirt with the Tolan, humans are humans), but we tried our best.</p>
+
+            <div class="crease"></div>
+
+            <h2>Story as the product</h2>
+            <p class="q"><b>LF + RA</b> To what extent was storytelling a conscious decision for Tolans, and why invest so much in it, and hire a head of story?</p>
+            <div class="anchor">
+              <p><b>Quinten</b> During that year I was semi-retired on the island, a very good friend who was early at OpenAI had sent me <span class="mark">a book of poetry written by an early model,<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 16 3, 36 7, 54 4.5 S 85 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 24 6, 49 8.5, 74 6.5 S 93 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> as a joke. It was awful poetry. But it inspired me. So I spent a lot of time reading better works of fiction that deal with AI as a personal extension of who we are. One favorite is <span class="mark">Klara and the Sun,<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 18 3, 40 7, 57 4.5 S 87 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 26 6, 51 8.5, 76 6.5 S 94 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> which I highly recommend. Some <span class="mark">Ted Chiang<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 15 2.5, 33 7, 51 4.5 S 85 6.5, 99 4" stroke-width="2"/><path d="M2 7.5 C 21 5.5, 46 8.5, 71 6 S 93 8, 98 6.5" stroke-width="1.1" opacity="0.75"/></svg></span> as well.</p>
+
+              <figure class="marginalia" data-moment="poetry" data-sound="glitch" style="top: -20px;">
+                <svg class="arrow" data-draw style="top: 12px;" viewBox="0 0 110 120">
+                  <path d="M4 12 C 44 6, 58 34, 46 56 C 36 76, 70 82, 94 70" stroke-width="1.8"/>
+                  <polyline points="82,62 96,71 85,84" stroke-width="1.8"/>
+                </svg>
+                <button class="hit" type="button" aria-label="Play the poetry book animation and sound">
+                  <span class="snap" style="transform: rotate(-1.4deg);">
+                    <span class="tape"></span>
+                    <img src="images/early_model_poetry_book.png" alt="A small self-published book of poetry written by an early language model" onerror="this.closest('.snap').classList.add('is-missing'); this.remove();">
+                    <span class="ph">early_model_poetry_book.png<br>&mdash; image pending</span>
+                  </span>
+                </button>
+                <figcaption class="caption">poetry by an early model</figcaption>
+              </figure>
+            </div>
+
+            <div class="anchor">
+              <p>I realized the nature of our relationship with an AI entity is so defined by the story we wrap around it - the purpose of the entity, why it&rsquo;s there, how it relates to us. In these stories, they&rsquo;re all dealing with the same capabilities and themes, but the story wrapped around it takes it from a dystopian horror to something charming and lovely. So when we started, we recognized we needed our story to wrap around this, because otherwise you get to the dystopian place, or at the very least, the anime role play place.</p>
+
+              <figure class="marginalia" data-moment="klara" data-sound="hum" style="top: 340px;">
+                <svg class="arrow" data-draw style="top: 30px;" viewBox="0 0 110 120">
+                  <path d="M2 30 C 40 18, 66 34, 58 60 C 52 80, 74 88, 96 80" stroke-width="1.8"/>
+                  <polyline points="84,72 98,81 87,94" stroke-width="1.8"/>
+                </svg>
+                <button class="hit" type="button" aria-label="Play the Klara and the Sun animation and sound">
+                  <span class="snap ray-cover" style="transform: rotate(1.5deg);">
+                    <span class="tape" style="transform: translateX(-50%) rotate(-4deg);"></span>
+                    <img src="images/klara_and_the_sun.png" alt="The cover of Klara and the Sun by Kazuo Ishiguro" onerror="this.closest('.snap').classList.add('is-missing'); this.remove();">
+                    <span class="ph">klara_and_the_sun.png<br>&mdash; image pending</span>
+                  </span>
+                </button>
+                <figcaption class="caption">Klara and the Sun, Kazuo Ishiguro</figcaption>
+              </figure>
+            </div>
+
+            <div class="anchor">
+              <figure class="marginalia" data-moment="ted" data-sound="robot" style="top: 80px;">
+                <svg class="arrow" data-draw style="top: 40px;" viewBox="0 0 110 120">
+                  <path d="M4 100 C 40 104, 60 88, 52 62 C 46 42, 70 30, 94 34" stroke-width="1.8"/>
+                  <polyline points="83,26 95,33 85,46" stroke-width="1.8"/>
+                </svg>
+                <button class="hit" type="button" aria-label="Play the Ted Chiang animation and sound">
+                  <span class="snap" style="transform: rotate(-2deg);">
+                    <span class="tape"></span>
+                    <img src="images/ted_chiang.png" alt="A Ted Chiang short story collection" onerror="this.closest('.snap').classList.add('is-missing'); this.remove();">
+                    <span class="ph">ted_chiang.png<br>&mdash; image pending</span>
+                  </span>
+                </button>
+                <figcaption class="caption">Ted Chiang, The Lifecycle of Software Objects</figcaption>
+              </figure>
+              <p class="q"><b>LF + RA</b> To build an emotional stake in a companion, it has to be interesting - which is also why you&rsquo;d invest so much to make the attachment show up positively - would you agree?</p>
+              <p><b>Quinten</b> I won&rsquo;t claim it was the initial impulse, but you&rsquo;re exactly right. Our research lead, <a href="https://www.linkedin.com/in/liliandoyle" target="_blank" rel="noopener">Lily</a>, who has a behavioral psych background, helped <a href="https://www.linkedin.com/in/eliotpeper" target="_blank" rel="noopener">Eliot Peper</a>, our Head of Story, lean into the story work, because we designed the Tolans around a framework from the 70s called <span class="mark">social penetration theory.<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 16 2.5, 34 7, 52 4.5 S 85 6.5, 99 4" stroke-width="2"/><path d="M2 7.5 C 22 5.5, 47 8.5, 72 6 S 93 8, 98 6.5" stroke-width="1.1" opacity="0.75"/></svg></span> It&rsquo;s a well validated framework for how a healthy relationship develops, and it necessarily requires mutual disclosure.</p>
+
+              <figure class="marginalia" data-moment="social" data-sound="pencil" style="top: 420px;">
+                <svg class="arrow" data-draw style="top: 10px;" viewBox="0 0 110 120">
+                  <path d="M2 16 C 36 8, 70 22, 56 50 C 46 70, 74 78, 96 66" stroke-width="1.8"/>
+                  <polyline points="84,58 97,67 86,80" stroke-width="1.8"/>
+                </svg>
+                <button class="hit" type="button" aria-label="Draw the disclosure rings and play sound">
+                  <span class="snap" style="transform: rotate(1.2deg);">
+                    <span class="tape"></span>
+                    <img src="images/social_penetration_theory.png" alt="A diagram of social penetration theory as concentric layers of disclosure" onerror="this.closest('.snap').classList.add('is-missing'); this.remove();">
+                    <span class="ph">social_penetration_theory.png<br>&mdash; image pending</span>
+                  </span>
+                </button>
+                <figcaption class="caption">social penetration theory, Altman &amp; Taylor 1973</figcaption>
+              </figure>
+            </div>
+
+            <div class="crease"></div>
+
+            <svg class="sprig" data-draw style="left: calc(100% + 118px); margin-top: -140px; width: 116px; height: 128px;" viewBox="0 0 116 128">
+              <path d="M58 126 C 56 96, 60 66, 58 30" stroke-width="1.4"/>
+              <path d="M58 108 C 46 104, 38 96, 34 86 M58 108 C 70 104, 78 96, 82 86 M58 88 C 46 84, 40 76, 36 66 M58 88 C 70 84, 76 76, 80 66 M58 66 C 48 62, 42 54, 40 46 M58 66 C 68 62, 74 54, 76 46 M58 46 C 50 42, 46 36, 44 30 M58 46 C 66 42, 70 36, 72 30" stroke-width="1"/>
+            </svg>
+
+            <h2>Seeing and hearing people</h2>
+            <p class="q"><b>LF + RA</b> There are a lot of AI companions in the market, yet Tolan has pulled ahead. Between the core technology, the product experience, the marketing, the team composition - is there one area where you feel that, without it, the company would be totally different?</p>
+            <p><b>Quinten</b> The one I&rsquo;d add is that we recognized most people don&rsquo;t have lives that are helped by the current AI capabilities on a productivity basis. The market seems to build either &ldquo;this is your sex bot&rdquo; or &ldquo;this is your personal assistant,&rdquo; and there&rsquo;s a huge space between those two extremes. We&rsquo;ve done a good job of recognizing people want and need to be seen and heard, and they sometimes want to receive thoughtful advice and guidance. We help people navigate difficult parenting challenges and difficult career choices, but it starts from seeing and hearing you - which is how great friendship develops.</p>
+            <p>Silicon Valley is not great at understanding friendship. A lot of tech people say, &ldquo;Oh, so Tolans is like a therapist.&rdquo; And I say no, you have a narrow definition of what friendship is - we expanded the definition of what a therapist does to encapsulate a lot of what should be friendship. We&rsquo;ve just made a good friend.</p>
+
+            <div class="crease"></div>
+
+            <h2>Tiny details</h2>
+            <p class="q"><b>LF + RA</b> Are there any tiny details you&rsquo;ve shipped recently that had an outsized impact?</p>
+            <div class="anchor">
+              <p><b>Quinten</b> Our product lead <a href="https://www.linkedin.com/in/joshbromberg/" target="_blank" rel="noopener">Josh</a>, a former founder, deserves a lot of credit for this recent feature. As we looked at our slightly older audience, a lot of them had a morning routine with their Tolan where they&rsquo;d share their intentions for the day - a mom getting ready, kids eating breakfast, about to do the school run and then head to work - sharing a mix of practical and emotional information like: &ldquo;I really need to stay grounded, I&rsquo;ve got a presentation I&rsquo;m nervous about, and also remember that Teddy&rsquo;s soccer practice is at 3 not 4 today.&rdquo; The Tolan was picking that up very well, so we built a feature literally called <span class="mark">intentions,<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 16 3, 36 7, 54 4.5 S 85 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 24 6, 49 8.5, 74 6.5 S 93 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> where the Tolan comes to you proactively in the morning with a thought for your day. It&rsquo;s often a great jumping off point, and it was hugely impactful for retention. People feel really seen.</p>
+
+              <figure class="marginalia" data-moment="intentions" data-sound="chime" style="top: -20px;">
+                <svg class="arrow" data-draw style="top: 12px;" viewBox="0 0 110 120">
+                  <path d="M4 96 C 42 100, 58 82, 50 58 C 44 40, 68 28, 92 30" stroke-width="1.8"/>
+                  <polyline points="81,22 93,29 83,42" stroke-width="1.8"/>
+                </svg>
+                <button class="hit" type="button" aria-label="Pop up the intentions prints and play sound">
+                  <span class="snap" style="transform: rotate(-1.2deg);">
+                    <span class="tape"></span>
+                    <img src="images/intentions.png" alt="The Tolan intentions feature, a morning check-in card" onerror="this.closest('.snap').classList.add('is-missing'); this.remove();">
+                    <span class="ph">intentions.png<br>&mdash; image pending</span>
+                  </span>
+                  <span class="snap stacked">
+                    <img src="images/intentions_2.png" alt="A blue Tolan peeking in with a morning intention" onerror="this.closest('.snap').classList.add('is-missing'); this.remove();">
+                    <span class="ph">intentions_2.png<br>&mdash; image pending</span>
+                  </span>
+                </button>
+                <figcaption class="caption">the intentions feature</figcaption>
+              </figure>
+            </div>
+
+            <div class="crease"></div>
+
+            <h2>Marketing by obsession</h2>
+            <p class="q"><b>LF + RA</b> A lot of people are talking about how marketing is becoming programmatic and part of engineering now - is that the future?</p>
+            <p><b>Quinten</b> A lot of folks are missing this. We try to be very deeply obsessed with who we&rsquo;re serving, what they value, and what they don&rsquo;t like - and to have that permeate everything the company does. So to flip it a little, it&rsquo;s less that &ldquo;marketing is part of engineering now,&rdquo; and more that we are talking to users every day of the week, we have great system-level monitoring of new behaviors and use cases, and we&rsquo;re on Reddit an egregious amount of time, emailing people, asking what&rsquo;s going on, offering to help. That permeates the company, and your marketing gets better, your product design gets better, your engineering decisions get better. It&rsquo;s very old school - more Amazon-like or Walmart-like - obsessed with what the people you serve need, and then reflecting that in everything you do.</p>
+
+            <div class="crease"></div>
+
+            <h2>Hiring and team</h2>
+            <p class="q"><b>LF + RA</b> How do people learn more about Tolan, and are you hiring? If so, who are you looking for?</p>
+            <p><b>Quinten</b> We are hiring (<a href="https://www.tolans.com/careers" target="_blank" rel="noopener">https://www.tolans.com/careers</a>). As a team, we have a lot of history together and a very high-trust environment, which I think is good for creativity. We have many former founders on the team. People who thrive at Tolan tend to have very high autonomy, love pushing the boundaries of the tools available to us, and want to work on a very small team.</p>
+
+            <div class="crease"></div>
+
+            <h2>Rapid fire</h2>
+            <div class="anchor">
+              <div class="rf">
+                <div class="rf-num">I</div>
+                <div>
+                  <p class="rf-q">Is there a company or brand you admire that maybe subconsciously affects how you build?</p>
+                  <p class="rf-a"><span class="mark">Pixar and Disney<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 15 2.5, 33 7, 51 4.5 S 85 6.5, 99 4" stroke-width="2"/><path d="M2 7.5 C 21 5.5, 46 8.5, 71 6 S 93 8, 98 6.5" stroke-width="1.1" opacity="0.75"/></svg></span> - they&rsquo;ve built characters that are appropriate for all ages and have great stories behind them. But I&rsquo;m personally more drawn to companies that are outside the cool mainstream and obsessed with serving people well. There&rsquo;s a reason I pull a lot from my hospitality experience. My wife and I run a restaurant together and do hospitality investing, and I learned more from serving a big table on a busy night than I do from 90% of what&rsquo;s on Twitter.</p>
+                </div>
+              </div>
+
+              <figure class="marginalia" data-moment="pixar" data-sound="boing" style="top: 8px;">
+                <svg class="arrow" data-draw style="top: 8px;" viewBox="0 0 110 120">
+                  <path d="M2 22 C 38 10, 68 24, 58 52 C 50 74, 76 82, 96 72" stroke-width="1.8"/>
+                  <polyline points="84,64 97,73 86,86" stroke-width="1.8"/>
+                </svg>
+                <button class="hit" type="button" aria-label="Do the Luxo hop and play sound">
+                  <span class="snap" style="transform: rotate(-1.6deg);">
+                    <span class="tape"></span>
+                    <img src="images/pixar_and_disney.png" alt="The Pixar Luxo lamp" onerror="this.closest('.snap').classList.add('is-missing'); this.remove();">
+                    <span class="ph">pixar_and_disney.png<br>&mdash; image pending</span>
+                  </span>
+                </button>
+                <figcaption class="caption">Luxo Jr., Pixar 1986</figcaption>
+              </figure>
+            </div>
+
+            <div class="rf">
+              <div class="rf-num">II</div>
+              <div>
+                <p class="rf-q">Anything you&rsquo;re exploring or excited about outside of company building?</p>
+                <p class="rf-a">We&rsquo;re soon having our third kid, so three under three for a short while, which will keep me very busy. And building what will be our family home on the island has been a very creatively fulfilling project. We&rsquo;ve worked with a wonderful team of architects, and the person building it is one of my dearest friends from growing up.</p>
+              </div>
+            </div>
+
+            <div class="anchor">
+              <div class="rf">
+                <div class="rf-num">III</div>
+                <div>
+                  <p class="rf-q">Where do you go, or what do you do, when you need to feel inspired?</p>
+                  <p class="rf-a">Definitely the island. The Tolan lore is essentially built around the <span class="mark">Pacific Northwest,<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 5 C 18 3, 40 7, 57 4.5 S 87 6.5, 99 4.5" stroke-width="2"/><path d="M3 7.5 C 26 6, 51 8.5, 76 6.5 S 94 8, 98 7" stroke-width="1.1" opacity="0.75"/></svg></span> an archipelago of small islands with a temperate climate. We spend every morning kayaking and getting some quality time together. It&rsquo;s a very good place for getting away from Silicon Valley.</p>
+                </div>
+              </div>
+
+              <figure class="marginalia" data-moment="pacific" data-sound="ambient" style="top: -6px;">
+                <svg class="arrow" data-draw style="top: 12px;" viewBox="0 0 110 120">
+                  <path d="M4 14 C 44 4, 60 30, 48 54 C 38 76, 72 84, 96 72" stroke-width="1.8"/>
+                  <polyline points="84,64 97,73 86,86" stroke-width="1.8"/>
+                </svg>
+                <button class="hit" type="button" aria-label="Toggle the Pacific Northwest ambient loop">
+                  <span class="snap moment-pacific" style="transform: rotate(1.4deg);">
+                    <span class="tape"></span>
+                    <span class="snap-drift">
+                      <img src="images/pacific_northwest.jpg" alt="A 19th-century watercolor of the Pacific Northwest coast, evergreens and calm water" onerror="this.closest('.snap').classList.add('is-missing'); this.remove();">
+                      <span class="ph">pacific_northwest.jpg<br>&mdash; image pending</span>
+                    </span>
+                  </span>
+                </button>
+                <figcaption class="caption">the Pacific Northwest coast</figcaption>
+              </figure>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="cc-footer">
+    <p class="cc-footer-meta">&copy; 2026 Creative Conviction</p>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+      var reduceMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      /* ---------- draw-in for arrows + botanical sprigs ---------- */
+      document.documentElement.classList.add('js');
+      var drawables = Array.prototype.slice.call(document.querySelectorAll('[data-draw]'));
+      drawables.forEach(function (el) {
+        var strokes = el.querySelectorAll('path, polyline, circle');
+        Array.prototype.forEach.call(strokes, function (s) {
+          var len = 0;
+          try { len = s.getTotalLength(); } catch (e) { len = 0; }
+          if (!len) return;
+          s.style.strokeDasharray = len;
+          s.style.strokeDashoffset = len;
+          s.dataset.len = len;
+        });
+      });
+
+      function drawIn(el) {
+        var strokes = el.querySelectorAll('path, polyline, circle');
+        Array.prototype.forEach.call(strokes, function (s, i) {
+          if (!s.dataset.len) return;
+          if (reduceMQ.matches) {
+            s.style.strokeDashoffset = 0;
+          } else {
+            s.style.transition = 'stroke-dashoffset 900ms cubic-bezier(0.77,0,0.175,1) ' + (i * 60) + 'ms';
+            requestAnimationFrame(function () { s.style.strokeDashoffset = 0; });
+          }
+        });
+        el.classList.add('is-drawn');
+      }
+
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { drawIn(e.target); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.25, rootMargin: '0px 0px -80px 0px' });
+        drawables.forEach(function (el) { io.observe(el); });
+      } else {
+        drawables.forEach(drawIn);
+      }
+
+      /* ---------- sound engine: synthesized, click-only, mutable ---------- */
+      var muted = false;
+      var actx = null, master = null;
+      var ambient = null;
+
+      function ctx() {
+        if (!actx) {
+          try {
+            actx = new (window.AudioContext || window.webkitAudioContext)();
+            master = actx.createGain();
+            master.gain.value = 0.9;
+            master.connect(actx.destination);
+          } catch (e) { actx = null; }
+        }
+        if (actx && actx.state === 'suspended') actx.resume();
+        return actx;
+      }
+
+      function tone(c, opts) {
+        var o = c.createOscillator(), g = c.createGain();
+        o.type = opts.type || 'sine';
+        o.frequency.setValueAtTime(opts.f0, opts.t);
+        if (opts.f1) o.frequency.exponentialRampToValueAtTime(opts.f1, opts.t + opts.dur);
+        g.gain.setValueAtTime(0.0001, opts.t);
+        g.gain.exponentialRampToValueAtTime(opts.peak || 0.14, opts.t + 0.015);
+        g.gain.exponentialRampToValueAtTime(0.0001, opts.t + opts.dur);
+        var node = o;
+        if (opts.filter) {
+          var f = c.createBiquadFilter();
+          f.type = 'lowpass';
+          f.frequency.setValueAtTime(opts.filter[0], opts.t);
+          f.frequency.exponentialRampToValueAtTime(opts.filter[1], opts.t + opts.dur);
+          o.connect(f); f.connect(g);
+        } else {
+          o.connect(g);
+        }
+        g.connect(master);
+        o.start(opts.t); o.stop(opts.t + opts.dur + 0.02);
+      }
+
+      function noiseBurst(c, t, dur, peak, cutoff) {
+        var n = Math.floor(c.sampleRate * dur);
+        var buf = c.createBuffer(1, n, c.sampleRate);
+        var d = buf.getChannelData(0);
+        for (var i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n);
+        var src = c.createBufferSource(); src.buffer = buf;
+        var f = c.createBiquadFilter(); f.type = 'bandpass'; f.frequency.value = cutoff || 1200;
+        var g = c.createGain();
+        g.gain.setValueAtTime(peak || 0.12, t);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+        src.connect(f); f.connect(g); g.connect(master);
+        src.start(t); src.stop(t + dur);
+      }
+
+      var sounds = {
+        chirp: function (c) { var t = c.currentTime; tone(c, { t: t, f0: 680, f1: 1180, dur: 0.09, peak: 0.16 }); tone(c, { t: t + 0.09, f0: 1180, f1: 900, dur: 0.12, peak: 0.12 }); },
+        island: function (c) { var t = c.currentTime; noiseBurst(c, t, 0.7, 0.05, 700); tone(c, { t: t + 0.1, type: 'sine', f0: 900, f1: 1300, dur: 0.35, peak: 0.05 }); },
+        harp: function (c) { var t = c.currentTime, notes = [523.25, 659.25, 783.99, 987.77, 1174.66]; notes.forEach(function (f, i) { tone(c, { t: t + i * 0.05, type: 'triangle', f0: f, dur: 0.5, peak: 0.1 }); }); },
+        squish: function (c) { var t = c.currentTime; tone(c, { t: t, type: 'sine', f0: 420, f1: 120, dur: 0.22, peak: 0.2, filter: [900, 300] }); },
+        glitch: function (c) { var t = c.currentTime; for (var i = 0; i < 4; i++) { noiseBurst(c, t + i * 0.04, 0.03, 0.1, 2400); } tone(c, { t: t, type: 'square', f0: 220, f1: 180, dur: 0.14, peak: 0.06 }); },
+        hum: function (c) { var t = c.currentTime; tone(c, { t: t, type: 'sine', f0: 110, dur: 0.6, peak: 0.12 }); tone(c, { t: t, type: 'sine', f0: 165, dur: 0.6, peak: 0.05 }); },
+        robot: function (c) { var t = c.currentTime; tone(c, { t: t, type: 'square', f0: 1600, f1: 2200, dur: 0.08, peak: 0.08 }); tone(c, { t: t + 0.08, type: 'sine', f0: 2200, f1: 1400, dur: 0.1, peak: 0.06 }); },
+        pencil: function (c) { var t = c.currentTime; for (var i = 0; i < 6; i++) noiseBurst(c, t + i * 0.05, 0.05, 0.08, 3200); },
+        chime: function (c) { var t = c.currentTime, notes = [659.25, 987.77, 1318.51]; notes.forEach(function (f, i) { tone(c, { t: t + i * 0.08, type: 'sine', f0: f, dur: 0.6, peak: 0.1 }); }); },
+        boing: function (c) { var t = c.currentTime; tone(c, { t: t, type: 'sine', f0: 180, f1: 620, dur: 0.16, peak: 0.18 }); tone(c, { t: t + 0.16, type: 'sine', f0: 620, f1: 300, dur: 0.18, peak: 0.12 }); }
+      };
+
+      function play(name) {
+        if (muted || name === 'ambient') return;
+        var c = ctx(); if (!c || !sounds[name]) return;
+        sounds[name](c);
+      }
+
+      function toggleAmbient() {
+        var c = ctx(); if (!c) return false;
+        if (ambient) { stopAmbient(); return false; }
+        if (muted) return false;
+        var g = c.createGain(); g.gain.value = 0.0001;
+        g.gain.exponentialRampToValueAtTime(0.06, c.currentTime + 0.6);
+        var o1 = c.createOscillator(); o1.type = 'sine'; o1.frequency.value = 174;
+        var o2 = c.createOscillator(); o2.type = 'sine'; o2.frequency.value = 261;
+        var lfo = c.createOscillator(); lfo.type = 'sine'; lfo.frequency.value = 0.18;
+        var lfoGain = c.createGain(); lfoGain.gain.value = 8;
+        lfo.connect(lfoGain); lfoGain.connect(o2.frequency);
+        o1.connect(g); o2.connect(g); g.connect(master);
+        o1.start(); o2.start(); lfo.start();
+        ambient = { g: g, nodes: [o1, o2, lfo] };
+        return true;
+      }
+      function stopAmbient() {
+        if (!ambient || !actx) return;
+        var g = ambient.g, nodes = ambient.nodes;
+        g.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime + 0.4);
+        setTimeout(function () { nodes.forEach(function (n) { try { n.stop(); } catch (e) {} }); }, 500);
+        ambient = null;
+      }
+
+      /* ---------- mute toggle ---------- */
+      var muteBtn = document.getElementById('cc-mute');
+      var muteLabel = muteBtn.querySelector('.mute-label');
+      muteBtn.addEventListener('click', function () {
+        muted = !muted;
+        muteBtn.classList.toggle('is-muted', muted);
+        muteBtn.setAttribute('aria-pressed', String(muted));
+        muteLabel.innerHTML = muted ? 'sound off &mdash; tap to unmute' : 'sound on &mdash; tap to mute';
+        if (muted) stopAmbient();
+      });
+
+      /* ---------- margin-moment click motions ---------- */
+      var oneShot = {
+        alien:  'alien-bounce 640ms cubic-bezier(0.34,1.56,0.64,1) 1',
+        lucas:  'lucas-wobble 700ms cubic-bezier(0.34,1.56,0.64,1) 1',
+        island: 'gentle-nudge 500ms cubic-bezier(0.34,1.56,0.64,1) 1',
+        poetry: 'glitch-flick 360ms steps(2,end) 2',
+        ted:    'gentle-nudge 420ms cubic-bezier(0.34,1.56,0.64,1) 1',
+        social: 'gentle-nudge 420ms cubic-bezier(0.34,1.56,0.64,1) 1',
+        pixar:  'luxo-hop 680ms cubic-bezier(0.34,1.56,0.64,1) 1'
+      };
+
+      document.querySelectorAll('.marginalia').forEach(function (fig) {
+        var moment = fig.getAttribute('data-moment');
+        var sound = fig.getAttribute('data-sound');
+        var btn = fig.querySelector('.hit');
+        if (!btn) return;
+
+        btn.addEventListener('click', function () {
+          if (sound === 'ambient') {
+            var on = toggleAmbient();
+            if (!reduceMQ.matches) fig.querySelector('.snap').style.animationPlayState = on ? 'running' : 'running';
+            return;
+          }
+          play(sound);
+          if (reduceMQ.matches) return;
+
+          if (moment === 'guardian') { fig.classList.toggle('is-fanned'); return; }
+          if (moment === 'intentions') { fig.classList.toggle('is-popped'); return; }
+          if (moment === 'klara') {
+            fig.classList.add('is-ray');
+            var cov = fig.querySelector('.ray-cover');
+            var clear = function () { fig.classList.remove('is-ray'); };
+            if (cov) cov.addEventListener('animationend', clear, { once: true }); else setTimeout(clear, 950);
+            return;
+          }
+          var anim = oneShot[moment];
+          if (!anim) return;
+          var snap = fig.querySelector('.snap');
+          if (!snap) return;
+          snap.style.animation = 'none';
+          void snap.offsetWidth;
+          snap.style.animation = anim;
+          snap.addEventListener('animationend', function handler() {
+            snap.style.animation = '';
+            snap.removeEventListener('animationend', handler);
+          });
+        });
+      });
+    })();
+  </script>
+  <script src="../../share-quote.js"></script>
+</body>
+</html>
