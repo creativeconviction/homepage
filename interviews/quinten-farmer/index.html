@@ -277,6 +277,7 @@
       width: 100%;
       max-width: 420px;
       margin: 20px auto 8px;
+      cursor: pointer;
     }
     .cc-img.is-full { width: 100%; }
     .cc-img.is-centered { margin-left: auto; margin-right: auto; }
@@ -690,6 +691,15 @@
       window.addEventListener('scroll', update, { passive: true });
       window.addEventListener('resize', update);
       update();
+    })();
+
+    (function () {
+      document.querySelectorAll('.cc-video').forEach(function (v) {
+        v.addEventListener('click', function () {
+          v.muted = !v.muted;
+          if (v.paused) v.play();
+        });
+      });
     })();
   </script>
   <script src="../../share-quote.js"></script>
