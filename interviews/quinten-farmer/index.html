@@ -277,8 +277,8 @@
     .cc-img { display: block; max-width: 100%; margin: 20px 0 8px; }
     .cc-img.is-full { width: 100%; }
     .cc-img.is-centered { margin-left: auto; margin-right: auto; }
-    .cc-img-row { display: flex; gap: 14px; align-items: flex-start; margin: 20px 0 8px; }
-    .cc-img-row img { flex: 1 1 0; min-width: 0; height: auto; display: block; }
+    .cc-img-row { display: flex; justify-content: space-between; align-items: flex-start; margin: 20px 0 8px; }
+    .cc-img-row img { display: block; height: 240px; width: auto; }
     .cc-img-stack { display: flex; flex-direction: column; gap: 14px; margin: 20px 0 8px; }
     .cc-img-stack img { display: block; width: 100%; height: auto; }
 
@@ -337,8 +337,7 @@
       .cc-speaker { padding-top: 0; }
       .cc-hot-take { grid-template-columns: 1fr; gap: 6px; }
       .cc-hot-take-num { padding-top: 0; }
-      .cc-img-row { flex-wrap: wrap; }
-      .cc-img-row img { width: 100%; flex-basis: 100%; }
+      .cc-img-row img { height: 160px; }
     }
   </style>
 </head>
@@ -514,9 +513,9 @@
             <div class="cc-qa-body is-response">
               <p>During that year I was semi-retired on the island, a very good friend who was early at OpenAI had sent me <span class="mark">a book of poetry written by an early model,</span> as a joke. It was awful poetry. But it inspired me. So I spent a lot of time reading better works of fiction that deal with AI as a personal extension of who we are. One favorite is <span class="mark">Klara and the Sun,</span> which I highly recommend. Some <span class="mark">Ted Chiang</span> as well.</p>
               <div class="cc-img-row">
-                <img style="flex-grow: 0.6652;" src="images/early_model_poetry_book.png" alt="A small self-published book of poetry written by an early language model" />
-                <img style="flex-grow: 0.6957;" src="images/ted_chiang.png" alt="A Ted Chiang short story collection" />
-                <img style="flex-grow: 0.6409;" src="images/klara_and_the_sun.png" alt="The cover of Klara and the Sun by Kazuo Ishiguro" />
+                <img src="images/early_model_poetry_book.png" alt="A small self-published book of poetry written by an early language model" />
+                <img src="images/ted_chiang.png" alt="A Ted Chiang short story collection" />
+                <img src="images/klara_and_the_sun.png" alt="The cover of Klara and the Sun by Kazuo Ishiguro" />
               </div>
               <p>I realized the nature of our relationship with an AI entity is so defined by the story we wrap around it - the purpose of the entity, why it&rsquo;s there, how it relates to us. In these stories, they&rsquo;re all dealing with the same capabilities and themes, but the story wrapped around it takes it from a dystopian horror to something charming and lovely. So when we started, we recognized we needed our story to wrap around this, because otherwise you get to the dystopian place, or at the very least, the anime role play place.</p>
             </div>
