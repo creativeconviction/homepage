@@ -275,19 +275,12 @@
 
     /* ----- Inline article images ----- */
     .cc-img { display: block; max-width: 100%; margin: 20px 0 8px; }
+    .cc-img.is-full { width: 100%; }
+    .cc-img.is-centered { margin-left: auto; margin-right: auto; }
     .cc-img-row { display: flex; gap: 14px; align-items: flex-start; margin: 20px 0 8px; }
-    .cc-img-row img { flex: 1 1 0; min-width: 0; width: 32%; height: auto; display: block; }
+    .cc-img-row img { flex: 1 1 0; min-width: 0; height: auto; display: block; }
     .cc-img-stack { display: flex; flex-direction: column; gap: 14px; margin: 20px 0 8px; }
     .cc-img-stack img { display: block; width: 100%; height: auto; }
-
-    /* ----- Margin images (intentions) ----- */
-    .cc-margin-wrap { position: relative; }
-    .cc-margin-img { display: block; max-width: 300px; margin: 18px 0; }
-    @media (min-width: 1240px) {
-      .cc-margin-img { position: absolute; margin: 0; }
-      .cc-margin-img.is-left  { width: 200px; left: -276px; top: 0; }
-      .cc-margin-img.is-right { width: 175px; right: -195px; top: 60px; }
-    }
 
     /* ----- Rapid fire ----- */
     .cc-hot-takes { padding-top: 32px; }
@@ -414,7 +407,7 @@
             <span class="cc-speaker is-guest">Quinten</span>
             <div class="cc-qa-body is-response">
               <p>I was born in Washington state and mostly grew up on a little island called <span class="mark">Whidbey Island</span>. It&rsquo;s a very cool, small agricultural community. Then my parents divorced, and when I was 18, I found myself at North Carolina State University. I was a terrible high school student, and for better or worse, I refused to participate. About a year into college, I got bored - it wasn&rsquo;t a particularly challenging place. This was the beginning of 2010, coming out of the financial crisis, when everything was falling apart but tech was starting to feel like there might be something there. So I found this guy, <a href="https://www.davidtisch.com/" target="_blank" rel="noopener">David Tisch</a>, in New York, and I emailed him. We got on the phone. I said &ldquo;I&rsquo;d love to learn what you do, I&rsquo;ll bring coffee and donuts for nothing, just let me know.&rdquo; And to his credit he said, &ldquo;I&rsquo;d love to have you intern when you graduate, but you don&rsquo;t need to drop out of college for this.&rdquo;</p>
-              <img class="cc-img" style="max-width: 460px;" src="images/the_island.png" alt="Whidbey Island, Washington: hay bales in a field, water and evergreens beyond, Mount Baker in the distance" />
+              <img class="cc-img is-full" src="images/the_island.png" alt="Whidbey Island, Washington: hay bales in a field, water and evergreens beyond, Mount Baker in the distance" />
               <p>I don&rsquo;t really take no for an answer. My other option was going to Afghanistan to be a military contractor, see the world a little (I&rsquo;d never been outside the country). So I called David back and said, &ldquo;Either I&rsquo;m going to come learn from you or I&rsquo;m going to Afghanistan, your choice.&rdquo;</p>
               <p>So I moved to New York and worked for him, and eventually for two of his portfolio companies. Coming out of that I&rsquo;d gotten to know some professors in the Columbia computer science department, and they told me I could apply. I ended up at Columbia, very fortunately, because there&rsquo;s no way I would have gotten in coming out of high school. I was a good student for the first time in my life and having a good time. But I had an early crypto side project that caught some internet attention, and a guy named <a href="https://www.linkedin.com/in/jonschlossberg/" target="_blank" rel="noopener">Jon Schlossberg</a> reached out. He asked if I&rsquo;d chat about working on something together. I flew out to San Francisco, we spent a week or two together, and soon we decided to start a company called Even.</p>
             </div>
@@ -464,9 +457,9 @@
             <span class="cc-speaker is-guest">Quinten</span>
             <div class="cc-qa-body is-response">
               <p>Today we call it a second self. It&rsquo;s personal AI, <span class="mark">a little character</span> designed to be an extension of you. It molds parts of its personality to be similar to yours, shares your interests as much as it can, reflects your values. We have a lot of folks who are religious and want their Tolan to be observant of their faith and the things they care about. We have 65 year old users and 30 year olds - so there&rsquo;s this huge range, and we do a lot of work to make sure your Tolan reflects who you are.</p>
-              <img class="cc-img" style="max-width: 240px;" src="images/a_little_character.png" alt="An early Tolan character, teal with pink-tipped hair and a yellow scarf" />
+              <img class="cc-img is-centered" style="max-width: 240px;" src="images/a_little_character.png" alt="An early Tolan character, teal with pink-tipped hair and a yellow scarf" />
               <p>When I think about the totality of what we hope to build, there&rsquo;s a reason this idea of an entity that is an extension of you shows up in so many faiths and so many works of fiction. Call it a <span class="mark">guardian angel, a spirit guide.</span> It&rsquo;s clearly something humanity really craves.</p>
-              <img class="cc-img" style="max-width: 300px;" src="images/guardian_angel_4.png" alt="Lizzie McGuire beside her animated alter ego" />
+              <img class="cc-img is-centered" style="max-width: 300px;" src="images/guardian_angel_4.png" alt="Lizzie McGuire beside her animated alter ego" />
               <p>As the capabilities improve, and as great creatives on our team help bring them to life, we&rsquo;re working toward giving people that full vision of a guardian angel or spirit guide. That&rsquo;s what a Tolan should be.</p>
             </div>
           </div>
@@ -521,9 +514,9 @@
             <div class="cc-qa-body is-response">
               <p>During that year I was semi-retired on the island, a very good friend who was early at OpenAI had sent me <span class="mark">a book of poetry written by an early model,</span> as a joke. It was awful poetry. But it inspired me. So I spent a lot of time reading better works of fiction that deal with AI as a personal extension of who we are. One favorite is <span class="mark">Klara and the Sun,</span> which I highly recommend. Some <span class="mark">Ted Chiang</span> as well.</p>
               <div class="cc-img-row">
-                <img src="images/early_model_poetry_book.png" alt="A small self-published book of poetry written by an early language model" />
-                <img src="images/ted_chiang.png" alt="A Ted Chiang short story collection" />
-                <img src="images/klara_and_the_sun.png" alt="The cover of Klara and the Sun by Kazuo Ishiguro" />
+                <img style="flex-grow: 0.6652;" src="images/early_model_poetry_book.png" alt="A small self-published book of poetry written by an early language model" />
+                <img style="flex-grow: 0.6957;" src="images/ted_chiang.png" alt="A Ted Chiang short story collection" />
+                <img style="flex-grow: 0.6409;" src="images/klara_and_the_sun.png" alt="The cover of Klara and the Sun by Kazuo Ishiguro" />
               </div>
               <p>I realized the nature of our relationship with an AI entity is so defined by the story we wrap around it - the purpose of the entity, why it&rsquo;s there, how it relates to us. In these stories, they&rsquo;re all dealing with the same capabilities and themes, but the story wrapped around it takes it from a dystopian horror to something charming and lovely. So when we started, we recognized we needed our story to wrap around this, because otherwise you get to the dystopian place, or at the very least, the anime role play place.</p>
             </div>
@@ -571,9 +564,7 @@
 
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Quinten</span>
-            <div class="cc-qa-body is-response cc-margin-wrap">
-              <img class="cc-margin-img is-left" src="images/intentions.png" alt="The Tolan intentions feature, a morning check-in card" />
-              <img class="cc-margin-img is-right" src="images/intentions_2.png" alt="A blue Tolan peeking in with a morning intention" />
+            <div class="cc-qa-body is-response">
               <p>Our product lead <a href="https://www.linkedin.com/in/joshbromberg/" target="_blank" rel="noopener">Josh</a>, a former founder, deserves a lot of credit for this recent feature. As we looked at our slightly older audience, a lot of them had a morning routine with their Tolan where they&rsquo;d share their intentions for the day - a mom getting ready, kids eating breakfast, about to do the school run and then head to work - sharing a mix of practical and emotional information like: &ldquo;I really need to stay grounded, I&rsquo;ve got a presentation I&rsquo;m nervous about, and also remember that Teddy&rsquo;s soccer practice is at 3 not 4 today.&rdquo; The Tolan was picking that up very well, so we built a feature literally called intentions, where the Tolan comes to you proactively in the morning with a thought for your day. It&rsquo;s often a great jumping off point, and it was hugely impactful for retention. People feel really seen.</p>
             </div>
           </div>
@@ -642,7 +633,7 @@
                 <div class="cc-hot-take-q">Where do you go, or what do you do, when you need to feel inspired?</div>
                 <div class="cc-hot-take-a">
                   <p>Definitely the island. The Tolan lore is essentially built around the <span class="mark">Pacific Northwest,</span> an archipelago of small islands with a temperate climate. We spend every morning kayaking and getting some quality time together. It&rsquo;s a very good place for getting away from Silicon Valley.</p>
-                  <img class="cc-img" style="max-width: 460px;" src="images/pacific_northwest.jpg" alt="A 19th-century watercolor of the Pacific Northwest coast, evergreens and calm water" />
+                  <img class="cc-img is-full" src="images/pacific_northwest.jpg" alt="A 19th-century watercolor of the Pacific Northwest coast, evergreens and calm water" />
                 </div>
               </div>
             </div>
