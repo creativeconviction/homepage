@@ -3,357 +3,175 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
-  <title>Creative Conviction — mobile concept</title>
+  <title>Mobile E — Compact, high-density</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400..700&display=swap" />
   <style>
+    /* ── CONCEPT E: Compact, high-density, text-forward ─────────
+       48px thumbs · 16px serif title · 11px meta · 10px row padding
+       Shows the most content above the fold. Like Hacker News or
+       a curated reading list — for the person who wants to scan fast.
+       Thumb acts as an accent color block, not the main event.
+    ──────────────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-
     :root {
       --cc-magenta: #D8016A;
       --cc-ink:    #1A1130;
-      --cc-ink-2:  #322847;
       --cc-ink-3:  #6A6378;
       --cc-ink-4:  #9C97A8;
       --cc-paper:  #F7F5FA;
-      --cc-rule:        #D2CDDB;
-      --cc-rule-soft:   #E5E1ED;
-      --fg-2: var(--cc-ink-2);
-      --fg-3: var(--cc-ink-3);
-      --fg-4: var(--cc-ink-4);
+      --cc-rule-soft: #E5E1ED;
+      --cc-rule:      #D2CDDB;
       --font-serif: "EB Garamond", Georgia, serif;
       --font-sans:  "Inter", system-ui, sans-serif;
-      --ease: cubic-bezier(.2,.6,.2,1);
-      --dur-1: 120ms;
     }
+    body { background: var(--cc-paper); color: var(--cc-ink); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
 
-    body {
-      background: var(--cc-paper);
-      color: var(--cc-ink);
-      font-family: var(--font-sans);
-      font-size: 16px;
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-    }
+    .shell { max-width: 430px; margin: 0 auto; padding: 0 20px 60px; }
 
-    a { color: var(--cc-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-    a:hover { text-decoration-thickness: 2px; }
-    em { font-family: var(--font-serif); font-style: italic; }
+    .hdr { display: flex; align-items: center; justify-content: space-between; padding: 14px 0 12px; position: sticky; top: 0; background: var(--cc-paper); z-index: 10; margin-bottom: 16px; }
+    .logo { font-family: var(--font-serif); font-size: 20px; font-weight: 400; letter-spacing: -0.01em; }
+    .logo em { font-style: italic; color: var(--cc-magenta); }
+    .nav { display: flex; gap: 18px; }
+    .nav a { font-size: 12px; color: var(--cc-ink-3); }
+    .nav .sub { color: var(--cc-magenta); }
 
-    /* ===================== MOBILE SHELL ===================== */
-    .cc-shell {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 0 20px 64px;
-    }
+    /* Intro very compact */
+    .intro { padding: 8px 0 16px; }
+    .intro-tag { font-size: 15px; line-height: 1.45; color: var(--cc-ink); margin-bottom: 6px; }
+    .intro-sub { font-size: 13px; line-height: 1.5; color: var(--cc-ink-3); }
 
-    /* ===================== HEADER ===================== */
-    .cc-header {
+    .rule { border: none; border-top: 1px solid var(--cc-rule-soft); margin: 0 0 16px; }
+    .label { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cc-ink-4); font-weight: 600; display: block; margin-bottom: 0; }
+
+    .list { list-style: none; margin-top: 8px; }
+    .row {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 18px 0 16px;
-      position: sticky;
-      top: 0;
-      background: var(--cc-paper);
-      z-index: 10;
-    }
-    .cc-mark {
-      font-family: var(--font-serif);
-      font-size: 22px;
-      font-weight: 400;
-      letter-spacing: -0.01em;
-      color: var(--cc-ink);
-      text-decoration: none;
-      line-height: 1;
-    }
-    .cc-mark em { font-style: italic; color: var(--cc-magenta); }
-
-    /* Mobile nav: just the key actions */
-    .cc-nav { display: flex; align-items: center; gap: 18px; }
-    .cc-nav-link {
-      font-size: 13px;
-      color: var(--fg-3);
-      text-decoration: none;
-    }
-    .cc-nav-link:hover { color: var(--cc-ink); }
-    .cc-nav-subscribe {
-      font-size: 13px;
-      color: var(--cc-magenta);
-      text-decoration: none;
-    }
-
-    /* ===================== INTRO ===================== */
-    .cc-intro {
-      padding: 24px 0 28px;
+      gap: 12px;
+      padding: 10px 0;
       border-bottom: 1px solid var(--cc-rule-soft);
-      margin-bottom: 32px;
-    }
-    .cc-intro p {
-      font-family: var(--font-sans);
-      font-size: 17px;
-      line-height: 1.5;
       color: var(--cc-ink);
     }
-    .cc-intro-sub {
-      font-family: var(--font-sans);
-      font-size: 14px;
-      color: var(--fg-3);
-      margin-top: 10px;
-      line-height: 1.5;
-    }
-    .cc-intro-sub a { color: var(--fg-2); text-decoration: none; }
+    .list .row:first-child { border-top: none; }
+    .row.muted { opacity: 0.35; pointer-events: none; }
+    .thumb { width: 48px; height: 48px; object-fit: cover; flex-shrink: 0; }
+    .body { flex: 1; min-width: 0; }
+    .title { font-family: var(--font-serif); font-size: 17px; font-weight: 400; line-height: 1.3; color: var(--cc-ink); display: block; margin-bottom: 3px; }
+    .meta { font-size: 11px; color: var(--cc-ink-4); display: block; }
+    .arr { font-size: 15px; color: var(--cc-ink-4); flex-shrink: 0; }
 
-    /* ===================== SECTIONS ===================== */
-    .cc-section { margin-bottom: 36px; }
+    .section { margin-bottom: 24px; }
+    .footer { padding: 16px 0; }
+    .footer-meta { font-size: 10px; color: var(--cc-ink-4); }
 
-    .cc-label {
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--fg-4);
-      display: block;
-      margin-bottom: 12px;
-    }
-
-    /* ===================== LIST ROWS ===================== */
-    .cc-list { list-style: none; }
-
-    .cc-item {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--cc-rule-soft);
-      min-height: 56px; /* touch target */
-      text-decoration: none;
-      color: var(--cc-ink);
-    }
-    .cc-list .cc-item:first-child { border-top: 1px solid var(--cc-rule); }
-    .cc-item:active { background: rgba(26,17,48,0.04); margin: 0 -20px; padding: 14px 20px; }
-
-    .cc-item-thumb {
-      width: 44px;
-      height: 44px;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-    .cc-item-body { flex: 1; min-width: 0; }
-    .cc-item-title {
-      font-family: var(--font-serif);
-      font-size: 17px;
-      font-weight: 400;
-      line-height: 1.3;
-      color: var(--cc-ink);
-      display: block;
-      overflow-wrap: break-word;
-    }
-    .cc-item-meta {
-      font-size: 12px;
-      color: var(--fg-4);
-      margin-top: 3px;
-    }
-    .cc-item-muted { opacity: 0.38; pointer-events: none; }
-
-    .cc-item-arrow {
-      font-size: 14px;
-      color: var(--fg-4);
-      flex-shrink: 0;
-    }
-
-    .cc-view-all {
-      display: block;
-      font-size: 13px;
-      color: var(--fg-3);
-      text-decoration: none;
-      padding: 14px 0;
-      min-height: 44px;
-    }
-    .cc-view-all:hover { color: var(--cc-ink); }
-
-    /* ===================== FOOTER ===================== */
-    .cc-footer { padding: 24px 0; margin-top: 16px; }
-    .cc-footer-meta { font-size: 11px; color: var(--fg-4); letter-spacing: 0.03em; }
-
-    /* ===================== DESKTOP UPGRADE ===================== */
+    /* ── DESKTOP UPGRADE (600px+) ── */
     @media (min-width: 600px) {
-      .cc-shell { max-width: 1080px; padding: 32px 40px 80px; }
-      .cc-header { position: static; padding: 0 0 28px; margin-bottom: 32px; }
-      .cc-mark { font-size: clamp(28px, 3.5vw, 40px); }
-      .cc-nav-link { font-size: 14px; text-decoration: underline; text-underline-offset: 4px; }
-      .cc-nav-subscribe { font-size: 14px; text-decoration: underline; text-underline-offset: 4px; }
-      .cc-intro { border-bottom: none; }
-      .cc-intro p { font-size: 17px; font-family: var(--font-sans); color: var(--fg-2); }
-      .cc-intro-sub { display: none; }
-      .cc-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 48px 56px; }
-      .cc-item-arrow { display: none; }
+      .shell { max-width: 1080px; padding: 32px 40px 80px; }
+      .hdr { position: static; padding: 0 0 28px; margin-bottom: 24px; }
+      .logo { font-size: clamp(28px, 3.5vw, 40px); }
+      .nav a { font-size: 14px; text-decoration: underline; text-underline-offset: 4px; }
+      .rule { display: none; }
+      .intro { padding: 0 0 32px; }
+      .intro-tag { font-size: 17px; color: var(--cc-ink-3); }
+      .intro-sub { display: none; }
+      /* Two-column layout: Interviews left, Essays + Gatherings right */
+      main { display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px; align-items: start; }
+      .section:nth-child(1) { grid-column: 1; grid-row: 1 / 3; }
+      .section:nth-child(2) { grid-column: 2; grid-row: 1; }
+      .section:nth-child(3) { grid-column: 2; grid-row: 2; }
+      .section { margin-bottom: 40px; }
+      /* Desktop row sizing */
+      .thumb { width: 44px; height: 44px; }
+      .title { font-size: 18px; }
+      .meta { font-size: 12px; }
+      .row { padding: 14px 0; }
+      .arr { display: none; }
+      /* Desktop label */
+      .label { font-size: 11px; letter-spacing: 0.1em; }
+      /* Hover state on desktop */
+      .row:hover { background: rgba(26,17,48,0.04); margin: 0 -10px; padding: 14px 10px; border-radius: 6px; }
     }
   </style>
 </head>
 <body>
-  <div class="cc-shell">
-
-    <!-- Sticky mobile header: logo + minimal nav -->
-    <header class="cc-header">
-      <a class="cc-mark" href="./">Creative <em>Conviction</em></a>
-      <nav class="cc-nav">
-        <a class="cc-nav-link" href="./about.html">About</a>
-        <a class="cc-nav-subscribe" href="https://creativeconvictionpress.substack.com/" target="_blank" rel="noopener">Subscribe</a>
+  <div class="shell">
+    <header class="hdr">
+      <a class="logo" href="./">Creative <em>Conviction</em></a>
+      <nav class="nav">
+        <a href="./about.html">About</a>
+        <a class="sub" href="https://creativeconvictionpress.substack.com/" target="_blank" rel="noopener">Subscribe</a>
       </nav>
     </header>
 
-    <!-- Intro: serif tagline on mobile, body text on desktop -->
-    <div class="cc-intro">
-      <p>A platform sparking conversations around creativity, capital, and AI.</p>
-      <p class="cc-intro-sub"><a href="./about.html">Libbie</a> and <a href="./about.html">Rayouf</a> interview the founders, designers, and operators building the most creative companies in technology.</p>
+    <div class="intro">
+      <p class="intro-tag">A platform sparking conversations around creativity, capital, and AI.</p>
+      <p class="intro-sub">Libbie and Rayouf interview the founders and operators building the most creative companies in tech.</p>
     </div>
+    <hr class="rule" />
 
     <main>
-      <div class="cc-columns">
+      <div class="section">
+        <span class="label">Interviews</span>
+        <ul class="list">
+          <li class="row muted">
+            <img class="thumb" src="interviews/images/diego-segura.jpg" alt="" width="48" height="48" />
+            <div class="body"><span class="title">Diego Segura &mdash; Language before layout</span><span class="meta">Coming soon</span></div>
+          </li>
+          <a class="row" href="interviews/quinten-farmer/">
+            <img class="thumb" src="interviews/images/quinten-farmer.jpg" alt="" width="48" height="48" />
+            <div class="body"><span class="title">Quinten Farmer &mdash; Why a little alien is a good friend</span><span class="meta">Co-founder &amp; CEO, Tolan &middot; July 2026</span></div>
+            <span class="arr">&rsaquo;</span>
+          </a>
+          <a class="row" href="interviews/paul-jun/">
+            <img class="thumb" src="interviews/images/paul-jun.jpg" alt="" width="48" height="48" />
+            <div class="body"><span class="title">Paul Jun &mdash; Form follows fantasy</span><span class="meta">Creative Director, Brand &middot; July 2026</span></div>
+            <span class="arr">&rsaquo;</span>
+          </a>
+          <a class="row" href="interviews/ben-and-zubin-raindrop/">
+            <img class="thumb" src="interviews/images/ben-hylak.jpg" alt="" width="48" height="48" />
+            <div class="body"><span class="title">Ben Hylak and Zubin Koticha &mdash; Tsunami of capabilities</span><span class="meta">Co-founders, Raindrop &middot; June 2026</span></div>
+            <span class="arr">&rsaquo;</span>
+          </a>
+          <a class="row" href="interviews/nir-zicherman/">
+            <img class="thumb" src="interviews/images/nir-zicherman.jpg" alt="" width="48" height="48" />
+            <div class="body"><span class="title">Nir Zicherman &mdash; Building the generalized learning platform</span><span class="meta">Co-founder &amp; CEO, Oboe &middot; June 2026</span></div>
+            <span class="arr">&rsaquo;</span>
+          </a>
+          <a class="row" href="interviews/stephen-haney/">
+            <img class="thumb" src="interviews/images/stephen-haney.jpg" alt="" width="48" height="48" />
+            <div class="body"><span class="title">Stephen Haney &mdash; Care that compounds</span><span class="meta">Founder &amp; CEO, Paper &middot; June 2026</span></div>
+            <span class="arr">&rsaquo;</span>
+          </a>
+          <a class="row" href="interviews/dylan-babbs/">
+            <img class="thumb" src="interviews/images/dylan-babbs.jpg" alt="" width="48" height="48" />
+            <div class="body"><span class="title">Dylan Babbs &mdash; Designing for trust in new categories</span><span class="meta">Co-founder, Profound &middot; June 2026</span></div>
+            <span class="arr">&rsaquo;</span>
+          </a>
+        </ul>
+      </div>
 
-        <!-- Interviews -->
-        <div class="cc-section">
-          <span class="cc-label">Interviews</span>
-          <ul class="cc-list">
+      <div class="section">
+        <span class="label">Essays</span>
+        <ul class="list">
+          <a class="row" href="reports/brand-and-narrative/"><img class="thumb" src="reports/thumbnails/brand-and-narrative.jpg" alt="" width="48" height="48" /><div class="body"><span class="title">Brand &amp; narrative</span><span class="meta">Part II &middot; April 2026</span></div><span class="arr">&rsaquo;</span></a>
+          <a class="row" href="reports/product-design/"><img class="thumb" src="reports/thumbnails/product-design.jpg" alt="" width="48" height="48" /><div class="body"><span class="title">Product design</span><span class="meta">Part I &middot; March 2026</span></div><span class="arr">&rsaquo;</span></a>
+          <a class="row" href="reports/welcome/"><img class="thumb" src="reports/thumbnails/welcome.jpg" alt="" width="48" height="48" /><div class="body"><span class="title">Welcome to Creative Conviction</span><span class="meta">Primer &middot; February 2026</span></div><span class="arr">&rsaquo;</span></a>
+        </ul>
+      </div>
 
-            <li class="cc-item cc-item-muted">
-              <img class="cc-item-thumb" src="interviews/images/diego-segura.jpg" alt="" width="44" height="44" />
-              <div class="cc-item-body">
-                <span class="cc-item-title">Diego Segura &mdash; Language before layout</span>
-                <span class="cc-item-meta">Coming soon</span>
-              </div>
-            </li>
-
-            <a class="cc-item" href="interviews/quinten-farmer/">
-              <img class="cc-item-thumb" src="interviews/images/quinten-farmer.jpg" alt="" width="44" height="44" />
-              <div class="cc-item-body">
-                <span class="cc-item-title">Quinten Farmer &mdash; Why a little alien is a good friend</span>
-                <span class="cc-item-meta">Co-founder &amp; CEO, Tolan &middot; July 2026</span>
-              </div>
-              <span class="cc-item-arrow">&rsaquo;</span>
-            </a>
-
-            <a class="cc-item" href="interviews/paul-jun/">
-              <img class="cc-item-thumb" src="interviews/images/paul-jun.jpg" alt="" width="44" height="44" />
-              <div class="cc-item-body">
-                <span class="cc-item-title">Paul Jun &mdash; Form follows fantasy</span>
-                <span class="cc-item-meta">Creative Director, Brand &middot; July 2026</span>
-              </div>
-              <span class="cc-item-arrow">&rsaquo;</span>
-            </a>
-
-            <a class="cc-item" href="interviews/ben-and-zubin-raindrop/">
-              <img class="cc-item-thumb" src="interviews/images/ben-hylak.jpg" alt="" width="44" height="44" />
-              <div class="cc-item-body">
-                <span class="cc-item-title">Ben Hylak and Zubin Koticha &mdash; Tsunami of capabilities</span>
-                <span class="cc-item-meta">Co-founders, Raindrop &middot; June 2026</span>
-              </div>
-              <span class="cc-item-arrow">&rsaquo;</span>
-            </a>
-
-            <a class="cc-item" href="interviews/nir-zicherman/">
-              <img class="cc-item-thumb" src="interviews/images/nir-zicherman.jpg" alt="" width="44" height="44" />
-              <div class="cc-item-body">
-                <span class="cc-item-title">Nir Zicherman &mdash; Building the generalized learning platform</span>
-                <span class="cc-item-meta">Co-founder &amp; CEO, Oboe &middot; June 2026</span>
-              </div>
-              <span class="cc-item-arrow">&rsaquo;</span>
-            </a>
-
-            <a class="cc-item" href="interviews/stephen-haney/">
-              <img class="cc-item-thumb" src="interviews/images/stephen-haney.jpg" alt="" width="44" height="44" />
-              <div class="cc-item-body">
-                <span class="cc-item-title">Stephen Haney &mdash; Care that compounds</span>
-                <span class="cc-item-meta">Founder &amp; CEO, Paper &middot; June 2026</span>
-              </div>
-              <span class="cc-item-arrow">&rsaquo;</span>
-            </a>
-
-            <a class="cc-item" href="interviews/dylan-babbs/">
-              <img class="cc-item-thumb" src="interviews/images/dylan-babbs.jpg" alt="" width="44" height="44" />
-              <div class="cc-item-body">
-                <span class="cc-item-title">Dylan Babbs &mdash; Designing for trust in new categories</span>
-                <span class="cc-item-meta">Co-founder, Profound &middot; June 2026</span>
-              </div>
-              <span class="cc-item-arrow">&rsaquo;</span>
-            </a>
-
-          </ul>
-        </div>
-
-        <!-- Essays + Gatherings -->
-        <div>
-          <div class="cc-section">
-            <span class="cc-label">Essays</span>
-            <ul class="cc-list">
-              <a class="cc-item" href="reports/brand-and-narrative/">
-                <img class="cc-item-thumb" src="reports/thumbnails/brand-and-narrative.jpg" alt="" width="44" height="44" />
-                <div class="cc-item-body">
-                  <span class="cc-item-title">Brand &amp; narrative</span>
-                  <span class="cc-item-meta">Part II &middot; April 2026</span>
-                </div>
-                <span class="cc-item-arrow">&rsaquo;</span>
-              </a>
-              <a class="cc-item" href="reports/product-design/">
-                <img class="cc-item-thumb" src="reports/thumbnails/product-design.jpg" alt="" width="44" height="44" />
-                <div class="cc-item-body">
-                  <span class="cc-item-title">Product design</span>
-                  <span class="cc-item-meta">Part I &middot; March 2026</span>
-                </div>
-                <span class="cc-item-arrow">&rsaquo;</span>
-              </a>
-              <a class="cc-item" href="reports/welcome/">
-                <img class="cc-item-thumb" src="reports/thumbnails/welcome.jpg" alt="" width="44" height="44" />
-                <div class="cc-item-body">
-                  <span class="cc-item-title">Welcome to Creative Conviction</span>
-                  <span class="cc-item-meta">Primer &middot; February 2026</span>
-                </div>
-                <span class="cc-item-arrow">&rsaquo;</span>
-              </a>
-            </ul>
-          </div>
-
-          <div class="cc-section">
-            <span class="cc-label">Gatherings</span>
-            <ul class="cc-list">
-              <a class="cc-item" href="gatherings/#ramp-design-bvp-dinner">
-                <img class="cc-item-thumb" src="gatherings/images/ramp-design-bvp-dinner.jpg" alt="" width="44" height="44" />
-                <div class="cc-item-body">
-                  <span class="cc-item-title">Elizabeth Lin @ Ramp Design &amp; BVP Dinner</span>
-                  <span class="cc-item-meta">Flatiron, NYC &middot; May 2026</span>
-                </div>
-                <span class="cc-item-arrow">&rsaquo;</span>
-              </a>
-              <a class="cc-item" href="gatherings/#melody-bvp-dinner">
-                <img class="cc-item-thumb" src="gatherings/images/melody-bvp-dinner.jpg" alt="" width="44" height="44" />
-                <div class="cc-item-body">
-                  <span class="cc-item-title">Melody Kim &amp; BVP Dinner</span>
-                  <span class="cc-item-meta">Greenwich Village, NYC &middot; April 2026</span>
-                </div>
-                <span class="cc-item-arrow">&rsaquo;</span>
-              </a>
-              <a class="cc-item" href="gatherings/#flora-bvp-dinner">
-                <img class="cc-item-thumb" src="gatherings/images/flora-bvp-dinner.jpg" alt="" width="44" height="44" />
-                <div class="cc-item-body">
-                  <span class="cc-item-title">Weber Wong @ Flora &amp; BVP Dinner</span>
-                  <span class="cc-item-meta">Greenwich Village, NYC &middot; October 2025</span>
-                </div>
-                <span class="cc-item-arrow">&rsaquo;</span>
-              </a>
-            </ul>
-          </div>
-        </div>
-
+      <div class="section">
+        <span class="label">Gatherings</span>
+        <ul class="list">
+          <a class="row" href="gatherings/#ramp-design-bvp-dinner"><img class="thumb" src="gatherings/images/ramp-design-bvp-dinner.jpg" alt="" width="48" height="48" /><div class="body"><span class="title">Elizabeth Lin @ Ramp Design &amp; BVP Dinner</span><span class="meta">Flatiron, NYC &middot; May 2026</span></div><span class="arr">&rsaquo;</span></a>
+          <a class="row" href="gatherings/#melody-bvp-dinner"><img class="thumb" src="gatherings/images/melody-bvp-dinner.jpg" alt="" width="48" height="48" /><div class="body"><span class="title">Melody Kim &amp; BVP Dinner</span><span class="meta">Greenwich Village, NYC &middot; April 2026</span></div><span class="arr">&rsaquo;</span></a>
+          <a class="row" href="gatherings/#flora-bvp-dinner"><img class="thumb" src="gatherings/images/flora-bvp-dinner.jpg" alt="" width="48" height="48" /><div class="body"><span class="title">Weber Wong @ Flora &amp; BVP Dinner</span><span class="meta">Greenwich Village, NYC &middot; October 2025</span></div><span class="arr">&rsaquo;</span></a>
+        </ul>
       </div>
     </main>
-
-    <footer class="cc-footer">
-      <p class="cc-footer-meta">&copy; 2026 Creative Conviction</p>
-    </footer>
-
+    <footer class="footer"><p class="footer-meta">&copy; 2026 Creative Conviction</p></footer>
   </div>
 </body>
 </html>
