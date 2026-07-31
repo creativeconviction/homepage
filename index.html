@@ -260,49 +260,63 @@
     /* ----- Small screens ----- */
     @media (max-width: 640px) {
       .cc-shell { padding: 0 20px 56px; }
-      .cc-header { position: sticky; top: 0; background: var(--cc-paper); z-index: 10; padding: 16px 0; margin-bottom: 0; }
-      .cc-intro-strip { padding: 16px 0 20px; margin-bottom: 20px; }
-      .cc-intro-text { font-size: 15px; }
+      .cc-header { position: sticky; top: 0; background: var(--cc-paper); z-index: 10; padding: 14px 0 12px; margin-bottom: 0; }
+      .cc-mark { font-size: 22px; }
+      .cc-nav { gap: 18px; }
+      .cc-nav-link { font-size: 13px; }
 
+      .cc-intro-strip { padding: 12px 0 16px; margin-bottom: 24px; }
+      .cc-intro-text { font-size: 14px; line-height: 1.55; }
+
+      .cc-section-label { font-size: 10px; margin-bottom: 10px; }
+
+      /* Reset desktop grid, go full block */
       .cc-episode {
         display: block;
-        padding: 14px 0;
+        padding: 11px 0;
         margin: 0;
         border-bottom: 1px solid var(--cc-rule-soft);
         border-radius: 0;
         position: relative;
       }
       .cc-episode:hover { background: none; }
+      .cc-episode-list .cc-episode:last-child { border-bottom: 1px solid var(--cc-rule-soft); }
 
-      /* Image + title inline */
+      /* Hide thumbnails — title gets full width */
+      .cc-episode-thumb { display: none; }
+
       .cc-episode-title {
-        display: flex;
-        align-items: flex-start;
-        gap: 12px;
+        display: block;
         font-size: 16px;
         line-height: 1.35;
-        padding-right: 20px;
-        margin-bottom: 5px;
+        padding-right: 16px;
+        margin-bottom: 3px;
+        gap: 0;
       }
-      .cc-episode-thumb { width: 40px; height: 40px; flex-shrink: 0; }
+      .cc-episode-title span { display: block; }
 
-      /* Cat + date indented to align under title text (past the 40px thumb + 12px gap) */
+      /* Cat · Date on one compact line */
       .cc-episode-cat {
-        display: block;
-        margin-left: 52px;
+        display: inline;
         font-size: 12px;
-        color: var(--fg-4);
+        color: var(--fg-3);
         text-align: left;
       }
-      .cc-episode-cat::after { content: " \00B7 "; }
+      .cc-episode-cat::after { content: " \00B7 "; color: var(--fg-4); }
       .cc-episode-date {
         display: inline;
         font-size: 12px;
         color: var(--fg-4);
+        margin: 0;
+        text-align: left;
       }
 
       /* Chevron */
-      .cc-episode::after { content: "\203A"; font-size: 20px; color: var(--fg-4); position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+      .cc-episode::after { content: "\203A"; font-size: 18px; color: var(--fg-4); position: absolute; right: 0; top: 11px; }
+
+      .cc-view-all { font-size: 13px; padding-top: 12px; margin-top: 10px; }
+      .cc-col { gap: 32px; }
+      .cc-footer { margin-top: 40px; }
     }
   </style>
 </head>
