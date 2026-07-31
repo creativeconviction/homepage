@@ -263,39 +263,46 @@
       .cc-header { position: sticky; top: 0; background: var(--cc-paper); z-index: 10; padding: 16px 0; margin-bottom: 0; }
       .cc-intro-strip { padding: 16px 0 20px; margin-bottom: 20px; }
       .cc-intro-text { font-size: 15px; }
+
       .cc-episode {
         display: block;
-        padding: 12px 0;
+        padding: 14px 0;
         margin: 0;
         border-bottom: 1px solid var(--cc-rule-soft);
         border-radius: 0;
         position: relative;
       }
       .cc-episode:hover { background: none; }
+
+      /* Image + title inline */
       .cc-episode-title {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         gap: 12px;
-        font-size: 15px;
-        padding-right: 18px;
-        margin-bottom: 4px;
+        font-size: 16px;
+        line-height: 1.35;
+        padding-right: 20px;
+        margin-bottom: 5px;
       }
-      .cc-episode-thumb { width: 40px; height: 40px; }
+      .cc-episode-thumb { width: 40px; height: 40px; flex-shrink: 0; }
+
+      /* Cat + date indented to align under title text (past the 40px thumb + 12px gap) */
       .cc-episode-cat {
-        display: inline;
-        font-size: 11px;
+        display: block;
+        margin-left: 52px;
+        font-size: 12px;
         color: var(--fg-4);
         text-align: left;
       }
       .cc-episode-cat::after { content: " \00B7 "; }
       .cc-episode-date {
         display: inline;
-        font-size: 11px;
+        font-size: 12px;
         color: var(--fg-4);
-        text-align: left;
-        margin: 0;
       }
-      .cc-episode::after { content: "\203A"; font-size: 18px; color: var(--fg-4); position: absolute; right: 0; top: 14px; }
+
+      /* Chevron */
+      .cc-episode::after { content: "\203A"; font-size: 20px; color: var(--fg-4); position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
     }
   </style>
 </head>
@@ -338,6 +345,15 @@
                 <span class="cc-episode-date">Coming soon</span>
               </li>
 
+              <li class="cc-episode" onclick="window.location='interviews/quinten-farmer/'">
+                <a class="cc-episode-title" href="interviews/quinten-farmer/">
+                  <img class="cc-episode-thumb" src="interviews/images/quinten-farmer.jpg" alt="" width="44" height="44" />
+                  <span>Quinten Farmer &mdash; Why a little alien is a good friend</span>
+                </a>
+                <span class="cc-episode-cat">Co-founder &amp; CEO, Tolan</span>
+                <span class="cc-episode-date">July 2026</span>
+              </li>
+
               <li class="cc-episode" onclick="window.location='interviews/paul-jun/'">
                 <a class="cc-episode-title" href="interviews/paul-jun/">
                   <img class="cc-episode-thumb" src="interviews/images/paul-jun.jpg" alt="" width="44" height="44" />
@@ -362,15 +378,6 @@
                   <span>Nir Zicherman &mdash; Building the generalized learning platform</span>
                 </a>
                 <span class="cc-episode-cat">Co-founder &amp; CEO, Oboe</span>
-                <span class="cc-episode-date">June 2026</span>
-              </li>
-
-              <li class="cc-episode" onclick="window.location='interviews/stephen-haney/'">
-                <a class="cc-episode-title" href="interviews/stephen-haney/">
-                  <img class="cc-episode-thumb" src="interviews/images/stephen-haney.jpg" alt="" width="44" height="44" />
-                  <span>Stephen Haney &mdash; Care that compounds</span>
-                </a>
-                <span class="cc-episode-cat">Founder &amp; CEO, Paper</span>
                 <span class="cc-episode-date">June 2026</span>
               </li>
 
