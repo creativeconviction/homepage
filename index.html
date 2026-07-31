@@ -4,351 +4,473 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
-  <title>Creative Conviction — mobile concept</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+
+  <title>Creative Conviction</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400..700&display=swap" />
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
     :root {
-      --cc-magenta: #D8016A;
+      --cc-magenta:   #D8016A;
+      --cc-orange:    #FF6514;
+      --cc-blue:      #1A0AE6;
+      --cc-indigo:    #361C76;
+      --cc-paper:        #F7F5FA;
+      --cc-paper-soft:   #F2EFF7;
+      --cc-white:        #FBFAFD;
       --cc-ink:    #1A1130;
       --cc-ink-2:  #322847;
       --cc-ink-3:  #6A6378;
       --cc-ink-4:  #9C97A8;
-      --cc-paper:  #F7F5FA;
       --cc-rule:        #D2CDDB;
       --cc-rule-soft:   #E5E1ED;
+      --fg-1: var(--cc-ink);
       --fg-2: var(--cc-ink-2);
       --fg-3: var(--cc-ink-3);
       --fg-4: var(--cc-ink-4);
-      --font-serif: "EB Garamond", Georgia, serif;
-      --font-sans:  "Inter", system-ui, sans-serif;
+      --font-serif: "EB Garamond", "Iowan Old Style", Charter, Georgia, serif;
+      --font-sans:  "Inter", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
       --ease: cubic-bezier(.2,.6,.2,1);
       --dur-1: 120ms;
+      --dur-2: 220ms;
     }
 
     body {
       background: var(--cc-paper);
-      color: var(--cc-ink);
+      color: var(--fg-1);
       font-family: var(--font-sans);
-      font-size: 16px;
-      line-height: 1.5;
+      font-size: 17px;
+      line-height: 1.55;
       -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      min-height: 100vh;
     }
 
-    a { color: var(--cc-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+    a { color: var(--cc-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: text-decoration-thickness var(--dur-1) var(--ease); }
     a:hover { text-decoration-thickness: 2px; }
     em { font-family: var(--font-serif); font-style: italic; }
 
-    /* ===================== MOBILE SHELL ===================== */
+    /* ----- Shell ----- */
     .cc-shell {
-      max-width: 480px;
+      max-width: 1080px;
       margin: 0 auto;
-      padding: 0 20px 64px;
+      padding: 32px 40px 80px;
     }
 
-    /* ===================== HEADER ===================== */
+    /* ----- Header ----- */
     .cc-header {
       display: flex;
-      align-items: center;
+      align-items: baseline;
       justify-content: space-between;
-      padding: 18px 0 16px;
-      position: sticky;
-      top: 0;
-      background: var(--cc-paper);
-      z-index: 10;
+      padding-bottom: 24px;
+      margin-bottom: 0;
+      gap: 24px;
     }
     .cc-mark {
       font-family: var(--font-serif);
-      font-size: 22px;
+      font-size: clamp(28px, 3.5vw, 40px);
       font-weight: 400;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
       color: var(--cc-ink);
       text-decoration: none;
       line-height: 1;
     }
-    .cc-mark em { font-style: italic; color: var(--cc-magenta); }
-
-    /* Mobile nav: just the key actions */
-    .cc-nav { display: flex; align-items: center; gap: 18px; }
+    .cc-mark em { font-style: italic; color: var(--cc-magenta); font-family: var(--font-serif); }
+    .cc-nav { display: flex; gap: 28px; align-items: center; }
     .cc-nav-link {
-      font-size: 13px;
-      color: var(--fg-3);
-      text-decoration: none;
-    }
-    .cc-nav-link:hover { color: var(--cc-ink); }
-    .cc-nav-subscribe {
-      font-size: 13px;
-      color: var(--cc-magenta);
-      text-decoration: none;
-    }
-
-    /* ===================== INTRO ===================== */
-    .cc-intro {
-      padding: 24px 0 28px;
-      border-bottom: 1px solid var(--cc-rule-soft);
-      margin-bottom: 32px;
-    }
-    .cc-intro p {
-      font-family: var(--font-serif);
-      font-size: 19px;
-      line-height: 1.45;
-      color: var(--cc-ink);
-    }
-    .cc-intro em { color: var(--cc-magenta); }
-    .cc-intro-sub {
       font-family: var(--font-sans);
       font-size: 14px;
-      color: var(--fg-3);
-      margin-top: 10px;
-      line-height: 1.5;
+      color: var(--fg-2);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+      transition: color var(--dur-1) var(--ease), text-decoration-thickness var(--dur-1) var(--ease);
     }
-    .cc-intro-sub a { color: var(--fg-2); }
+    .cc-nav-link:hover { color: var(--cc-ink); text-decoration-thickness: 2px; }
+    .cc-nav-link--subscribe { color: var(--cc-magenta); }
+    .cc-nav-link--subscribe:hover { color: var(--cc-magenta); }
 
-    /* ===================== SECTIONS ===================== */
-    .cc-section { margin-bottom: 36px; }
+    /* ----- Intro strip ----- */
+    .cc-intro-strip {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 32px;
+      padding: 20px 0;
+      margin-bottom: 48px;
+    }
+    .cc-intro-text {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      color: var(--fg-2);
+      line-height: 1.6;
+      max-width: 560px;
+    }
+    .cc-intro-text a { color: var(--cc-ink); }
 
-    .cc-label {
-      font-size: 10px;
-      letter-spacing: 0.12em;
+    /* ----- Featured interview ----- */
+    .cc-featured-desc {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--fg-2);
+      margin-top: 4px;
+      max-width: 480px;
+    }
+    .cc-featured-read {
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--cc-ink);
+      margin-top: 4px;
+    }
+
+    /* ----- Two-column index ----- */
+    .cc-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px 56px;
+      align-items: start;
+    }
+    .cc-col {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      min-width: 0;
+    }
+
+    /* ----- Section headings ----- */
+    .cc-section-label {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--fg-4);
-      display: block;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
-
-    /* ===================== LIST ROWS ===================== */
-    .cc-list { list-style: none; }
-
-    .cc-item {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--cc-rule-soft);
-      min-height: 56px; /* touch target */
-      text-decoration: none;
+    .cc-h2 {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin: 0 0 20px;
       color: var(--cc-ink);
     }
-    .cc-list .cc-item:first-child { border-top: 1px solid var(--cc-rule); }
-    .cc-item:active { background: rgba(26,17,48,0.04); margin: 0 -20px; padding: 14px 20px; }
+    a.cc-h2 { text-decoration: none; display: inline-block; }
+    a.cc-h2:hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
 
-    .cc-item-thumb {
+    /* ----- Episodes ----- */
+    .cc-episodes { margin-bottom: 0; }
+    .cc-episode-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--cc-rule); }
+    .cc-episode {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        "title cat"
+        "title date";
+      align-items: center;
+      column-gap: 16px;
+      row-gap: 0;
+      padding: 16px 10px;
+      margin: 0 -10px;
+      border-bottom: 1px solid var(--cc-rule-soft);
+      border-radius: 6px;
+      transition: background var(--dur-1) var(--ease);
+    }
+    .cc-episode-list .cc-episode:last-child { border-bottom: 0; }
+    .cc-episode:hover { background: rgba(26, 17, 48, 0.04); }
+    .cc-episode-title {
+      grid-area: title;
+      min-width: 0;
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 1.25;
+      color: var(--cc-ink);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .cc-episode-title span { min-width: 0; overflow-wrap: break-word; }
+    .cc-episode-thumb {
       width: 44px;
       height: 44px;
       object-fit: cover;
       flex-shrink: 0;
-    }
-    .cc-item-body { flex: 1; min-width: 0; }
-    .cc-item-title {
-      font-family: var(--font-serif);
-      font-size: 17px;
-      font-weight: 400;
-      line-height: 1.3;
-      color: var(--cc-ink);
       display: block;
-      overflow-wrap: break-word;
     }
-    .cc-item-meta {
+    .cc-episode:hover .cc-episode-title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+    .cc-episode-cat {
+      grid-area: cat;
+      align-self: end;
+      font-family: var(--font-sans);
       font-size: 12px;
-      color: var(--fg-4);
-      margin-top: 3px;
+      color: var(--fg-3);
+      text-align: right;
     }
-    .cc-item-muted { opacity: 0.38; pointer-events: none; }
-
-    .cc-item-arrow {
-      font-size: 14px;
+    .cc-episode-date {
+      grid-area: date;
+      align-self: start;
+      font-family: var(--font-sans);
+      font-variant-numeric: tabular-nums;
+      font-size: 11px;
       color: var(--fg-4);
-      flex-shrink: 0;
+      text-align: right;
+      margin-top: 2px;
     }
-
     .cc-view-all {
       display: block;
+      font-family: var(--font-sans);
       font-size: 13px;
       color: var(--fg-3);
       text-decoration: none;
-      padding: 14px 0;
-      min-height: 44px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--cc-rule-soft);
     }
-    .cc-view-all:hover { color: var(--cc-ink); }
+    .cc-view-all:hover { color: var(--cc-ink); text-decoration: underline; text-underline-offset: 3px; }
 
-    /* ===================== FOOTER ===================== */
-    .cc-footer { padding: 24px 0; margin-top: 16px; }
-    .cc-footer-meta { font-size: 11px; color: var(--fg-4); letter-spacing: 0.03em; }
+    /* ----- Footer ----- */
+    .cc-footer {
+      padding: 32px 0 24px;
+      margin-top: 64px;
+    }
+    .cc-footer-meta {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
 
-    /* ===================== DESKTOP UPGRADE ===================== */
-    @media (min-width: 600px) {
-      .cc-shell { max-width: 1080px; padding: 32px 40px 80px; }
-      .cc-header { position: static; padding: 0 0 28px; margin-bottom: 32px; }
-      .cc-mark { font-size: clamp(28px, 3.5vw, 40px); }
-      .cc-nav-link { font-size: 14px; text-decoration: underline; text-underline-offset: 4px; }
-      .cc-nav-subscribe { font-size: 14px; text-decoration: underline; text-underline-offset: 4px; }
-      .cc-intro { border-bottom: none; }
-      .cc-intro p { font-size: 17px; font-family: var(--font-sans); color: var(--fg-2); }
-      .cc-intro-sub { display: none; }
-      .cc-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 48px 56px; }
-      .cc-item-arrow { display: none; }
+    /* ----- Medium screens ----- */
+    @media (max-width: 860px) {
+      .cc-columns { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    /* ----- Small screens ----- */
+    @media (max-width: 640px) {
+      .cc-shell { padding: 0 20px 56px; }
+      .cc-header { position: sticky; top: 0; background: var(--cc-paper); z-index: 10; padding: 16px 0; margin-bottom: 0; }
+      .cc-intro-strip { padding: 20px 0 24px; margin-bottom: 28px; }
+      .cc-intro-text { font-size: 16px; }
+      .cc-episode {
+        display: block;
+        padding: 14px 0;
+        margin: 0;
+        border-bottom: 1px solid var(--cc-rule-soft);
+        border-radius: 0;
+        position: relative;
+        min-height: 44px;
+      }
+      .cc-episode:hover { background: none; }
+      .cc-episode-title {
+        grid-area: unset;
+        font-size: 16px;
+        padding-right: 20px;
+        margin-bottom: 3px;
+      }
+      .cc-episode-cat {
+        grid-area: unset;
+        font-size: 11px;
+        color: var(--fg-4);
+        text-align: left;
+        align-self: auto;
+        display: inline;
+      }
+      .cc-episode-cat::after { content: " \00B7  "; }
+      .cc-episode-date {
+        grid-area: unset;
+        font-size: 11px;
+        color: var(--fg-4);
+        text-align: left;
+        margin: 0;
+        display: inline;
+      }
+      .cc-episode::after { content: "\203A"; font-size: 20px; color: var(--fg-4); position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
     }
   </style>
 </head>
+
 <body>
   <div class="cc-shell">
 
-    <!-- Sticky mobile header: logo + minimal nav -->
     <header class="cc-header">
       <a class="cc-mark" href="./">Creative <em>Conviction</em></a>
       <nav class="cc-nav">
         <a class="cc-nav-link" href="./about.html">About</a>
-        <a class="cc-nav-subscribe" href="https://creativeconvictionpress.substack.com/" target="_blank" rel="noopener">Subscribe</a>
+        <a class="cc-nav-link" href="./hiring-lists/">Hiring lists</a>
+        <a class="cc-nav-link cc-nav-link--subscribe" href="https://creativeconvictionpress.substack.com/" target="_blank" rel="noopener">Subscribe</a>
       </nav>
     </header>
 
-    <!-- Intro: serif tagline on mobile, body text on desktop -->
-    <div class="cc-intro">
-      <p>A platform sparking conversations around creativity, capital, and AI.</p>
-      <p class="cc-intro-sub"><a href="./about.html">Libbie</a> and <a href="./about.html">Rayouf</a> interview the founders, designers, and operators building the most creative companies in technology.</p>
+    <!-- Intro strip: human context + CTA in one breath -->
+    <div class="cc-intro-strip">
+      <p class="cc-intro-text">
+        A platform sparking conversations around creativity, capital, and AI. <a href="./about.html">Libbie</a> and <a href="./about.html">Rayouf</a> interview the founders, designers, and operators building the most creative companies in technology — and share what they're learning.
+      </p>
     </div>
 
     <main>
+
       <div class="cc-columns">
 
-        <!-- Interviews -->
-        <div class="cc-section">
-          <span class="cc-label">Interviews</span>
-          <ul class="cc-list">
+        <!-- Left column: Interviews (capped at 5, view all link) -->
+        <div class="cc-col">
+          <section class="cc-episodes">
+            <p class="cc-section-label">Interviews</p>
+            <ul class="cc-episode-list">
 
-            <li class="cc-item cc-item-muted">
-              <img class="cc-item-thumb" src="interviews/images/diego-segura.jpg" alt="" width="44" height="44" />
-              <div class="cc-item-body">
-                <span class="cc-item-title">Diego Segura &mdash; Language before layout</span>
-                <span class="cc-item-meta">Coming soon</span>
-              </div>
-            </li>
+              <li class="cc-episode" style="opacity: 0.4; pointer-events: none;">
+                <span class="cc-episode-title">
+                  <img class="cc-episode-thumb" src="interviews/images/diego-segura.jpg" alt="" width="44" height="44" />
+                  <span>Diego Segura &mdash; Language before layout</span>
+                </span>
+                <span class="cc-episode-cat">Founder &amp; CEO, Family Office</span>
+                <span class="cc-episode-date">Coming soon</span>
+              </li>
 
-            <a class="cc-item" href="interviews/quinten-farmer/">
-              <img class="cc-item-thumb" src="interviews/images/quinten-farmer.jpg" alt="" width="44" height="44" />
-              <div class="cc-item-body">
-                <span class="cc-item-title">Quinten Farmer &mdash; Why a little alien is a good friend</span>
-                <span class="cc-item-meta">Co-founder &amp; CEO, Tolan &middot; July 2026</span>
-              </div>
-              <span class="cc-item-arrow">&rsaquo;</span>
-            </a>
+              <li class="cc-episode" onclick="window.location='interviews/paul-jun/'">
+                <a class="cc-episode-title" href="interviews/paul-jun/">
+                  <img class="cc-episode-thumb" src="interviews/images/paul-jun.jpg" alt="" width="44" height="44" />
+                  <span>Paul Jun &mdash; Form follows fantasy</span>
+                </a>
+                <span class="cc-episode-cat">Creative Director, Brand</span>
+                <span class="cc-episode-date">July 2026</span>
+              </li>
 
-            <a class="cc-item" href="interviews/paul-jun/">
-              <img class="cc-item-thumb" src="interviews/images/paul-jun.jpg" alt="" width="44" height="44" />
-              <div class="cc-item-body">
-                <span class="cc-item-title">Paul Jun &mdash; Form follows fantasy</span>
-                <span class="cc-item-meta">Creative Director, Brand &middot; July 2026</span>
-              </div>
-              <span class="cc-item-arrow">&rsaquo;</span>
-            </a>
+              <li class="cc-episode" onclick="window.location='interviews/ben-and-zubin-raindrop/'">
+                <a class="cc-episode-title" href="interviews/ben-and-zubin-raindrop/">
+                  <img class="cc-episode-thumb" src="interviews/images/ben-hylak.jpg" alt="" width="44" height="44" />
+                  <span>Ben Hylak and Zubin Koticha &mdash; Tsunami of capabilities</span>
+                </a>
+                <span class="cc-episode-cat">Co-founders, Raindrop</span>
+                <span class="cc-episode-date">June 2026</span>
+              </li>
 
-            <a class="cc-item" href="interviews/ben-and-zubin-raindrop/">
-              <img class="cc-item-thumb" src="interviews/images/ben-hylak.jpg" alt="" width="44" height="44" />
-              <div class="cc-item-body">
-                <span class="cc-item-title">Ben Hylak and Zubin Koticha &mdash; Tsunami of capabilities</span>
-                <span class="cc-item-meta">Co-founders, Raindrop &middot; June 2026</span>
-              </div>
-              <span class="cc-item-arrow">&rsaquo;</span>
-            </a>
+              <li class="cc-episode" onclick="window.location='interviews/nir-zicherman/'">
+                <a class="cc-episode-title" href="interviews/nir-zicherman/">
+                  <img class="cc-episode-thumb" src="interviews/images/nir-zicherman.jpg" alt="" width="44" height="44" />
+                  <span>Nir Zicherman &mdash; Building the generalized learning platform</span>
+                </a>
+                <span class="cc-episode-cat">Co-founder &amp; CEO, Oboe</span>
+                <span class="cc-episode-date">June 2026</span>
+              </li>
 
-            <a class="cc-item" href="interviews/nir-zicherman/">
-              <img class="cc-item-thumb" src="interviews/images/nir-zicherman.jpg" alt="" width="44" height="44" />
-              <div class="cc-item-body">
-                <span class="cc-item-title">Nir Zicherman &mdash; Building the generalized learning platform</span>
-                <span class="cc-item-meta">Co-founder &amp; CEO, Oboe &middot; June 2026</span>
-              </div>
-              <span class="cc-item-arrow">&rsaquo;</span>
-            </a>
+              <li class="cc-episode" onclick="window.location='interviews/stephen-haney/'">
+                <a class="cc-episode-title" href="interviews/stephen-haney/">
+                  <img class="cc-episode-thumb" src="interviews/images/stephen-haney.jpg" alt="" width="44" height="44" />
+                  <span>Stephen Haney &mdash; Care that compounds</span>
+                </a>
+                <span class="cc-episode-cat">Founder &amp; CEO, Paper</span>
+                <span class="cc-episode-date">June 2026</span>
+              </li>
 
-            <a class="cc-item" href="interviews/stephen-haney/">
-              <img class="cc-item-thumb" src="interviews/images/stephen-haney.jpg" alt="" width="44" height="44" />
-              <div class="cc-item-body">
-                <span class="cc-item-title">Stephen Haney &mdash; Care that compounds</span>
-                <span class="cc-item-meta">Founder &amp; CEO, Paper &middot; June 2026</span>
-              </div>
-              <span class="cc-item-arrow">&rsaquo;</span>
-            </a>
-
-            <a class="cc-item" href="interviews/dylan-babbs/">
-              <img class="cc-item-thumb" src="interviews/images/dylan-babbs.jpg" alt="" width="44" height="44" />
-              <div class="cc-item-body">
-                <span class="cc-item-title">Dylan Babbs &mdash; Designing for trust in new categories</span>
-                <span class="cc-item-meta">Co-founder, Profound &middot; June 2026</span>
-              </div>
-              <span class="cc-item-arrow">&rsaquo;</span>
-            </a>
-
-          </ul>
+            </ul>
+            <a class="cc-view-all" href="interviews/">View all interviews &rarr;</a>
+          </section>
         </div>
 
-        <!-- Essays + Gatherings -->
-        <div>
-          <div class="cc-section">
-            <span class="cc-label">Essays</span>
-            <ul class="cc-list">
-              <a class="cc-item" href="reports/brand-and-narrative/">
-                <img class="cc-item-thumb" src="reports/thumbnails/brand-and-narrative.jpg" alt="" width="44" height="44" />
-                <div class="cc-item-body">
-                  <span class="cc-item-title">Brand &amp; narrative</span>
-                  <span class="cc-item-meta">Part II &middot; April 2026</span>
-                </div>
-                <span class="cc-item-arrow">&rsaquo;</span>
-              </a>
-              <a class="cc-item" href="reports/product-design/">
-                <img class="cc-item-thumb" src="reports/thumbnails/product-design.jpg" alt="" width="44" height="44" />
-                <div class="cc-item-body">
-                  <span class="cc-item-title">Product design</span>
-                  <span class="cc-item-meta">Part I &middot; March 2026</span>
-                </div>
-                <span class="cc-item-arrow">&rsaquo;</span>
-              </a>
-              <a class="cc-item" href="reports/welcome/">
-                <img class="cc-item-thumb" src="reports/thumbnails/welcome.jpg" alt="" width="44" height="44" />
-                <div class="cc-item-body">
-                  <span class="cc-item-title">Welcome to Creative Conviction</span>
-                  <span class="cc-item-meta">Primer &middot; February 2026</span>
-                </div>
-                <span class="cc-item-arrow">&rsaquo;</span>
-              </a>
-            </ul>
-          </div>
+        <!-- Right column: Essays + Gatherings -->
+        <div class="cc-col">
+          <section class="cc-episodes">
+            <p class="cc-section-label">Essays</p>
+            <ul class="cc-episode-list">
 
-          <div class="cc-section">
-            <span class="cc-label">Gatherings</span>
-            <ul class="cc-list">
-              <a class="cc-item" href="gatherings/#ramp-design-bvp-dinner">
-                <img class="cc-item-thumb" src="gatherings/images/ramp-design-bvp-dinner.jpg" alt="" width="44" height="44" />
-                <div class="cc-item-body">
-                  <span class="cc-item-title">Elizabeth Lin @ Ramp Design &amp; BVP Dinner</span>
-                  <span class="cc-item-meta">Flatiron, NYC &middot; May 2026</span>
-                </div>
-                <span class="cc-item-arrow">&rsaquo;</span>
-              </a>
-              <a class="cc-item" href="gatherings/#melody-bvp-dinner">
-                <img class="cc-item-thumb" src="gatherings/images/melody-bvp-dinner.jpg" alt="" width="44" height="44" />
-                <div class="cc-item-body">
-                  <span class="cc-item-title">Melody Kim &amp; BVP Dinner</span>
-                  <span class="cc-item-meta">Greenwich Village, NYC &middot; April 2026</span>
-                </div>
-                <span class="cc-item-arrow">&rsaquo;</span>
-              </a>
-              <a class="cc-item" href="gatherings/#flora-bvp-dinner">
-                <img class="cc-item-thumb" src="gatherings/images/flora-bvp-dinner.jpg" alt="" width="44" height="44" />
-                <div class="cc-item-body">
-                  <span class="cc-item-title">Weber Wong @ Flora &amp; BVP Dinner</span>
-                  <span class="cc-item-meta">Greenwich Village, NYC &middot; October 2025</span>
-                </div>
-                <span class="cc-item-arrow">&rsaquo;</span>
-              </a>
+              <li class="cc-episode" onclick="window.location='reports/brand-and-narrative/'">
+                <a class="cc-episode-title" href="reports/brand-and-narrative/">
+                  <img class="cc-episode-thumb" src="reports/thumbnails/brand-and-narrative.jpg" alt="" width="44" height="44" />
+                  <span>Brand &amp; narrative</span>
+                </a>
+                <span class="cc-episode-cat">Part II</span>
+                <span class="cc-episode-date">April 2026</span>
+              </li>
+
+              <li class="cc-episode" onclick="window.location='reports/product-design/'">
+                <a class="cc-episode-title" href="reports/product-design/">
+                  <img class="cc-episode-thumb" src="reports/thumbnails/product-design.jpg" alt="" width="44" height="44" />
+                  <span>Product design</span>
+                </a>
+                <span class="cc-episode-cat">Part I</span>
+                <span class="cc-episode-date">March 2026</span>
+              </li>
+
+              <li class="cc-episode" onclick="window.location='reports/welcome/'">
+                <a class="cc-episode-title" href="reports/welcome/">
+                  <img class="cc-episode-thumb" src="reports/thumbnails/welcome.jpg" alt="" width="44" height="44" />
+                  <span>Welcome to Creative Conviction</span>
+                </a>
+                <span class="cc-episode-cat">Primer</span>
+                <span class="cc-episode-date">February 2026</span>
+              </li>
+
             </ul>
-          </div>
+          </section>
+
+          <section class="cc-episodes">
+            <p class="cc-section-label">Gatherings</p>
+            <ul class="cc-episode-list">
+
+              <li class="cc-episode" onclick="window.location='gatherings/#ramp-design-bvp-dinner'">
+                <a class="cc-episode-title" href="gatherings/#ramp-design-bvp-dinner">
+                  <img class="cc-episode-thumb" src="gatherings/images/ramp-design-bvp-dinner.jpg" alt="" width="44" height="44" />
+                  <span>Elizabeth Lin @ Ramp Design &amp; BVP Dinner</span>
+                </a>
+                <span class="cc-episode-cat">Flatiron, NYC</span>
+                <span class="cc-episode-date">May 2026</span>
+              </li>
+
+              <li class="cc-episode" onclick="window.location='gatherings/#melody-bvp-dinner'">
+                <a class="cc-episode-title" href="gatherings/#melody-bvp-dinner">
+                  <img class="cc-episode-thumb" src="gatherings/images/melody-bvp-dinner.jpg" alt="" width="44" height="44" />
+                  <span>Melody Kim &amp; BVP Dinner</span>
+                </a>
+                <span class="cc-episode-cat">Greenwich Village, NYC</span>
+                <span class="cc-episode-date">April 2026</span>
+              </li>
+
+              <li class="cc-episode" onclick="window.location='gatherings/#flora-bvp-dinner'">
+                <a class="cc-episode-title" href="gatherings/#flora-bvp-dinner">
+                  <img class="cc-episode-thumb" src="gatherings/images/flora-bvp-dinner.jpg" alt="" width="44" height="44" />
+                  <span>Weber Wong @ Flora &amp; BVP Dinner</span>
+                </a>
+                <span class="cc-episode-cat">Greenwich Village, NYC</span>
+                <span class="cc-episode-date">October 2025</span>
+              </li>
+
+              <li class="cc-episode" onclick="window.location='gatherings/#flora-bvp-demo-night'">
+                <a class="cc-episode-title" href="gatherings/#flora-bvp-demo-night">
+                  <img class="cc-episode-thumb" src="gatherings/images/flora-bvp-demo-night.jpg" alt="" width="44" height="44" />
+                  <span>Flora &amp; BVP Demo Night</span>
+                </a>
+                <span class="cc-episode-cat">Williamsburg, NYC</span>
+                <span class="cc-episode-date">July 2025</span>
+              </li>
+
+              <li class="cc-episode" onclick="window.location='gatherings/#arts-crafts-bauhaus-bvp'">
+                <a class="cc-episode-title" href="gatherings/#arts-crafts-bauhaus-bvp">
+                  <img class="cc-episode-thumb" src="gatherings/images/arts-crafts-bauhaus-bvp.jpg" alt="" width="44" height="44" />
+                  <span>Ally Bell @ Baukunst &amp; BVP Art &amp; Crafts</span>
+                </a>
+                <span class="cc-episode-cat">Flatiron, NYC</span>
+                <span class="cc-episode-date">May 2025</span>
+              </li>
+
+            </ul>
+          </section>
         </div>
 
       </div>
+
     </main>
 
     <footer class="cc-footer">
