@@ -261,42 +261,41 @@
     @media (max-width: 640px) {
       .cc-shell { padding: 0 20px 56px; }
       .cc-header { position: sticky; top: 0; background: var(--cc-paper); z-index: 10; padding: 16px 0; margin-bottom: 0; }
-      .cc-intro-strip { padding: 20px 0 24px; margin-bottom: 28px; }
-      .cc-intro-text { font-size: 16px; }
+      .cc-intro-strip { padding: 16px 0 20px; margin-bottom: 20px; }
+      .cc-intro-text { font-size: 15px; }
       .cc-episode {
         display: block;
-        padding: 14px 0;
+        padding: 12px 0;
         margin: 0;
         border-bottom: 1px solid var(--cc-rule-soft);
         border-radius: 0;
         position: relative;
-        min-height: 44px;
       }
       .cc-episode:hover { background: none; }
       .cc-episode-title {
-        grid-area: unset;
-        font-size: 16px;
-        padding-right: 20px;
-        margin-bottom: 3px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 15px;
+        padding-right: 18px;
+        margin-bottom: 4px;
       }
+      .cc-episode-thumb { width: 40px; height: 40px; }
       .cc-episode-cat {
-        grid-area: unset;
+        display: inline;
         font-size: 11px;
         color: var(--fg-4);
         text-align: left;
-        align-self: auto;
-        display: inline;
       }
-      .cc-episode-cat::after { content: " \00B7  "; }
+      .cc-episode-cat::after { content: " \00B7 "; }
       .cc-episode-date {
-        grid-area: unset;
+        display: inline;
         font-size: 11px;
         color: var(--fg-4);
         text-align: left;
         margin: 0;
-        display: inline;
       }
-      .cc-episode::after { content: "\203A"; font-size: 20px; color: var(--fg-4); position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+      .cc-episode::after { content: "\203A"; font-size: 18px; color: var(--fg-4); position: absolute; right: 0; top: 14px; }
     }
   </style>
 </head>
