@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="en">
+<head>
+ <meta charset="utf-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+ <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+ <link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png" />
+ <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png" />
+
+ <title>Colin Daymond Hanna — Creative Conviction</title>
+ <meta name="cc-person" content="Colin Daymond Hanna">
+ <meta name="cc-role" content="Co-founder, Earendil">
+ <meta name="description" content="Creating light in the darkness. An interview with Colin Daymond Hanna, co-founder of Earendil." />
+
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400..700&display=swap" />
+
+ <style>
+ *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ html { scroll-behavior: smooth; }
+
+ :root {
+ --cc-magenta: #D8016A;
+ --cc-orange: #FF6514;
+ --cc-blue: #1A0AE6;
+ --cc-indigo: #361C76;
+ --cc-magenta-tint: #FBE0EC;
+
+ --cc-paper: #F7F5FA;
+ --cc-paper-soft: #F2EFF7;
+ --cc-white: #FBFAFD;
+
+ --cc-ink: #1A1130;
+ --cc-ink-2: #322847;
+ --cc-ink-3: #6A6378;
+ --cc-ink-4: #9C97A8;
+ --cc-rule: #D2CDDB;
+ --cc-rule-soft: #E5E1ED;
+
+ --fg-1: var(--cc-ink);
+ --fg-2: var(--cc-ink-2);
+ --fg-3: var(--cc-ink-3);
+
+ --font-serif: "EB Garamond", "Iowan Old Style", Charter, Georgia, serif;
+ --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+ --ease: cubic-bezier(.2,.6,.2,1);
+ --dur-1: 120ms;
+ --dur-2: 220ms;
+
+ --sidebar-w: 220px;
+ }
+
+ body {
+ background: var(--cc-paper);
+ color: var(--fg-1);
+ font-family: var(--font-sans);
+ font-size: 17px;
+ line-height: 1.55;
+ -webkit-font-smoothing: antialiased;
+ text-rendering: optimizeLegibility;
+ min-height: 100vh;
+ }
+
+ a { color: var(--cc-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: text-decoration-thickness var(--dur-1) var(--ease); }
+ a:hover { text-decoration-thickness: 2px; }
+ em { font-family: var(--font-serif); font-style: italic; }
+
+ /* ----- Shell + header (matches homepage) ----- */
+ .cc-shell {
+ max-width: 1180px;
+ margin: 0 auto;
+ padding: 32px 40px 80px;
+ }
+ .cc-header {
+ display: flex;
+ align-items: baseline;
+ justify-content: space-between;
+ padding-bottom: 22px;
+ margin-bottom: 64px;
+ }
+ .cc-mark {
+ font-family: var(--font-serif);
+ font-size: 24px;
+ font-weight: 400;
+ letter-spacing: -0.01em;
+ color: var(--cc-ink);
+ text-decoration: none;
+ line-height: 1;
+ }
+ .cc-mark em { font-style: italic; color: var(--cc-magenta); font-family: var(--font-serif); }
+ .cc-nav { display: flex; gap: 28px; }
+ .cc-nav-link {
+ font-family: var(--font-sans);
+ font-size: 14px;
+ color: var(--fg-2);
+ text-decoration: underline;
+ text-underline-offset: 4px;
+ text-decoration-thickness: 1px;
+ transition: color var(--dur-1) var(--ease), text-decoration-thickness var(--dur-1) var(--ease);
+ }
+ .cc-nav-link:hover { color: var(--cc-ink); text-decoration-thickness: 2px; }
+
+ /* ----- Article layout (sidebar + main) ----- */
+ .cc-article-layout {
+ display: grid;
+ grid-template-columns: 1fr;
+ gap: 0;
+ align-items: start;
+ }
+ @media (min-width: 1060px) {
+ .cc-article-layout {
+ grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+ gap: 56px;
+ }
+ }
+
+ /* ----- Sidebar ----- */
+ .cc-sidebar { display: none; }
+ @media (min-width: 1060px) {
+ .cc-sidebar {
+ display: block;
+ position: sticky;
+ top: 40px;
+ align-self: start;
+ opacity: 0;
+ transform: translateX(-8px);
+ transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+ }
+ }
+ .cc-sidebar.is-visible { opacity: 1; transform: translateX(0); }
+
+ .cc-sidebar-eyebrow {
+ font-family: var(--font-sans);
+ font-size: 12px;
+ font-weight: 500;
+ letter-spacing: 0.02em;
+ color: var(--fg-3);
+ margin-bottom: 18px;
+ }
+
+ .cc-sidebar-nav { display: flex; align-items: flex-start; gap: 14px; }
+ .cc-sidebar-track {
+ position: relative;
+ width: 1px;
+ flex-shrink: 0;
+ align-self: stretch;
+ background: var(--cc-rule-soft);
+ }
+ .cc-sidebar-track-indicator {
+ position: absolute;
+ width: 100%;
+ background: var(--cc-ink);
+ height: 14px; top: 0;
+ transition: top 0.22s var(--ease), height 0.12s var(--ease);
+ }
+
+ .cc-sidebar-links { display: flex; flex-direction: column; gap: 4px; }
+ .cc-sidebar-link {
+ background: none; border: none; cursor: pointer; padding: 2px 0;
+ font-family: var(--font-sans);
+ font-size: 13px;
+ line-height: 1.4;
+ color: var(--fg-3);
+ text-align: left;
+ transition: color var(--dur-1) var(--ease);
+ }
+ .cc-sidebar-link:hover { color: var(--cc-ink); }
+ .cc-sidebar-link.is-active { color: var(--cc-ink); font-weight: 500; }
+
+ .cc-sidebar-group {
+ font-family: var(--font-serif);
+ font-style: italic;
+ font-size: 13px;
+ color: var(--cc-ink-4);
+ margin: 14px 0 2px;
+ }
+ .cc-sidebar-links .cc-sidebar-group:first-child { margin-top: 0; }
+
+ /* ----- Section headings ----- */
+ .cc-section-head { margin-top: 24px; }
+ .cc-section-kicker {
+ font-family: var(--font-serif);
+ font-style: italic;
+ font-size: 15px;
+ color: var(--fg-3);
+ margin-bottom: 6px;
+ }
+ .cc-section-title {
+ font-family: var(--font-serif);
+ font-size: 26px;
+ font-weight: 400;
+ line-height: 1.2;
+ letter-spacing: -0.01em;
+ color: var(--cc-ink);
+ }
+
+ /* ----- Article main ----- */
+ .cc-article { max-width: 640px; margin: 0 auto; }
+ @media (min-width: 1060px) { .cc-article { margin: 0; } }
+
+ .cc-article-header { margin-bottom: 40px; }
+ .cc-article-thumb {
+ display: block;
+ width: 168px;
+ height: 168px;
+ object-fit: cover;
+ margin: 0 0 28px;
+ }
+ .cc-article-eyebrow {
+ font-family: var(--font-serif);
+ font-style: italic;
+ font-size: 15px;
+ color: var(--fg-3);
+ margin-bottom: 14px;
+ }
+ .cc-article-title {
+ font-family: var(--font-serif);
+ font-size: clamp(34px, 4.4vw, 48px);
+ font-weight: 400;
+ line-height: 1.08;
+ letter-spacing: -0.02em;
+ color: var(--cc-ink);
+ margin: 0 0 18px;
+ }
+ .cc-article-title em { font-style: italic; }
+ .cc-article-subtitle {
+ font-family: var(--font-serif);
+ font-style: italic;
+ font-size: 19px;
+ color: var(--fg-2);
+ margin: 0 0 10px;
+ }
+ .cc-article-date {
+ font-family: var(--font-sans);
+ font-size: 13px;
+ color: var(--fg-3);
+ letter-spacing: 0.02em;
+ }
+
+ .cc-article-dek {
+ font-family: var(--font-sans);
+ font-size: 17px;
+ line-height: 1.65;
+ color: var(--fg-2);
+ margin: 32px 0 56px;
+ }
+ .cc-article-dek p { margin-bottom: 16px; }
+ .cc-article-dek p:last-child { margin-bottom: 0; }
+ .cc-article-dek a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+ .scroll-anchor { scroll-margin-top: 48px; }
+
+ /* ----- Q&A ----- */
+ .cc-qa-list { display: flex; flex-direction: column; gap: 28px; margin-bottom: 80px; }
+ .cc-qa { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: start; }
+ .cc-speaker {
+ font-family: var(--font-sans);
+ font-size: 12px;
+ font-weight: 600;
+ letter-spacing: 0.02em;
+ padding-top: 6px;
+ line-height: 1.3;
+ }
+ .cc-speaker.is-interviewer { color: var(--fg-3); }
+ .cc-speaker.is-guest { color: var(--cc-ink); }
+
+ .cc-qa-body {
+ font-family: var(--font-sans);
+ font-size: 17px;
+ line-height: 1.6;
+ color: var(--fg-2);
+ }
+ .cc-qa-body p { margin-bottom: 14px; }
+ .cc-qa-body p:last-child { margin-bottom: 0; }
+ .cc-qa-body em { font-family: var(--font-serif); font-style: italic; }
+ .cc-qa-body.is-question { color: var(--cc-ink); font-weight: 500; }
+ .cc-qa-body.is-response { font-weight: 400; }
+ .cc-qa-body a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+ /* ----- Pull-quote highlight (indigo at rest, magenta on hover) ----- */
+ .cc-highlight {
+ background: rgba(54, 28, 118, 0.10);
+ color: var(--cc-ink);
+ padding: 1px 4px;
+ transition: background var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+ cursor: default;
+ }
+ .cc-highlight:hover { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
+
+ /* ----- Inline article images ----- */
+ .cc-img { display: block; max-width: 100%; margin: 20px 0 8px; }
+ .cc-img-caption {
+ font-family: var(--font-serif);
+ font-size: 18px;
+ color: var(--cc-magenta);
+ text-align: center;
+ margin: 10px 0 16px;
+ }
+ .cc-video {
+ display: block;
+ width: 100%;
+ max-width: 420px;
+ margin: 20px auto 8px;
+ cursor: pointer;
+ }
+ .cc-img.is-full { width: 100%; }
+ .cc-img.is-centered { margin-left: auto; margin-right: auto; }
+ .cc-img-row { display: flex; justify-content: space-between; align-items: flex-start; margin: 20px 0 8px; }
+ .cc-img-row img { display: block; height: 240px; width: auto; }
+ .cc-img-stack { display: flex; flex-direction: column; gap: 14px; margin: 20px 0 8px; }
+ .cc-img-stack img { display: block; width: 100%; height: auto; }
+
+ /* ----- Rapid fire ----- */
+ .cc-hot-takes { padding-top: 32px; }
+ .cc-hot-takes-title {
+ font-family: var(--font-serif);
+ font-size: 28px;
+ font-weight: 400;
+ line-height: 1.2;
+ letter-spacing: -0.01em;
+ color: var(--cc-ink);
+ margin: 0 0 32px;
+ }
+ .cc-hot-takes-list { display: flex; flex-direction: column; gap: 32px; }
+ .cc-hot-take { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: start; }
+ .cc-hot-take-num {
+ font-family: var(--font-serif);
+ font-style: italic;
+ font-size: 17px;
+ color: var(--fg-3);
+ padding-top: 4px;
+ }
+ .cc-hot-take-q {
+ font-family: var(--font-sans);
+ font-size: 17px;
+ font-weight: 500;
+ color: var(--cc-ink);
+ line-height: 1.45;
+ margin-bottom: 10px;
+ }
+ .cc-hot-take-a {
+ font-family: var(--font-sans);
+ font-size: 17px;
+ line-height: 1.6;
+ color: var(--fg-2);
+ }
+ .cc-hot-take-a p { margin-bottom: 12px; }
+ .cc-hot-take-a p:last-child { margin-bottom: 0; }
+
+ /* ----- Footer ----- */
+ .cc-footer { padding: 48px 0 32px; margin-top: 96px; }
+ .cc-footer-meta {
+ font-family: var(--font-sans);
+ font-size: 12px;
+ color: var(--fg-3);
+ letter-spacing: 0.02em;
+ }
+
+ @media (max-width: 640px) {
+ .cc-shell { padding: 24px 24px 64px; }
+ .cc-header { margin-bottom: 48px; }
+ .cc-article-header { margin-bottom: 40px; }
+ .cc-article-dek { margin: 24px 0 40px; }
+ .cc-qa { grid-template-columns: 1fr; gap: 6px; }
+ .cc-speaker { padding-top: 0; }
+ .cc-hot-take { grid-template-columns: 1fr; gap: 6px; }
+ .cc-hot-take-num { padding-top: 0; }
+ .cc-img-row img { height: 160px; }
+ }
+ </style>
+</head>
+
+<body>
+ <div class="cc-shell">
+
+ <header class="cc-header">
+ <a class="cc-mark" href="../../">Creative <em>Conviction</em></a>
+ <nav class="cc-nav">
+ <a class="cc-nav-link" href="../../about.html">About</a>
+ </nav>
+ </header>
+
+ <div class="cc-article-layout">
+
+ <aside class="cc-sidebar" id="cc-sidebar">
+ <div class="cc-sidebar-eyebrow">Contents</div>
+ <div class="cc-sidebar-nav">
+ <div class="cc-sidebar-track">
+ <div class="cc-sidebar-track-indicator" id="cc-track-indicator"></div>
+ </div>
+ <div class="cc-sidebar-links" id="cc-sidebar-links">
+ <p class="cc-sidebar-group">Background</p>
+ <button class="cc-sidebar-link is-active" data-target="child-of-the-earth">A child of the earth</button>
+ <button class="cc-sidebar-link" data-target="why-black-and-white">Why black and white</button>
+ <button class="cc-sidebar-link" data-target="soundcloud-in-cairo">SoundCloud in Cairo</button>
+ <p class="cc-sidebar-group">Beliefs</p>
+ <button class="cc-sidebar-link" data-target="earendil-as-a-vessel">Earendil as a vessel</button>
+ <button class="cc-sidebar-link" data-target="tenants-of-hope">Tenants of hope</button>
+ <p class="cc-sidebar-group">Building</p>
+ <button class="cc-sidebar-link" data-target="the-harness-explained">The harness explained</button>
+ <button class="cc-sidebar-link" data-target="waves-logos-details">Waves, logos, and tiny details</button>
+ <button class="cc-sidebar-link" data-target="no-llm-writing">No LLM writing</button>
+ <button class="cc-sidebar-link" data-target="voice-and-the-machine">Voice and the machine in the room</button>
+ <button class="cc-sidebar-link" data-target="rapid-fire">Rapid fire</button>
+ </div>
+ </div>
+ </aside>
+
+ <main class="cc-article">
+
+ <div class="cc-article-header">
+ <img class="cc-article-thumb" src="../images/colin-daymond-hanna.jpg" alt="" width="168" height="168" />
+ <p class="cc-article-eyebrow">An interview with Colin Daymond Hanna</p>
+ <h1 class="cc-article-title">Creating light in the darkness</h1>
+ <p class="cc-article-subtitle">Co-founder, Earendil</p>
+ <p class="cc-article-date">August 2026</p>
+ </div>
+
+ <div class="cc-article-dek">
+ <p><a href="https://colin.day/" target="_blank" rel="noopener">Colin Daymond Hanna</a> climbed a mountainside in the Vienna alps to take this interview (thank you Starlink - unsponsored). It felt right - Colin describes himself as a child of the earth, where the through line of his life runs from Jakarta to Hong Kong to California, from B&amp;W film photography to open water swimming, and now to <a href="https://earendil.com/" target="_blank" rel="noopener">Earendil</a>, the public benefit corporation he co-founded with <a href="https://lucumr.pocoo.org/about/" target="_blank" rel="noopener">Armin Ronacher</a>, makers of <a href="https://pi.dev/" target="_blank" rel="noopener">Pi</a> and <a href="https://lefos.com/" target="_blank" rel="noopener">Lefos</a>.</p>
+ <p>This conversation is a behind the scenes look at how a creative philosophy gets formed and lives upstream of product and brand. We started with the years that shaped how Colin sees&hellip; a mom who drew architectural plans by hand, a camcorder in 1990s Chinese villages, black and white photography, hugs on the streets in Cairo. Each experience taught him something he believes&hellip; which he and Armin committed to paper before building anything. And now every company decision traces back to them - in the products (a minimalist harness you own, transparent and open, multi-party), the hires (kindness, family first, english majors), the brand (hand drawn logo, waves coded from personal photography, literary references with meaning). All of it in service of the founding ethos - light in the darkness.</p>
+ </div>
+
+ <div id="child-of-the-earth" class="scroll-anchor"></div>
+
+ <div class="cc-qa-list">
+
+ <div class="cc-section-head">
+ <p class="cc-section-kicker">Background</p>
+ <h2 class="cc-section-title">A child of the earth</h2>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-interviewer">LF + RA</span>
+ <div class="cc-qa-body is-question">
+ <p>Tell us who you are and your story into the early days of founding Earendil.</p>
+ </div>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-guest">Colin</span>
+ <div class="cc-qa-body is-response">
+ <p>It starts with my mom and my dad. My mom was an architect at MIT in the 1970s, when very few women were studying architecture there, when people still did all the plans and drawings by hand, so I always had this artistic streak that was technically grounded from that time. My father is an economist. He worked at the World Bank.</p>
+ <p>I&rsquo;ve been lucky enough to really feel like a child of the earth. I don&rsquo;t mean that lightly. My first memories are from Jakarta, Indonesia, where I grew up the first five or six years of my life. I spent a lot of my boyhood in Hong Kong. But I&rsquo;m a rooted Californian. My parents&rsquo; extended families on both sides were all in the Bay Area, so we were always home for holidays and summers, and we moved back when I was in high school.</p>
+ <p>I&rsquo;ve always been interested in how you can let yourself be a filter in a medium. I used to travel to China a lot in the 90s, and there&rsquo;s camcorder footage of me as a nine-year-old kid going around interviewing people in Chinese villages. There&rsquo;s even one where someone has a desktop computer and they were selling insurance, in 1997. You, as the receiver of the information, act as a filter for the information, but the information itself is not being generated by you. There&rsquo;s nothing artificial about it. I felt that pull because I&rsquo;ve been exposed to so much, and I find so much of it really beautiful. <span class="cc-highlight">I find humanity really beautiful, our planet really beautiful.</span> And I feel this intense desire to try to share that.</p>
+ <p>Maybe the other dimension that&rsquo;s important about me is I feel at home in the water. I was a swimmer from a very young age, and I&rsquo;m a surfer, swimmer, and diver now. I&rsquo;m teaching my sons to swim. My goal is that next summer I&rsquo;ll go to the masters world championship with my dad and compete there together.</p>
+ </div>
+ </div>
+
+ <div id="why-black-and-white" class="scroll-anchor"></div>
+
+ <div class="cc-section-head">
+ <h2 class="cc-section-title">Why black and white</h2>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-interviewer">LF + RA</span>
+ <div class="cc-qa-body is-question">
+ <p>On your art and photography, why black and white? What do you love about it?</p>
+ </div>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-guest">Colin</span>
+ <div class="cc-qa-body is-response">
+ <p>I had a mentor in black and white photography, a woman named Christine, who unfortunately passed away last year. She was herself an assistant to a photographer named <a href="https://en.wikipedia.org/wiki/Frank_Horvat" target="_blank" rel="noopener">Frank Horvat</a>, a French black and white photographer who does wonderful portraiture.</p>
+ <p>Black and white focuses the mind on elements that are even more fundamental than what we see with our own eye. There&rsquo;s a minimalism to it - it contains less information than the way we traditionally perceive reality, so there is a focus on how the subject is being framed. Where does the focus of the lens lie? What is the quality of the light, and where does the light fall? What are the qualities of the shadows and the blackness? Black and white isn&rsquo;t really black and white. It&rsquo;s shades. You can get a level of subtlety and nuance in black and white photography that I think is hard to come by in color photography.</p>
+ </div>
+ </div>
+
+ <div id="soundcloud-in-cairo" class="scroll-anchor"></div>
+
+ <div class="cc-section-head">
+ <h2 class="cc-section-title">SoundCloud in Cairo</h2>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-interviewer">LF + RA</span>
+ <div class="cc-qa-body is-question">
+ <p>How did working at SoundCloud influence you?</p>
+ </div>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-guest">Colin</span>
+ <div class="cc-qa-body is-response">
+ <p>I was hired as a junior person at SoundCloud to be a generalist growth and product person looking at markets outside the US and Europe. SoundCloud had this phenomenon where the second largest market for SoundCloud was Egypt, and nobody in the company had any idea why. I also got to sit next to these devops engineers who were developing <a href="https://developers.soundcloud.com/blog/prometheus-monitoring-at-soundcloud/" target="_blank" rel="noopener">Prometheus at the time</a>, an open source observability software on Kubernetes. I traveled to Egypt, and I was getting hugs on the streets of Cairo when they saw me in my SoundCloud t-shirt. That&rsquo;s how culturally important SoundCloud was to them. At the time, Egypt was 90M people, 20M smartphone users, and 8M logged-in monthly active listeners. So 40% of Egyptian smartphone users were listening to SoundCloud every month.</p>
+ <p><a href="https://www.imdb.com/title/tt2887002/" target="_blank" rel="noopener">There was a documentary</a> about this genre of music, mahraganat, a mix between electronic music and rap, that was big in the slums of Cairo. Because it was associated with the slums and the poor castes of society, the traditional A&amp;R functions in the music industry didn&rsquo;t take it on. So the only distribution channels were YouTube and SoundCloud, but this was before YouTube Premium and it was too expensive. So I got to see this open source infrastructure software the engineers were developing in Berlin help disseminate this music so people could launch their careers. It was an influential chapter for me because it showed that <span class="cc-highlight">software can be good - if it&rsquo;s designed well, transparently, and with the good of the user in mind.</span></p>
+ </div>
+ </div>
+
+ <div id="earendil-as-a-vessel" class="scroll-anchor"></div>
+
+ <div class="cc-section-head">
+ <p class="cc-section-kicker">Beliefs</p>
+ <h2 class="cc-section-title">Earendil as a vessel</h2>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-interviewer">LF + RA</span>
+ <div class="cc-qa-body is-question">
+ <p>You&rsquo;ve had a series of arcs in your career, and now you&rsquo;re building Earendil. What is Earendil&rsquo;s purpose, and what are some of the operating principles you live by?</p>
+ </div>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-guest">Colin</span>
+ <div class="cc-qa-body is-response">
+ <p>Earendil was really created by Armin and me as a vessel - a vessel for products and tools that will make things better for us humans, harnessing the most powerful technologies of our time, but doing all of that to serve us. We defined that at the very outset of the company.</p>
+ <p>Earendil is a particularly important figure <a href="https://tolkiengateway.net/wiki/E%C3%A4rendil" target="_blank" rel="noopener">in Tolkien&rsquo;s legendarium</a>. He&rsquo;s the first character Tolkien described, and he played this important role of bringing light to the darkness. We feel that people need that light right now, as a beacon of hope. There&rsquo;s so much dystopia and doomerism out there, and so much information is mediated by an algorithm, and <span class="cc-highlight">it would be better if fear was replaced by optimism.</span> If all we do is carry around fear all day, every day, what comes out of that is a negative externality. So we wanted our company, the people we work with, and the products we build to instill hope in people, and empower them.</p>
+ <p>We started Earendil as a <a href="https://earendil.com/purpose/" target="_blank" rel="noopener">public benefit corporation</a>, to craft software and open protocols that strengthen human agency, bridge division and ignorance, and cultivate lasting joy and understanding. Anything we can build that&rsquo;s in service of those goals, we&rsquo;ll look to do. Anything that violates those things, we won&rsquo;t do.</p>
+ <p>We defined seven principles and seven modalities for how we do things. Those came as a function of our experiences in the places we worked before. There are things in there like &ldquo;be compassionate and be kind.&rdquo; There are things like &ldquo;family first,&rdquo; which is not to be misconstrued as a lifestyle job. Armin and I are both fathers, and there&rsquo;s a stake in the sand that our family is more important than our work. Period. But we&rsquo;re super intense about our work. Successful people understand that building a family and doing that well requires sacrifice and hard work, and people who recognize that can often do incredible things in their work too. The two are not mutually exclusive. <span class="cc-highlight">But where there&rsquo;s a trade-off, you pick family.</span></p>
+ </div>
+ </div>
+
+ <div id="tenants-of-hope" class="scroll-anchor"></div>
+
+ <div class="cc-section-head">
+ <h2 class="cc-section-title">Tenants of hope</h2>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-interviewer">LF + RA</span>
+ <div class="cc-qa-body is-question">
+ <p>Within the goal of building tools that instill optimism in people, how would you stack rank the most important tenants for achieving that? Is it who&rsquo;s building it, the messaging and brand, the product experience&hellip; something else?</p>
+ </div>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-guest">Colin</span>
+ <div class="cc-qa-body is-response">
+ <p>The first most important tenant is transparency. Just being forthright with our community, our customers, our users. It&rsquo;s something Armin brought from <a href="https://sentry.io/welcome/" target="_blank" rel="noopener">Sentry</a>, where they did that really well. Imagine something went wrong. The reflex is to tell everybody about it, not to hide it or adopt the messaging to do damage control. If we&rsquo;re vulnerable with our users and our customers, that empowers them, because it means the thing they&rsquo;re spending their time and attention and money on is honest with them.</p>
+ <p>The second core tenant is allowing people to make something their own. This is something people love about pi. Through that, users develop a relationship with their tool that empowers them, because it does things how they want things to be done.</p>
+ <p>The third tenant is that we&rsquo;re going to try our best to not do things in a way we&rsquo;d feel ashamed or guilty of. We&rsquo;re going through a heat wave in Europe, people are inhaling noxious fumes on the east coast because of forest fires, and you may or may not be familiar with the fact that some people are feeding data centers with jet fuel just to maximize GPU utilization. That&rsquo;s something we observe, and we step back and say, we can do better than that. As a company, we&rsquo;re going to be looking up and down the supply chain at how we&rsquo;re doing things. For the variables we can control or influence, we&rsquo;re going to try to make sure they don&rsquo;t suck. I think fueling data centers with jet fuel sucks. I can&rsquo;t look my kids in the eye and say, &ldquo;This is how we&rsquo;re making money, and by the way, somebody somewhere is feeding a data center jet fuel to produce a bunch of slop.&rdquo;</p>
+ </div>
+ </div>
+
+ <div id="the-harness-explained" class="scroll-anchor"></div>
+
+ <div class="cc-section-head">
+ <p class="cc-section-kicker">Building</p>
+ <h2 class="cc-section-title">The harness explained</h2>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-interviewer">LF + RA</span>
+ <div class="cc-qa-body is-question">
+ <p>We&rsquo;ve played around with the Earendil suite, but in your words, what are <a href="https://pi.dev/" target="_blank" rel="noopener">pi</a> and <a href="https://lefos.com/" target="_blank" rel="noopener">lefos</a> broadly, and how do they play into one another?</p>
+ </div>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-guest">Colin</span>
+ <div class="cc-qa-body is-response">
+ <p>Right now, on the product side, the right way to describe us is a harness company. The harness is an interesting place because it&rsquo;s probably the lowest level interaction point of a lot of the software that sits on top or alongside the model itself. You have the inference provider, and the inference API sitting alongside doing important things, and the sandbox in which things are running is also an important factor. But the harness is, in a lot of ways, governing the behavior of the model.</p>
+ <p>Lefos was also built with pi, but lefos is a thicker harness that also has elements like session storage (how your session is stored, where it sits, who can understand, access, and reproduce it) modeled as email conversations. That was a deliberate, important choice, as we see more and more human conversations are happening with machines. In the case of lefos, it was built primarily for the email channel, where all the archives and records are yours. You have a legal right to the correspondence, you can search them, index them, port them over to other things. In the case of pi, the session storage is formatted in JSON, and it&rsquo;s happening locally on your machine. Some of the APIs the model providers are offering mean they&rsquo;re the only ones who can properly reproduce that session on the server side, and you can&rsquo;t on the client side anymore <a href="https://earendil.com/posts/session-portability/" target="_blank" rel="noopener">- which is a problem</a>.</p>
+ <p>The word harness is funny. There&rsquo;s this huge divide between people who say &ldquo;Oh yeah, it&rsquo;s a harness,&rdquo; and a whole bunch of people who say, &ldquo;What the hell are you talking about.&rdquo;</p>
+ </div>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-interviewer">LF + RA</span>
+ <div class="cc-qa-body is-question">
+ <p>How would you describe a harness to someone who isn&rsquo;t from the AI world?</p>
+ </div>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-guest">Colin</span>
+ <div class="cc-qa-body is-response">
+ <p>It&rsquo;s not the perfect analogy (but no analogy is perfect, otherwise it wouldn&rsquo;t be an analogy), but <span class="cc-highlight">I think of the model as the engine of a car, and the harness is the chassis.</span> The harness is the frame through which the production of force by the engine is mediated. The chassis connects it to a set of wheels (a set of other components) that allow you to have a car (a chatbot, agentic application, a recruiting agent, a code review agent, etc). You can make certain decisions on the body of the car, but the chassis is governing fundamentally what the core components of the vehicle are.</p>
+ <p>The harness is a framework through which the model can choose to manipulate a set of tools, and it uses those tools to achieve certain aims. The harness is governing, &ldquo;here&rsquo;s what you can do, and here are the different ways you can try to satisfy the prompt.&rdquo; It has a system prompt that&rsquo;s moderating the model&rsquo;s behavior. It&rsquo;s setting the pace for the model, &ldquo;here&rsquo;s how much work you should do until you think you&rsquo;re finished,&rdquo; or &ldquo;here&rsquo;s what you should do if you&rsquo;re running out of time but your work isn&rsquo;t finished yet.&rdquo; It&rsquo;s setting a whole bunch of constraints and describing a set of tools that help govern how the model works. So you fit the engine into the chassis to make it work.</p>
+ <p>What&rsquo;s also nice about it, at least in the form of pi, is it can be one harness where you can swap out the model. I can govern a bunch of things that I own, and the AI model that sits underneath it, I can swap in and out - that is something that is mine. This is important to people.</p>
+ </div>
+ </div>
+
+ <div id="waves-logos-details" class="scroll-anchor"></div>
+
+ <div class="cc-section-head">
+ <h2 class="cc-section-title">Waves, logos, and tiny details</h2>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-interviewer">LF + RA</span>
+ <div class="cc-qa-body is-question">
+ <p>What is a specific product or brand decision that you particularly love? And what was the creative process of how you landed there?</p>
+ </div>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-guest">Colin</span>
+ <div class="cc-qa-body is-response">
+ <p>Something I&rsquo;ve been deliberate about in my creative process has been getting the framing and branding right for us as a company. Armin and I have personally designed a lot of it. For example, Armin personally coded the algorithm that does the waves on the website. The first landing page of our website was a black and white photograph of the ocean with a long horizon, a relatively long exposure photo, inspired by the photographer <a href="https://www.sugimotohiroshi.com/" target="_blank" rel="noopener">Sugimoto</a>. I had taken the photograph driving from the mountains down to the sea (it&rsquo;s still on <a href="https://colin.day/" target="_blank" rel="noopener">my personal website</a>). We made this decision partly because E&auml;rendil was a mariner, a journeyman on the sea. One day Armin decided to add waves. He worked on this for a while until it was right. It came from somewhere that was earthly and real, but crafted into the digital realm.</p>
+ <p>The logo and vectors themselves is something I designed. I first did it by hand first. It&rsquo;s designed after <a href="https://www.google.com/search?q=an+elven+boat&udm=2" target="_blank" rel="noopener">an elven boat</a>, but it&rsquo;s become this abstract shape. And the pi.dev website is something we&rsquo;ve all worked on as a team. Rami, who has done a lot with the Tetris animation. We get millions of hits to that site per week, and at one point the animation was taking too long. So I took time to re-optimize the animation, because I realized if we optimized it by 40 percent, we were saving, in aggregate, days of human life a day. Even as founders, we care a lot about the small little details.</p>
+ </div>
+ </div>
+
+ <div id="no-llm-writing" class="scroll-anchor"></div>
+
+ <div class="cc-section-head">
+ <h2 class="cc-section-title">The art of human-written language</h2>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-guest">Colin</span>
+ <div class="cc-qa-body is-response">
+ <p>With lefos, we have a small, growing cohort of loyal people who love it, quite a few businesses and investment firms who use it a lot internally, people whose OS is email. The voice of it, the system prompt, the personality - this is something we&rsquo;ve spent a lot of time crafting and iterating. It&rsquo;s so interesting that you can now moderate such important aspects of how a software system behaves using natural language. One of our designers studied English. Many english majors are trained to speak and write concisely, find the right words, use the right style&hellip; Language allows you to pack information in really elegant ways if you can find the right words for things.</p>
+ <p>We&rsquo;ve been getting good responses on our recent blog posts. Armin wrote a post that was number one on Hacker News three days ago, and another engineer, Christina, wrote a post that was number two. One of the principles in our company is we do not have LLMs produce writing for us. Sure, we&rsquo;ll have an LLM produce a summary of a call transcript, that&rsquo;s fine, they&rsquo;re good at compression. But when we want to convey information to other humans, it&rsquo;s so presumptuous to have it author something and not at least cite it. If you&rsquo;re using an LLM to produce writing that you&rsquo;re sending on your behalf, cite the model, and ideally cite the harness too.</p>
+ <p>We all have this incredible bounty of neurodiversity within our own skulls that comes from formulating our own experiences. Go ahead and use LLMs to augment and harness information you didn&rsquo;t have access to, but the output you&rsquo;re sharing with a teammate, boss, friend, partner - they want to hear from you. They don&rsquo;t want to hear from one of six sets of weights being produced by billions of dollars of hardware. There&rsquo;s so much bad writing out there now, and within three sentences, you can tell when a human did not write this.</p>
+ </div>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-interviewer">LF + RA</span>
+ <div class="cc-qa-body is-question">
+ <p>There&rsquo;s a reason those posts are going viral. Something we&rsquo;re craving too is actually reading the prompts people are crafting, how they&rsquo;re talking to their harness and their coding agents, and the subtle differences in the language they use within their process.</p>
+ </div>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-guest">Colin</span>
+ <div class="cc-qa-body is-response">
+ <p>Instead of sharing the slop that came out of the model, I&rsquo;d rather see your prompt, then your model output. With your prompt, I can go send it to twelve different models. <span class="cc-highlight">The prompt is what&rsquo;s more unique - it&rsquo;s the crux of the idea.</span></p>
+ </div>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-interviewer">LF + RA</span>
+ <div class="cc-qa-body is-question">
+ <p>For the branding on pi, why Tetris and why the grid lines?</p>
+ </div>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-guest">Colin</span>
+ <div class="cc-qa-body is-response">
+ <p>It comes down to the composability and extensibility of pi. Computers and machines can do things that are just fun, and we want working with pi to feel fun for the end user. It also speaks to the fact that you can build complex shapes out of things that feel minimal and primitive independently and on their own.</p>
+ </div>
+ </div>
+
+ <div id="voice-and-the-machine" class="scroll-anchor"></div>
+
+ <div class="cc-section-head">
+ <h2 class="cc-section-title">Voice and the machine in the room</h2>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-guest">Colin</span>
+ <div class="cc-qa-body is-response">
+ <p>We&rsquo;re also doing a lot of prompting through voice. Voice is a richer medium than people give credit to. Right now, for example, we&rsquo;re having a nuanced conversation, and it&rsquo;s not requiring me to stare at a screen&hellip; I&rsquo;m looking a couple thousand kilometers southeast. Voice is a minimalist channel, and it allows you to have a rich conversation while also being present in your physical surroundings. <span class="cc-highlight">It allows software to fall into the background when it&rsquo;s appropriate, and your foreground can be the real world again.</span></p>
+ <p>Voice also gives us an opportunity to be more multi-party. Most harnesses aren&rsquo;t outputting voice, and that&rsquo;s something we are working on. We should be having shared conversations with machines more. It will lead to fewer tokens and a better outcome. So much of building in AI now is people gathering together, then breaking apart, then seven different people input seven different versions of what they think needs to get done to seven different models, consuming seven times the tokens, and then they come back and say &ldquo;this is what I did and this is what I think.&rdquo; If those conversations were happening with the machine in the room, it would be a lot more efficient token-wise, but we&rsquo;d also arrive at a version of truth more readily.</p>
+ </div>
+ </div>
+
+ </div>
+
+ <section id="rapid-fire" class="cc-hot-takes scroll-anchor">
+ <h2 class="cc-hot-takes-title">Rapid fire</h2>
+ <div class="cc-hot-takes-list">
+
+ <div class="cc-hot-take">
+ <span class="cc-hot-take-num">I</span>
+ <div>
+ <div class="cc-hot-take-q">Is there a specific source (book, film, work of art, etc) that has moved how you think?</div>
+ <div class="cc-hot-take-a">
+ <p>My favorite book is <a href="https://www.goodreads.com/book/show/30320038-barbarian-days" target="_blank" rel="noopener">Barbarian Days</a>. It&rsquo;s an autobiography of a man who&rsquo;s a journalist and writer for the New Yorker, but the book is about how surfing has been this central thread to his life. The way he describes his relationships, having kids, and pursuing a career while also having something else of value to him&hellip; I appreciate that perspective. So many times when you get to know someone in public, it&rsquo;s people bragging about their career and how much money they made, and you don&rsquo;t get a sense of richness or depth. What else has this person&rsquo;s life brought them? He&rsquo;s one of the most lauded writers of our time, but also he&rsquo;s been a father and an incredible surfer. It&rsquo;s inspiring.</p>
+ </div>
+ </div>
+ </div>
+
+ <div class="cc-hot-take">
+ <span class="cc-hot-take-num">II</span>
+ <div>
+ <div class="cc-hot-take-q">Where do you go to feel inspired?</div>
+ <div class="cc-hot-take-a">
+ <p>Nature. The world around us is so rich. It&rsquo;s fun having young, school-age kids and seeing the awe with which they confront new animal species and new physical phenomena. If you enter nature with a perceptive eye, it&rsquo;s really hard not to be floored by the beauty, whether that&rsquo;s mountains, oceans, bodies of water. It&rsquo;s silent and calm, a place that can reflect back and help structure your own thoughts. Finding this clarity helps you execute the right things rather than get pulled in a million directions by everything in the media.</p>
+ <p>Also traveling. One of the first trips Armin and I took was to China, because China has forked, and in some ways the fork is technologically ahead of us and in other ways behind us. We took the high speed rail through the country. I&rsquo;m lucky enough to speak Mandarin, so I could converse with everyday people on the street. And I was in Kenya just last month for my niece&rsquo;s baptism, meeting young engineers studying computer science who are trying to figure out how they can not get left behind by what they see as this incredible improvement in technology. We&rsquo;re eight billion people. I come from a place where I think we&rsquo;re all the same. We all have the same biological needs, a shared set of what makes us human, and then we express that differently in our cultures. You find smiling faces everywhere, people having kids, men and women working hard&hellip; people starting families, burying their moms and dads, learning. We&rsquo;re just doing it in different ways.</p>
+ </div>
+ </div>
+ </div>
+
+ <div class="cc-hot-take">
+ <span class="cc-hot-take-num">III</span>
+ <div>
+ <div class="cc-hot-take-q">What advice would you leave for people building in AI?</div>
+ <div class="cc-hot-take-a">
+ <p>There&rsquo;s an important role for everybody who&rsquo;s lucky enough to be closer to the center of this thing. All of us have responsibility here. These machines can compute weights that have this tremendous capacity to compress the information humanity has formed up to this point. How we wield that, how we disseminate that technology, how it gets grafted onto humanity - it&rsquo;s such an important time. Most people are focused inwardly on the technology, the next decimal point model and its improvements against benchmarks, with way less thought around how it&rsquo;s going to be deployed in a classroom, the right way to bring it to people. Small things, like how we should start citing its outputs, transparency - these kinds of tenets are going to be really important to influence the positive and negative energy that&rsquo;s to come.</p>
+ </div>
+ </div>
+ </div>
+
+ </div>
+ </section>
+
+ </main>
+
+ </div>
+
+ <footer class="cc-footer">
+ <p class="cc-footer-meta">&copy; 2026 Creative Conviction</p>
+ </footer>
+
+ </div>
+
+ <script>
+ (function () {
+ var sidebar = document.getElementById('cc-sidebar');
+ var indicator = document.getElementById('cc-track-indicator');
+ var links = Array.prototype.slice.call(document.querySelectorAll('.cc-sidebar-link'));
+ if (!sidebar || !indicator || !links.length) return;
+
+ setTimeout(function () { sidebar.classList.add('is-visible'); }, 180);
+
+ links.forEach(function (link) {
+ link.addEventListener('click', function () {
+ var id = link.getAttribute('data-target');
+ var el = document.getElementById(id);
+ if (el) el.scrollIntoView({ behavior: 'smooth' });
+ });
+ });
+
+ function update() {
+ var activeIdx = 0;
+ for (var i = links.length - 1; i >= 0; i--) {
+ var id = links[i].getAttribute('data-target');
+ var el = document.getElementById(id);
+ if (el && el.getBoundingClientRect().top <= 130) { activeIdx = i; break; }
+ }
+ links.forEach(function (l, i) { l.classList.toggle('is-active', i === activeIdx); });
+ var activeLink = links[activeIdx];
+ if (activeLink) {
+ var linksBox = document.getElementById('cc-sidebar-links');
+ var top = activeLink.getBoundingClientRect().top - linksBox.getBoundingClientRect().top;
+ indicator.style.top = top + 'px';
+ indicator.style.height = activeLink.offsetHeight + 'px';
+ }
+ }
+ window.addEventListener('scroll', update, { passive: true });
+ window.addEventListener('resize', update);
+ update();
+ })();
+
+ (function () {
+ document.querySelectorAll('.cc-video').forEach(function (v) {
+ v.addEventListener('click', function () {
+ v.muted = !v.muted;
+ if (v.paused) v.play();
+ });
+ });
+ })();
+ </script>
+ <script src="../../share-quote.js"></script>
+</body>
+</html>
+
