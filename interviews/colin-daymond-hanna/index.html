@@ -134,7 +134,7 @@
 
  .cc-sidebar-eyebrow {
  font-family: var(--font-sans);
- font-size: 12px;
+ font-size: 17px;
  font-weight: 500;
  letter-spacing: 0.02em;
  color: var(--fg-3);
@@ -161,7 +161,7 @@
  .cc-sidebar-link {
  background: none; border: none; cursor: pointer; padding: 2px 0;
  font-family: var(--font-sans);
- font-size: 13px;
+ font-size: 17px;
  line-height: 1.4;
  color: var(--fg-3);
  text-align: left;
@@ -171,10 +171,11 @@
  .cc-sidebar-link.is-active { color: var(--cc-ink); font-weight: 500; }
 
  .cc-sidebar-group {
+ background: none; border: none; cursor: pointer; padding: 2px 0;
  font-family: var(--font-serif);
- font-style: italic;
- font-size: 13px;
- color: var(--cc-ink-4);
+ font-size: 17px;
+ color: var(--cc-ink);
+ text-align: left;
  margin: 14px 0 2px;
  }
  .cc-sidebar-links .cc-sidebar-group:first-child { margin-top: 0; }
@@ -183,17 +184,16 @@
  .cc-section-head { margin-top: 24px; }
  .cc-section-kicker {
  font-family: var(--font-serif);
- font-style: italic;
- font-size: 15px;
- color: var(--fg-3);
+ font-size: 26px;
+ line-height: 1.2;
+ letter-spacing: -0.01em;
+ color: var(--cc-ink);
  margin-bottom: 6px;
  }
  .cc-section-title {
  font-family: var(--font-serif);
- font-size: 26px;
+ font-size: 17px;
  font-weight: 400;
- line-height: 1.2;
- letter-spacing: -0.01em;
  color: var(--cc-ink);
  }
 
@@ -211,8 +211,7 @@
  }
  .cc-article-eyebrow {
  font-family: var(--font-serif);
- font-style: italic;
- font-size: 15px;
+ font-size: 17px;
  color: var(--fg-3);
  margin-bottom: 14px;
  }
@@ -228,14 +227,15 @@
  .cc-article-title em { font-style: italic; }
  .cc-article-subtitle {
  font-family: var(--font-serif);
- font-style: italic;
- font-size: 19px;
+ font-size: 26px;
+ line-height: 1.2;
+ letter-spacing: -0.01em;
  color: var(--fg-2);
  margin: 0 0 10px;
  }
  .cc-article-date {
  font-family: var(--font-sans);
- font-size: 13px;
+ font-size: 17px;
  color: var(--fg-3);
  letter-spacing: 0.02em;
  }
@@ -258,7 +258,7 @@
  .cc-qa { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: start; }
  .cc-speaker {
  font-family: var(--font-sans);
- font-size: 12px;
+ font-size: 17px;
  font-weight: 600;
  letter-spacing: 0.02em;
  padding-top: 6px;
@@ -317,7 +317,7 @@
  .cc-hot-takes { padding-top: 32px; }
  .cc-hot-takes-title {
  font-family: var(--font-serif);
- font-size: 28px;
+ font-size: 26px;
  font-weight: 400;
  line-height: 1.2;
  letter-spacing: -0.01em;
@@ -328,7 +328,6 @@
  .cc-hot-take { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: start; }
  .cc-hot-take-num {
  font-family: var(--font-serif);
- font-style: italic;
  font-size: 17px;
  color: var(--fg-3);
  padding-top: 4px;
@@ -354,7 +353,7 @@
  .cc-footer { padding: 48px 0 32px; margin-top: 96px; }
  .cc-footer-meta {
  font-family: var(--font-sans);
- font-size: 12px;
+ font-size: 17px;
  color: var(--fg-3);
  letter-spacing: 0.02em;
  }
@@ -392,19 +391,19 @@
  <div class="cc-sidebar-track-indicator" id="cc-track-indicator"></div>
  </div>
  <div class="cc-sidebar-links" id="cc-sidebar-links">
- <p class="cc-sidebar-group">Background</p>
+ <button class="cc-sidebar-group" data-target="child-of-the-earth">Background</button>
  <button class="cc-sidebar-link is-active" data-target="child-of-the-earth">A child of the earth</button>
  <button class="cc-sidebar-link" data-target="why-black-and-white">Why black and white</button>
  <button class="cc-sidebar-link" data-target="soundcloud-in-cairo">SoundCloud in Cairo</button>
- <p class="cc-sidebar-group">Beliefs</p>
+ <button class="cc-sidebar-group" data-target="earendil-as-a-vessel">Beliefs</button>
  <button class="cc-sidebar-link" data-target="earendil-as-a-vessel">Earendil as a vessel</button>
- <button class="cc-sidebar-link" data-target="tenants-of-hope">Tenants of hope</button>
- <p class="cc-sidebar-group">Building</p>
+ <button class="cc-sidebar-link" data-target="tenets-of-hope">Tenets of hope</button>
+ <button class="cc-sidebar-group" data-target="the-harness-explained">Building</button>
  <button class="cc-sidebar-link" data-target="the-harness-explained">The harness explained</button>
  <button class="cc-sidebar-link" data-target="waves-logos-details">Waves, logos, and tiny details</button>
- <button class="cc-sidebar-link" data-target="no-llm-writing">No LLM writing</button>
+ <button class="cc-sidebar-link" data-target="no-llm-writing">The art of human-written language</button>
  <button class="cc-sidebar-link" data-target="voice-and-the-machine">Voice and the machine in the room</button>
- <button class="cc-sidebar-link" data-target="rapid-fire">Rapid fire</button>
+ <button class="cc-sidebar-group" data-target="rapid-fire">Rapid fire</button>
  </div>
  </div>
  </aside>
@@ -516,25 +515,25 @@
  </div>
  </div>
 
- <div id="tenants-of-hope" class="scroll-anchor"></div>
+ <div id="tenets-of-hope" class="scroll-anchor"></div>
 
  <div class="cc-section-head">
- <h2 class="cc-section-title">Tenants of hope</h2>
+ <h2 class="cc-section-title">Tenets of hope</h2>
  </div>
 
  <div class="cc-qa">
  <span class="cc-speaker is-interviewer">LF + RA</span>
  <div class="cc-qa-body is-question">
- <p>Within the goal of building tools that instill optimism in people, how would you stack rank the most important tenants for achieving that? Is it who&rsquo;s building it, the messaging and brand, the product experience&hellip; something else?</p>
+ <p>Within the goal of building tools that instill optimism in people, how would you stack rank the most important tenets for achieving that? Is it who&rsquo;s building it, the messaging and brand, the product experience&hellip; something else?</p>
  </div>
  </div>
 
  <div class="cc-qa">
  <span class="cc-speaker is-guest">Colin</span>
  <div class="cc-qa-body is-response">
- <p>The first most important tenant is transparency. Just being forthright with our community, our customers, our users. It&rsquo;s something Armin brought from <a href="https://sentry.io/welcome/" target="_blank" rel="noopener">Sentry</a>, where they did that really well. Imagine something went wrong. The reflex is to tell everybody about it, not to hide it or adopt the messaging to do damage control. If we&rsquo;re vulnerable with our users and our customers, that empowers them, because it means the thing they&rsquo;re spending their time and attention and money on is honest with them.</p>
- <p>The second core tenant is allowing people to make something their own. This is something people love about pi. Through that, users develop a relationship with their tool that empowers them, because it does things how they want things to be done.</p>
- <p>The third tenant is that we&rsquo;re going to try our best to not do things in a way we&rsquo;d feel ashamed or guilty of. We&rsquo;re going through a heat wave in Europe, people are inhaling noxious fumes on the east coast because of forest fires, and you may or may not be familiar with the fact that some people are feeding data centers with jet fuel just to maximize GPU utilization. That&rsquo;s something we observe, and we step back and say, we can do better than that. As a company, we&rsquo;re going to be looking up and down the supply chain at how we&rsquo;re doing things. For the variables we can control or influence, we&rsquo;re going to try to make sure they don&rsquo;t suck. I think fueling data centers with jet fuel sucks. I can&rsquo;t look my kids in the eye and say, &ldquo;This is how we&rsquo;re making money, and by the way, somebody somewhere is feeding a data center jet fuel to produce a bunch of slop.&rdquo;</p>
+ <p>The first most important tenet is transparency. Just being forthright with our community, our customers, our users. It&rsquo;s something Armin brought from <a href="https://sentry.io/welcome/" target="_blank" rel="noopener">Sentry</a>, where they did that really well. Imagine something went wrong. The reflex is to tell everybody about it, not to hide it or adapt the messaging to do damage control. If we&rsquo;re vulnerable with our users and our customers, that empowers them, because it means the thing they&rsquo;re spending their time and attention and money on is honest with them.</p>
+ <p>The second core tenet is allowing people to make something their own. This is something people love about pi. Through that, users develop a relationship with their tool.</p>
+ <p>The third tenet is that we&rsquo;re going to try our best to not do things in a way we&rsquo;d feel ashamed or guilty of. We&rsquo;re going through a heat wave in Europe, people are inhaling noxious fumes on the east coast because of forest fires, and you may or may not be familiar with the fact that some people are feeding data centers with jet fuel just to maximize GPU utilization. That&rsquo;s something we observe, and we step back and say, we can do better than that. As a company, we&rsquo;re going to be looking up and down the supply chain at how we&rsquo;re doing things. For the variables we can control or influence, we&rsquo;re going to try to make sure they don&rsquo;t suck. I think fueling data centers with jet fuel sucks. I can&rsquo;t look my kids in the eye and say, &ldquo;This is how we&rsquo;re making money, and by the way, somebody somewhere is feeding a data center jet fuel to produce a bunch of slop.&rdquo;</p>
  </div>
  </div>
 
@@ -557,7 +556,6 @@
  <div class="cc-qa-body is-response">
  <p>Right now, on the product side, the right way to describe us is a harness company. The harness is an interesting place because it&rsquo;s probably the lowest level interaction point of a lot of the software that sits on top or alongside the model itself. You have the inference provider, and the inference API sitting alongside doing important things, and the sandbox in which things are running is also an important factor. But the harness is, in a lot of ways, governing the behavior of the model.</p>
  <p>Lefos was also built with pi, but lefos is a thicker harness that also has elements like session storage (how your session is stored, where it sits, who can understand, access, and reproduce it) modeled as email conversations. That was a deliberate, important choice, as we see more and more human conversations are happening with machines. In the case of lefos, it was built primarily for the email channel, where all the archives and records are yours. You have a legal right to the correspondence, you can search them, index them, port them over to other things. In the case of pi, the session storage is formatted in JSON, and it&rsquo;s happening locally on your machine. Some of the APIs the model providers are offering mean they&rsquo;re the only ones who can properly reproduce that session on the server side, and you can&rsquo;t on the client side anymore <a href="https://earendil.com/posts/session-portability/" target="_blank" rel="noopener">- which is a problem</a>.</p>
- <p>The word harness is funny. There&rsquo;s this huge divide between people who say &ldquo;Oh yeah, it&rsquo;s a harness,&rdquo; and a whole bunch of people who say, &ldquo;What the hell are you talking about.&rdquo;</p>
  </div>
  </div>
 
@@ -594,7 +592,21 @@
  <span class="cc-speaker is-guest">Colin</span>
  <div class="cc-qa-body is-response">
  <p>Something I&rsquo;ve been deliberate about in my creative process has been getting the framing and branding right for us as a company. Armin and I have personally designed a lot of it. For example, Armin personally coded the algorithm that does the waves on the website. The first landing page of our website was a black and white photograph of the ocean with a long horizon, a relatively long exposure photo, inspired by the photographer <a href="https://www.sugimotohiroshi.com/" target="_blank" rel="noopener">Sugimoto</a>. I had taken the photograph driving from the mountains down to the sea (it&rsquo;s still on <a href="https://colin.day/" target="_blank" rel="noopener">my personal website</a>). We made this decision partly because E&auml;rendil was a mariner, a journeyman on the sea. One day Armin decided to add waves. He worked on this for a while until it was right. It came from somewhere that was earthly and real, but crafted into the digital realm.</p>
- <p>The logo and vectors themselves is something I designed. I first did it by hand first. It&rsquo;s designed after <a href="https://www.google.com/search?q=an+elven+boat&udm=2" target="_blank" rel="noopener">an elven boat</a>, but it&rsquo;s become this abstract shape. And the pi.dev website is something we&rsquo;ve all worked on as a team. Rami, who has done a lot with the Tetris animation. We get millions of hits to that site per week, and at one point the animation was taking too long. So I took time to re-optimize the animation, because I realized if we optimized it by 40 percent, we were saving, in aggregate, days of human life a day. Even as founders, we care a lot about the small little details.</p>
+ <p>The logo and vectors themselves are something I designed. I did it by hand first. It&rsquo;s designed after <a href="https://www.google.com/search?q=an+elven+boat&udm=2" target="_blank" rel="noopener">an elven boat</a>, but it&rsquo;s become this abstract shape. And the pi.dev website is something we&rsquo;ve all worked on as a team. Rami, who has done a lot with the Tetris animation. At one point, the Tetris animation was taking too long, and we realized that optimizing it by 40% saved days of human life as a result. Even as founders, we care a lot about the small little details.</p>
+ </div>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-interviewer">LF + RA</span>
+ <div class="cc-qa-body is-question">
+ <p>For the branding on pi, why Tetris and why the grid lines?</p>
+ </div>
+ </div>
+
+ <div class="cc-qa">
+ <span class="cc-speaker is-guest">Colin</span>
+ <div class="cc-qa-body is-response">
+ <p>It comes down to the composability and extensibility of pi. Computers and machines can do things that are just fun, and we want working with pi to feel fun for the end user. It also speaks to the fact that you can build complex shapes out of things that feel minimal and primitive independently and on their own.</p>
  </div>
  </div>
 
@@ -627,21 +639,7 @@
  </div>
  </div>
 
- <div class="cc-qa">
- <span class="cc-speaker is-interviewer">LF + RA</span>
- <div class="cc-qa-body is-question">
- <p>For the branding on pi, why Tetris and why the grid lines?</p>
- </div>
- </div>
-
- <div class="cc-qa">
- <span class="cc-speaker is-guest">Colin</span>
- <div class="cc-qa-body is-response">
- <p>It comes down to the composability and extensibility of pi. Computers and machines can do things that are just fun, and we want working with pi to feel fun for the end user. It also speaks to the fact that you can build complex shapes out of things that feel minimal and primitive independently and on their own.</p>
- </div>
- </div>
-
- <div id="voice-and-the-machine" class="scroll-anchor"></div>
+  <div id="voice-and-the-machine" class="scroll-anchor"></div>
 
  <div class="cc-section-head">
  <h2 class="cc-section-title">Voice and the machine in the room</h2>
@@ -709,7 +707,7 @@
  (function () {
  var sidebar = document.getElementById('cc-sidebar');
  var indicator = document.getElementById('cc-track-indicator');
- var links = Array.prototype.slice.call(document.querySelectorAll('.cc-sidebar-link'));
+ var links = Array.prototype.slice.call(document.querySelectorAll('.cc-sidebar-link, .cc-sidebar-group'));
  if (!sidebar || !indicator || !links.length) return;
 
  setTimeout(function () { sidebar.classList.add('is-visible'); }, 180);
@@ -755,4 +753,3 @@
  <script src="../../share-quote.js"></script>
 </body>
 </html>
-
