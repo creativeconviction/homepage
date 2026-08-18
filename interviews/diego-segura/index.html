@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png" />
+
+  <title>Diego Segura &mdash; Creative Conviction</title>
+  <meta name="cc-person" content="Diego Segura">
+  <meta name="cc-role" content="Founder &amp; CEO, Family Office">
+  <meta name="description" content="Narrative before design. An interview with Diego Segura, founder of Family Office." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400..700&display=swap" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --cc-magenta:   #D8016A;
+      --cc-orange:    #FF6514;
+      --cc-blue:      #1A0AE6;
+      --cc-indigo:    #361C76;
+      --cc-magenta-tint: #FBE0EC;
+
+      --cc-paper:        #F7F5FA;
+      --cc-paper-soft:   #F2EFF7;
+      --cc-white:        #FBFAFD;
+
+      --cc-ink:    #1A1130;
+      --cc-ink-2:  #322847;
+      --cc-ink-3:  #6A6378;
+      --cc-ink-4:  #9C97A8;
+      --cc-rule:        #D2CDDB;
+      --cc-rule-soft:   #E5E1ED;
+
+      --fg-1: var(--cc-ink);
+      --fg-2: var(--cc-ink-2);
+      --fg-3: var(--cc-ink-3);
+
+      --font-serif: "EB Garamond", "Iowan Old Style", Charter, Georgia, serif;
+      --font-sans:  "Inter", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+      --ease: cubic-bezier(.2,.6,.2,1);
+      --dur-1: 120ms;
+      --dur-2: 220ms;
+
+      --sidebar-w: 220px;
+    }
+
+    body {
+      background: var(--cc-paper);
+      color: var(--fg-1);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      min-height: 100vh;
+    }
+
+    a { color: var(--cc-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: text-decoration-thickness var(--dur-1) var(--ease); }
+    a:hover { text-decoration-thickness: 2px; }
+    em { font-family: var(--font-serif); font-style: italic; }
+
+    .cc-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 40px 80px;
+    }
+    .cc-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-bottom: 22px;
+      margin-bottom: 64px;
+    }
+    .cc-mark {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      text-decoration: none;
+      line-height: 1;
+    }
+    .cc-mark em { font-style: italic; color: var(--cc-magenta); font-family: var(--font-serif); }
+    .cc-nav { display: flex; gap: 28px; }
+    .cc-nav-link {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--fg-2);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+      transition: color var(--dur-1) var(--ease), text-decoration-thickness var(--dur-1) var(--ease);
+    }
+    .cc-nav-link:hover { color: var(--cc-ink); text-decoration-thickness: 2px; }
+    .cc-nav-link--subscribe { color: var(--cc-magenta); }
+    .cc-nav-link--subscribe:hover { color: var(--cc-magenta); }
+
+    .cc-article-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      align-items: start;
+    }
+    @media (min-width: 1060px) {
+      .cc-article-layout {
+        grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+        gap: 56px;
+      }
+    }
+
+    .cc-sidebar { display: none; }
+    @media (min-width: 1060px) {
+      .cc-sidebar {
+        display: block;
+        position: sticky;
+        top: 40px;
+        align-self: start;
+        opacity: 0;
+        transform: translateX(-8px);
+        transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+      }
+    }
+    .cc-sidebar.is-visible { opacity: 1; transform: translateX(0); }
+
+    .cc-sidebar-eyebrow {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--fg-3);
+      margin-bottom: 18px;
+    }
+
+    .cc-sidebar-nav { display: flex; align-items: flex-start; gap: 14px; }
+    .cc-sidebar-track {
+      position: relative;
+      width: 1px;
+      flex-shrink: 0;
+      align-self: stretch;
+      background: var(--cc-rule-soft);
+    }
+    .cc-sidebar-track-indicator {
+      position: absolute;
+      width: 100%;
+      background: var(--cc-ink);
+      height: 14px; top: 0;
+      transition: top 0.22s var(--ease), height 0.12s var(--ease);
+    }
+
+    .cc-sidebar-links { display: flex; flex-direction: column; gap: 4px; }
+    .cc-sidebar-link {
+      background: none; border: none; cursor: pointer; padding: 2px 0;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1.4;
+      color: var(--fg-3);
+      text-align: left;
+      transition: color var(--dur-1) var(--ease);
+    }
+    .cc-sidebar-link:hover { color: var(--cc-ink); }
+    .cc-sidebar-link.is-active { color: var(--cc-ink); font-weight: 500; }
+
+    .cc-article { max-width: 640px; margin: 0 auto; }
+    @media (min-width: 1060px) { .cc-article { margin: 0; } }
+
+    .cc-article-header { margin-bottom: 56px; }
+    .cc-article-thumb {
+      display: block;
+      width: 168px;
+      height: 168px;
+      object-fit: cover;
+      margin: 0 0 28px;
+    }
+    .cc-article-eyebrow {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 15px;
+      color: var(--fg-3);
+      margin-bottom: 14px;
+    }
+    .cc-article-title {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 4.4vw, 48px);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--cc-ink);
+      margin: 0 0 18px;
+    }
+    .cc-article-title em { font-style: italic; }
+    .cc-article-subtitle {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 19px;
+      color: var(--fg-2);
+      margin: 0 0 10px;
+    }
+    .cc-article-date {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
+
+    .cc-article-substack {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      margin: 8px 0 0;
+    }
+    .cc-article-substack a.cc-highlight {
+      color: var(--cc-ink);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .cc-article-substack a.cc-highlight:hover { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
+
+    .cc-article-dek {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--fg-2);
+      margin: 32px 0 56px;
+    }
+    .cc-article-dek p + p { margin-top: 16px; }
+    .cc-article-dek a { color: inherit; }
+
+    .scroll-anchor { scroll-margin-top: 48px; }
+
+    .cc-qa-list { display: flex; flex-direction: column; gap: 28px; margin-bottom: 80px; }
+    .cc-qa { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: start; }
+    .cc-speaker {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding-top: 6px;
+      line-height: 1.3;
+    }
+    .cc-speaker.is-interviewer { color: var(--fg-3); }
+    .cc-speaker.is-guest { color: var(--cc-ink); }
+
+    .cc-qa-body {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg-2);
+    }
+    .cc-qa-body p { margin-bottom: 14px; }
+    .cc-qa-body p:last-child { margin-bottom: 0; }
+    .cc-qa-body em { font-family: var(--font-serif); font-style: italic; }
+    .cc-qa-body.is-question { color: var(--cc-ink); font-weight: 500; }
+    .cc-qa-body.is-response { font-weight: 400; }
+    .cc-qa-body a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+    .cc-highlight {
+      background: rgba(54, 28, 118, 0.10);
+      color: var(--cc-ink);
+      padding: 1px 4px;
+      transition: background var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+      cursor: default;
+    }
+    .cc-highlight:hover { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
+
+    .cc-hot-takes { padding-top: 32px; }
+    .cc-hot-takes-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      margin: 0 0 32px;
+    }
+    .cc-hot-takes-list { display: flex; flex-direction: column; gap: 32px; }
+    .cc-hot-take { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: start; }
+    .cc-hot-take-num {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 17px;
+      color: var(--fg-3);
+      padding-top: 4px;
+    }
+    .cc-hot-take-q {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--cc-ink);
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+    .cc-hot-take-a {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg-2);
+    }
+    .cc-hot-take-a p { margin-bottom: 12px; }
+    .cc-hot-take-a p:last-child { margin-bottom: 0; }
+    .cc-hot-take-a a { color: inherit; }
+
+    .cc-footer { padding: 48px 0 32px; margin-top: 96px; }
+    .cc-footer-meta {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 640px) {
+      .cc-shell { padding: 24px 24px 64px; }
+      .cc-header { margin-bottom: 48px; }
+      .cc-article-header { margin-bottom: 40px; }
+      .cc-qa { grid-template-columns: 1fr; gap: 6px; }
+      .cc-speaker { padding-top: 0; }
+      .cc-hot-take { grid-template-columns: 1fr; gap: 6px; }
+      .cc-hot-take-num { padding-top: 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cc-shell">
+
+    <header class="cc-header">
+      <a class="cc-mark" href="../../">Creative <em>Conviction</em></a>
+      <nav class="cc-nav">
+        <a class="cc-nav-link" href="../../about.html">About</a>
+        <a class="cc-nav-link" href="../../hiring-lists/">Hiring lists</a>
+        <a class="cc-nav-link cc-nav-link--subscribe" href="https://creativeconvictionpress.substack.com/" target="_blank" rel="noopener">Subscribe</a>
+      </nav>
+    </header>
+
+    <div class="cc-article-layout">
+
+      <aside class="cc-sidebar" id="cc-sidebar">
+        <div class="cc-sidebar-eyebrow">Contents</div>
+        <div class="cc-sidebar-nav">
+          <div class="cc-sidebar-track">
+            <div class="cc-sidebar-track-indicator" id="cc-track-indicator"></div>
+          </div>
+          <div class="cc-sidebar-links" id="cc-sidebar-links">
+            <button class="cc-sidebar-link is-active" data-target="founding-story">Founding story</button>
+            <button class="cc-sidebar-link" data-target="design-alpha">Where design has alpha</button>
+            <button class="cc-sidebar-link" data-target="bad-word">Design as a bad word</button>
+            <button class="cc-sidebar-link" data-target="deliverables">Deliverables and the idea</button>
+            <button class="cc-sidebar-link" data-target="saying-no">Saying no</button>
+            <button class="cc-sidebar-link" data-target="after-the-project">After the project</button>
+            <button class="cc-sidebar-link" data-target="making-the-hire">Making the hire</button>
+            <button class="cc-sidebar-link" data-target="evaluating-designers">Evaluating designers</button>
+            <button class="cc-sidebar-link" data-target="new-portfolio">The new portfolio</button>
+            <button class="cc-sidebar-link" data-target="hot-takes">Hot takes</button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="cc-article">
+
+        <div class="cc-article-header">
+          <img class="cc-article-thumb" src="../images/diego-segura.jpg" alt="" width="168" height="168" />
+          <p class="cc-article-eyebrow">An interview with Diego Segura, founder of Family Office</p>
+          <h1 class="cc-article-title">Narrative before design</h1>
+          <p class="cc-article-date">Recorded May 2026 &middot; Published July 2026</p>
+        </div>
+
+        <div class="cc-article-dek">
+          <p><a href="https://diegosegura.me/" target="_blank" rel="noopener">Diego Segura</a> is the founder of <a href="https://familyoffice.is/" target="_blank" rel="noopener">Family Office</a>, a New York design studio that pairs designers, writers, and strategists to do brand and product work, often in categories where design has rarely been done well, like mechanical engineering, ad tech, and traditional finance. He broke into design as a teenage dropout and became the youngest designer at COLLINS. One of his core beliefs about building great brands is that narrative changes a company&rsquo;s value, and design is the visual symbolism of it.</p>
+          <p>We paid him a visit at his sun-drenched Tribeca studio, lined with shelves of books covering everything from geopolitics to money markets to, of course, design. The range of titles is a useful introduction to how Diego sees the world, and it goes some way toward explaining <a href="https://terms-eccles.com/" target="_blank" rel="noopener">Terms-Eccles</a>, his platform covering capital and culture, which also hosts an annual <a href="https://www.instagram.com/p/DXPi4g5DSxe/" target="_blank" rel="noopener">Tax Day party</a>.</p>
+          <p>Our conversation left the mechanics of design behind fairly quickly. Diego moves between subjects at speed, touching on everything from brand systems, founder psychology, venture dynamics, private equity, whatever cultural current happens to be running underneath the work. His breadth of perspective is why so much of what he says lands somewhere between a designer&rsquo;s language and an investor&rsquo;s. He articulated something we have long believed: that design, done properly, is one of the most underrated levers available to a growing company.</p>
+        </div>
+
+        <div id="founding-story" class="scroll-anchor"></div>
+
+        <div class="cc-qa-list">
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Tell us about the founding story of Family Office and your own design journey.</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Diego</span>
+            <div class="cc-qa-body is-response">
+              <p>I dropped out of high school in Leander, Texas to head to Austin and joined a healthtech company that had just been acquired. I was 17 years old, the sole design hire at the company. I owe much to the CEO who hired me. He put me on to the idea that I could move to New York and said, &ldquo;If you want to be a great designer, you go where the great designers are.&rdquo; So, I started sending emails, and a few weeks after my 18th birthday flew to New York for the first time to visit Pentagram, Sagmeister &amp; Walsh, and COLLINS in the same week.</p>
+              <p>I ended up working at COLLINS, still just 18 years old. It was my BFA and MFA and coming of age all at once. I came in before everyone and left after everyone. Every week I&rsquo;d be handed a stack of books across fashion and design to read and learn from. After leaving COLLINS, I worked in tech briefly, raised money for a venture-backed software startup that failed, and then freelancing led to hiring designers and starting Family Office.</p>
+            </div>
+          </div>
+
+          <div id="design-alpha" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>If you were investing in design-led companies, where would you look for opportunities where design can create the most leverage?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Diego</span>
+            <div class="cc-qa-body is-response">
+              <p><span class="cc-highlight">Design is most valuable in spaces designers don&rsquo;t usually care to work in. The unsexy stuff.</span> Part of the magic, then, is convincing great talent to work on companies and problems that weren&rsquo;t immediately attractive to design for, but where the design transformation can be the most dramatic. If I were an investor, I&rsquo;d be looking for where I know design will have the most alpha, a category where it&rsquo;s never been done, or at least never been done well.</p>
+            </div>
+          </div>
+
+          <div id="bad-word" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>You&rsquo;ve said the word &ldquo;design&rdquo; itself causes problems. What do you mean?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Diego</span>
+            <div class="cc-qa-body is-response">
+              <p>Design is almost a bad word, because founders have a very specific idea of what it means. To most, it means &ldquo;I have this idea, can you please make it?&rdquo; Founders have great domain expertise, great instinct, real agency over their work and their people. But creatively, their ideas are often vague. Really, really vague. They think they know what they&rsquo;re describing, but the illusion of explanatory depth is hard at work. They know they want something, but they don&rsquo;t know it the same way they do their codebase or their cap table, for example.</p>
+              <p>The reason tech has been so adamant about technical co-founders is that the technical person roots the ideas person. Design has the same problem. Getting from an idea to a finished artifact (a piece of writing, a website, a product) is nine layers deep. People think they hire us to design. It&rsquo;s partially true&hellip; but they mostly hire us to write and clarify their ideas, and it just so happens that the design process is when that happens. We are writers at Family Office. Every designer in this room is extremely critical of a weak idea. <span class="cc-highlight">If I could give any founder one piece of advice, it would be: write the thing in extreme detail first, then go talk to the designers.</span></p>
+              <p>People spend a lot of money skipping that step. We sell the opposite &mdash; you don&rsquo;t know how to articulate this yet, and we&rsquo;re going to help you figure it out. The test of whether founders have thought through their idea is simple. Is there a doc? &ldquo;We have an outline.&rdquo; That&rsquo;s often not good enough. Do you have a headline? A real idea? Does anyone think your writing is interesting? If not, the idea is still weak. Give it strength.</p>
+            </div>
+          </div>
+
+          <div id="deliverables" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>There&rsquo;s something interesting about the psychological role you play as a design agency. A founder has the seed of an idea, and they come straight to you to materialize it. Responsibility gets diffused &mdash; how do you think through that?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Diego</span>
+            <div class="cc-qa-body is-response">
+              <p>It&rsquo;s fraught, and it&rsquo;s fraught partly because we want to sell the projects. That&rsquo;s how we stay in business, so the incentive cuts against us. One common misunderstanding is that people get hung up on deliverables. &ldquo;What do you deliver? What are you handing me?&rdquo; To which I ask, &ldquo;what deliverables actually matter?&rdquo; I think sometimes the deliverables make them feel like they got maximum value for a project, which is an illusion. Re-skinning a deck, once the brand has been reimagined, takes us very, very little time. <span class="cc-highlight">The one deliverable should be the idea we come up with &mdash; and then you should hire a designer as soon as possible.</span> People ask for a template they can use forever. Sure, I can make that. But you&rsquo;re going to break it, because you&rsquo;re not a designer. You&rsquo;ll ungroup the text, the typography won&rsquo;t load, and you won&rsquo;t even notice. If you&rsquo;re not ready to have a designer who can steward the work, there&rsquo;s no point in us building a brand system with no one to wield it.</p>
+            </div>
+          </div>
+
+          <div id="saying-no" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>So much service work is built on saying yes, but you seem to think saying no is the differentiator?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Diego</span>
+            <div class="cc-qa-body is-response">
+              <p><span class="cc-highlight">Saying no is a forcing function for both parties to be better.</span> When you tell a founder &ldquo;I don&rsquo;t think we can do this, I think it&rsquo;s too early,&rdquo; something clicks. Suddenly it&rsquo;s, &ldquo;what do you mean I&rsquo;m not ready? I&rsquo;m ready.&rdquo; And then they actually prove it. They get it on paper, they articulate it, and a few calls later I&rsquo;ll say, you know what, I get it now.</p>
+              <p>You can spot the studios that said yes the whole way through. The work ends up worse. The agency is incentivized to just get the client out the door so they can move resources to the next project. I&rsquo;d rather say no at the beginning, draw a line, agree on what makes sense, and then run a real project. We&rsquo;re not perfect at it, but that&rsquo;s the goal.</p>
+            </div>
+          </div>
+
+          <div id="after-the-project" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Where does your brand and design work start and end? What should a founder do after the project?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Diego</span>
+            <div class="cc-qa-body is-response">
+              <p>They need to hire designers. <span class="cc-highlight">The decision to take design seriously is binary. You&rsquo;re either going to invest in it or you&rsquo;re not.</span> The moment you decide you will, you should be clear on what it&rsquo;s going to get you. Is design important because your product hinges on it? Because go-to-market is the hinge of your company? Because it&rsquo;s part of your founder&rsquo;s marketing? All of those are fair, but they&rsquo;re different reasons that lead to different work.</p>
+              <p>Then there are two parts to the process. First, you go find the best possible talent in the world &mdash; and the best talent usually doesn&rsquo;t want to work in-house. That&rsquo;s the real reason agencies deserve to exist. The people who love making new ideas every day don&rsquo;t want to work on the same B2B product forever. Second, you bring in those great outsiders to set the direction, and then you hire someone in-house who can steward it. That person may not be the superstar on the agency side, and that&rsquo;s okay.</p>
+              <p>The in-house designer has to be good enough to steward what the agency made, and care enough about your product to steward it for a long time. Unless you&rsquo;re one of the rare startups that can pay enough to pull people out of agency work, you take slightly less raw talent in exchange for someone who genuinely cares about the space. They&rsquo;ll do amazing work because they care.</p>
+            </div>
+          </div>
+
+          <div id="making-the-hire" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Do you help founders make that designer hire?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Diego</span>
+            <div class="cc-qa-body is-response">
+              <p>Yes. Often. We&rsquo;ve pointed people toward freelancers for ongoing work, and we&rsquo;ve recruited a designer directly into one of our clients, which was very cool. He&rsquo;d just graduated. We meet a ton of designers because they&rsquo;re all sending us portfolios. We keep a big database of thousands of people, publicly catalogued at <a href="https://ruks.org" target="_blank" rel="noopener">Ruks.org</a>. Thesis shows are happening right now, everyone&rsquo;s graduating, so it&rsquo;s easy to reach out and say, &ldquo;Send us the flyer, send us the list of everyone showing.&rdquo; I went to the Parsons show recently just to scope it out and met a bunch of great young designers.</p>
+            </div>
+          </div>
+
+          <div id="evaluating-designers" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Do you have a take on geography and background? Where do the best designers come from, and how do you evaluate them?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Diego</span>
+            <div class="cc-qa-body is-response">
+              <p>The most talented designers as far as creativity and interesting work goes are almost all in New York &mdash; they went to school here or came here right after. Product designers are a slightly different question; there are good ones in lots of places, and it&rsquo;s more about sorting for taste.</p>
+              <p><span class="cc-highlight">A lot of evaluating a designer is just whether they have good taste in what they like.</span> Ask a product designer whose work they think is interesting. If the only answer is one obvious company, then they&rsquo;re not tapped in enough. They should know nine other great app icons and nine other products doing something crazy. They should remember the one company that nailed an interaction pattern nobody else did, or the iOS game that was hot for ten days and then disappeared. If you&rsquo;re tapped in, you just know these things.</p>
+            </div>
+          </div>
+
+          <div id="new-portfolio" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>We&rsquo;re noticing younger designers realizing they need to be on X &mdash; posting little animations that go viral and turn into jobs. Have you noticed this?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Diego</span>
+            <div class="cc-qa-body is-response">
+              <p><span class="cc-highlight">That&rsquo;s the new portfolio.</span> A 3-4 second animation goes viral, gets hundreds of likes, and becomes the entire calling card. We&rsquo;ve found people that way &mdash; someone posts a beautiful data visualization, and within minutes you&rsquo;re reaching out to ask if they&rsquo;re open to freelance or internships. It&rsquo;s especially powerful for students and people who need distribution.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <section id="hot-takes" class="cc-hot-takes scroll-anchor">
+          <h2 class="cc-hot-takes-title">Hot takes</h2>
+          <div class="cc-hot-takes-list">
+
+            <div class="cc-hot-take">
+              <span class="cc-hot-take-num">I</span>
+              <div>
+                <div class="cc-hot-take-q">When should a founder engage on a brand project?</div>
+                <div class="cc-hot-take-a">
+                  <p>Only when you&rsquo;re throwing fuel on a fire that&rsquo;s already lit, never when you&rsquo;re throwing a Hail Mary. If you have no traction, design can&rsquo;t save you &mdash; it just makes you subjective and attached to your own ideas. Show sales, a waitlist, people that are excited, then we have something objective to design toward.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="cc-hot-take">
+              <span class="cc-hot-take-num">II</span>
+              <div>
+                <div class="cc-hot-take-q">What should more young founders do instead of raising venture?</div>
+                <div class="cc-hot-take-a">
+                  <p>Buy the boring incumbent. A venture-backed startup burns millions acquiring customers from scratch over years. Meanwhile, some unsexy company already has fifty thousand of them, trades at no real multiple, and the acquisition friction is zero. Buy it, put a young, talented person in charge, make it AI-native. The risk profile is completely different from spending fifty million dollars on a coin flip.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="cc-hot-take">
+              <span class="cc-hot-take-num">III</span>
+              <div>
+                <div class="cc-hot-take-q">What does private equity get wrong about value creation?</div>
+                <div class="cc-hot-take-a">
+                  <p>To the person with a balance sheet, everything looks like an LBO. PE knows how to cut the back office and fix the bottom line, but almost no one in the board room thinks to go deep on product or narrative to grow the top line. The ideal firm here is born out of that thesis, not pivoting into it as a novelty. Right now you can count the people who actually get this on a few hands.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      var sidebar = document.getElementById('cc-sidebar');
+      var indicator = document.getElementById('cc-track-indicator');
+      var links = Array.prototype.slice.call(document.querySelectorAll('.cc-sidebar-link'));
+      if (!sidebar || !indicator || !links.length) return;
+
+      setTimeout(function () { sidebar.classList.add('is-visible'); }, 180);
+
+      links.forEach(function (link) {
+        link.addEventListener('click', function () {
+          var id = link.getAttribute('data-target');
+          var el = document.getElementById(id);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      function update() {
+        var activeIdx = 0;
+        for (var i = links.length - 1; i >= 0; i--) {
+          var id = links[i].getAttribute('data-target');
+          var el = document.getElementById(id);
+          if (el && el.getBoundingClientRect().top <= 130) { activeIdx = i; break; }
+        }
+        links.forEach(function (l, i) { l.classList.toggle('is-active', i === activeIdx); });
+        var activeLink = links[activeIdx];
+        if (activeLink) {
+          indicator.style.top = activeLink.offsetTop + 'px';
+          indicator.style.height = activeLink.offsetHeight + 'px';
+        }
+      }
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    })();
+  </script>
+  <script src="../../share-quote.js"></script>
+</body>
+</html>
