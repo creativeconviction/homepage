@@ -96,6 +96,8 @@
       transition: color var(--dur-1) var(--ease);
     }
     .cc-nav-link:hover { color: var(--cc-ink); }
+    .cc-nav-link--subscribe { color: var(--cc-magenta); }
+    .cc-nav-link--subscribe:hover { color: var(--cc-magenta); }
 
     /* ----- Article ----- */
     .cc-article {
@@ -246,7 +248,9 @@
     <header class="cc-header">
       <a class="cc-mark" href="../../">Creative <em>Conviction</em></a>
       <nav class="cc-nav">
-        <a class="cc-nav-link" href="../../about.html">About</a>
+        <a class="cc-nav-link" href="../about.html">About</a>
+        <a class="cc-nav-link" href="../hiring-lists/">Hiring lists</a>
+        <a class="cc-nav-link cc-nav-link--subscribe" href="https://creativeconvictionpress.substack.com/" target="_blank" rel="noopener">Subscribe</a>
       </nav>
     </header>
 
@@ -264,10 +268,6 @@
       <div class="cc-article-body" id="cc-article-body"></div>
 
     </main>
-
-    <footer class="cc-footer">
-      <p class="cc-footer-meta">&copy; 2026 Creative Conviction</p>
-    </footer>
 
   </div>
 
