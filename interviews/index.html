@@ -97,6 +97,8 @@
       transition: color var(--dur-1) var(--ease), text-decoration-thickness var(--dur-1) var(--ease);
     }
     .cc-nav-link:hover { color: var(--cc-ink); text-decoration-thickness: 2px; }
+    .cc-nav-link--subscribe { color: var(--cc-magenta); }
+    .cc-nav-link--subscribe:hover { color: var(--cc-magenta); }
 
     /* ----- Page layout ----- */
     .cc-page { max-width: 720px; margin: 0; }
@@ -126,7 +128,6 @@
       list-style: none;
       margin: 0;
       padding: 0;
-      border-top: 1px solid var(--cc-rule);
     }
     .cc-episode {
       display: grid;
@@ -138,6 +139,7 @@
       transition: background var(--dur-1) var(--ease);
       cursor: pointer;
     }
+    .cc-episode-list .cc-episode:last-child { border-bottom: 0; }
     .cc-episode:hover { background: rgba(26, 17, 48, 0.025); }
     .cc-episode-title {
       font-family: var(--font-serif);
@@ -209,6 +211,8 @@
       <a class="cc-mark" href="../">Creative <em>Conviction</em></a>
       <nav class="cc-nav">
         <a class="cc-nav-link" href="../about.html">About</a>
+        <a class="cc-nav-link" href="../hiring-lists/">Hiring lists</a>
+        <a class="cc-nav-link cc-nav-link--subscribe" href="https://creativeconvictionpress.substack.com/" target="_blank" rel="noopener">Subscribe</a>
       </nav>
     </header>
 
@@ -278,31 +282,9 @@
           <span class="cc-episode-date">July 2026</span>
         </li>
 
-        <li class="cc-episode">
-          <span class="cc-episode-title">
-            <img class="cc-episode-thumb" src="images/colin-daymond-hanna.jpg" alt="" width="48" height="48" />
-            <span>Colin Daymond Hanna &mdash; Creating light in the darkness</span>
-          </span>
-          <span class="cc-episode-cat">Co-founder, Earendil</span>
-          <span class="cc-episode-date">Coming soon</span>
-        </li>
-
-        <li class="cc-episode">
-          <span class="cc-episode-title">
-            <img class="cc-episode-thumb" src="images/diego-segura.jpg" alt="" width="48" height="48" />
-            <span>Diego Segura &mdash; Language before layout</span>
-          </span>
-          <span class="cc-episode-cat">Founder &amp; CEO, Family Office</span>
-          <span class="cc-episode-date">Coming soon</span>
-        </li>
-
       </ul>
 
     </main>
-
-    <footer class="cc-footer">
-      <p class="cc-footer-meta">&copy; 2026 Creative Conviction</p>
-    </footer>
 
   </div>
 </body>
