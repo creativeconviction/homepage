@@ -598,77 +598,40 @@
       var sidebar = document.getElementById('cc-sidebar');
       var indicator = document.getElementById('cc-track-indicator');
       var links = Array.prototype.slice.call(document.querySelectorAll('.cc-sidebar-link'));
-
-      var locked = false;
       if (!sidebar || !indicator || !links.length) return;
 
       setTimeout(function () { sidebar.classList.add('is-visible'); }, 180);
 
       links.forEach(function (link, idx) {
-
         link.addEventListener('click', function () {
-
           var id = link.getAttribute('data-target');
-
           var el = document.getElementById(id);
-
           if (el) el.scrollIntoView({ behavior: 'smooth' });
-
-          locked = true;
-
           setActive(idx);
-
         });
-
       });
 
 
       function setActive(idx) {
-
         links.forEach(function (l, i) { l.classList.toggle('is-active', i === idx); });
-
         var activeLink = links[idx];
-
         var linksBox = document.getElementById('cc-sidebar-links');
-
         if (!activeLink || !linksBox) return;
-
         var top = activeLink.getBoundingClientRect().top - linksBox.getBoundingClientRect().top;
-
         indicator.style.top = top + 'px';
-
         indicator.style.height = activeLink.getBoundingClientRect().height + 'px';
-
       }
 
 
       function update() {
-
-        if (locked) return;
-
         var activeIdx = 0;
-
         for (var i = links.length - 1; i >= 0; i--) {
-
           var el = document.getElementById(links[i].getAttribute('data-target'));
-
           if (el && el.getBoundingClientRect().top <= 130) { activeIdx = i; break; }
-
         }
-
+        if (window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 4) activeIdx = links.length - 1;
         setActive(activeIdx);
-
       }
-
-
-      function unlock() { locked = false; }
-
-      window.addEventListener('wheel', unlock, { passive: true });
-
-      window.addEventListener('touchmove', unlock, { passive: true });
-
-      window.addEventListener('keydown', unlock);
-
 
       window.addEventListener('scroll', update, { passive: true });
       window.addEventListener('resize', update);
