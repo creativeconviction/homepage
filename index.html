@@ -82,7 +82,7 @@
     .cc-nav { display: flex; gap: 28px; align-items: center; }
     .cc-nav-link {
       font-family: var(--font-sans);
-      font-size: 14px;
+      font-size: 15px;
       color: var(--fg-2);
       text-decoration: underline;
       text-underline-offset: 4px;
@@ -104,7 +104,7 @@
     }
     .cc-intro-text {
       font-family: var(--font-sans);
-      font-size: 17px;
+      font-size: 15px;
       color: var(--fg-2);
       line-height: 1.6;
       max-width: 560px;
@@ -128,7 +128,7 @@
     /* ----- Section headings ----- */
     .cc-section-label {
       font-family: var(--font-sans);
-      font-size: 14px;
+      font-size: 15px;
       color: var(--fg-2);
       margin-bottom: 14px;
     }
@@ -237,13 +237,13 @@
       }
       .cc-mark { font-size: 20px; white-space: nowrap; }
       .cc-nav { gap: 14px; }
-      .cc-nav-link { font-size: 12px; text-decoration: none; }
+      .cc-nav-link { font-size: 13px; text-decoration: none; }
 
       /* Compact intro */
       .cc-intro-strip { padding: 16px 0 16px; margin-bottom: 16px; }
-      .cc-intro-text { font-size: 15px; line-height: 1.45; }
+      .cc-intro-text { font-size: 13px; line-height: 1.5; }
 
-      .cc-section-label { font-size: 12px; margin-bottom: 0; }
+      .cc-section-label { font-size: 13px; margin-bottom: 0; }
       .cc-col { gap: 24px; }
 
       /* No border above first episode in each list */
@@ -251,7 +251,14 @@
 
       /* Episode: block with left padding for thumb, thumb absolutely placed */
       .cc-episode {
-        display: block;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+          "title title"
+          "cat date";
+        column-gap: 12px;
+        row-gap: 2px;
+        align-items: baseline;
         position: relative;
         padding: 10px 0 10px 60px; /* 48px thumb + 12px gap */
         min-height: 68px;
@@ -274,6 +281,7 @@
       }
 
       /* Title: block serif, no flex gap */
+      .cc-episode-title { grid-area: title; }
       .cc-episode-title {
         display: block;
         font-family: var(--font-serif);
@@ -288,26 +296,23 @@
 
       /* Meta inline below title */
       .cc-episode-cat {
-        display: inline;
+        grid-area: cat;
+        display: block;
         font-size: 11px;
         color: var(--fg-4);
         text-align: left;
-        align-self: auto;
-        grid-area: unset;
+        align-self: baseline;
       }
-      .cc-episode-cat::after { content: " \00B7 "; }
       .cc-episode-date {
-        display: inline;
+        grid-area: date;
+        display: block;
         font-size: 11px;
         color: var(--fg-4);
-        text-align: left;
+        text-align: right;
         margin: 0;
-        align-self: auto;
-        grid-area: unset;
+        align-self: baseline;
+        white-space: nowrap;
       }
-
-      /* Chevron */
-      .cc-episode::after { content: "\203A"; font-size: 16px; color: var(--fg-4); position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
 
       .cc-view-all { font-size: 13px; margin-top: 10px; }
       .cc-footer { margin-top: 40px; }
@@ -316,7 +321,9 @@
     @media (max-width: 400px) {
       .cc-mark { font-size: 18px; }
       .cc-nav { gap: 11px; }
-      .cc-nav-link { font-size: 11px; }
+      .cc-nav-link { font-size: 12px; }
+      .cc-section-label { font-size: 12px; }
+      .cc-intro-text { font-size: 12px; }
     }
   </style>
 </head>
