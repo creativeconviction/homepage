@@ -251,6 +251,10 @@
       border: 6px solid #121111;
       border-radius: 0;
     }
+    .cc-plate.is-portrait {
+      justify-content: center;
+      padding-left: 10px;   /* offsets the tab so the photo centres on the text column */
+    }
     .cc-plate.is-portrait .cc-plate-img { width: 50%; }
 
     .scroll-anchor { scroll-margin-top: 48px; }
@@ -347,6 +351,7 @@
       .cc-plate { margin-left: 0; }
       .cc-plate-tab { display: none; }
       .cc-plate-img { border-width: 5px; }
+      .cc-plate.is-portrait { padding-left: 0; }
       .cc-plate.is-portrait .cc-plate-img { width: 65%; }
     
       /* header: consistent across the site on mobile */
