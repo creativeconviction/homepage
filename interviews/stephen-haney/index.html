@@ -269,6 +269,7 @@
       cursor: default;
     }
     .cc-highlight:hover { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
+    .cc-highlight.is-on { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
 
     .cc-hot-takes { padding-top: 32px; }
     .cc-hot-takes-title {
@@ -323,7 +324,21 @@
       .cc-speaker { padding-top: 0; }
       .cc-hot-take { grid-template-columns: 1fr; gap: 6px; }
       .cc-hot-take-num { padding-top: 0; }
-    }
+    
+      /* header: consistent across the site on mobile */
+      .cc-header {
+        position: sticky;
+        top: 0;
+        background: var(--cc-paper);
+        z-index: 10;
+        padding: 14px 0 12px;
+        margin-bottom: 32px;
+        border-bottom: none;
+      }
+      .cc-mark { font-size: 20px; }
+      .cc-nav { gap: 18px; }
+      .cc-nav-link { font-size: 12px; text-decoration: none; }
+}
   </style>
 </head>
 
@@ -616,5 +631,13 @@
     })();
   </script>
   <script src="../../share-quote.js"></script>
+  <script>
+    (function () {
+      if (!window.matchMedia || !window.matchMedia('(hover: none)').matches) return;
+      Array.prototype.forEach.call(document.querySelectorAll('.cc-highlight'), function (el) {
+        el.addEventListener('click', function () { el.classList.toggle('is-on'); });
+      });
+    })();
+  </script>
 </body>
 </html>
