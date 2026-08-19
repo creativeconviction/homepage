@@ -243,6 +243,21 @@
       background: var(--cc-paper-soft, #F1EDF6);
       border-radius: 16px 0 0 16px;
       margin-right: -10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 18px 0;
+    }
+    .cc-plate-label {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1;
+      letter-spacing: 0.01em;
+      color: var(--fg-3);
+      white-space: nowrap;
     }
     .cc-plate-img {
       display: block;
@@ -348,8 +363,20 @@
       .cc-speaker { padding-top: 0; }
       .cc-hot-take { grid-template-columns: 1fr; gap: 6px; }
       .cc-hot-take-num { padding-top: 0; }
-      .cc-plate { margin-left: 0; }
-      .cc-plate-tab { display: none; }
+      .cc-plate { margin-left: 0; flex-direction: column; }
+      .cc-plate-tab {
+        flex: none;
+        background: none;
+        border-radius: 0;
+        margin: 0 0 7px;
+        padding: 0;
+        align-items: flex-start;
+      }
+      .cc-plate-label {
+        writing-mode: horizontal-tb;
+        transform: none;
+        font-size: 12px;
+      }
       .cc-plate-img { border-width: 5px; }
       .cc-plate.is-portrait { padding-left: 0; }
       .cc-plate.is-portrait .cc-plate-img { width: 65%; }
@@ -430,7 +457,7 @@
         </div>
 
         <div class="cc-plate">
-          <div class="cc-plate-tab" aria-hidden="true"></div>
+          <div class="cc-plate-tab"><span class="cc-plate-label">Family Office bookshelf</span></div>
           <img class="cc-plate-img" src="images/studio-shelves.jpg?v=2" alt="A wall of shelves in the Family Office studio, books stacked from design to geopolitics" />
         </div>
 
@@ -454,7 +481,7 @@
           </div>
 
           <div class="cc-plate is-portrait">
-            <div class="cc-plate-tab" aria-hidden="true"></div>
+            <div class="cc-plate-tab"><span class="cc-plate-label">Diego</span></div>
             <img class="cc-plate-img" src="images/diego-portrait.jpg?v=3" alt="Black and white portrait of Diego Segura in profile" />
           </div>
 
@@ -509,7 +536,7 @@
           </div>
 
           <div class="cc-plate">
-            <div class="cc-plate-tab" aria-hidden="true"></div>
+            <div class="cc-plate-tab"><span class="cc-plate-label">Studio morning</span></div>
             <img class="cc-plate-img" src="images/studio-morning.jpg?v=2" alt="Two people talking by the studio windows in morning light" />
           </div>
 
@@ -549,7 +576,7 @@
           </div>
 
           <div class="cc-plate">
-            <div class="cc-plate-tab" aria-hidden="true"></div>
+            <div class="cc-plate-tab"><span class="cc-plate-label">COLLINS crew at Storm King, 2019</span></div>
             <img class="cc-plate-img" src="images/upstate.jpg?v=2" alt="A group sitting on a grass hillside looking out at rolling fields and autumn woods" />
           </div>
 
@@ -605,7 +632,7 @@
         </div>
 
         <div class="cc-plate">
-          <div class="cc-plate-tab" aria-hidden="true"></div>
+          <div class="cc-plate-tab"><span class="cc-plate-label">Tax Day 2026</span></div>
           <img class="cc-plate-img" src="images/talk.jpg?v=2" alt="A packed loft audience seated on the floor watching a speaker with a microphone" />
         </div>
 
