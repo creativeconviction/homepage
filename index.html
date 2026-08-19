@@ -229,12 +229,14 @@
         top: 0;
         background: var(--cc-paper);
         z-index: 10;
+        gap: 10px;
+        flex-wrap: wrap;
         padding: 14px 0 12px;
         margin-bottom: 0;
         border-bottom: none;
       }
-      .cc-mark { font-size: 20px; }
-      .cc-nav { gap: 18px; }
+      .cc-mark { font-size: 20px; white-space: nowrap; }
+      .cc-nav { gap: 14px; }
       .cc-nav-link { font-size: 12px; text-decoration: none; }
 
       /* Compact intro */
@@ -309,6 +311,12 @@
 
       .cc-view-all { font-size: 13px; margin-top: 10px; }
       .cc-footer { margin-top: 40px; }
+    }
+    /* very narrow phones: keep the wordmark on one line */
+    @media (max-width: 400px) {
+      .cc-mark { font-size: 18px; }
+      .cc-nav { gap: 11px; }
+      .cc-nav-link { font-size: 11px; }
     }
   </style>
 </head>
