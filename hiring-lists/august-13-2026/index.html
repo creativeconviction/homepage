@@ -153,7 +153,21 @@
       .cc-shell { padding: 24px 24px 64px; }
       .cc-header { margin-bottom: 56px; }
       .cc-page-header { margin-bottom: 36px; }
-    }
+    
+      /* header: consistent across the site on mobile */
+      .cc-header {
+        position: sticky;
+        top: 0;
+        background: var(--cc-paper);
+        z-index: 10;
+        padding: 14px 0 12px;
+        margin-bottom: 32px;
+        border-bottom: none;
+      }
+      .cc-mark { font-size: 20px; }
+      .cc-nav { gap: 18px; }
+      .cc-nav-link { font-size: 12px; text-decoration: none; }
+}
   </style>
 </head>
 <body>
