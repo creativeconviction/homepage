@@ -238,7 +238,31 @@
       .cc-header { margin-bottom: 48px; }
       .cc-article-header { margin-bottom: 36px; }
       .cc-article-body h2 { margin: 40px 0 14px; }
+    
+      /* header: consistent across the site on mobile */
+      .cc-header {
+        position: sticky;
+        top: 0;
+        background: var(--cc-paper);
+        z-index: 10;
+        padding: 14px 0 12px;
+        margin-bottom: 32px;
+        border-bottom: none;
+      }
+      .cc-mark { font-size: 20px; }
+      .cc-nav { gap: 18px; }
+      .cc-nav-link { font-size: 12px; text-decoration: none; }
+}
+    .cc-highlight {
+      background: rgba(54, 28, 118, 0.10);
+      color: var(--cc-ink);
+      padding: 1px 4px;
+      transition: background 120ms cubic-bezier(.2,.6,.2,1), color 120ms cubic-bezier(.2,.6,.2,1);
+      cursor: pointer;
     }
+    .cc-highlight:hover,
+    .cc-highlight.is-on { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
+
   </style>
 </head>
 
@@ -292,6 +316,14 @@
       cap.textContent = label;
       div.replaceWith(img, cap);
     });
+  </script>
+  <script>
+    (function () {
+      if (!window.matchMedia || !window.matchMedia('(hover: none)').matches) return;
+      Array.prototype.forEach.call(document.querySelectorAll('.cc-highlight'), function (el) {
+        el.addEventListener('click', function () { el.classList.toggle('is-on'); });
+      });
+    })();
   </script>
 </body>
 </html>
