@@ -233,8 +233,24 @@
     .cc-article-dek p + p { margin-top: 16px; }
     .cc-article-dek a { color: inherit; }
 
-    .cc-img { display: block; max-width: 100%; margin: 20px 0 8px; }
-    .cc-img.is-full { width: 100%; }
+    .cc-plate {
+      display: flex;
+      align-items: stretch;
+      margin: 34px 0 34px -62px;
+    }
+    .cc-plate-tab {
+      flex: 0 0 62px;
+      background: var(--cc-paper-soft, #F1EDF6);
+      border-radius: 16px 0 0 16px;
+      margin-right: -10px;
+    }
+    .cc-plate-img {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      border: 11px solid #121111;
+      border-radius: 0;
+    }
 
     .scroll-anchor { scroll-margin-top: 48px; }
 
@@ -326,6 +342,9 @@
       .cc-speaker { padding-top: 0; }
       .cc-hot-take { grid-template-columns: 1fr; gap: 6px; }
       .cc-hot-take-num { padding-top: 0; }
+      .cc-plate { margin-left: 0; }
+      .cc-plate-tab { display: none; }
+      .cc-plate-img { border-width: 8px; }
     }
   </style>
 </head>
@@ -380,8 +399,9 @@
           <p>Our conversation left the mechanics of design behind fairly quickly. Diego moves between subjects at speed, touching on everything from brand systems, founder psychology, venture dynamics, private equity, whatever cultural current happens to be running underneath the work. His breadth of perspective is why so much of what he says lands somewhere between a designer&rsquo;s language and an investor&rsquo;s. He articulated something we have long believed: that design, done properly, is one of the most underrated levers available to a growing company.</p>
         </div>
 
-        <div class="cc-img-block">
-          <img class="cc-img is-full" src="images/studio-shelves.jpg" alt="A wall of shelves in the Family Office studio, books stacked from design to geopolitics" />
+        <div class="cc-plate">
+          <div class="cc-plate-tab" aria-hidden="true"></div>
+          <img class="cc-plate-img" src="images/studio-shelves.jpg" alt="A wall of shelves in the Family Office studio, books stacked from design to geopolitics" />
         </div>
 
         <div id="founding-story" class="scroll-anchor"></div>
@@ -403,8 +423,9 @@
             </div>
           </div>
 
-          <div class="cc-img-block">
-            <img class="cc-img is-full" src="images/diego-portrait.jpg" alt="Portrait of Diego Segura" />
+          <div class="cc-plate">
+            <div class="cc-plate-tab" aria-hidden="true"></div>
+            <img class="cc-plate-img" src="images/diego-portrait.jpg" alt="Portrait of Diego Segura" />
           </div>
 
           <div id="design-alpha" class="scroll-anchor"></div>
@@ -457,8 +478,9 @@
             </div>
           </div>
 
-          <div class="cc-img-block">
-            <img class="cc-img is-full" src="images/studio-morning.jpg" alt="Two people talking by the studio windows in morning light" />
+          <div class="cc-plate">
+            <div class="cc-plate-tab" aria-hidden="true"></div>
+            <img class="cc-plate-img" src="images/studio-morning.jpg" alt="Two people talking by the studio windows in morning light" />
           </div>
 
           <div id="saying-no" class="scroll-anchor"></div>
@@ -496,8 +518,9 @@
             </div>
           </div>
 
-          <div class="cc-img-block">
-            <img class="cc-img is-full" src="images/upstate.jpg" alt="A group sitting on a grass hillside looking out at rolling fields and autumn woods" />
+          <div class="cc-plate">
+            <div class="cc-plate-tab" aria-hidden="true"></div>
+            <img class="cc-plate-img" src="images/upstate.jpg" alt="A group sitting on a grass hillside looking out at rolling fields and autumn woods" />
           </div>
 
           <div id="making-the-hire" class="scroll-anchor"></div>
@@ -551,8 +574,9 @@
 
         </div>
 
-        <div class="cc-img-block">
-          <img class="cc-img is-full" src="images/talk.jpg" alt="A packed loft audience seated on the floor watching a speaker with a microphone" />
+        <div class="cc-plate">
+          <div class="cc-plate-tab" aria-hidden="true"></div>
+          <img class="cc-plate-img" src="images/talk.jpg" alt="A packed loft audience seated on the floor watching a speaker with a microphone" />
         </div>
 
         <section id="hot-takes" class="cc-hot-takes scroll-anchor">
