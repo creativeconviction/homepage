@@ -218,6 +218,19 @@
     .scroll-anchor { scroll-margin-top: 48px; }
 
     /* ----- Intro dek ----- */
+    .cc-article-substack {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      margin: 8px 0 0;
+    }
+    .cc-article-substack a.cc-highlight {
+      color: var(--cc-ink);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .cc-article-substack a.cc-highlight:hover,
+    .cc-article-substack a.cc-highlight.is-on { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
+
     .cc-article-dek {
       font-family: var(--font-sans);
       font-size: 17px;
@@ -401,6 +414,7 @@
           <p class="cc-article-eyebrow">An interview with Ben Hylak and Zubin Koticha, co-founders of Raindrop</p>
           <h1 class="cc-article-title">Tsunami of capabilities</h1>
           <p class="cc-article-date">June 2026</p>
+          <p class="cc-article-substack"><a href="https://creativeconvictionpress.substack.com/p/tsunami-of-capabilities" target="_blank" rel="noopener" class="cc-highlight">Substack version</a></p>
         </div>
 
         <p class="cc-article-dek">When Ben, Zubin, and Alexis started building tools to understand where their own AI agents were failing in production, there was no production observability platform for agents. The platforms that existed counted tokens, scored hallucinations, or tagged sentiment, but none of them told you whether your agent did the thing the user wanted. So they built the thing they needed, and found that everyone building an agent had the same problem. This became <a href="https://raindrop.ai" target="_blank" rel="noopener">Raindrop</a>. Ben came to this from a unique background, four years at Apple as an engineer and then a designer, working on projects like the Vision Pro before his cofounder Zubin pulled him away after ChatGPT arrived. The teams&rsquo; design sense shows up everywhere in Raindrop, though not in the way you might expect. We talked about why observability became more important as agents got more capable, the internal language Raindrop invented to make a brand new problem comprehensible, and the small product details that separate tools people tolerate from tools people love.</p>
