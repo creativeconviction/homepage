@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png" />
+
+  <title>Noah Kerner &mdash; Creative Conviction</title>
+  <meta name="cc-person" content="Noah Kerner">
+  <meta name="cc-role" content="CEO and Chairman, Acorns">
+  <meta name="description" content="We All Dream. An interview with Noah Kerner, CEO and Chairman of Acorns." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400..700&display=swap" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --cc-magenta:   #D8016A;
+      --cc-orange:    #FF6514;
+      --cc-blue:      #1A0AE6;
+      --cc-indigo:    #361C76;
+      --cc-magenta-tint: #FBE0EC;
+
+      --cc-paper:        #F7F5FA;
+      --cc-paper-soft:   #F2EFF7;
+      --cc-white:        #FBFAFD;
+
+      --cc-ink:    #1A1130;
+      --cc-ink-2:  #322847;
+      --cc-ink-3:  #6A6378;
+      --cc-ink-4:  #9C97A8;
+      --cc-rule:        #D2CDDB;
+      --cc-rule-soft:   #E5E1ED;
+
+      --fg-1: var(--cc-ink);
+      --fg-2: var(--cc-ink-2);
+      --fg-3: var(--cc-ink-3);
+
+      --font-serif: "EB Garamond", "Iowan Old Style", Charter, Georgia, serif;
+      --font-sans:  "Inter", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+      --ease: cubic-bezier(.2,.6,.2,1);
+      --dur-1: 120ms;
+      --dur-2: 220ms;
+
+      --sidebar-w: 220px;
+    }
+
+    body {
+      background: var(--cc-paper);
+      color: var(--fg-1);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      min-height: 100vh;
+    }
+
+    a { color: var(--cc-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: text-decoration-thickness var(--dur-1) var(--ease); }
+    a:hover { text-decoration-thickness: 2px; }
+    em { font-family: var(--font-serif); font-style: italic; }
+
+    .cc-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 40px 80px;
+    }
+    .cc-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-bottom: 22px;
+      margin-bottom: 64px;
+    }
+    .cc-mark {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      text-decoration: none;
+      line-height: 1;
+    }
+    .cc-mark em { font-style: italic; color: var(--cc-magenta); font-family: var(--font-serif); }
+    .cc-nav { display: flex; gap: 28px; }
+    .cc-nav-link {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      color: var(--fg-2);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+      transition: color var(--dur-1) var(--ease), text-decoration-thickness var(--dur-1) var(--ease);
+    }
+    .cc-nav-link:hover { color: var(--cc-ink); text-decoration-thickness: 2px; }
+    .cc-nav-link--subscribe { color: var(--cc-magenta); }
+    .cc-nav-link--subscribe:hover { color: var(--cc-magenta); }
+
+    .cc-article-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      align-items: start;
+    }
+    @media (min-width: 1060px) {
+      .cc-article-layout {
+        grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+        gap: 56px;
+      }
+    }
+
+    .cc-sidebar { display: none; }
+    @media (min-width: 1060px) {
+      .cc-sidebar {
+        display: block;
+        position: sticky;
+        top: 40px;
+        align-self: start;
+        opacity: 0;
+        transform: translateX(-8px);
+        transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+      }
+    }
+    .cc-sidebar.is-visible { opacity: 1; transform: translateX(0); }
+
+    .cc-sidebar-eyebrow {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--fg-3);
+      margin-bottom: 18px;
+    }
+
+    .cc-sidebar-nav { display: flex; align-items: flex-start; gap: 14px; }
+    .cc-sidebar-track {
+      position: relative;
+      width: 1px;
+      flex-shrink: 0;
+      align-self: stretch;
+      background: var(--cc-rule-soft);
+    }
+    .cc-sidebar-track-indicator {
+      position: absolute;
+      width: 100%;
+      background: var(--cc-ink);
+      height: 14px; top: 0;
+      transition: top 0.22s var(--ease), height 0.12s var(--ease);
+    }
+
+    .cc-sidebar-links { display: flex; flex-direction: column; gap: 4px; }
+    .cc-sidebar-link {
+      background: none; border: none; cursor: pointer; padding: 2px 0;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1.4;
+      color: var(--fg-3);
+      text-align: left;
+      transition: color var(--dur-1) var(--ease);
+    }
+    .cc-sidebar-link:hover { color: var(--cc-ink); }
+    .cc-sidebar-link.is-active { color: var(--cc-ink); font-weight: 500; }
+
+    .cc-article { max-width: 640px; margin: 0 auto; }
+    @media (min-width: 1060px) { .cc-article { margin: 0; } }
+
+    .cc-article-header { margin-bottom: 56px; }
+    .cc-article-thumb {
+      display: block;
+      width: 168px;
+      height: 168px;
+      object-fit: cover;
+      margin: 0 0 28px;
+    }
+    .cc-article-eyebrow {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 15px;
+      color: var(--fg-3);
+      margin-bottom: 14px;
+    }
+    .cc-article-title {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 4.4vw, 48px);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--cc-ink);
+      margin: 0 0 18px;
+    }
+    .cc-article-title em { font-style: italic; }
+    .cc-article-subtitle {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 19px;
+      color: var(--fg-2);
+      margin: 0 0 10px;
+    }
+    .cc-article-date {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
+
+    .cc-article-substack {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      margin: 8px 0 0;
+    }
+    .cc-article-substack a.cc-highlight {
+      color: var(--cc-ink);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .cc-article-substack a.cc-highlight:hover { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
+
+    .cc-article-dek {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--fg-2);
+      margin: 32px 0 56px;
+    }
+    .cc-article-dek p + p { margin-top: 16px; }
+    .cc-article-dek a { color: inherit; }
+
+    .cc-plate {
+      display: flex;
+      align-items: stretch;
+      margin: 34px 0 34px -62px;
+    }
+    .cc-plate-tab {
+      flex: 0 0 62px;
+      background: var(--cc-paper-soft, #F1EDF6);
+      border-radius: 16px 0 0 16px;
+      margin-right: -10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 18px 0;
+    }
+    .cc-plate-label {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1;
+      letter-spacing: 0.01em;
+      color: var(--fg-3);
+      white-space: nowrap;
+    }
+    .cc-plate-img {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      border: 6px solid #121111;
+      border-radius: 0;
+    }
+    .cc-plate.is-portrait {
+      justify-content: center;
+      padding-left: 10px;   /* offsets the tab so the photo centres on the text column */
+    }
+    .cc-plate.is-portrait .cc-plate-img { width: 50%; }
+
+    .scroll-anchor { scroll-margin-top: 48px; }
+
+    .cc-qa-list { display: flex; flex-direction: column; gap: 28px; margin-bottom: 80px; }
+    .cc-qa { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: start; }
+    .cc-speaker {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding-top: 6px;
+      line-height: 1.3;
+    }
+    .cc-speaker.is-interviewer { color: var(--fg-3); }
+    .cc-speaker.is-guest { color: var(--cc-ink); }
+
+    .cc-qa-body {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg-2);
+    }
+    .cc-qa-body p { margin-bottom: 14px; }
+    .cc-qa-body p:last-child { margin-bottom: 0; }
+    .cc-qa-body em { font-family: var(--font-serif); font-style: italic; }
+    .cc-qa-body.is-question { color: var(--cc-ink); font-weight: 500; }
+    .cc-qa-body.is-response { font-weight: 400; }
+    .cc-qa-body a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+    .cc-highlight {
+      background: rgba(54, 28, 118, 0.10);
+      color: var(--cc-ink);
+      padding: 1px 4px;
+      transition: background var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+      cursor: default;
+    }
+    .cc-highlight:hover { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
+    .cc-highlight.is-on { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
+
+    .cc-hot-takes { padding-top: 32px; }
+    .cc-hot-takes-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      margin: 0 0 32px;
+    }
+    .cc-hot-takes-list { display: flex; flex-direction: column; gap: 32px; }
+    .cc-hot-take { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: start; }
+    .cc-hot-take-num {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 17px;
+      color: var(--fg-3);
+      padding-top: 4px;
+    }
+    .cc-hot-take-q {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--cc-ink);
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+    .cc-hot-take-a {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg-2);
+    }
+    .cc-hot-take-a p { margin-bottom: 12px; }
+    .cc-hot-take-a p:last-child { margin-bottom: 0; }
+    .cc-hot-take-a a { color: inherit; }
+
+    .cc-footer { padding: 48px 0 32px; margin-top: 96px; }
+    .cc-footer-meta {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 640px) {
+      .cc-shell { padding: 24px 24px 64px; }
+      .cc-header { margin-bottom: 48px; }
+      .cc-article-header { margin-bottom: 40px; }
+      .cc-qa { grid-template-columns: 1fr; gap: 6px; }
+      .cc-speaker { padding-top: 0; }
+      .cc-hot-take { grid-template-columns: 1fr; gap: 6px; }
+      .cc-hot-take-num { padding-top: 0; }
+      .cc-plate { margin-left: 0; flex-direction: column; }
+      .cc-plate-tab {
+        flex: none;
+        background: none;
+        border-radius: 0;
+        margin: 0 0 7px;
+        padding: 0;
+        align-items: flex-start;
+      }
+      .cc-plate-label {
+        writing-mode: horizontal-tb;
+        transform: none;
+        font-size: 12px;
+      }
+      .cc-plate-img { border-width: 5px; }
+      .cc-plate.is-portrait { padding-left: 0; }
+      .cc-plate.is-portrait .cc-plate-img { width: 65%; }
+    
+      /* header: consistent across the site on mobile */
+      .cc-header {
+        position: sticky;
+        top: 0;
+        background: var(--cc-paper);
+        z-index: 10;
+        gap: 10px;
+        flex-wrap: wrap;
+        padding: 14px 0 12px;
+        margin-bottom: 32px;
+        border-bottom: none;
+      }
+      .cc-mark { font-size: 20px; white-space: nowrap; }
+      .cc-nav { gap: 14px; }
+      .cc-nav-link { font-size: 13px; text-decoration: none; }
+}
+    /* very narrow phones: keep the wordmark on one line */
+    @media (max-width: 400px) {
+      .cc-mark { font-size: 18px; }
+      .cc-nav { gap: 11px; }
+      .cc-nav-link { font-size: 12px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cc-shell">
+
+    <header class="cc-header">
+      <a class="cc-mark" href="../../">Creative <em>Conviction</em></a>
+      <nav class="cc-nav">
+        <a class="cc-nav-link" href="../../about.html">About</a>
+        <a class="cc-nav-link" href="../../hiring-lists/">Hiring lists</a>
+        <a class="cc-nav-link cc-nav-link--subscribe" href="https://creativeconvictionpress.substack.com/" target="_blank" rel="noopener">Subscribe</a>
+      </nav>
+    </header>
+
+    <div class="cc-article-layout">
+
+      <aside class="cc-sidebar" id="cc-sidebar">
+        <div class="cc-sidebar-eyebrow">Contents</div>
+        <div class="cc-sidebar-nav">
+          <div class="cc-sidebar-track">
+            <div class="cc-sidebar-track-indicator" id="cc-track-indicator"></div>
+          </div>
+          <div class="cc-sidebar-links" id="cc-sidebar-links">
+            <button class="cc-sidebar-link is-active" data-target="dj-roots">DJ roots in 90s hip hop</button>
+            <button class="cc-sidebar-link" data-target="improvisation">Improvisation over data</button>
+            <button class="cc-sidebar-link" data-target="hip-hop-to-meaning">From hip hop to meaning</button>
+            <button class="cc-sidebar-link" data-target="born-an-artist">Every child is born an artist</button>
+            <button class="cc-sidebar-link" data-target="ai-as-an-input">AI as an input</button>
+            <button class="cc-sidebar-link" data-target="studying-magnetism">Studying magnetism</button>
+            <button class="cc-sidebar-link" data-target="build-for-yourself">Build for yourself</button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="cc-article">
+
+        <div class="cc-article-header">
+          <img class="cc-article-thumb" src="../images/noah-kerner.jpg" alt="" width="168" height="168" />
+          <p class="cc-article-eyebrow">An interview with Noah Kerner, CEO and Chairman, Acorns</p>
+          <h1 class="cc-article-title">We All Dream</h1>
+          <p class="cc-article-date">Recorded July 2026 &middot; Published August 2026</p>
+          <p class="cc-article-substack"><a href="https://creativeconvictionpress.substack.com/" target="_blank" rel="noopener" class="cc-highlight">Substack version</a></p>
+        </div>
+
+        <div class="cc-article-dek">
+          <p>Noah Kerner has spent his whole life tuning one instrument: his instinct. Before he was CEO of Acorns, a financial wellness app with millions of users, he was a kid in New York City who got turntables in 1991, locked himself in his room until the early hours learning to scratch, and showed up to nightclubs with ten crates of records and no plan. He started his first company at 21 in the hip hop space, and spent four years interviewing 75 of culture&rsquo;s most magnetic people for his book <a href="https://www.amazon.com/Chasing-Cool-Standing-Cluttered-Marketplace/dp/0743497104" target="_blank" rel="noopener">Chasing Cool</a>.</p>
+          <p>In this interview, Noah talks about why nothing profound was ever built by simply following the data, what dogs smelling history can teach us about how adults break children&rsquo;s creativity, and why he&rsquo;s watched every Conor McGregor interview ever recorded.</p>
+        </div>
+
+        <div id="dj-roots" class="scroll-anchor"></div>
+
+        <div class="cc-qa-list">
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>How did getting into the DJing start?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Noah</span>
+            <div class="cc-qa-body is-response">
+              <p>I got into DJing early in hip hop in 1991. It was about turntablism and battling and scratching and beat juggling.</p>
+              <p>I was a public school kid, so I was surrounded by hip hop. The first cassette tape I can remember having was <a href="https://www.youtube.com/watch?v=63-uUWe-JkA" target="_blank" rel="noopener">It Takes a Nation of Millions by Public Enemy</a>. I thought DJing was the coolest art form, I got turntables and locked myself in my room. I&rsquo;ve always been somebody who wants to be great at what I do and put the time in to master a craft. Every night I would stay up till the wee hours of the morning learning to scratch, watching battle DJs, taking some inspiration.</p>
+              <p>But I always had a feeling that the value is in originality and having your own thing. When I first started performing at nightclubs, I was really young. A lot of people had predefined sets. They knew the music they were going to play throughout the night, but I would come with ten crates of records and not know where I was going. I would follow the crowd and follow my feelings.</p>
+            </div>
+          </div>
+
+          <div id="improvisation" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>You didn&rsquo;t get nervous?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Noah</span>
+            <div class="cc-qa-body is-response">
+              <p>No, I was nervous, but I&rsquo;m still following my gut. <span class="cc-highlight">I find this whole &ldquo;follow the data&rdquo; or &ldquo;follow the research&rdquo; thing to be so backwards. Nothing profound was built off of research in the classic sense. You follow your heart, instinct, taste, imagination.</span></p>
+              <p>It was night after night of doing these clubs where I started to become one with the audience. Growing up, <a href="https://en.wikipedia.org/wiki/The_Freud/Jung_Letters" target="_blank" rel="noopener">Freud and Jung</a> was the literature that lined the walls in my house. The research is about the long journey of tuning the instinct and the antenna about what it is that moves people. My research was just listening, watching, observing, participating.</p>
+              <p>I still have a room in my apartment with turntables set up, and I go in every day for 10, 15 minutes and cut. It takes me away.</p>
+            </div>
+          </div>
+
+          <div id="hip-hop-to-meaning" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>When did you stop doing sets and start building companies?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Noah</span>
+            <div class="cc-qa-body is-response">
+              <p>I stopped around 26. I started my first company at 21, but it was in the hip hop space. All these things have followed a thread of what I&rsquo;m passionate about, what moves me at the particular time. And now I&rsquo;m moved only by the feeling of making things that are meaningful, helpful to people in a true sense, not in some corporate distorted sense.</p>
+              <p>In my 20s, it was hip hop. It was a product development and marketing agency focused on young adults. It was a music company. I wrote a book called Chasing Cool that was an exploration into what creates magnetism in culture and among consumers. We interviewed 75 people who had created something magnetic in every kind of field.</p>
+              <p>I reflect a lot on the positioning of that name, because the name is a negative. It&rsquo;s the opposite of what we were championing. <span class="cc-highlight">What&rsquo;s happening in corporate America is chasing, but what leads to wonderful outcomes is the pursuit of an internal feeling and your own sense of taste. And above all things, you trust yourself.</span></p>
+            </div>
+          </div>
+
+          <div id="born-an-artist" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Where did that self trust come from for you?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Noah</span>
+            <div class="cc-qa-body is-response">
+              <p>That was promoted in my household growing up, particularly by my mother. I can immediately transport myself back to this moment where she gave me a book of Albert Einstein quotes, bookmarked to, &ldquo;Few are those who see with their own eyes and feel with their own hearts. See with your own eyes, feel with your own heart, go your own way. You&rsquo;re not going to be good at being anyone else anyway.&rdquo;</p>
+              <p>But it&rsquo;s a really hard thing because many people are told certain things as children. Kids ask, &ldquo;Why are things this way?&rdquo; People around them respond with, &ldquo;Just cuz. Stop asking so many questions.&rdquo; Kids also break things. But kids break things because they&rsquo;re experimenting, they&rsquo;re trying to learn their way.</p>
+              <p>My wife and I have an art organization she runs called Give Kids Art, and the message is &ldquo;Create Fearlessly.&rdquo; The founding ethos is based on a Picasso quote, &ldquo;Every child is born an artist. The problem is how to remain one as we grow up.&rdquo;</p>
+              <p>There&rsquo;s a wonderful book about how animals experience the world, <a href="https://edyong.me/an-immense-world" target="_blank" rel="noopener">An Immense World</a>. Dogs smell history. They experience smell as a chronological record of everything that happened in that spot. So when you pull your dog away from smelling, you&rsquo;re breaking their natural instinct, their joy. I think of it as a metaphor for what happens to kids. &ldquo;Don&rsquo;t drop that. Don&rsquo;t break that. Stop asking questions.&rdquo;</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Do you think someone is born creative vs not?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Noah</span>
+            <div class="cc-qa-body is-response">
+              <p><span class="cc-highlight">I think everybody is creative. We all dream, and dreams are magnificent. Every night you fall asleep and you become a producer, a director, a director of photography, a writer, an actor. You&rsquo;re creating full feature length films in your mind every night. These are miracles. So when somebody says to me they&rsquo;re not creative, I say, &ldquo;Do you dream? You&rsquo;re probably just not in touch with your creativity. So you need to pull that out, whatever is cutting you off from that inner child.&rdquo;</span></p>
+            </div>
+          </div>
+
+          <div id="ai-as-an-input" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>I wonder how this changes when everyone has AI in their hands to ask &ldquo;why&rdquo; questions more freely.</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Noah</span>
+            <div class="cc-qa-body is-response">
+              <p>Maybe it leads to more imagination, because you don&rsquo;t have to be confronted by &ldquo;Just cuz.&rdquo;</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>What&rsquo;s your sentiment around AI?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Noah</span>
+            <div class="cc-qa-body is-response">
+              <p>I would bring it back to what I said about creativity. Creativity, in many ways, is the ability to synthesize things into something your own. So if you have that foundation, you can access all of this amazing information and inspiration, but that&rsquo;s just an input or an insight. You need to build something better. But <span class="cc-highlight">I&rsquo;m not sure we should be treating AI as a replacement for our own instincts. It&rsquo;s really hard to believe the human propensity for imagination would be replaced.</span></p>
+            </div>
+          </div>
+
+          <div id="studying-magnetism" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Are there inspiration sources you look at?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Noah</span>
+            <div class="cc-qa-body is-response">
+              <p>I&rsquo;m drawn to people, and I&rsquo;m fascinated by magnetism. I find myself going down many YouTube rabbit holes around people, just observing. I&rsquo;m fascinated by Conor McGregor, the MMA fighter. Not because I like MMA (I don&rsquo;t), but I&rsquo;m fascinated by him as a personality. I&rsquo;ve watched every interview he&rsquo;s ever done. There is a confidence and a self belief that&rsquo;s infectious. This man truly believes in himself. It&rsquo;s his life force. He&rsquo;s also a great improviser &mdash; he&rsquo;s as quick with his words as he is with his fists.</p>
+              <p>Theo Von is an interesting one too. Very quick witted, funny, humble, vulnerable. I&rsquo;m fascinated by how much his audience adores him. Somehow he&rsquo;s managed to cut through with vulnerability, and that is not easy to do.</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>When you wrote Chasing Cool and defined this concept of magnetism, does anything feel different now?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Noah</span>
+            <div class="cc-qa-body is-response">
+              <p>I wrote it 20 years ago, 2007. I would spend a couple hours with Michael Lang, who started Woodstock, or Ahmet Ertegun, who founded Atlantic Records, or Richard Meier, the architect, or Tom Ford. People who were perceived as &ldquo;cool&rdquo; by a large following. And the question is why.</p>
+              <p>I co-wrote the book with the person who ran Barneys. I spent four years working on this with him, and I learned so much from him about taste, simplicity, merchandising. Everything is merchandising to some extent. You&rsquo;re romancing somebody through a journey to a destination, and it&rsquo;s no different than moving someone through a store.</p>
+            </div>
+          </div>
+
+          <div id="build-for-yourself" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Noah</span>
+            <div class="cc-qa-body is-response">
+              <p>But in the end, it all has to come from inside you. That is the answer to all the questions. No matter how many people you talk to and listen to, <span class="cc-highlight">what matters is what comes from inside you, what you really feel and believe, and whether you can bring that to life in a way that connects with other people who probably feel somehow similar to how you feel.</span> Ultimately you&rsquo;re building for yourself. The most successful people build for themselves&hellip; If you don&rsquo;t love it, what are you doing?</p>
+            </div>
+          </div>
+
+        </div>
+
+      </main>
+
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      var sidebar = document.getElementById('cc-sidebar');
+      var indicator = document.getElementById('cc-track-indicator');
+      var links = Array.prototype.slice.call(document.querySelectorAll('.cc-sidebar-link'));
+      if (!sidebar || !indicator || !links.length) return;
+
+      setTimeout(function () { sidebar.classList.add('is-visible'); }, 180);
+
+      links.forEach(function (link, idx) {
+        link.addEventListener('click', function () {
+          var id = link.getAttribute('data-target');
+          var el = document.getElementById(id);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+          setActive(idx);
+        });
+      });
+
+
+      function setActive(idx) {
+        links.forEach(function (l, i) { l.classList.toggle('is-active', i === idx); });
+        var activeLink = links[idx];
+        var linksBox = document.getElementById('cc-sidebar-links');
+        if (!activeLink || !linksBox) return;
+        var top = activeLink.getBoundingClientRect().top - linksBox.getBoundingClientRect().top;
+        indicator.style.top = top + 'px';
+        indicator.style.height = activeLink.getBoundingClientRect().height + 'px';
+      }
+
+
+      function update() {
+        var activeIdx = 0;
+        for (var i = links.length - 1; i >= 0; i--) {
+          var el = document.getElementById(links[i].getAttribute('data-target'));
+          if (el && el.getBoundingClientRect().top <= 130) { activeIdx = i; break; }
+        }
+        if (window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 4) activeIdx = links.length - 1;
+        setActive(activeIdx);
+      }
+
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    })();
+  </script>
+  <script src="../../share-quote.js"></script>
+  <script>
+    (function () {
+      if (!window.matchMedia || !window.matchMedia('(hover: none)').matches) return;
+      Array.prototype.forEach.call(document.querySelectorAll('.cc-highlight'), function (el) {
+        el.addEventListener('click', function () { el.classList.toggle('is-on'); });
+      });
+    })();
+  </script>
+</body>
+</html>
