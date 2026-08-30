@@ -185,11 +185,17 @@
       margin: 0 0 28px;
     }
     .cc-article-eyebrow {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 15px;
+      display: inline-block;
+      margin: 0 0 20px -41px;
+      padding: 9px 20px 9px 41px;
+      background: var(--cc-paper-soft, #F1EDF6);
+      border-left: 3px solid var(--cc-rule);
+      border-radius: 0 6px 6px 0;
+      font-family: var(--font-sans);
+      font-style: normal;
+      font-size: 13px;
+      letter-spacing: 0.02em;
       color: var(--fg-3);
-      margin-bottom: 14px;
     }
     .cc-article-title {
       font-family: var(--font-serif);
@@ -350,6 +356,11 @@
       .cc-mark { font-size: 20px; white-space: nowrap; }
       .cc-nav { gap: 14px; }
       .cc-nav-link { font-size: 13px; text-decoration: none; }
+      .cc-article-eyebrow {
+        margin: 0 0 16px 0;
+        padding: 8px 14px;
+        font-size: 12px;
+      }
 }
     /* very narrow phones: keep the wordmark on one line */
     @media (max-width: 400px) {
