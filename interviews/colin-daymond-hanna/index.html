@@ -257,6 +257,7 @@
     }
     .cc-plate-label {
       writing-mode: vertical-rl;
+      text-orientation: sideways;
       transform: rotate(180deg);
       font-family: var(--font-sans);
       font-size: 13px;
@@ -396,6 +397,7 @@
       }
       .cc-plate-label {
         writing-mode: horizontal-tb;
+        text-orientation: mixed;
         transform: none;
         font-size: 12px;
       }
@@ -610,12 +612,12 @@
 
           <div class="cc-plate">
             <div class="cc-plate-tab"><span class="cc-plate-label">Armin&rsquo;s personal website</span></div>
-            <img class="cc-plate-img" src="images/armin-site.jpg" alt="Armin Ronacher&rsquo;s personal website" width="800" height="514" loading="lazy" decoding="async" />
+            <video class="cc-plate-img" src="images/armin-site.mp4" poster="images/armin-site.jpg" width="800" height="514" autoplay muted loop playsinline preload="metadata"></video>
           </div>
 
           <div class="cc-plate">
             <div class="cc-plate-tab"><span class="cc-plate-label">Earendil&rsquo;s landing page</span></div>
-            <img class="cc-plate-img" src="images/earendil-landing.jpg" alt="The Earendil landing page with coded waves below the headline" width="640" height="380" loading="lazy" decoding="async" />
+            <video class="cc-plate-img" src="images/earendil-landing.mp4" poster="images/earendil-landing.jpg" width="640" height="380" autoplay muted loop playsinline preload="metadata"></video>
           </div>
 
           <div class="cc-qa">
@@ -637,6 +639,11 @@
             <div class="cc-qa-body is-response">
               <p>It comes down to the composability and extensibility of pi. Computers and machines can do things that are just fun, and we want working with Pi to feel fun for the end user. <span class="cc-highlight">It also speaks to the fact that you can build complex shapes out of things that feel minimal and primitive on their own.</span></p>
             </div>
+          </div>
+
+          <div class="cc-plate">
+            <div class="cc-plate-tab"><span class="cc-plate-label">The Pi landing page</span></div>
+            <video class="cc-plate-img" src="images/pi-landing.mp4" poster="images/pi-landing.jpg" width="800" height="394" autoplay muted loop playsinline preload="metadata"></video>
           </div>
 
           <div id="language-voice-machine" class="scroll-anchor"></div>
