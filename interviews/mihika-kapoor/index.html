@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png" />
+
+  <title>Mihika Kapoor &mdash; Creative Conviction</title>
+  <meta name="cc-person" content="Mihika Kapoor">
+  <meta name="cc-role" content="Head of Product, Simile">
+  <meta name="description" content="Simulation is human. An interview with Mihika Kapoor, Head of Product at Simile." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400..700&display=swap" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --cc-magenta:   #D8016A;
+      --cc-orange:    #FF6514;
+      --cc-blue:      #1A0AE6;
+      --cc-indigo:    #361C76;
+      --cc-magenta-tint: #FBE0EC;
+
+      --cc-paper:        #F7F5FA;
+      --cc-paper-soft:   #F2EFF7;
+      --cc-white:        #FBFAFD;
+
+      --cc-ink:    #1A1130;
+      --cc-ink-2:  #322847;
+      --cc-ink-3:  #6A6378;
+      --cc-ink-4:  #9C97A8;
+      --cc-rule:        #D2CDDB;
+      --cc-rule-soft:   #E5E1ED;
+
+      --fg-1: var(--cc-ink);
+      --fg-2: var(--cc-ink-2);
+      --fg-3: var(--cc-ink-3);
+
+      --font-serif: "EB Garamond", "Iowan Old Style", Charter, Georgia, serif;
+      --font-sans:  "Inter", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+      --ease: cubic-bezier(.2,.6,.2,1);
+      --dur-1: 120ms;
+      --dur-2: 220ms;
+
+      --sidebar-w: 220px;
+    }
+
+    body {
+      background: var(--cc-paper);
+      color: var(--fg-1);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      min-height: 100vh;
+    }
+
+    a { color: var(--cc-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: text-decoration-thickness var(--dur-1) var(--ease); }
+    a:hover { text-decoration-thickness: 2px; }
+    em { font-family: var(--font-serif); font-style: italic; }
+
+    .cc-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 40px 80px;
+    }
+    .cc-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-bottom: 22px;
+      margin-bottom: 64px;
+    }
+    .cc-mark {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      text-decoration: none;
+      line-height: 1;
+    }
+    .cc-mark em { font-style: italic; color: var(--cc-magenta); font-family: var(--font-serif); }
+    .cc-nav { display: flex; gap: 28px; }
+    .cc-nav-link {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      color: var(--fg-2);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+      transition: color var(--dur-1) var(--ease), text-decoration-thickness var(--dur-1) var(--ease);
+    }
+    .cc-nav-link:hover { color: var(--cc-ink); text-decoration-thickness: 2px; }
+    .cc-nav-link--subscribe { color: var(--cc-magenta); }
+    .cc-nav-link--subscribe:hover { color: var(--cc-magenta); }
+
+    .cc-article-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      align-items: start;
+    }
+    @media (min-width: 1060px) {
+      .cc-article-layout {
+        grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+        gap: 56px;
+      }
+    }
+
+    .cc-sidebar { display: none; }
+    @media (min-width: 1060px) {
+      .cc-sidebar {
+        display: block;
+        position: sticky;
+        top: 40px;
+        align-self: start;
+        opacity: 0;
+        transform: translateX(-8px);
+        transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+      }
+    }
+    .cc-sidebar.is-visible { opacity: 1; transform: translateX(0); }
+
+    .cc-sidebar-eyebrow {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--fg-3);
+      margin-bottom: 18px;
+    }
+
+    .cc-sidebar-nav { display: flex; align-items: flex-start; gap: 14px; }
+    .cc-sidebar-track {
+      position: relative;
+      width: 1px;
+      flex-shrink: 0;
+      align-self: stretch;
+      background: var(--cc-rule-soft);
+    }
+    .cc-sidebar-track-indicator {
+      position: absolute;
+      width: 100%;
+      background: var(--cc-ink);
+      height: 14px; top: 0;
+      transition: top 0.22s var(--ease), height 0.12s var(--ease);
+    }
+
+    .cc-sidebar-links { display: flex; flex-direction: column; gap: 4px; }
+    .cc-sidebar-link {
+      background: none; border: none; cursor: pointer; padding: 2px 0;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1.4;
+      color: var(--fg-3);
+      text-align: left;
+      transition: color var(--dur-1) var(--ease);
+    }
+    .cc-sidebar-link:hover { color: var(--cc-ink); }
+    .cc-sidebar-link.is-active { color: var(--cc-ink); font-weight: 500; }
+
+    .cc-article { max-width: 640px; margin: 0 auto; }
+    @media (min-width: 1060px) { .cc-article { margin: 0; } }
+
+    .cc-article-header { margin-bottom: 56px; }
+    .cc-article-thumb {
+      display: block;
+      width: 168px;
+      height: 168px;
+      object-fit: cover;
+      margin: 0 0 28px;
+    }
+    .cc-article-eyebrow {
+      display: inline-block;
+      margin: 0 0 20px -41px;
+      padding: 9px 20px 9px 41px;
+      background: var(--cc-paper-soft, #F1EDF6);
+      border-left: 3px solid var(--cc-rule);
+      border-radius: 0 6px 6px 0;
+      font-family: var(--font-sans);
+      font-style: normal;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      color: var(--fg-3);
+    }
+    .cc-article-title {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 4.4vw, 48px);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--cc-ink);
+      margin: 0 0 18px;
+    }
+    .cc-article-title em { font-style: italic; }
+    .cc-article-subtitle {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 19px;
+      color: var(--fg-2);
+      margin: 0 0 10px;
+    }
+    .cc-article-date {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
+
+    .cc-article-substack {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      margin: 8px 0 0;
+    }
+    .cc-article-substack a.cc-highlight {
+      color: var(--cc-ink);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .cc-article-substack a.cc-highlight:hover { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
+
+    .cc-article-dek {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--fg-2);
+      margin: 32px 0 56px;
+    }
+    .cc-article-dek p + p { margin-top: 16px; }
+    .cc-article-dek a { color: inherit; }
+
+    .cc-plate {
+      display: flex;
+      align-items: stretch;
+      margin: 34px 0 34px -62px;
+    }
+    .cc-plate-tab {
+      flex: 0 0 62px;
+      background: var(--cc-paper-soft, #F1EDF6);
+      border-radius: 16px 0 0 16px;
+      margin-right: -10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 18px 0;
+    }
+    .cc-plate-label {
+      writing-mode: vertical-rl;
+      text-orientation: sideways;
+      transform: rotate(180deg);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1;
+      letter-spacing: 0.01em;
+      color: var(--fg-3);
+      white-space: nowrap;
+    }
+    .cc-plate-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      min-width: 0;
+      border: 6px solid #121111;
+      border-radius: 0;
+    }
+    .cc-plate.is-portrait {
+      justify-content: center;
+      padding-left: 10px;   /* offsets the tab so the photo centres on the text column */
+    }
+    .cc-plate.is-portrait .cc-plate-img { width: 50%; }
+
+
+    .cc-section-banner {
+      display: inline-block;
+      align-self: flex-start;
+      margin: 0 0 0 -41px;
+      padding: 9px 20px 9px 41px;
+      background: var(--cc-paper-soft, #F1EDF6);
+      border-left: 3px solid var(--cc-rule);
+      border-radius: 0 6px 6px 0;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      color: var(--fg-3);
+    }
+
+    .scroll-anchor { scroll-margin-top: 48px; }
+
+    .cc-qa-list { display: flex; flex-direction: column; gap: 28px; margin-bottom: 80px; }
+    .cc-qa { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: start; }
+    .cc-speaker {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding-top: 6px;
+      line-height: 1.3;
+    }
+    .cc-speaker.is-interviewer { color: var(--fg-3); }
+    .cc-speaker.is-guest { color: var(--cc-ink); }
+
+    .cc-qa-body {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg-2);
+    }
+    .cc-qa-body p { margin-bottom: 14px; }
+    .cc-qa-body p:last-child { margin-bottom: 0; }
+    .cc-qa-body em { font-family: var(--font-serif); font-style: italic; }
+    .cc-qa-body.is-question { color: var(--cc-ink); font-weight: 500; }
+    .cc-qa-body.is-response { font-weight: 400; }
+    .cc-qa-body a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+    .cc-highlight {
+      background: rgba(54, 28, 118, 0.10);
+      color: var(--cc-ink);
+      padding: 1px 4px;
+      transition: background var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+      cursor: default;
+    }
+    .cc-highlight:hover { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
+    .cc-highlight.is-on { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
+
+    .cc-hot-takes { padding-top: 32px; }
+    .cc-hot-takes-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      margin: 0 0 32px;
+    }
+    .cc-hot-takes-list { display: flex; flex-direction: column; gap: 32px; }
+    .cc-hot-take { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: start; }
+    .cc-hot-take-num {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 17px;
+      color: var(--fg-3);
+      padding-top: 4px;
+    }
+    .cc-hot-take-q {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--cc-ink);
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+    .cc-hot-take-a {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg-2);
+    }
+    .cc-hot-take-a p { margin-bottom: 12px; }
+    .cc-hot-take-a p:last-child { margin-bottom: 0; }
+    .cc-hot-take-a a { color: inherit; }
+
+    .cc-footer { padding: 48px 0 32px; margin-top: 96px; }
+    .cc-footer-meta {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 640px) {
+      .cc-shell { padding: 24px 24px 64px; }
+      .cc-header { margin-bottom: 48px; }
+      .cc-article-header { margin-bottom: 40px; }
+      .cc-qa { grid-template-columns: 1fr; gap: 6px; }
+      .cc-speaker { padding-top: 0; }
+      .cc-hot-take { grid-template-columns: 1fr; gap: 6px; }
+      .cc-hot-take-num { padding-top: 0; }
+      .cc-plate { margin-left: 0; flex-direction: column; }
+      .cc-plate-tab {
+        flex: none;
+        background: none;
+        border-radius: 0;
+        margin: 0 0 7px;
+        padding: 0;
+        align-items: flex-start;
+      }
+      .cc-plate-label {
+        writing-mode: horizontal-tb;
+        text-orientation: mixed;
+        transform: none;
+        font-size: 12px;
+      }
+      .cc-plate-img { border-width: 5px; }
+      .cc-section-banner { margin: 0; padding: 8px 14px; font-size: 12px; }
+        .cc-article-eyebrow {
+        margin: 0 0 16px 0;
+        padding: 8px 14px;
+        font-size: 12px;
+      }
+      .cc-plate.is-portrait { padding-left: 0; }
+      .cc-plate.is-portrait .cc-plate-img { width: 65%; }
+    
+      /* header: consistent across the site on mobile */
+      .cc-header {
+        position: sticky;
+        top: 0;
+        background: var(--cc-paper);
+        z-index: 10;
+        gap: 10px;
+        flex-wrap: wrap;
+        padding: 14px 0 12px;
+        margin-bottom: 32px;
+        border-bottom: none;
+      }
+      .cc-mark { font-size: 20px; white-space: nowrap; }
+      .cc-nav { gap: 14px; }
+      .cc-nav-link { font-size: 13px; text-decoration: none; }
+}
+    /* very narrow phones: keep the wordmark on one line */
+    @media (max-width: 400px) {
+      .cc-mark { font-size: 18px; }
+      .cc-nav { gap: 11px; }
+      .cc-nav-link { font-size: 12px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cc-shell">
+
+    <header class="cc-header">
+      <a class="cc-mark" href="../../">Creative <em>Conviction</em></a>
+      <nav class="cc-nav">
+        <a class="cc-nav-link" href="../../about.html">About</a>
+        <a class="cc-nav-link" href="../../hiring-lists/">Hiring lists</a>
+        <a class="cc-nav-link cc-nav-link--subscribe" href="https://creativeconvictionpress.substack.com/" target="_blank" rel="noopener">Subscribe</a>
+      </nav>
+    </header>
+
+    <div class="cc-article-layout">
+
+      <aside class="cc-sidebar" id="cc-sidebar">
+        <div class="cc-sidebar-eyebrow">Contents</div>
+        <div class="cc-sidebar-nav">
+          <div class="cc-sidebar-track">
+            <div class="cc-sidebar-track-indicator" id="cc-track-indicator"></div>
+          </div>
+          <div class="cc-sidebar-links" id="cc-sidebar-links">
+            <button class="cc-sidebar-link is-active" data-target="discovering-design">Discovering product design</button>
+            <button class="cc-sidebar-link" data-target="maker-week">Maker Week at Figma</button>
+            <button class="cc-sidebar-link" data-target="road-to-simile">The road to Simile</button>
+            <button class="cc-sidebar-link" data-target="research-and-product">Research and product in lockstep</button>
+            <button class="cc-sidebar-link" data-target="the-game-town">The game town decision</button>
+            <button class="cc-sidebar-link" data-target="brand-as-conviction">Brand as conviction</button>
+            <button class="cc-sidebar-link" data-target="hiring-and-storytelling">Hiring and storytelling</button>
+            <button class="cc-sidebar-link" data-target="hot-takes">Hot takes</button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="cc-article">
+
+        <div class="cc-article-header">
+          <img class="cc-article-thumb" src="../images/mihika-kapoor.jpg" alt="" width="168" height="168" />
+          <p class="cc-article-eyebrow">An interview with Mihika Kapoor, Head of Product at Simile</p>
+          <h1 class="cc-article-title">Simulation is human</h1>
+          <p class="cc-article-date">Recorded September 2026 &middot; Published September 2026</p>
+          <p class="cc-article-substack"><a href="https://creativeconvictionpress.substack.com/" target="_blank" rel="noopener" class="cc-highlight">Substack version</a></p>
+        </div>
+
+        <div class="cc-article-dek">
+          <p><a href="https://www.mihikakapoor.com/" target="_blank" rel="noopener">Mihika Kapoor</a> is Head of Product at <a href="https://www.simile.com/" target="_blank" rel="noopener">Simile,</a> the research and product lab simulating human behavior.</p>
+          <p>Mihika has a habit of noticing something missing, making or co-making it herself, and then getting everyone else to see its magic too. At Princeton, she identified a gap between art and computer science, which became <a href="https://dn.businesstoday.org/" target="_blank" rel="noopener">Design Nation,</a> a national conference for design-enthusiast undergrads. At Figma, the Maker Week hackathon became her launch pad where she pitched music in FigJam and <a href="https://www.figma.com/slides/" target="_blank" rel="noopener">Figma Slides.</a> A year ago, she started her own company. Then, a &lt;10 person startup founded by AI researchers and a studio art major that most people had not heard of yet talked her into joining and leading product instead.</p>
+          <p>Simile grew out of the 2023 <a href="https://arxiv.org/abs/2304.03442" target="_blank" rel="noopener">Stanford paper</a> on generative agents. Following this, most of the AI field chased making agents more capable than people. Simile, however, took it in a different direction, which is how to replicate humans exactly, with all of their imperfections included so companies can hear from the people their decisions affect. The product is the voice of those humans in rooms they are otherwise not in.</p>
+          <p>This conversation is about conviction over the safe choice: placing a design emphasis on &ldquo;show your work&rdquo; instead of just &ldquo;simply,&rdquo; choosing the word &ldquo;human&rdquo; for building the brand around - when most people assume simulation means the opposite, and landing on a pixel game town aesthetic despite being an early stage company selling to Fortune 100 buyers.</p>
+        </div>
+
+        <div id="discovering-design" class="scroll-anchor"></div>
+
+        <div class="cc-qa-list">
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Did you always consider yourself creative as a kid? And how and when did you discover product design?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Mihika</span>
+            <div class="cc-qa-body is-response">
+              <p>My grandma tells this story about how, when I was a baby, the way to get me to stop crying was to walk me over to a painting on the wall. Growing up, it was painting, drawing, chalk on the sidewalks, and every week my mom would drive me into the city for live model classes. In high school I became the design editor for five school publications, which was my introduction to InDesign and Photoshop, and to having an editorial voice.</p>
+              <p>Product design came somewhat accidentally. I majored in computer science and minored in visual arts at Princeton, and like a good computer science student, I did a software engineering internship at a startup the summer after my freshman year. I entered as a software engineering intern and exited as a product design intern. Before that summer, I had no idea the field existed. I was convinced I had found my life&rsquo;s calling.</p>
+              <p>The following summer I interned in product design at Facebook. This was 2016, and design was under the radar but growing in prominence. InVision had just released a film called <a href="https://www.imdb.com/title/tt8189076/" target="_blank" rel="noopener">Design Disruptors,</a> which argued that design was the number one factor shaping the world we lived in. I watched it with my intern class, and it moved design from a thing I was interested in to a thing that underpins society. Then I came back to campus and none of that was reflected in my curriculum. No HCI, no courses on product design. My entire intern class was in the same boat, so I started Design Nation to address that gap.</p>
+            </div>
+          </div>
+
+          <div id="maker-week" class="scroll-anchor"></div>
+
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>You also went on to accomplish a lot at Figma - what are you most proud of shipping there personally?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Mihika</span>
+            <div class="cc-qa-body is-response">
+              <p>I fully embraced Maker Week, our biannual company-wide hackathon. Some companies run hackathons for just their tech org. At Figma, the entire company stopped what they were doing to create, and I used it as a vehicle to advance whatever I wanted on the roadmap. My first one, I worked on adding music to FigJam, <span class="cc-highlight">which is not a necessary feature and hard to prioritize normally, but exciting to explore in a hackathon. We ultimately shipped it.</span> Figma Slides, Figma&rsquo;s third product, started the same way. I pulled a team together, then used demo day to get the entire company to see the magic.</p>
+            </div>
+          </div>
+
+          <div id="road-to-simile" class="scroll-anchor"></div>
+
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>What made you excited to join Simile, and what is the company&rsquo;s mission?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Mihika</span>
+            <div class="cc-qa-body is-response">
+              <p>My journey to Simile was unconventional. Last summer I left Figma to found a company. This past fall I was catching up with Lainie, Simile&rsquo;s co-founder and GTM lead, pitching her on being a customer for my startup, and her response was yes, but also, you should come lead product at Simile.</p>
+              <p>At the time, Simile was a sub-10-person startup that pretty much anyone I spoke to, including VCs, had no idea about. I was skeptical. I was decidedly on my founding journey, had great design partners and traction, and was set on that mission. But Lainie said two things: you have to meet our founders - they are incredibly brilliant and low ego, and I know you&rsquo;re going to love the idea - it&rsquo;s going to change the world.</p>
+              <p>So I took a meeting with Joon, Simile&rsquo;s CEO, and one of the first things I learned is that before he studied computer science and went into research, he majored in studio art. He is this art-and-technical blend of a human being.</p>
+            </div>
+          </div>
+
+          <div class="cc-plate">
+            <div class="cc-plate-tab"><span class="cc-plate-label"><a href="https://www.joonsungpark.com/#artanddesign" target="_blank" rel="noopener">Joon&rsquo;s work</a></span></div>
+            <img class="cc-plate-img" src="images/joon-work.jpg" alt="Joon Sung Park&rsquo;s exhibitions page, showing his paintings and drawings" width="1300" height="1225" loading="lazy" decoding="async" />
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Mihika</span>
+            <div class="cc-qa-body is-response">
+              <p>Simile&rsquo;s ultimate ambition is to help people make better decisions by simulating the entire world. People make expensive and terrible decisions all the time because they are unable to properly take into account the humans they are impacting. Simile is a tool to experiment with the future and understand human behavior through simulation.</p>
+              <p>A lot of people took the original generative agents research in the direction of making agents even more perfect than humans. The Simile team took it in a very different direction, which is how to replicate humans exactly, with all of their imperfections. <span class="cc-highlight">You can distill pretty much any company into: figure out what to do, then do the thing. Most AI today is pointed at the latter. Simile helps with the former.</span></p>
+              <p>Most startups today also fall into one of two buckets. Either you have the wrappers, or you have the new labs that are interesting but years away from commercial viability. <span class="cc-highlight">Simile was this N of 1 combination of research foundations and crazy commercial pull, so from the very beginning research and product worked in lockstep.</span> The caliber of the team, the vastness of the vision, and the conviction of the customers made it an easy yes for me.</p>
+            </div>
+          </div>
+
+          <div id="research-and-product" class="scroll-anchor"></div>
+
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>What is most exciting and most challenging about leading product when research and product work in lockstep?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Mihika</span>
+            <div class="cc-qa-body is-response">
+              <p>We call Simile a research and product lab because we are experimental on both fronts at once. We are post-training models to build a foundation model of human behavior, and we are deploying those via an interface to our end customers.</p>
+              <p>That presents a unique design challenge. <span class="cc-highlight">Traditionally the core principle in design is simplify, simplify, simplify. At Simile you still need to simplify, but there is a strong emphasis on showing your work.</span></p>
+              <p>There is a difference between simulation and prediction. Prediction says this is what&rsquo;s going to happen. Simulation says this is what&rsquo;s going to happen, and more importantly, these are the levers, steps and inputs informing that end state and how it unfolds. Getting the answer right is a baseline expectation. <span class="cc-highlight">The most magical moments customers have in our product are when they learn something or see a perspective they had never considered, which then changes their own mental calculus about the decision.</span> So the challenge is how you maintain simplicity while showcasing the inputs to a simulation, so you bring the user along on that journey.</p>
+            </div>
+          </div>
+
+          <div class="cc-plate">
+            <div class="cc-plate-tab"><span class="cc-plate-label">A Simile simulation</span></div>
+            <img class="cc-plate-img" src="images/simulated-city.jpg" alt="An isometric illustrated city used in Simile&rsquo;s simulations" width="1300" height="795" loading="lazy" decoding="async" />
+          </div>
+
+          <div id="the-game-town" class="scroll-anchor"></div>
+
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Let&rsquo;s talk about Simile&rsquo;s visual language - the game town aesthetic is memorable. What creative decisions have been pivotal to how Simile is perceived?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Mihika</span>
+            <div class="cc-qa-body is-response">
+              <p>Leaning into the original game town aesthetic was a high conviction, controversial decision. Our primary audience is F100 companies. When you appeal to an enterprise buyer, you typically want to look official, corporate, trustworthy. A game town is antithetical to all of that. It&rsquo;s playful, unserious, and not very grown up.</p>
+              <p>A few principles led us there anyway. We worked with Pentagram on our brand, and early on they had us distill it into a single word. The word I advocated for was human. The biggest misconception about simulation is that you are sidelining humans by spending time with simulations instead. We view our work as the opposite. If you are a company as large as CVS, you cannot get 90 million Americans in a room to understand their needs. Through simulation, we can get close. <span class="cc-highlight">We see our work as being the voice of these humans in the rooms they are otherwise not in.</span></p>
+              <p>Second, very few companies at the seed stage prioritize brand, because it is so easy for it to fall to the bottom of the list. The brands I admire most, Notion, Clay, Ramp, have consistently put it front and center. <span class="cc-highlight">There is an unquantifiable brand equity you build by leaning into a strong visual identity.</span> When you see a motif without a logo and instantly know the brand - that felt very important to me.</p>
+              <p>Third, so many people got excited about simulation because they read the original papers. The game town creates continuity from the research that created the field to the work we are doing now to push the frontier.</p>
+              <p>Finally, everyone has an inner child. Our task has been how to build a world that has that humanness, that child in everyone, and still looks official and trustworthy.</p>
+            </div>
+          </div>
+
+          <div id="brand-as-conviction" class="scroll-anchor"></div>
+
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Is investing in brand something a founder either believes in or doesn&rsquo;t?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Mihika</span>
+            <div class="cc-qa-body is-response">
+              <p>Our founders, as a byproduct of having their own creative streaks, are in the believer camp. Joon wrote the original paper with two of his professors, Michael and Percy, who are also co-founders. When Joon had the idea of building the game town, pretty much every professor laughed in his face, except Michael, who said that&rsquo;s an interesting idea, we should explore it. They never expected it to go as viral as it did. But people are visual creatures.</p>
+              <p>I also love that our mission is to simulate the entire world and our brand language is building an entire world. There is an Easter egg at the bottom of our website. Scroll down and you end up in a game town with all of the company&rsquo;s similes in it, and you can walk up and talk to us. Eventually we want that to be the entire world.</p>
+            </div>
+          </div>
+
+          <div class="cc-plate">
+            <div class="cc-plate-tab"><span class="cc-plate-label">The game town Easter egg</span></div>
+            <img class="cc-plate-img" src="images/game-town.jpg" alt="The Simile game town, a pixel art street where you can walk up and talk to the team" width="1300" height="1050" loading="lazy" decoding="async" />
+          </div>
+
+          <div id="hiring-and-storytelling" class="scroll-anchor"></div>
+
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>As you grow, where are you most excited to build out the team?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Mihika</span>
+            <div class="cc-qa-body is-response">
+              <p><a href="https://jobs.ashbyhq.com/simile" target="_blank" rel="noopener">We are hiring on all fronts.</a> PMs and designers (though I refer to it as design engineering now because our designs live in code). We are also building an in-house brand function. Until now, our two designers, Natasha and Kian, have been product designers by trade moonlighting as brand designers. They coded the entire website. So now we are hiring brand designers, motion animators, storytellers, pixel artists, you name it. Folks with incredible creativity, ambition and scrappiness.</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Why storytelling and not comms?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Mihika</span>
+            <div class="cc-qa-body is-response">
+              <p>Comms feels more reactive: we are doing this launch, how do we talk about it. <span class="cc-highlight">Storytelling is developing the core company narrative and partnering with people across the company to evangelize it.</span></p>
+            </div>
+          </div>
+
+          <div id="hot-takes" class="scroll-anchor"></div>
+
+
+          <p class="cc-section-banner">Hot takes</p>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>What has influenced your taste and your philosophy?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Mihika</span>
+            <div class="cc-qa-body is-response">
+              <p>No surprises here: art. The artists I love most use excessive color. David Hockney, Matisse. I also love large scale, so the Monet paintings in the Mus&eacute;e de l&rsquo;Orangerie, which make you feel like a dot. And I love absurdism, so Alice in Wonderland has been very influential.</p>
+            </div>
+          </div>
+
+          <div class="cc-plate">
+            <div class="cc-plate-tab"><span class="cc-plate-label">Alice in Wonderland</span></div>
+            <img class="cc-plate-img" src="images/alice.jpg" alt="An illustration of Alice in Wonderland among oversized flowers" width="1000" height="1236" loading="lazy" decoding="async" />
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Other than art, a weird rabbit hole you have gone down recently?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Mihika</span>
+            <div class="cc-qa-body is-response">
+              <p>We created a mini-me channel in Slack with similes of all the employees. You throw a bunch of employees into a thread, prompt them with a question, and watch them reason it out. It started jokey - what should we order for lunch, what should we name the Wi-Fi. Now people throw in everyone on a customer account and ask them to develop a strategy. It&rsquo;s addictive.</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Where do you go to get inspired when you are in a rut?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Mihika</span>
+            <div class="cc-qa-body is-response">
+              <p>Pen and paper. I think in pen and paper despite being very tech-filled. Even before a prototype, I almost always start there!</p>
+            </div>
+          </div>
+
+        </div>
+
+      </main>
+
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      var sidebar = document.getElementById('cc-sidebar');
+      var indicator = document.getElementById('cc-track-indicator');
+      var links = Array.prototype.slice.call(document.querySelectorAll('.cc-sidebar-link'));
+      if (!sidebar || !indicator || !links.length) return;
+
+      setTimeout(function () { sidebar.classList.add('is-visible'); }, 180);
+
+      links.forEach(function (link, idx) {
+        link.addEventListener('click', function () {
+          var id = link.getAttribute('data-target');
+          var el = document.getElementById(id);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+          setActive(idx);
+        });
+      });
+
+
+      function setActive(idx) {
+        links.forEach(function (l, i) { l.classList.toggle('is-active', i === idx); });
+        var activeLink = links[idx];
+        var linksBox = document.getElementById('cc-sidebar-links');
+        if (!activeLink || !linksBox) return;
+        var top = activeLink.getBoundingClientRect().top - linksBox.getBoundingClientRect().top;
+        indicator.style.top = top + 'px';
+        indicator.style.height = activeLink.getBoundingClientRect().height + 'px';
+      }
+
+
+      function update() {
+        var activeIdx = 0;
+        for (var i = links.length - 1; i >= 0; i--) {
+          var el = document.getElementById(links[i].getAttribute('data-target'));
+          if (el && el.getBoundingClientRect().top <= 130) { activeIdx = i; break; }
+        }
+        if (window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 4) activeIdx = links.length - 1;
+        setActive(activeIdx);
+      }
+
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    })();
+  </script>
+  <script src="../../share-quote.js"></script>
+  <script>
+    (function () {
+      if (!window.matchMedia || !window.matchMedia('(hover: none)').matches) return;
+      Array.prototype.forEach.call(document.querySelectorAll('.cc-highlight'), function (el) {
+        el.addEventListener('click', function () { el.classList.toggle('is-on'); });
+      });
+    })();
+  </script>
+</body>
+</html>
