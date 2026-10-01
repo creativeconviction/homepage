@@ -427,24 +427,17 @@
       .cc-nav { gap: 11px; }
       .cc-nav-link { font-size: 12px; }
     }
-    .cc-plate-note {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 17px;
+    .cc-figure { margin: 34px 0; }
+    .cc-figure .cc-plate-img { width: 100%; height: auto; }
+    .cc-figure figcaption {
+      margin-top: 10px;
+      font-family: var(--font-sans);
+      font-size: 13px;
       line-height: 1.5;
       color: var(--fg-3);
-      margin: -18px 0 34px;
     }
-    .cc-plate-note.is-inline { margin: 4px 0 0; }
-    .cc-plate-placeholder {
-      aspect-ratio: 3 / 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--cc-paper-soft);
-      color: var(--fg-3);
-      font-size: 14px;
-    }
+    .cc-figure-label { display: block; color: var(--fg-2); font-weight: 500; }
+    .cc-figure-note { font-family: var(--font-serif); font-style: italic; font-size: 16px; }
   </style>
 </head>
 
@@ -515,13 +508,10 @@
             </div>
           </div>
 
-          <div>
-            <div class="cc-plate">
-              <div class="cc-plate-tab"><span class="cc-plate-label">Young Liz</span></div>
-              <img class="cc-plate-img" src="images/young-liz.jpg" alt="Young Liz holding a homemade drone, with a 3D printer and radio controller on the table behind her" width="1400" height="953" loading="lazy" decoding="async" />
-            </div>
-            <p class="cc-plate-note">I proudly was the geek of the friend group throughout middle and high school. And yes, I did bring the drone to school &mdash; it can do flips!</p>
-          </div>
+          <figure class="cc-figure">
+            <img class="cc-plate-img" src="images/young-liz.jpg" alt="Young Liz holding a homemade drone, with a 3D printer and radio controller on the table behind her" width="1400" height="953" loading="lazy" decoding="async" />
+            <figcaption><span class="cc-figure-label">Young Liz</span> <span class="cc-figure-note">I proudly was the geek of the friend group throughout middle and high school. And yes, I did bring the drone to school &mdash; it can do flips!</span></figcaption>
+          </figure>
 
           <div id="leaving-the-appleverse" class="scroll-anchor"></div>
 
@@ -545,10 +535,10 @@
             </div>
           </div>
 
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Primavera</span></div>
+          <figure class="cc-figure">
             <img class="cc-plate-img" src="images/primavera.jpg" alt="Primavera: dozens of handmade AI devices floating against a blue sky, around the words &ldquo;creating worlds, with era&rdquo;" width="1600" height="916" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Primavera</span></figcaption>
+          </figure>
 
           <div id="play-doh" class="scroll-anchor"></div>
 
@@ -568,10 +558,10 @@
             </div>
           </div>
 
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Every Thing Computer, with TIAT</span></div>
+          <figure class="cc-figure">
             <img class="cc-plate-img" src="images/every-thing-computer.jpg" alt="Open call poster for Every Thing Computer by era and tiat, ringed with photos of playful vintage gadgets" width="1600" height="998" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Every Thing Computer, with TIAT</span></figcaption>
+          </figure>
 
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
@@ -610,14 +600,10 @@
             </div>
           </div>
 
-          <!-- TODO: office / play date photo (pending from Liz). Replace this placeholder before deploying. -->
-          <div>
-            <div class="cc-plate">
-              <div class="cc-plate-tab"><span class="cc-plate-label">Era&rsquo;s office</span></div>
-              <div class="cc-plate-img cc-plate-placeholder">Office photo coming soon</div>
-            </div>
-            <p class="cc-plate-note">Fun fact: we work out of an art gallery! We are constantly inspired by the artists &mdash; every month is a new perspective. We joke we are around the original AI, the SF Art Institute.</p>
-          </div>
+          <figure class="cc-figure">
+            <img class="cc-plate-img" src="images/era-office.jpg" alt="Era&rsquo;s team working at a long table in an art gallery, walls covered in paintings and the floor marked out with coloured tape" width="1592" height="1174" loading="lazy" decoding="async" />
+            <figcaption><span class="cc-figure-label">Era&rsquo;s office</span> <span class="cc-figure-note">Fun fact: we work out of an art gallery! We are constantly inspired by the artists &mdash; every month is a new perspective. We joke we are around the original AI, the SF Art Institute.</span></figcaption>
+          </figure>
 
           <div id="experience-led" class="scroll-anchor"></div>
 
@@ -644,9 +630,13 @@
             <span class="cc-speaker is-guest">Liz</span>
             <div class="cc-qa-body is-response">
               <p>I&rsquo;m a big sucker for architecture. I particularly love Archigram and the Metabolists, avant-garde groups in the UK and Japan that imagined buildings as organisms: modular buildings that change and rotate based on the needs of the inhabitants, so you&rsquo;d come back and the building would look different. Era is very much inspired by them. <span class="cc-highlight">Things will constantly change, and we&rsquo;re merely building the core modular blocks that let people change it for their needs.</span></p>
-              <p class="cc-plate-note is-inline">Archigram explored control (forced behavior by unchangeable buildings) vs. choice (spaces made of modules that adapt to the needs of the inhabitants). Sounds familiar in this new Era?</p>
             </div>
           </div>
+
+          <figure class="cc-figure">
+            <img class="cc-plate-img" src="images/archigram.jpg" alt="Archigram&rsquo;s Control and Choice drawing: modular housing capsules stacked on a frame against a yellow background, with hand-lettered words like Choose and Enclosure" width="1600" height="565" loading="lazy" decoding="async" />
+            <figcaption><span class="cc-figure-label">Archigram, Control and Choice</span> <span class="cc-figure-note">Archigram explored control (forced behavior by unchangeable buildings) vs. choice (spaces made of modules that adapt to the needs of the inhabitants). Sounds familiar in this new Era?</span></figcaption>
+          </figure>
 
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
