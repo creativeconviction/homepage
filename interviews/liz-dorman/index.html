@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png" />
+
+  <title>Liz Dorman &mdash; Creative Conviction</title>
+  <meta name="cc-person" content="Liz Dorman">
+  <meta name="cc-role" content="Co-founder, Era">
+  <meta name="description" content="Couture computing in hardware. An interview with Liz Dorman, co-founder of Era." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400..700&display=swap" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --cc-magenta:   #D8016A;
+      --cc-orange:    #FF6514;
+      --cc-blue:      #1A0AE6;
+      --cc-indigo:    #361C76;
+      --cc-magenta-tint: #FBE0EC;
+
+      --cc-paper:        #F7F5FA;
+      --cc-paper-soft:   #F2EFF7;
+      --cc-white:        #FBFAFD;
+
+      --cc-ink:    #1A1130;
+      --cc-ink-2:  #322847;
+      --cc-ink-3:  #6A6378;
+      --cc-ink-4:  #9C97A8;
+      --cc-rule:        #D2CDDB;
+      --cc-rule-soft:   #E5E1ED;
+
+      --fg-1: var(--cc-ink);
+      --fg-2: var(--cc-ink-2);
+      --fg-3: var(--cc-ink-3);
+
+      --font-serif: "EB Garamond", "Iowan Old Style", Charter, Georgia, serif;
+      --font-sans:  "Inter", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+      --ease: cubic-bezier(.2,.6,.2,1);
+      --dur-1: 120ms;
+      --dur-2: 220ms;
+
+      --sidebar-w: 220px;
+    }
+
+    body {
+      background: var(--cc-paper);
+      color: var(--fg-1);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      min-height: 100vh;
+    }
+
+    a { color: var(--cc-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: text-decoration-thickness var(--dur-1) var(--ease); }
+    a:hover { text-decoration-thickness: 2px; }
+    em { font-family: var(--font-serif); font-style: italic; }
+
+    .cc-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 40px 80px;
+    }
+    .cc-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-bottom: 22px;
+      margin-bottom: 64px;
+    }
+    .cc-mark {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      text-decoration: none;
+      line-height: 1;
+    }
+    .cc-mark em { font-style: italic; color: var(--cc-magenta); font-family: var(--font-serif); }
+    .cc-nav { display: flex; gap: 28px; }
+    .cc-nav-link {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      color: var(--fg-2);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+      transition: color var(--dur-1) var(--ease), text-decoration-thickness var(--dur-1) var(--ease);
+    }
+    .cc-nav-link:hover { color: var(--cc-ink); text-decoration-thickness: 2px; }
+    .cc-nav-link--subscribe { color: var(--cc-magenta); }
+    .cc-nav-link--subscribe:hover { color: var(--cc-magenta); }
+
+    .cc-article-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      align-items: start;
+    }
+    @media (min-width: 1060px) {
+      .cc-article-layout {
+        grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+        gap: 56px;
+      }
+    }
+
+    .cc-sidebar { display: none; }
+    @media (min-width: 1060px) {
+      .cc-sidebar {
+        display: block;
+        position: sticky;
+        top: 40px;
+        align-self: start;
+        opacity: 0;
+        transform: translateX(-8px);
+        transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+      }
+    }
+    .cc-sidebar.is-visible { opacity: 1; transform: translateX(0); }
+
+    .cc-sidebar-eyebrow {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--fg-3);
+      margin-bottom: 18px;
+    }
+
+    .cc-sidebar-nav { display: flex; align-items: flex-start; gap: 14px; }
+    .cc-sidebar-track {
+      position: relative;
+      width: 1px;
+      flex-shrink: 0;
+      align-self: stretch;
+      background: var(--cc-rule-soft);
+    }
+    .cc-sidebar-track-indicator {
+      position: absolute;
+      width: 100%;
+      background: var(--cc-ink);
+      height: 14px; top: 0;
+      transition: top 0.22s var(--ease), height 0.12s var(--ease);
+    }
+
+    .cc-sidebar-links { display: flex; flex-direction: column; gap: 4px; }
+    .cc-sidebar-link {
+      background: none; border: none; cursor: pointer; padding: 2px 0;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1.4;
+      color: var(--fg-3);
+      text-align: left;
+      transition: color var(--dur-1) var(--ease);
+    }
+    .cc-sidebar-link:hover { color: var(--cc-ink); }
+    .cc-sidebar-link.is-active { color: var(--cc-ink); font-weight: 500; }
+
+    .cc-article { max-width: 640px; margin: 0 auto; }
+    @media (min-width: 1060px) { .cc-article { margin: 0; } }
+
+    .cc-article-header { margin-bottom: 56px; }
+    .cc-article-thumb {
+      display: block;
+      width: 168px;
+      height: 168px;
+      object-fit: cover;
+      margin: 0 0 28px;
+    }
+    .cc-article-eyebrow {
+      margin: 0 0 8px;
+      font-family: var(--font-sans);
+      font-style: normal;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      color: var(--fg-3);
+    }
+    .cc-article-title {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 4.4vw, 48px);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--cc-ink);
+      margin: 0 0 18px;
+    }
+    .cc-article-title em { font-style: italic; }
+    .cc-article-subtitle {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 19px;
+      color: var(--fg-2);
+      margin: 0 0 10px;
+    }
+    .cc-article-date {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
+
+    .cc-article-substack {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      margin: 8px 0 0;
+    }
+    .cc-article-substack a.cc-highlight {
+      color: var(--cc-ink);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .cc-article-substack a.cc-highlight:hover { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
+
+    .cc-article-dek {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--fg-2);
+      margin: 32px 0 56px;
+    }
+    .cc-article-dek p + p { margin-top: 16px; }
+    .cc-article-dek a { color: inherit; }
+
+    .cc-plate {
+      display: flex;
+      align-items: stretch;
+      margin: 34px 0 34px -62px;
+    }
+    .cc-plate-tab {
+      flex: 0 0 62px;
+      background: var(--cc-paper-soft, #F1EDF6);
+      border-radius: 16px 0 0 16px;
+      margin-right: -10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 18px 0;
+    }
+    .cc-plate-label {
+      writing-mode: vertical-rl;
+      text-orientation: sideways;
+      transform: rotate(180deg);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1;
+      letter-spacing: 0.01em;
+      color: var(--fg-3);
+      white-space: nowrap;
+    }
+    .cc-plate-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      min-width: 0;
+      border: 6px solid #121111;
+      border-radius: 0;
+    }
+    .cc-plate.is-portrait {
+      justify-content: center;
+      padding-left: 10px;   /* offsets the tab so the photo centres on the text column */
+    }
+    .cc-plate.is-portrait .cc-plate-img { width: 50%; }
+
+
+    .cc-section-banner {
+      display: inline-block;
+      align-self: flex-start;
+      margin: 0 0 0 -41px;
+      padding: 9px 20px 9px 41px;
+      background: var(--cc-paper-soft, #F1EDF6);
+      border-left: 3px solid var(--cc-rule);
+      border-radius: 0 6px 6px 0;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      color: var(--fg-3);
+    }
+
+    .scroll-anchor { scroll-margin-top: 48px; }
+
+    .cc-qa-list { display: flex; flex-direction: column; gap: 28px; margin-bottom: 80px; }
+    .cc-qa { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: start; }
+    .cc-speaker {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding-top: 6px;
+      line-height: 1.3;
+    }
+    .cc-speaker.is-interviewer { color: var(--fg-3); }
+    .cc-speaker.is-guest { color: var(--cc-ink); }
+
+    .cc-qa-body {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg-2);
+    }
+    .cc-qa-body p { margin-bottom: 14px; }
+    .cc-qa-body p:last-child { margin-bottom: 0; }
+    .cc-qa-body em { font-family: var(--font-serif); font-style: italic; }
+    .cc-qa-body.is-question { color: var(--cc-ink); font-weight: 500; }
+    .cc-qa-body.is-response { font-weight: 400; }
+    .cc-qa-body a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+    .cc-highlight {
+      background: rgba(54, 28, 118, 0.10);
+      color: var(--cc-ink);
+      padding: 1px 4px;
+      transition: background var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+      cursor: default;
+    }
+    .cc-highlight:hover { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
+    .cc-highlight.is-on { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
+
+    .cc-hot-takes { padding-top: 32px; }
+    .cc-hot-takes-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      margin: 0 0 32px;
+    }
+    .cc-hot-takes-list { display: flex; flex-direction: column; gap: 32px; }
+    .cc-hot-take { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: start; }
+    .cc-hot-take-num {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 17px;
+      color: var(--fg-3);
+      padding-top: 4px;
+    }
+    .cc-hot-take-q {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--cc-ink);
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+    .cc-hot-take-a {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg-2);
+    }
+    .cc-hot-take-a p { margin-bottom: 12px; }
+    .cc-hot-take-a p:last-child { margin-bottom: 0; }
+    .cc-hot-take-a a { color: inherit; }
+
+    .cc-footer { padding: 48px 0 32px; margin-top: 96px; }
+    .cc-footer-meta {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 640px) {
+      .cc-shell { padding: 24px 24px 64px; }
+      .cc-header { margin-bottom: 48px; }
+      .cc-article-header { margin-bottom: 40px; }
+      .cc-qa { grid-template-columns: 1fr; gap: 6px; }
+      .cc-speaker { padding-top: 0; }
+      .cc-hot-take { grid-template-columns: 1fr; gap: 6px; }
+      .cc-hot-take-num { padding-top: 0; }
+      .cc-plate { margin-left: 0; flex-direction: column; }
+      .cc-plate-tab {
+        flex: none;
+        background: none;
+        border-radius: 0;
+        margin: 0 0 7px;
+        padding: 0;
+        align-items: flex-start;
+      }
+      .cc-plate-label {
+        writing-mode: horizontal-tb;
+        text-orientation: mixed;
+        transform: none;
+        font-size: 12px;
+      }
+      .cc-plate-img { border-width: 5px; }
+      .cc-section-banner { margin: 0; padding: 8px 14px; font-size: 12px; }
+        .cc-article-eyebrow {
+        margin: 0 0 6px 0;
+        font-size: 12px;
+      }
+      .cc-plate.is-portrait { padding-left: 0; }
+      .cc-plate.is-portrait .cc-plate-img { width: 65%; }
+    
+      /* header: consistent across the site on mobile */
+      .cc-header {
+        position: sticky;
+        top: 0;
+        background: var(--cc-paper);
+        z-index: 10;
+        gap: 10px;
+        flex-wrap: wrap;
+        padding: 14px 0 12px;
+        margin-bottom: 32px;
+        border-bottom: none;
+      }
+      .cc-mark { font-size: 20px; white-space: nowrap; }
+      .cc-nav { gap: 14px; }
+      .cc-nav-link { font-size: 13px; text-decoration: none; }
+}
+    /* very narrow phones: keep the wordmark on one line */
+    @media (max-width: 400px) {
+      .cc-mark { font-size: 18px; }
+      .cc-nav { gap: 11px; }
+      .cc-nav-link { font-size: 12px; }
+    }
+    .cc-plate-note {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 17px;
+      line-height: 1.5;
+      color: var(--fg-3);
+      margin: -18px 0 34px;
+    }
+    .cc-plate-note.is-inline { margin: 4px 0 0; }
+    .cc-plate-placeholder {
+      aspect-ratio: 3 / 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--cc-paper-soft);
+      color: var(--fg-3);
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cc-shell">
+
+    <header class="cc-header">
+      <a class="cc-mark" href="../../">Creative <em>Conviction</em></a>
+      <nav class="cc-nav">
+        <a class="cc-nav-link" href="../../about.html">About</a>
+        <a class="cc-nav-link" href="../../hiring-lists/">Hiring lists</a>
+        <a class="cc-nav-link cc-nav-link--subscribe" href="https://creativeconvictionpress.substack.com/" target="_blank" rel="noopener">Subscribe</a>
+      </nav>
+    </header>
+
+    <div class="cc-article-layout">
+
+      <aside class="cc-sidebar" id="cc-sidebar">
+        <div class="cc-sidebar-eyebrow">Contents</div>
+        <div class="cc-sidebar-nav">
+          <div class="cc-sidebar-track">
+            <div class="cc-sidebar-track-indicator" id="cc-track-indicator"></div>
+          </div>
+          <div class="cc-sidebar-links" id="cc-sidebar-links">
+            <button class="cc-sidebar-link is-active" data-target="physicists-passports">Physicists, passports, and a maker kid</button>
+            <button class="cc-sidebar-link" data-target="leaving-the-appleverse">Leaving the Appleverse</button>
+            <button class="cc-sidebar-link" data-target="introducing-era">Introducing Era</button>
+            <button class="cc-sidebar-link" data-target="play-doh">Play-Doh for intelligent objects</button>
+            <button class="cc-sidebar-link" data-target="main-character-energy">Main character energy</button>
+            <button class="cc-sidebar-link" data-target="experience-led">Experience-led</button>
+            <button class="cc-sidebar-link" data-target="rapid-fire">Rapid fire</button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="cc-article">
+
+        <div class="cc-article-header">
+          <img class="cc-article-thumb" src="../images/liz-dorman.jpg" alt="" width="168" height="168" />
+          <p class="cc-article-eyebrow">An interview with Liz Dorman, Co-founder of Era</p>
+          <h1 class="cc-article-title">Couture computing in hardware</h1>
+          <p class="cc-article-date">Recorded September 2026 &middot; Published October 2026</p>
+          <p class="cc-article-substack"><a href="https://creativeconvictionpress.substack.com/" target="_blank" rel="noopener" class="cc-highlight">Substack version</a></p>
+        </div>
+
+        <div class="cc-article-dek">
+          <p>Liz Dorman owns more than a hundred old phones. There is a 1970s Bell telephone, a set of Barbie phones from the &rsquo;80s, Siemens handsets that were released in seasonal collections like clothing, and her prized piece: a hot pink Motorola Razr signed by Paris Hilton. To Dorman, the collection is evidence. Technology used to be weird, expressive, and fun, and she believes it can be again.</p>
+          <p>So she is building her own. Era, which she cofounded with Alex Ollman and Megan Gole and which raised $11 million earlier this year, makes the intelligence layer and hardware toolbox that let anyone, from brands to artists to people with no technical background at all, design their own AI devices. A speaker that talks like a British butler. A mirror that wants your gratitude before it hands over your toothbrush. A lamp you have to charm with poetry. Dorman calls it couture computing. In our conversation, we get into the physicists and the travel bug behind it, why she left big tech, why the next chapter of computing should look more like fashion than like a phone, and why Era asks job candidates to build something before they ever sit for an interview.</p>
+        </div>
+
+        <div id="physicists-passports" class="scroll-anchor"></div>
+
+        <div class="cc-qa-list">
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Who are you, what&rsquo;s your story, and what&rsquo;s the through line to how and why you started Era?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Liz</span>
+            <div class="cc-qa-body is-response">
+              <p>I&rsquo;m Liz, a Jersey gal originally from Princeton, New Jersey. I grew up with immigrant parents from the Soviet Union. My whole family are physicists, four generations back. What they instilled in me is how you go so deep into a field that you build the underlying intellectual platform that allows other ideas to flourish. My grandpa discovered the underlying foundations for cosmic rays, and my great-grandpa discovered the foundations for superconductivity. Growing up with those inspirations, the question on my mind was: <span class="cc-highlight">what is my platform, what is my infrastructure?</span></p>
+              <p>My dad was also an electrical engineer, and I grew up 3D printing stuff, tinkering, making my own contraptions like drones, and going to maker fairs. In elementary school, I went through all of Codecademy and taught myself to code. My family prioritized traveling the world (one life goal is going to all the countries in the world). I view technology as an incredible vehicle for curiosity and for connecting with the vastness of the world, and my dream was to be an inventor who made kooky gadgets that enabled us to be more in awe. I even tried making my own laser watch, I thought it was the coolest thing.</p>
+              <p>I love computing because it&rsquo;s such a universal medium, and there are very few universal mediums. We have fashion, cars, architecture, and frankly the world is becoming more uniform and less diverse in all of them. In college I studied computer science and architecture at Princeton. <span class="cc-highlight">Architecture is such a perfect metaphor for computing.</span> We inhabit it every day, it influences how we think and connect, and it responds very quickly to the technological advancement enabling it.</p>
+            </div>
+          </div>
+
+          <div>
+            <div class="cc-plate">
+              <div class="cc-plate-tab"><span class="cc-plate-label">Young Liz</span></div>
+              <img class="cc-plate-img" src="images/young-liz.jpg" alt="Young Liz holding a homemade drone, with a 3D printer and radio controller on the table behind her" width="1400" height="953" loading="lazy" decoding="async" />
+            </div>
+            <p class="cc-plate-note">I proudly was the geek of the friend group throughout middle and high school. And yes, I did bring the drone to school &mdash; it can do flips!</p>
+          </div>
+
+          <div id="leaving-the-appleverse" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Liz</span>
+            <div class="cc-qa-body is-response">
+              <p>In college, I got super interested in the most future-focused interfaces we could have, and I wanted to see how they actually get made real. I spent a year researching noninvasive BCIs, then cold-emailed the CTO of Apple, who, amazingly, was highly responsive. I ended up working on Vision Pro and future form factors for a year.</p>
+              <p>While I was at Apple, I heard about Humane, and I thought it was the most Rebel Alliance company that existed. There was this one image of everyone on their phones and one person standing up, and I thought, I don&rsquo;t care what they&rsquo;re doing, I must go work there. That&rsquo;s the world I want to build towards. I cold-emailed my way in and ended up on the design team, and I learned so much there from some of the most thoughtful designers in the world. Humane saw the future years ahead of time, and tried doing too much, too early. But the ideas we brought forward, such as natural language device interaction on bespoke wearable devices, helped kick off a whole new industry.</p>
+              <p>As a Gen Z gal from the maker community, I always felt something was missing from the design processes at both Apple and Humane. Too often, the Apple way of making products meant building in hierarchical silos with incredible resources, out of touch with the &ldquo;real world.&rdquo; We&rsquo;ll give you what&rsquo;s best, we won&rsquo;t ask for your input, and we&rsquo;ll give you a toggle: option one or option two. There&rsquo;s a reason devices come in two colors (black and white) with few pathways to customizing the software experience. There was no way for the consumer to author anything. Technology has felt like that for way too long, and it&rsquo;s become boring because of it.</p>
+              <p>So Era is very much the opposite. I want it to be a living lab where people are actually invited to invent with us. <span class="cc-highlight">The future of how we design technology should be more like fashion, where there&rsquo;s so much diversity in ideas because you give people the tools and materials and they make them their own.</span></p>
+            </div>
+          </div>
+
+          <div id="introducing-era" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Liz</span>
+            <div class="cc-qa-body is-response">
+              <p>Era is a participatory personal computing company that believes <span class="cc-highlight">people should author their own relationship with their technology.</span> We build an intelligence layer and hardware toolbox that lets creators, brands, and everyday people design and personalize their own physical devices, starting with ambitious creative builders and expanding outward.</p>
+              <p>What that means is our design process is very different. We don&rsquo;t work in silos. We conduct play-driven research, and we build with people. Too much tech acts as if it needs to have all the right answers about where the future is going and forces that onto people, instead of creating the space to understand what people actually will be empowered by. The only way to get there is to design the right infrastructure and events so people can build with you and explore things you would never think of.</p>
+            </div>
+          </div>
+
+          <div class="cc-plate">
+            <div class="cc-plate-tab"><span class="cc-plate-label">Primavera</span></div>
+            <img class="cc-plate-img" src="images/primavera.jpg" alt="Primavera: dozens of handmade AI devices floating against a blue sky, around the words &ldquo;creating worlds, with era&rdquo;" width="1600" height="916" loading="lazy" decoding="async" />
+          </div>
+
+          <div id="play-doh" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Where is Era today? What have you prototyped and tested, and what have you learned?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Liz</span>
+            <div class="cc-qa-body is-response">
+              <p>We are making a platform that&rsquo;s highly open and moldable. Internally, we talk about it as making our own Play-Doh: software and hardware toolboxes that let anyone make intelligent objects. We distilled the future of AI computing into a few core primitives, everything from orchestration to connecting agents to customizing voices. It doesn&rsquo;t have to be a general assistant. <span class="cc-highlight">This intelligence layer can be seen as the Android for the age of ambient objects.</span></p>
+              <p>A few months ago we gave a minimal-viable AI device (a small button, mic, and speaker holdable) to 30 of our favorite creative friends. They made a cornucopia of devices for a collection we call Primavera. All look and act different. Some are more practical creative assistants, others wellness-oriented devices, and others conceptual art pieces. We learned so much &mdash; but mainly that <span class="cc-highlight">creatives should be shaping the conversation about where technology like AI is headed, and given the tools they have a lot to say.</span> We are merely the invisible toolbox, and I can&rsquo;t wait for us as a team to continuously learn from all the creation and thinking via making that we continuously enable more and more of.</p>
+              <p>I care so much about Era creating spaces for people from all backgrounds to make this future world of computing together. More short term, we are collabing on a show with our friends at TIAT in October&ndash;November exploring the future of playful personal computers &mdash; come by!</p>
+            </div>
+          </div>
+
+          <div class="cc-plate">
+            <div class="cc-plate-tab"><span class="cc-plate-label">Every Thing Computer, with TIAT</span></div>
+            <img class="cc-plate-img" src="images/every-thing-computer.jpg" alt="Open call poster for Every Thing Computer by era and tiat, ringed with photos of playful vintage gadgets" width="1600" height="998" loading="lazy" decoding="async" />
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>What do you mean by ambient objects?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Liz</span>
+            <div class="cc-qa-body is-response">
+              <p>Ambient objects are devices with intelligence that blend into your life and into the objects you use every day. When you&rsquo;re not using them, you shouldn&rsquo;t even notice them. They&rsquo;re just there, helping you in the ways you want to be empowered.</p>
+              <p>We&rsquo;re finally at a point where a few trends are catching up. Agentic systems are becoming so good that we&rsquo;re moving to a post-app ecosystem, and agents are built on very open protocols, so there&rsquo;s no set gatekeeper (as much as the incumbents will try to be). People are getting used to natural interfaces, and manufacturing physical devices is becoming so much more approachable.</p>
+              <p>The future we are building towards at Era is extremely exciting! <span class="cc-highlight">We believe that the same way you can vibe code your own website, you should be able to vibe make your own consumer electronics.</span> You say, I want this device that encourages me to be outside more and listen to more music and looks like a cool star, and it gets printed and CNC&rsquo;d using pre-certified boards and components, and then shipped directly to your door.</p>
+            </div>
+          </div>
+
+          <div id="main-character-energy" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>To push back a little, why hardware to enable this malleability in experience? Why not build a personal software app that enables all of this on an iPhone?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Liz</span>
+            <div class="cc-qa-body is-response">
+              <p>Smartphones as a form factor have become too saturated and overbearing in our lives. There&rsquo;s a reason so many people are into single-use devices such as digicams. It&rsquo;s nostalgic, but it&rsquo;s also this notion of control and getting back agency. <span class="cc-highlight">We want main character energy back.</span> The reason we loved our phones in the 2010s was that they felt so expansive and expressive &mdash; I was looking at jailbreak tweaks all the time, downloading crazy apps in the App Store, changing the backgrounds, and it felt so me. I would be so proud showing my friends how I styled my device, the same way we style our clothing.</p>
+              <p>But over time we&rsquo;ve all consolidated on the same five apps, and those apps aren&rsquo;t even working in our favor anymore. When I go on Instagram, I feel sucked in, rather than feeling that I have the ability to curate a space I like. In a world of algorithms and too many agents, I want my human agency back!</p>
+              <p>My parents are Soviet, and Soviet Russia did not have much. There weren&rsquo;t many options, but if you were fashionable and expressive, you had your little moments: cool earrings, or a scarf you made yourself. We see this in tech too. The current substrate is very boring and dull, and people tie little bows on it with custom icons and backgrounds as their little moments. Highly customizable personal devices is where that opening is.</p>
+              <p>Meta&rsquo;s glasses come in many colors, but they&rsquo;re completely unauthorable and not stylable. The Humane Pin, very similar. The most fun I ever had with the Humane Pin, and when I used it most, was when I made it speak like Gossip Girl behind the scenes. All of a sudden it felt like my device. It&rsquo;s not even that I love Gossip Girl. It&rsquo;s, wow, I can change it, I can make it my own.</p>
+              <p>I also don&rsquo;t believe in a world with one core form factor. Glasses, rings, bag charms, necklaces, home speakers will all coexist the same way accessories and jewelry coexist. Who are we to say what people will choose to use?</p>
+              <p>We aim to create a world of couture computing where these devices don&rsquo;t need to be made by us, and other hardware companies can exist with much more curated, designed experiences they share with their audiences. <span class="cc-highlight">I think we will see dozens of computing device companies, all happily co-existing.</span></p>
+            </div>
+          </div>
+
+          <!-- TODO: office / play date photo (pending from Liz). Replace this placeholder before deploying. -->
+          <div>
+            <div class="cc-plate">
+              <div class="cc-plate-tab"><span class="cc-plate-label">Era&rsquo;s office</span></div>
+              <div class="cc-plate-img cc-plate-placeholder">Office photo coming soon</div>
+            </div>
+            <p class="cc-plate-note">Fun fact: we work out of an art gallery! We are constantly inspired by the artists &mdash; every month is a new perspective. We joke we are around the original AI, the SF Art Institute.</p>
+          </div>
+
+          <div id="experience-led" class="scroll-anchor"></div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Liz</span>
+            <div class="cc-qa-body is-response">
+              <p>At Era, we say we&rsquo;re an experience-led company. We&rsquo;re not design-led, because that creates an artificial division between design and everyone else. <span class="cc-highlight">In the world of AI, engineers have a pulse on what&rsquo;s possible from an experience standpoint</span>, so we hire engineers who are very product-brained, conceptual, and thoughtful about technology.</p>
+              <p>On the design team, we have a few archetypes. One is the UI/UX design engineer who aims to perfect every animation. Another is the brand and design language thinker. Another goes deep on the AI system: someone who can listen to something and say, the memory does not sound right, let me go sit down with the memory engineer. And then there are object thinkers, which is what makes design culture at Era unique. They&rsquo;re like the concept car teams at auto companies. Their goal is to imagine the future and go make devices. We hire generalists who can think through all of these but are very spiky in one.</p>
+            </div>
+          </div>
+
+          <div id="rapid-fire" class="scroll-anchor"></div>
+
+          <p class="cc-section-banner">Rapid fire</p>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>What sources have influenced your taste and philosophy?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Liz</span>
+            <div class="cc-qa-body is-response">
+              <p>I&rsquo;m a big sucker for architecture. I particularly love Archigram and the Metabolists, avant-garde groups in the UK and Japan that imagined buildings as organisms: modular buildings that change and rotate based on the needs of the inhabitants, so you&rsquo;d come back and the building would look different. Era is very much inspired by them. <span class="cc-highlight">Things will constantly change, and we&rsquo;re merely building the core modular blocks that let people change it for their needs.</span></p>
+              <p class="cc-plate-note is-inline">Archigram explored control (forced behavior by unchangeable buildings) vs. choice (spaces made of modules that adapt to the needs of the inhabitants). Sounds familiar in this new Era?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>What brand do you most admire?</p>
+            </div>
+          </div>
+
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Liz</span>
+            <div class="cc-qa-body is-response">
+              <p>I love Apple back in the &rsquo;80s. It was very Rebel Alliance, anti-IBM: computers should be personal. No big brother. All Apple was telling people was that you can empower yourself by having your own beautifully designed computer and making your own applications on it, which is a beautiful idea.</p>
+              <p>I like places that are very open and inviting to participation and play, which is so missing in the tech scene right now. I really love Lego. It&rsquo;s an incredible brand that enables so much creativity, at all scales. A24 as well. It&rsquo;s very high-craft but also a platform for incredible work that just wouldn&rsquo;t happen in the existing systems.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </main>
+
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      var sidebar = document.getElementById('cc-sidebar');
+      var indicator = document.getElementById('cc-track-indicator');
+      var links = Array.prototype.slice.call(document.querySelectorAll('.cc-sidebar-link'));
+      if (!sidebar || !indicator || !links.length) return;
+
+      setTimeout(function () { sidebar.classList.add('is-visible'); }, 180);
+
+      links.forEach(function (link, idx) {
+        link.addEventListener('click', function () {
+          var id = link.getAttribute('data-target');
+          var el = document.getElementById(id);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+          setActive(idx);
+        });
+      });
+
+
+      function setActive(idx) {
+        links.forEach(function (l, i) { l.classList.toggle('is-active', i === idx); });
+        var activeLink = links[idx];
+        var linksBox = document.getElementById('cc-sidebar-links');
+        if (!activeLink || !linksBox) return;
+        var top = activeLink.getBoundingClientRect().top - linksBox.getBoundingClientRect().top;
+        indicator.style.top = top + 'px';
+        indicator.style.height = activeLink.getBoundingClientRect().height + 'px';
+      }
+
+
+      function update() {
+        var activeIdx = 0;
+        for (var i = links.length - 1; i >= 0; i--) {
+          var el = document.getElementById(links[i].getAttribute('data-target'));
+          if (el && el.getBoundingClientRect().top <= 130) { activeIdx = i; break; }
+        }
+        if (window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 4) activeIdx = links.length - 1;
+        setActive(activeIdx);
+      }
+
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    })();
+  </script>
+  <script src="../../share-quote.js"></script>
+  <script>
+    (function () {
+      if (!window.matchMedia || !window.matchMedia('(hover: none)').matches) return;
+      Array.prototype.forEach.call(document.querySelectorAll('.cc-highlight'), function (el) {
+        el.addEventListener('click', function () { el.classList.toggle('is-on'); });
+      });
+    })();
+  </script>
+</body>
+</html>
