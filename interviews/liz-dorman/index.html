@@ -437,6 +437,8 @@
       line-height: 1.5;
       color: var(--fg-3);
     }
+    .cc-figure.is-small { width: 60%; }
+    @media (max-width: 640px) { .cc-figure.is-small { width: 80%; } }
     .cc-figure-label { display: block; color: var(--fg-2); font-weight: 500; }
     .cc-figure-note { font-family: var(--font-serif); font-style: italic; font-size: 16px; }
   </style>
@@ -509,7 +511,7 @@
             </div>
           </div>
 
-          <figure class="cc-figure">
+          <figure class="cc-figure is-small">
             <img class="cc-plate-img" src="images/young-liz.jpg?v=2" alt="Young Liz holding a homemade drone, with a 3D printer and radio controller on the table behind her" width="1600" height="1361" loading="lazy" decoding="async" />
             <figcaption><span class="cc-figure-label">Young Liz</span> <span class="cc-figure-note">I proudly was the geek of the friend group throughout middle and high school. And yes, I did bring the drone to school &mdash; it can do flips!</span></figcaption>
           </figure>
