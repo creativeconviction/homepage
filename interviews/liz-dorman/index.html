@@ -428,7 +428,8 @@
       .cc-nav-link { font-size: 12px; }
     }
     .cc-figure { margin: 34px 0; }
-    .cc-figure .cc-plate-img { width: 100%; height: auto; border-color: #22104A; }
+    .cc-figure .cc-plate-img { width: 100%; height: auto; border-color: #22104A; border-width: 4px; }
+    @media (max-width: 640px) { .cc-figure .cc-plate-img { border-width: 3px; } }
     .cc-figure figcaption {
       margin-top: 10px;
       font-family: var(--font-sans);
@@ -500,7 +501,7 @@
           </div>
 
           <div class="cc-qa">
-            <span class="cc-speaker is-guest">Liz</span>
+            <span class="cc-speaker is-guest">Liz Dorman</span>
             <div class="cc-qa-body is-response">
               <p>I&rsquo;m Liz, a Jersey gal originally from Princeton, New Jersey. I grew up with immigrant parents from the Soviet Union. My whole family are physicists, four generations back. What they instilled in me is how you go so deep into a field that you build the underlying intellectual platform that allows other ideas to flourish. My grandpa discovered the underlying foundations for cosmic rays, and my great-grandpa discovered the foundations for superconductivity. Growing up with those inspirations, the question on my mind was: <span class="cc-highlight">what is my platform, what is my infrastructure?</span></p>
               <p>My dad was also an electrical engineer, and I grew up 3D printing stuff, tinkering, making my own contraptions like drones, and going to maker fairs. In elementary school, I went through all of Codecademy and taught myself to code. My family prioritized traveling the world (one life goal is going to all the countries in the world). I view technology as an incredible vehicle for curiosity and for connecting with the vastness of the world, and my dream was to be an inventor who made kooky gadgets that enabled us to be more in awe. I even tried making my own laser watch, I thought it was the coolest thing.</p>
@@ -509,14 +510,14 @@
           </div>
 
           <figure class="cc-figure">
-            <img class="cc-plate-img" src="images/young-liz.jpg" alt="Young Liz holding a homemade drone, with a 3D printer and radio controller on the table behind her" width="1400" height="953" loading="lazy" decoding="async" />
+            <img class="cc-plate-img" src="images/young-liz.jpg?v=2" alt="Young Liz holding a homemade drone, with a 3D printer and radio controller on the table behind her" width="1600" height="1361" loading="lazy" decoding="async" />
             <figcaption><span class="cc-figure-label">Young Liz</span> <span class="cc-figure-note">I proudly was the geek of the friend group throughout middle and high school. And yes, I did bring the drone to school &mdash; it can do flips!</span></figcaption>
           </figure>
 
           <div id="leaving-the-appleverse" class="scroll-anchor"></div>
 
           <div class="cc-qa">
-            <span class="cc-speaker is-guest">Liz</span>
+            <span class="cc-speaker is-guest">LD</span>
             <div class="cc-qa-body is-response">
               <p>In college, I got super interested in the most future-focused interfaces we could have, and I wanted to see how they actually get made real. I spent a year researching noninvasive BCIs, then cold-emailed the CTO of Apple, who, amazingly, was highly responsive. I ended up working on Vision Pro and future form factors for a year.</p>
               <p>While I was at Apple, I heard about Humane, and I thought it was the most Rebel Alliance company that existed. There was this one image of everyone on their phones and one person standing up, and I thought, I don&rsquo;t care what they&rsquo;re doing, I must go work there. That&rsquo;s the world I want to build towards. I cold-emailed my way in and ended up on the design team, and I learned so much there from some of the most thoughtful designers in the world. Humane saw the future years ahead of time, and tried doing too much, too early. But the ideas we brought forward, such as natural language device interaction on bespoke wearable devices, helped kick off a whole new industry.</p>
@@ -528,7 +529,7 @@
           <div id="introducing-era" class="scroll-anchor"></div>
 
           <div class="cc-qa">
-            <span class="cc-speaker is-guest">Liz</span>
+            <span class="cc-speaker is-guest">LD</span>
             <div class="cc-qa-body is-response">
               <p>Era is a participatory personal computing company that believes <span class="cc-highlight">people should author their own relationship with their technology.</span> We build an intelligence layer and hardware toolbox that lets creators, brands, and everyday people design and personalize their own physical devices, starting with ambitious creative builders and expanding outward.</p>
               <p>What that means is our design process is very different. We don&rsquo;t work in silos. We conduct play-driven research, and we build with people. Too much tech acts as if it needs to have all the right answers about where the future is going and forces that onto people, instead of creating the space to understand what people actually will be empowered by. The only way to get there is to design the right infrastructure and events so people can build with you and explore things you would never think of.</p>
@@ -550,7 +551,7 @@
           </div>
 
           <div class="cc-qa">
-            <span class="cc-speaker is-guest">Liz</span>
+            <span class="cc-speaker is-guest">LD</span>
             <div class="cc-qa-body is-response">
               <p>We are making a platform that&rsquo;s highly open and moldable. Internally, we talk about it as making our own Play-Doh: software and hardware toolboxes that let anyone make intelligent objects. We distilled the future of AI computing into a few core primitives, everything from orchestration to connecting agents to customizing voices. It doesn&rsquo;t have to be a general assistant. <span class="cc-highlight">This intelligence layer can be seen as the Android for the age of ambient objects.</span></p>
               <p>A few months ago we gave a minimal-viable AI device (a small button, mic, and speaker holdable) to 30 of our favorite creative friends. They made a cornucopia of devices for a collection we call Primavera. All look and act different. Some are more practical creative assistants, others wellness-oriented devices, and others conceptual art pieces. We learned so much &mdash; but mainly that <span class="cc-highlight">creatives should be shaping the conversation about where technology like AI is headed, and given the tools they have a lot to say.</span> We are merely the invisible toolbox, and I can&rsquo;t wait for us as a team to continuously learn from all the creation and thinking via making that we continuously enable more and more of.</p>
@@ -571,7 +572,7 @@
           </div>
 
           <div class="cc-qa">
-            <span class="cc-speaker is-guest">Liz</span>
+            <span class="cc-speaker is-guest">LD</span>
             <div class="cc-qa-body is-response">
               <p>Ambient objects are devices with intelligence that blend into your life and into the objects you use every day. When you&rsquo;re not using them, you shouldn&rsquo;t even notice them. They&rsquo;re just there, helping you in the ways you want to be empowered.</p>
               <p>We&rsquo;re finally at a point where a few trends are catching up. Agentic systems are becoming so good that we&rsquo;re moving to a post-app ecosystem, and agents are built on very open protocols, so there&rsquo;s no set gatekeeper (as much as the incumbents will try to be). People are getting used to natural interfaces, and manufacturing physical devices is becoming so much more approachable.</p>
@@ -589,7 +590,7 @@
           </div>
 
           <div class="cc-qa">
-            <span class="cc-speaker is-guest">Liz</span>
+            <span class="cc-speaker is-guest">LD</span>
             <div class="cc-qa-body is-response">
               <p>Smartphones as a form factor have become too saturated and overbearing in our lives. There&rsquo;s a reason so many people are into single-use devices such as digicams. It&rsquo;s nostalgic, but it&rsquo;s also this notion of control and getting back agency. <span class="cc-highlight">We want main character energy back.</span> The reason we loved our phones in the 2010s was that they felt so expansive and expressive &mdash; I was looking at jailbreak tweaks all the time, downloading crazy apps in the App Store, changing the backgrounds, and it felt so me. I would be so proud showing my friends how I styled my device, the same way we style our clothing.</p>
               <p>But over time we&rsquo;ve all consolidated on the same five apps, and those apps aren&rsquo;t even working in our favor anymore. When I go on Instagram, I feel sucked in, rather than feeling that I have the ability to curate a space I like. In a world of algorithms and too many agents, I want my human agency back!</p>
@@ -608,7 +609,7 @@
           <div id="experience-led" class="scroll-anchor"></div>
 
           <div class="cc-qa">
-            <span class="cc-speaker is-guest">Liz</span>
+            <span class="cc-speaker is-guest">LD</span>
             <div class="cc-qa-body is-response">
               <p>At Era, we say we&rsquo;re an experience-led company. We&rsquo;re not design-led, because that creates an artificial division between design and everyone else. <span class="cc-highlight">In the world of AI, engineers have a pulse on what&rsquo;s possible from an experience standpoint</span>, so we hire engineers who are very product-brained, conceptual, and thoughtful about technology.</p>
               <p>On the design team, we have a few archetypes. One is the UI/UX design engineer who aims to perfect every animation. Another is the brand and design language thinker. Another goes deep on the AI system: someone who can listen to something and say, the memory does not sound right, let me go sit down with the memory engineer. And then there are object thinkers, which is what makes design culture at Era unique. They&rsquo;re like the concept car teams at auto companies. Their goal is to imagine the future and go make devices. We hire generalists who can think through all of these but are very spiky in one.</p>
@@ -627,7 +628,7 @@
           </div>
 
           <div class="cc-qa">
-            <span class="cc-speaker is-guest">Liz</span>
+            <span class="cc-speaker is-guest">LD</span>
             <div class="cc-qa-body is-response">
               <p>I&rsquo;m a big sucker for architecture. I particularly love Archigram and the Metabolists, avant-garde groups in the UK and Japan that imagined buildings as organisms: modular buildings that change and rotate based on the needs of the inhabitants, so you&rsquo;d come back and the building would look different. Era is very much inspired by them. <span class="cc-highlight">Things will constantly change, and we&rsquo;re merely building the core modular blocks that let people change it for their needs.</span></p>
             </div>
@@ -646,7 +647,7 @@
           </div>
 
           <div class="cc-qa">
-            <span class="cc-speaker is-guest">Liz</span>
+            <span class="cc-speaker is-guest">LD</span>
             <div class="cc-qa-body is-response">
               <p>I love Apple back in the &rsquo;80s. It was very Rebel Alliance, anti-IBM: computers should be personal. No big brother. All Apple was telling people was that you can empower yourself by having your own beautifully designed computer and making your own applications on it, which is a beautiful idea.</p>
               <p>I like places that are very open and inviting to participation and play, which is so missing in the tech scene right now. I really love Lego. It&rsquo;s an incredible brand that enables so much creativity, at all scales. A24 as well. It&rsquo;s very high-craft but also a platform for incredible work that just wouldn&rsquo;t happen in the existing systems.</p>
