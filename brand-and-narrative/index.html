@@ -8,6 +8,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png" />
 
+  <link rel="stylesheet" href="../assets/topline.css" />
   <title>Brand &amp; Narrative — Creative Conviction</title>
   <meta name="description" content="Part II of the Creative Conviction in the AI Era series. How AI is reshaping brand building, creative storytelling, and narrative strategy." />
 
@@ -277,17 +278,19 @@
   </style>
 </head>
 
-<body>
+<body class="has-top">
   <div class="cc-shell">
-
-    <header class="cc-header">
-      <a class="cc-mark" href="../../">Creative <em>Conviction</em></a>
-      <nav class="cc-nav">
-        <a class="cc-nav-link" href="../about.html">About</a>
-        <a class="cc-nav-link" href="../hiring-lists/">Hiring lists</a>
-        <a class="cc-nav-link cc-nav-link--subscribe" href="https://creativeconvictionpress.substack.com/" target="_blank" rel="noopener">Subscribe</a>
-      </nav>
-    </header>
+  <div class="cc-top">
+    <a class="cc-top-mark" href="../">Creative <em>Conviction</em></a>
+    <nav aria-label="Site">
+      <a href="../#interviews">Interviews</a>
+      <a href="../reports/">Writing</a>
+      <a href="../gatherings/">Community</a>
+      <a href="../about.html">About</a>
+      <a class="cc-top-sub" href="https://creativeconvictionpress.substack.com/" target="_blank" rel="noopener">Subscribe</a>
+      <button class="cc-bg" type="button" aria-label="Switch background between soft purple and white" title="Background"></button>
+    </nav>
+  </div>
 
     <main class="cc-article">
 
@@ -337,5 +340,6 @@
       });
     })();
   </script>
+  <script src="../assets/topline.js"></script>
 </body>
 </html>
