@@ -135,8 +135,15 @@
     }, (i % 24) * 60));
   }
 
-  const fromHash = () => { const h = (location.hash || "#rails").slice(1); if (h === "interviews" || h === "top") { if (pageName !== "home" || !page.firstElementChild) render(current); const el = document.getElementById(h === "top" ? "top" : "interviews"); if (el) el.scrollIntoView(); } else render(h); };
-  addEventListener("hashchange", () => { const h = location.hash.slice(1); if (layouts[h] || pages[h] || h === "interviews" || h === "top") fromHash(); });
+  // #interviews goes straight to the list with no title screen (the wordmark comes back in the top line); every other view shows the title
+  const setHero = skip => { document.body.classList.toggle("no-hero", skip); const top = document.querySelector(".cc-top"); if (top) top.classList.toggle("no-mark", !skip); };
+  const fromHash = () => { const h = (location.hash || "#rails").slice(1);
+    if (h === "interviews" || h === "top") {
+      setHero(h === "interviews");
+      if (pageName !== "home" || !page.firstElementChild) render(current);
+      if (h === "interviews") scrollTo(0, 0); else { const el = document.getElementById("top"); if (el) el.scrollIntoView(); }
+    } else { setHero(false); render(h); } };
+  addEventListener("hashchange", () => { const h = location.hash.slice(1); if (!h || layouts[h] || pages[h] || h === "interviews" || h === "top") fromHash(); });
   fromHash();
   let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { if (pageName === "home") render(current); }, 200); });
   addEventListener("scroll", () => document.body.classList.toggle("past", scrollY > innerHeight * .4), { passive: true });

@@ -15,7 +15,9 @@
   <link rel="stylesheet" href="./assets/site.css" />
 </head>
 <body class="has-top">
-  <div class="cc-top no-mark">
+  <script>if (location.hash === "#interviews") document.body.classList.add("no-hero");</script>
+  <div class="cc-top no-mark" id="topline">
+    <a class="cc-top-mark" href="./">Creative <em>Conviction</em></a>
     <nav aria-label="Site">
       <a href="./#interviews">Interviews</a>
       <a href="./reports/">Writing</a>

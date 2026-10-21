@@ -2,6 +2,7 @@
 :root[data-bg="white"] { --cc-paper: #FFFFFF; --cc-paper-soft: #F7F5FA; --cc-white: #FFFFFF; }
 :root[data-bg="paper"] { --cc-paper: #F7F5FA; --cc-paper-soft: #F2EFF7; --cc-white: #FBFAFD; }
 .cc-top.no-mark { justify-content: flex-end; }
+.cc-top.no-mark .cc-top-mark { display: none; }
 .cc-top { position: fixed; top: 0; left: 0; right: 0; z-index: 30; display: flex; justify-content: space-between; align-items: center; padding: 14px clamp(16px, 3vw, 32px); font-family: "Inter", ui-sans-serif, system-ui, sans-serif; font-size: 14px; background: var(--cc-paper, #fff); color: var(--cc-ink, #1A1130); }
 .cc-top .cc-top-mark { font-family: "EB Garamond", Garamond, Georgia, serif; font-size: 20px; color: var(--cc-ink, #1A1130); text-decoration: none; }
 .cc-top .cc-top-mark em { color: var(--cc-magenta, #D8016A); font-style: italic; }

@@ -93,6 +93,7 @@
 
   /* Essays, Gatherings, About */
   body.sub .hero { display: none; }
+  body.no-hero .hero { display: none; }
   body.sub #page { padding-top: 16px; min-height: 100vh; }
   .about { max-width: 640px; margin: 0 auto; padding: clamp(24px, 4vw, 56px) clamp(16px, 4vw, 48px) 96px; text-align: center; }
   .about .people { display: flex; justify-content: center; gap: 24px; margin-bottom: 36px; }
