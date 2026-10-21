@@ -135,7 +135,7 @@
     }, (i % 24) * 60));
   }
 
-  const fromHash = () => { const h = (location.hash || "#rails").slice(1); if (h === "interviews" || h === "top") { if (pageName !== "home") render(current); const el = document.getElementById(h === "top" ? "top" : "interviews"); if (el) el.scrollIntoView(); } else render(h); };
+  const fromHash = () => { const h = (location.hash || "#rails").slice(1); if (h === "interviews" || h === "top") { if (pageName !== "home" || !page.firstElementChild) render(current); const el = document.getElementById(h === "top" ? "top" : "interviews"); if (el) el.scrollIntoView(); } else render(h); };
   addEventListener("hashchange", () => { const h = location.hash.slice(1); if (layouts[h] || pages[h] || h === "interviews" || h === "top") fromHash(); });
   fromHash();
   let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { if (pageName === "home") render(current); }, 200); });
