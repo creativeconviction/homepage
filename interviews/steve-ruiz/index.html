@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png" />
+
+  <title>Steve Ruiz &mdash; Creative Conviction</title>
+  <meta name="cc-person" content="Steve Ruiz">
+  <meta name="cc-role" content="Founder, tldraw">
+  <meta name="description" content="The painter who built the canvas. An interview with Steve Ruiz, founder of tldraw." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400..700&display=swap" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --cc-magenta:   #D8016A;
+      --cc-orange:    #FF6514;
+      --cc-blue:      #1A0AE6;
+      --cc-indigo:    #361C76;
+      --cc-magenta-tint: #FBE0EC;
+
+      --cc-paper:        #F7F5FA;
+      --cc-paper-soft:   #F2EFF7;
+      --cc-white:        #FBFAFD;
+
+      --cc-ink:    #1A1130;
+      --cc-ink-2:  #322847;
+      --cc-ink-3:  #6A6378;
+      --cc-ink-4:  #9C97A8;
+      --cc-rule:        #D2CDDB;
+      --cc-rule-soft:   #E5E1ED;
+
+      --fg-1: var(--cc-ink);
+      --fg-2: var(--cc-ink-2);
+      --fg-3: var(--cc-ink-3);
+
+      --font-serif: "EB Garamond", "Iowan Old Style", Charter, Georgia, serif;
+      --font-sans:  "Inter", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+      --ease: cubic-bezier(.2,.6,.2,1);
+      --dur-1: 120ms;
+      --dur-2: 220ms;
+
+      --sidebar-w: 220px;
+    }
+
+    body {
+      background: var(--cc-paper);
+      color: var(--fg-1);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      min-height: 100vh;
+    }
+
+    a { color: var(--cc-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: text-decoration-thickness var(--dur-1) var(--ease); }
+    a:hover { text-decoration-thickness: 2px; }
+    em { font-family: var(--font-serif); font-style: italic; }
+
+    .cc-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 40px 80px;
+    }
+    .cc-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-bottom: 22px;
+      margin-bottom: 64px;
+    }
+    .cc-mark {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      text-decoration: none;
+      line-height: 1;
+    }
+    .cc-mark em { font-style: italic; color: var(--cc-magenta); font-family: var(--font-serif); }
+    .cc-nav { display: flex; gap: 28px; }
+    .cc-nav-link {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      color: var(--fg-2);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+      transition: color var(--dur-1) var(--ease), text-decoration-thickness var(--dur-1) var(--ease);
+    }
+    .cc-nav-link:hover { color: var(--cc-ink); text-decoration-thickness: 2px; }
+    .cc-nav-link--subscribe { color: var(--cc-magenta); }
+    .cc-nav-link--subscribe:hover { color: var(--cc-magenta); }
+
+    .cc-article-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      align-items: start;
+    }
+    @media (min-width: 1060px) {
+      .cc-article-layout {
+        grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+        gap: 56px;
+      }
+    }
+
+    .cc-sidebar { display: none; }
+    @media (min-width: 1060px) {
+      .cc-sidebar {
+        display: block;
+        position: sticky;
+        top: 40px;
+        align-self: start;
+        opacity: 0;
+        transform: translateX(-8px);
+        transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+      }
+    }
+    .cc-sidebar.is-visible { opacity: 1; transform: translateX(0); }
+
+    .cc-sidebar-eyebrow {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--fg-3);
+      margin-bottom: 18px;
+    }
+
+    .cc-sidebar-nav { display: flex; align-items: flex-start; gap: 14px; }
+    .cc-sidebar-track {
+      position: relative;
+      width: 1px;
+      flex-shrink: 0;
+      align-self: stretch;
+      background: var(--cc-rule-soft);
+    }
+    .cc-sidebar-track-indicator {
+      position: absolute;
+      width: 100%;
+      background: var(--cc-ink);
+      height: 14px; top: 0;
+      transition: top 0.22s var(--ease), height 0.12s var(--ease);
+    }
+
+    .cc-sidebar-links { display: flex; flex-direction: column; gap: 4px; }
+    .cc-sidebar-link {
+      background: none; border: none; cursor: pointer; padding: 2px 0;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1.4;
+      color: var(--fg-3);
+      text-align: left;
+      transition: color var(--dur-1) var(--ease);
+    }
+    .cc-sidebar-link:hover { color: var(--cc-ink); }
+    .cc-sidebar-link.is-active { color: var(--cc-ink); font-weight: 500; }
+
+    .cc-article { max-width: 640px; margin: 0 auto; }
+    @media (min-width: 1060px) { .cc-article { margin: 0; } }
+
+    .cc-article-header { margin-bottom: 56px; }
+    .cc-article-thumb {
+      display: block;
+      width: 168px;
+      height: 168px;
+      object-fit: cover;
+      margin: 0 0 28px;
+    }
+    .cc-article-eyebrow {
+      margin: 0 0 8px;
+      font-family: var(--font-sans);
+      font-style: normal;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      color: var(--fg-3);
+    }
+    .cc-article-title {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 4.4vw, 48px);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--cc-ink);
+      margin: 0 0 18px;
+    }
+    .cc-article-title em { font-style: italic; }
+    .cc-article-subtitle {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 19px;
+      color: var(--fg-2);
+      margin: 0 0 10px;
+    }
+    .cc-article-date {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
+
+    .cc-article-substack {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      margin: 8px 0 0;
+    }
+    .cc-article-substack a.cc-highlight {
+      color: var(--cc-ink);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .cc-article-substack a.cc-highlight:hover { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
+
+    .cc-article-dek {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--fg-2);
+      margin: 32px 0 56px;
+    }
+    .cc-article-dek p + p { margin-top: 16px; }
+    .cc-article-dek a { color: inherit; }
+
+    .cc-plate {
+      display: flex;
+      align-items: stretch;
+      margin: 34px 0 34px -62px;
+    }
+    .cc-plate-tab {
+      flex: 0 0 62px;
+      background: var(--cc-paper-soft, #F1EDF6);
+      border-radius: 16px 0 0 16px;
+      margin-right: -10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 18px 0;
+    }
+    .cc-plate-label {
+      writing-mode: vertical-rl;
+      text-orientation: sideways;
+      transform: rotate(180deg);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1;
+      letter-spacing: 0.01em;
+      color: var(--fg-3);
+      white-space: nowrap;
+    }
+    .cc-plate-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      min-width: 0;
+      border: 6px solid #121111;
+      border-radius: 0;
+    }
+    .cc-plate.is-portrait {
+      justify-content: center;
+      padding-left: 10px;   /* offsets the tab so the photo centres on the text column */
+    }
+    .cc-plate.is-portrait .cc-plate-img { width: 50%; }
+
+
+    .cc-section-banner {
+      display: inline-block;
+      align-self: flex-start;
+      margin: 0 0 0 -41px;
+      padding: 9px 20px 9px 41px;
+      background: var(--cc-paper-soft, #F1EDF6);
+      border-left: 3px solid var(--cc-rule);
+      border-radius: 0 6px 6px 0;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      color: var(--fg-3);
+    }
+
+    .scroll-anchor { scroll-margin-top: 48px; }
+
+    .cc-qa-list { display: flex; flex-direction: column; gap: 28px; margin-bottom: 80px; }
+    .cc-qa { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: start; }
+    .cc-speaker {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding-top: 6px;
+      line-height: 1.3;
+    }
+    .cc-speaker.is-interviewer { color: var(--fg-3); }
+    .cc-speaker.is-guest { color: var(--cc-ink); }
+
+    .cc-qa-body {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg-2);
+    }
+    .cc-qa-body p { margin-bottom: 14px; }
+    .cc-qa-body p:last-child { margin-bottom: 0; }
+    .cc-qa-body em { font-family: var(--font-serif); font-style: italic; }
+    .cc-qa-body.is-question { color: var(--cc-ink); font-weight: 500; }
+    .cc-qa-body.is-response { font-weight: 400; }
+    .cc-qa-body a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+    .cc-highlight {
+      background: rgba(54, 28, 118, 0.10);
+      color: var(--cc-ink);
+      padding: 1px 4px;
+      transition: background var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+      cursor: default;
+    }
+    .cc-highlight:hover { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
+    .cc-highlight.is-on { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
+
+    .cc-hot-takes { padding-top: 32px; }
+    .cc-hot-takes-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--cc-ink);
+      margin: 0 0 32px;
+    }
+    .cc-hot-takes-list { display: flex; flex-direction: column; gap: 32px; }
+    .cc-hot-take { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; align-items: start; }
+    .cc-hot-take-num {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 17px;
+      color: var(--fg-3);
+      padding-top: 4px;
+    }
+    .cc-hot-take-q {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--cc-ink);
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+    .cc-hot-take-a {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg-2);
+    }
+    .cc-hot-take-a p { margin-bottom: 12px; }
+    .cc-hot-take-a p:last-child { margin-bottom: 0; }
+    .cc-hot-take-a a { color: inherit; }
+
+    .cc-footer { padding: 48px 0 32px; margin-top: 96px; }
+    .cc-footer-meta {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--fg-3);
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 640px) {
+      .cc-shell { padding: 24px 24px 64px; }
+      .cc-header { margin-bottom: 48px; }
+      .cc-article-header { margin-bottom: 40px; }
+      .cc-qa { grid-template-columns: 1fr; gap: 6px; }
+      .cc-speaker { padding-top: 0; }
+      .cc-hot-take { grid-template-columns: 1fr; gap: 6px; }
+      .cc-hot-take-num { padding-top: 0; }
+      .cc-plate { margin-left: 0; flex-direction: column; }
+      .cc-plate-tab {
+        flex: none;
+        background: none;
+        border-radius: 0;
+        margin: 0 0 7px;
+        padding: 0;
+        align-items: flex-start;
+      }
+      .cc-plate-label {
+        writing-mode: horizontal-tb;
+        text-orientation: mixed;
+        transform: none;
+        font-size: 12px;
+      }
+      .cc-plate-img { border-width: 5px; }
+      .cc-section-banner { margin: 0; padding: 8px 14px; font-size: 12px; }
+        .cc-article-eyebrow {
+        margin: 0 0 6px 0;
+        font-size: 12px;
+      }
+      .cc-plate.is-portrait { padding-left: 0; }
+      .cc-plate.is-portrait .cc-plate-img { width: 65%; }
+    
+      /* header: consistent across the site on mobile */
+      .cc-header {
+        position: sticky;
+        top: 0;
+        background: var(--cc-paper);
+        z-index: 10;
+        gap: 10px;
+        flex-wrap: wrap;
+        padding: 14px 0 12px;
+        margin-bottom: 32px;
+        border-bottom: none;
+      }
+      .cc-mark { font-size: 20px; white-space: nowrap; }
+      .cc-nav { gap: 14px; }
+      .cc-nav-link { font-size: 13px; text-decoration: none; }
+}
+    /* very narrow phones: keep the wordmark on one line */
+    @media (max-width: 400px) {
+      .cc-mark { font-size: 18px; }
+      .cc-nav { gap: 11px; }
+      .cc-nav-link { font-size: 12px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cc-shell">
+
+    <header class="cc-header">
+      <a class="cc-mark" href="../../">Creative <em>Conviction</em></a>
+      <nav class="cc-nav">
+        <a class="cc-nav-link" href="../../about.html">About</a>
+        <a class="cc-nav-link" href="../../hiring-lists/">Hiring lists</a>
+        <a class="cc-nav-link cc-nav-link--subscribe" href="https://creativeconvictionpress.substack.com/" target="_blank" rel="noopener">Subscribe</a>
+      </nav>
+    </header>
+
+    <div class="cc-article-layout">
+
+      <aside class="cc-sidebar" id="cc-sidebar">
+        <div class="cc-sidebar-eyebrow">Contents</div>
+        <div class="cc-sidebar-nav">
+          <div class="cc-sidebar-track">
+            <div class="cc-sidebar-track-indicator" id="cc-track-indicator"></div>
+          </div>
+          <div class="cc-sidebar-links" id="cc-sidebar-links">
+            <button class="cc-sidebar-link is-active" data-target="fine-art">From fine art to design technology</button>
+            <button class="cc-sidebar-link" data-target="working-in-public">Working in public</button>
+            <button class="cc-sidebar-link" data-target="what-tldraw-is">What tldraw is</button>
+            <button class="cc-sidebar-link" data-target="fairies">Fairies, designing agents for the canvas</button>
+            <button class="cc-sidebar-link" data-target="wonky-rectangle">The wonky rectangle, branding and constraints</button>
+            <button class="cc-sidebar-link" data-target="tldraw-offline">tldraw offline</button>
+            <button class="cc-sidebar-link" data-target="rapid-fire">Rapid fire</button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="cc-article">
+
+        <div class="cc-article-header">
+          <img class="cc-article-thumb" src="../images/steve-ruiz.jpg" alt="" width="168" height="168" />
+          <p class="cc-article-eyebrow">An interview with Steve Ruiz, Founder of tldraw</p>
+          <h1 class="cc-article-title">The painter who built the canvas</h1>
+          <p class="cc-article-date">Recorded August 2026 &middot; Published October 2026</p>
+          <p class="cc-article-substack"><a href="https://creativeconvictionpress.substack.com/" target="_blank" rel="noopener" class="cc-highlight">Substack version</a></p>
+        </div>
+
+        <div class="cc-article-dek">
+          <p>Before founding <a href="https://tldraw.com" target="_blank" rel="noopener">tldraw</a>, <a href="https://x.com/steveruizok" target="_blank" rel="noopener">Steve Ruiz</a> was an artist in Chicago painting landscapes and writing for magazines. After moving to England, he decided to bring his analytical and creative sides together, teaching himself to design and code and working through roles at Framer and Play. Five years after closing his studio, he was raising money for a company of his own.</p>
+          <p>That company is tldraw, and if you have used an AI product recently, there is a good chance you have used it without knowing. tldraw is an infinite canvas, the deceptively simple whiteboard surface that lets you draw, arrange, and connect ideas in open space. Building one well is famously difficult, involving years of work on problems like selection, multiplayer sync, and the exact feel of an arrow or a stroke of ink. Today the canvas sits inside products from Replit to Autodesk to BlackRock, usually as the place where people do their more advanced, visual, and collaborative work where the chat window falls short.</p>
+          <p>We admire Steve for his charming simplicity behind tasteful engineering. The product only allows twelve colors, four sizes, and rectangles whose corners are ever so slightly, deliberately wonky, all in service of a clear idea about what a good creative tool should and should not do.</p>
+          <p>In our conversation, we trace the arc of his career, the thinking behind the brand, his bet on the canvas as a natural home for AI agents (including a detour into fairy lore), and his newest experiments letting coding agents work directly on the canvas.</p>
+        </div>
+
+          <div id="fine-art" class="scroll-anchor"></div>
+        <div class="cc-qa-list">
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Walk us through that journey of building your identity as a creative person.</p>
+            </div>
+          </div>
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Steve</span>
+            <div class="cc-qa-body is-response">
+              <p>My background before software, the thing I went to school for and worked in, was fine art. I loved being a studio artist, and I loved writing about other people&rsquo;s artwork. That was a big part of my practice too - working as a lowercase-c art critic, spending time with other artists and hearing them talk about their work.</p>
+              <p>I was a painter. Mostly beautiful landscapes. Pretty good paintings.</p>
+            </div>
+          </div>
+          <div class="cc-plate is-portrait">
+            <div class="cc-plate-tab"><span class="cc-plate-label">Logan Square Whooooosh</span></div>
+            <img class="cc-plate-img" src="images/logan-square-whooooosh.jpg" alt="A painted tree against a green and yellow watercolor ground, with orange comic-style captions reading WHHOOOOSSSSHHHH threaded through its branches" width="1183" height="1600" loading="lazy" decoding="async" />
+          </div>
+          <div class="cc-plate is-portrait">
+            <div class="cc-plate-tab"><span class="cc-plate-label">Roman Road</span></div>
+            <img class="cc-plate-img" src="images/roman-road.jpg" alt="An ink and gouache painting of a tree with brown trunks and green leaves above a pale blue sky, framed in black" width="1094" height="1600" loading="lazy" decoding="async" />
+          </div>
+          <div class="cc-plate is-portrait">
+            <div class="cc-plate-tab"><span class="cc-plate-label">Negril Slides</span></div>
+            <img class="cc-plate-img" src="images/negril-slides.jpg" alt="A painting of blue waterslide tubes winding through green tropical foliage, against a yellow and turquoise watercolor sky" width="1094" height="1600" loading="lazy" decoding="async" />
+          </div>
+          <div class="cc-plate is-portrait">
+            <div class="cc-plate-tab"><span class="cc-plate-label">Money Tree, Logan Square</span></div>
+            <img class="cc-plate-img" src="images/money-tree.jpg" alt="A painting of a money tree plant with a comic caption reading BRING ME MONEY..!, on pale turquoise paper" width="1000" height="1228" loading="lazy" decoding="async" />
+          </div>
+          <div class="cc-plate is-portrait">
+            <div class="cc-plate-tab"><span class="cc-plate-label">Oh God, Oh No!</span></div>
+            <img class="cc-plate-img" src="images/oh-god-oh-no.jpg" alt="A black silhouetted garden of trees and shrubs in front of a building, with comic captions reading OH GOD, OH NO, on a blue and yellow watercolor ground" width="900" height="1198" loading="lazy" decoding="async" />
+          </div>
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Steve</span>
+            <div class="cc-qa-body is-response">
+              <p>When I turned 30, I moved to England and opened a studio. My day job was research for attorneys as a paralegal. In my career leading up to this, I&rsquo;d kept two things separate: my writing and analytical skills on one hand and my creative practice on the other, partly because you only have so much creative energy, and partly because I&rsquo;d never thought about working in a commercial field in a creative role. But when you turn 30 you start to question things, so this was when I decided to unite the two. That&rsquo;s how I got into design, starting in publishing.</p>
+              <p>This was 2016. I started with interactive books, then interactive products. I found a space within design that fit the way I&rsquo;d worked as an artist: interactive prototyping. Everyone was talking about it then - there were meetups, blog posts from Uber and Airbnb about how they used it. So everyone was hiring for these unicorn designer developers, and barely anyone could do it. So I was like, all right, that&rsquo;ll be me.</p>
+              <p>Eventually I&rsquo;d put my 10,000 hours in, and I had a good feel for software that supported creativity versus software that got in its way. I worked at Framer, then at a company called Play, which went to Apple.</p>
+              <p>Those projects were all about the technical problems inside design and creative software. <span class="cc-highlight">To work on them, you had to have strong opinions about things that are technically very hard to implement and highly subjective. What does good ink feel like? What do good arrows feel like?</span></p>
+              <p>A year of posting works-in-progress on Twitter led to a design tool I built named globs and an algorithm for freehand ink. Then it turned into, let&rsquo;s just build a canvas. Something like Figma&rsquo;s canvas, but open source and on the web. That became tldraw.</p>
+            </div>
+          </div>
+          <div class="cc-plate">
+            <div class="cc-plate-tab"><span class="cc-plate-label"><a href="https://globs.design" target="_blank" rel="noopener">globs.design</a></span></div>
+            <img class="cc-plate-img" src="images/globs.jpg" alt="A screenshot of the globs design tool in dark mode, showing a curved glob shape with node handles and control points" width="1600" height="1138" loading="lazy" decoding="async" />
+          </div>
+          <div id="working-in-public" class="scroll-anchor"></div>
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Why did you choose to put things in public, and what has it taught you?</p>
+            </div>
+          </div>
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Steve</span>
+            <div class="cc-qa-body is-response">
+              <p>This is something I brought from art practice. <span class="cc-highlight">No one cares about your paintings. No one&rsquo;s knocking on your door to ask about what you&rsquo;re making. It&rsquo;s up to you to share your work. Every serious artist has a marketing function, even if they&rsquo;d never call it that. You post in-progress work, a little detail of the thing.</span></p>
+              <p>That&rsquo;s a habit I brought into design, and then programming. Anything visual I thought was cool, I chuck it on Twitter. I still do it, and I still have to teach the people who work with me to do it. It&rsquo;s a good impulse, but a foreign one if you never had that professional responsibility to promote the things you think are cool.</p>
+            </div>
+          </div>
+          <div id="what-tldraw-is" class="scroll-anchor"></div>
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>What is tldraw, and what is the mission?</p>
+            </div>
+          </div>
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Steve</span>
+            <div class="cc-qa-body is-response">
+              <p>tldraw is a company I founded to build infrastructure for creative products, specifically collaborative, whiteboard-like products. Think Figma, Miro, the products that were out in 2020, 2021 creating this incredible new category.</p>
+              <p>It&rsquo;s crazy how big some of these players got without any serious competitors. Where were all the other Miros? As soon as I started working on an open-source canvas, I got constant emails from big companies saying, &ldquo;We&rsquo;re building the web version of our conferencing software, and we need a whiteboard, and it&rsquo;s a very hard thing to build.&rdquo; It&rsquo;s a complex problem, especially once you add multiplayer. There was no &ldquo;Mapbox for canvases.&rdquo; Every team was building it themselves.</p>
+              <p>That&rsquo;s what I raised money on, and it&rsquo;s been the core premise ever since. Build the canvas, commercialize it by licensing it to other companies, and learn from our customers and community about where the new product opportunities are.</p>
+              <p><span class="cc-highlight">Having a commodity canvas we can sell creates a flywheel. The way I prove you can build cool things with it is by building cool things with it, and that doubles as our marketing.</span> All the while, we get to do real product discovery. How does AI work with the canvas? What other forms of collaboration are possible? We get to explore the whole category in a way that would have taken five separate startups.</p>
+            </div>
+          </div>
+          <div id="fairies" class="scroll-anchor"></div>
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Can you give an example of something you were excited to ship, and walk us through the creative process behind it?</p>
+            </div>
+          </div>
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Steve</span>
+            <div class="cc-qa-body is-response">
+              <p>A good example is fairies. A lot of our customers are building AI products and looking to differentiate. When your user is generating a lot of different artifacts, it needs to be collaborative, and it needs to let people zoom out and see what they&rsquo;ve done. Go to Replit and say, &ldquo;I want to make a website for my coffee shop,&rdquo; and you&rsquo;re taken to a canvas built on tldraw. On Luma AI, if you&rsquo;re generating thousands of images, you need a place for them to live, and that&rsquo;s the canvas. Even companies that don&rsquo;t sound like creative tools, like Honeycomb or BlackRock, use it. To get people doing advanced and collaborative things with AI, you need more than a chatbot.</p>
+            </div>
+          </div>
+          <div class="cc-plate">
+            <div class="cc-plate-tab"><span class="cc-plate-label">Fairies</span></div>
+            <video class="cc-plate-img" src="images/fairies-video.mp4" poster="images/fairies-video.jpg" width="960" height="542" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Steve</span>
+            <div class="cc-qa-body is-response">
+              <p>We&rsquo;ve been working for years on what a harness for AI agents looks like, one that lets them work with the canvas and eventually on the canvas. Last December we shipped fairies, a version of that harness that&rsquo;s spatially located. The agent is represented by an avatar, in this case a fairy. You can have several of them, customize them with different hats, even adjust the length of their legs. The affordances that make the canvas good for human collaboration turn out to be really useful for agents too. <span class="cc-highlight">I can ask one to draw a cat and another to mock up a landing page for a cat shelter, and you can watch them work.</span></p>
+            </div>
+          </div>
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>How did you land on fairies as the character of choice?</p>
+            </div>
+          </div>
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Steve</span>
+            <div class="cc-qa-body is-response">
+              <p>They&rsquo;re not human, not really virtual collaborators. It would be ineffective to have them pretend to be a colleague. <span class="cc-highlight">If we called this agent &ldquo;Susan&rdquo; instead of fairy &ldquo;Marion Fluttersmith,&rdquo; it would be a bad design.</span> But when you characterize them as non-human intelligences, they&rsquo;re fairies.</p>
+              <p>We got really into fairy lore on this project. I pulled some papers, read a bit of the literature, and the inspiration worked in both directions. In one direction, I&rsquo;d look in the lore for parallels to the agentic world. I was looking for a metaphor for MCP servers. Maybe it&rsquo;s a gazing pool they look into, or a cell phone they&rsquo;re on.</p>
+              <p><span class="cc-highlight">In the other direction, the lore inspired the product.</span> Fairies love leaving gifts. Think of the tooth fairy, where you leave a gift and they replace it with another. So what&rsquo;s the metaphor for gift-giving in AI assistance? Maybe a fairy leaves a little note or a piece of context for later. An agent might say, &ldquo;I can&rsquo;t do this right now, but it&rsquo;s a good idea, let me leave it here for another fairy to come by and pick up as a task.&rdquo;</p>
+            </div>
+          </div>
+          <div class="cc-plate">
+            <div class="cc-plate-tab"><span class="cc-plate-label">Fairy lore</span></div>
+            <img class="cc-plate-img" src="images/fairies.jpg" alt="A vintage illustration of winged fairies among trees in a green forest" width="750" height="250" loading="lazy" decoding="async" />
+          </div>
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Any specific book or story that really landed, or were you just going through a lot of fairy lore?</p>
+            </div>
+          </div>
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Steve</span>
+            <div class="cc-qa-body is-response">
+              <p>I was going through a lot. It turns out English fairies are super friendly - Tinkerbell, the tooth fairy. But Irish fairies are terrifying - not your friends, will steal your breath away. So I learned that Irish fairies are scary and you shouldn&rsquo;t collaborate with Irish fairies.</p>
+            </div>
+          </div>
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>Do you think fairies are real?</p>
+            </div>
+          </div>
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Steve</span>
+            <div class="cc-qa-body is-response">
+              <p>I&rsquo;ll say this much. If you&rsquo;re thinking about how humans interact with non-human intelligences and you&rsquo;re looking for a metaphor, or honestly just inspiration, it turns out we have a lot of literature and things in our culture about exactly that. Haunted houses, bodies of water with a lady in the lake. We have a way of thinking about this stuff. <span class="cc-highlight">If you&rsquo;re deep into the user experience of AI, you should be learning about fairy lore.</span></p>
+            </div>
+          </div>
+          <div id="wonky-rectangle" class="scroll-anchor"></div>
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>There&rsquo;s something delightfully raw and sweet about the tldraw branding. How did you land on this feeling?</p>
+            </div>
+          </div>
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Steve</span>
+            <div class="cc-qa-body is-response">
+              <p>I think it comes down to what makes a good creative tool. tldraw has a pretty technical audience, used by a lot of technical teams for interviews, wireframing, diagrams. <span class="cc-highlight">If you give technical people a color picker, they&rsquo;ll obsess over picking the right color. Too many options, and you&rsquo;ve created the possibility of making the wrong choice.</span> You want to reduce the options so people focus on what matters.</p>
+              <p>If you zoom in, our rectangles are all slightly wonky. We add a little random offset to the corners of every shape, and it&rsquo;s random every time. It&rsquo;s a subtle hint. You have precise tools, but limited choices, and not really the option for perfection. This isn&rsquo;t one of those tools. You can relax a little.</p>
+            </div>
+          </div>
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>So psychologically, people don&rsquo;t even realize it, but these choices make it feel experimental, i.e., don&rsquo;t try to make it perfect?</p>
+            </div>
+          </div>
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Steve</span>
+            <div class="cc-qa-body is-response">
+              <p>Exactly. We only have 12 colors and 4 sizes. I&rsquo;ve watched many people ask, where&rsquo;s my 13th color? I want a different green. And I say, you probably don&rsquo;t need it. And they go, &ldquo;Oh&hellip; I guess I don&rsquo;t, I&rsquo;ll work with what I have.&rdquo; There are no shadows in tldraw, but you can make shadows out of primitives. There are no sliders, but you can build one out of the shapes you have.</p>
+              <p>It&rsquo;s a bit of a psychological move, but it&rsquo;s also just a good creative tool. A good creative tool doesn&rsquo;t fight you, but it doesn&rsquo;t give you everything you want either. <span class="cc-highlight">You have to be creative with the tool itself to get the most out of it.</span></p>
+            </div>
+          </div>
+          <div class="cc-plate is-portrait">
+            <div class="cc-plate-tab"><span class="cc-plate-label">12 colors, 4 sizes</span></div>
+            <img class="cc-plate-img" src="images/style-panel.jpg" alt="The tldraw style panel: a grid of twelve color swatches, an opacity slider at 75 percent, fill and dash options, and four sizes from S to XL" width="326" height="594" loading="lazy" decoding="async" />
+          </div>
+          <div id="tldraw-offline" class="scroll-anchor"></div>
+          <div class="cc-qa">
+            <span class="cc-speaker is-interviewer">LF + RA</span>
+            <div class="cc-qa-body is-question">
+              <p>What&rsquo;s something you&rsquo;ve built that you&rsquo;re most proud of?</p>
+            </div>
+          </div>
+          <div class="cc-qa">
+            <span class="cc-speaker is-guest">Steve</span>
+            <div class="cc-qa-body is-response">
+              <p>We launched tldraw offline. It&rsquo;s a desktop app built on the canvas, but it&rsquo;s also file-based. I can do File, Save As. I can turn off my Wi-Fi and it works normally. The really different thing is that we set it up so AI agents can program against the canvas.</p>
+              <p>tldraw is designed to be an SDK, but there was never an easy way to just experiment with that. Not everyone wants to set up a website and play with a JavaScript API. So this app is a fun way to fire up your terminal, run Codex or Claude, and say, &ldquo;in dataviz.tldraw, make it dark mode.&rdquo; It can write into the document, read it, and update it. The community has gone wild with it, because it&rsquo;s like a local MCP server. Agents can just reach into it.</p>
+            </div>
+          </div>
+          <div class="cc-plate">
+            <div class="cc-plate-tab"><span class="cc-plate-label">tldraw offline</span></div>
+            <img class="cc-plate-img" src="images/tldraw-offline.jpg" alt="The tldraw offline desktop app showing a wireframes file full of connected screens, with a Codex terminal window open over it asking about the best architecture for a self-hostable sync engine" width="1600" height="1033" loading="lazy" decoding="async" />
+          </div>
+        </div>
+
+        <section id="rapid-fire" class="cc-hot-takes scroll-anchor">
+          <h2 class="cc-hot-takes-title">Rapid fire</h2>
+          <div class="cc-hot-takes-list">
+
+            <div class="cc-hot-take">
+              <span class="cc-hot-take-num">I</span>
+              <div>
+                <div class="cc-hot-take-q">Where do you go when you want to feel inspired?</div>
+                <div class="cc-hot-take-a">
+                  <p>I have a seven-year-old daughter, and a lot of the ideas come from her. Playing with tldraw together and realizing there&rsquo;s a thing she wants to do, so how do we make that easier? <span class="cc-highlight">That&rsquo;s my number one source of product inspiration.</span></p>
+                  <p>I&rsquo;m also really inspired by <span class="cc-highlight">software from the second half of the 90s</span>. Not out of nostalgia, but because that software had more of a thumbprint, more of an index of the people who made it. It was weirder, more idiosyncratic, and fun.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="cc-hot-take">
+              <span class="cc-hot-take-num">II</span>
+              <div>
+                <div class="cc-hot-take-q">Is there a company or brand you admire?</div>
+                <div class="cc-hot-take-a">
+                  <p>I really like the Pierre Computer Company. An incredibly talented technical team, but with a sense of humor, building their brand by being loud about the cool things they do and not afraid to be a little confusing about what products they make.</p>
+                </div>
+              </div>
+            </div>
+
+            <p class="cc-teaser" style="font-family: var(--font-sans); font-size: 14px; color: var(--fg-3);">[psssst&hellip; stay tuned for our next interview!]</p>
+
+            <div class="cc-hot-take">
+              <span class="cc-hot-take-num">III</span>
+              <div>
+                <div class="cc-hot-take-q">Are you hiring? Looking for users? How should people learn about tldraw?</div>
+                <div class="cc-hot-take-a">
+                  <p>Depends on who you are. If you&rsquo;re a regular computer user, check out <a href="https://tldraw.com" target="_blank" rel="noopener">tldraw.com</a>. If you&rsquo;re a developer or a product person, check out <a href="https://tldraw.dev" target="_blank" rel="noopener">tldraw.dev</a>, to learn about the SDK. And if you have a coding agent like Claude or Codex on your computer, check out <a href="https://offline.tldraw.com" target="_blank" rel="noopener">offline.tldraw.com</a>. There&rsquo;s more on Twitter at <a href="https://x.com/tldraw" target="_blank" rel="noopener">x.com/tldraw</a>. And yes, we&rsquo;re hiring in London, software and product engineers, and design engineers too.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      var sidebar = document.getElementById('cc-sidebar');
+      var indicator = document.getElementById('cc-track-indicator');
+      var links = Array.prototype.slice.call(document.querySelectorAll('.cc-sidebar-link'));
+      if (!sidebar || !indicator || !links.length) return;
+
+      setTimeout(function () { sidebar.classList.add('is-visible'); }, 180);
+
+      links.forEach(function (link, idx) {
+        link.addEventListener('click', function () {
+          var id = link.getAttribute('data-target');
+          var el = document.getElementById(id);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+          setActive(idx);
+        });
+      });
+
+
+      function setActive(idx) {
+        links.forEach(function (l, i) { l.classList.toggle('is-active', i === idx); });
+        var activeLink = links[idx];
+        var linksBox = document.getElementById('cc-sidebar-links');
+        if (!activeLink || !linksBox) return;
+        var top = activeLink.getBoundingClientRect().top - linksBox.getBoundingClientRect().top;
+        indicator.style.top = top + 'px';
+        indicator.style.height = activeLink.getBoundingClientRect().height + 'px';
+      }
+
+
+      function update() {
+        var activeIdx = 0;
+        for (var i = links.length - 1; i >= 0; i--) {
+          var el = document.getElementById(links[i].getAttribute('data-target'));
+          if (el && el.getBoundingClientRect().top <= 130) { activeIdx = i; break; }
+        }
+        if (window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 4) activeIdx = links.length - 1;
+        setActive(activeIdx);
+      }
+
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    })();
+  </script>
+  <script src="../../share-quote.js"></script>
+  <script>
+    (function () {
+      if (!window.matchMedia || !window.matchMedia('(hover: none)').matches) return;
+      Array.prototype.forEach.call(document.querySelectorAll('.cc-highlight'), function (el) {
+        el.addEventListener('click', function () { el.classList.toggle('is-on'); });
+      });
+    })();
+  </script>
+</body>
+</html>
