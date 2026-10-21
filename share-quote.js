@@ -265,13 +265,13 @@
     ctx.textAlign    = 'left';
     ctx.font         = lsz + 'px ' + SERIF;
     var cw           = ctx.measureText('Creative ').width;
-    ctx.font         = 'italic ' + lsz + 'px ' + SERIF;
+    ctx.font         = lsz + 'px ' + SERIF;
     var kw           = ctx.measureText('Conviction').width;
     var lx           = CARD_W - PAD - cw - kw;
     ctx.font         = lsz + 'px ' + SERIF;
     ctx.fillStyle    = INK;
     ctx.fillText('Creative ', lx, bottomY);
-    ctx.font         = 'italic ' + lsz + 'px ' + SERIF;
+    ctx.font         = lsz + 'px ' + SERIF;
     ctx.fillStyle    = MAGENTA;
     ctx.fillText('Conviction', lx + cw, bottomY);
 
