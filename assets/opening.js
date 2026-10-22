@@ -1,4 +1,4 @@
-// Creative Conviction — the landing page opening (see opening.css for the beats). Uses the CC / PORTS / IMGS / REFS data the page carries.
+// Creative Conviction — the landing page opening (see opening.css for the beats); it runs by itself on the first load of a visit. Uses the CC / PORTS / IMGS / REFS data the page carries.
 (() => {
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches, body = document.body;
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -68,7 +68,7 @@
     busy = true; cue.classList.remove("on");
     board.classList.add("in"); $("grain").classList.add("on");
     await wait(500); intro.classList.add("out"); body.classList.add("docked");
-    await wait(1700); phase = 2; busy = false; cue.classList.add("on"); stage.classList.add("live");
+    await wait(1700); phase = 2; busy = false; stage.classList.add("live");
     if (again) { again = false; buildBoard(); }
   }
   async function beat2() {
@@ -94,11 +94,16 @@
   addEventListener("touchmove", e => { if (ty !== null && ty - e.touches[0].clientY > 12) { ty = null; onScrollIntent(); } }, { passive: true });
   addEventListener("keydown", e => { if (["ArrowDown", "PageDown", " "].includes(e.key)) onScrollIntent(); });
 
+  // It plays by itself, once per visit: later loads in the same session go straight to the list. Scrolling still moves it on sooner.
+  let seen = false; try { seen = sessionStorage.getItem("cc-opened") === "1"; sessionStorage.setItem("cc-opened", "1"); } catch (e) {}
   (async () => {
     body.classList.add("opening"); scrollTo(0, 0);
-    if (reduce) { await wait(50); return land(); }
+    if (reduce || seen) { await wait(50); return land(); }
     [...board.querySelectorAll("img")].forEach(im => im.decode().catch(() => {}));
     await wait(40); intro.classList.add("go");
-    await wait(2200); phase = 1; cue.classList.add("on");
+    await wait(2200); phase = 1;
+    if (!busy) await beat1();
+    await wait(2600);
+    if (phase === 2 && !busy) beat2();
   })();
 })();

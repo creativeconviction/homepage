@@ -1,7 +1,7 @@
-/* Creative Conviction — the landing page opening. Each beat waits for the reader to scroll:
+/* Creative Conviction — the landing page opening. The beats run by themselves on the first load of a visit (scrolling moves them on sooner):
    load      the wordmark assembles from scattered letters; the tagline follows
-   scroll 1  the board of pictures, full width behind the words, comes into focus out of grain and blur; the words fade
-   scroll 2  every picture that isn't a face becomes a colour square; the faces run down to their rows; the titles arrive */
+   beat 1    the board of pictures, full width behind the words, comes into focus out of grain and blur; the words fade
+   beat 2    every picture that isn't a face becomes a colour square; the faces run down to their rows; the titles arrive */
 body.opening { overflow: hidden; }
 .intro { position: fixed; inset: 56px 0 0 0; z-index: 22; display: grid; place-items: center; text-align: center; pointer-events: none; transition: opacity .8s ease; }
 .intro.out { opacity: 0; }

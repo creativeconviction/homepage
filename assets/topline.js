@@ -1,11 +1,7 @@
-// Background switch (soft purple by default, or white), remembered per browser; the Index menu; and the jump-to-quote highlight
+// The site background (always soft purple); the Index menu; and the jump-to-quote highlight
 (function () {
-  var root = document.documentElement, key = "cc-bg";
-  function setBg(v) { root.setAttribute("data-bg", v); try { localStorage.setItem(key, v); } catch (e) {} }
-  // "cc-bg-v" marks the one-time reset that moved the default from white to soft purple
-  var saved = null; try { if (localStorage.getItem("cc-bg-v") !== "3") { localStorage.removeItem(key); localStorage.setItem("cc-bg-v", "3"); } saved = localStorage.getItem(key); } catch (e) {}
-  setBg(saved || "paper");
-  var btn = document.querySelector(".cc-bg"); if (btn) btn.addEventListener("click", function () { setBg(root.getAttribute("data-bg") === "paper" ? "white" : "paper"); });
+  // One background for the whole site: soft purple
+  document.documentElement.setAttribute("data-bg", "paper");
 
   // Index: opens a vertical list under the word; a choice, a click elsewhere or Escape closes it
   var ib = document.querySelector(".cc-index-btn"), im = document.getElementById("cc-index-menu");
