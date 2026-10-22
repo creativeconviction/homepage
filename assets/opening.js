@@ -94,11 +94,16 @@
   addEventListener("touchmove", e => { if (ty !== null && ty - e.touches[0].clientY > 12) { ty = null; onScrollIntent(); } }, { passive: true });
   addEventListener("keydown", e => { if (["ArrowDown", "PageDown", " "].includes(e.key)) onScrollIntent(); });
 
+  // A link to #interviews or #library (the Index menu, the old /interviews/ and /library/ addresses) skips the opening and goes straight there
+  const target = () => ["#interviews", "#library"].includes(location.hash) ? location.hash.slice(1) : null;
+  const go = () => { const id = target(); if (id) requestAnimationFrame(() => document.getElementById(id).scrollIntoView()); };
+  addEventListener("hashchange", () => { if (!target()) return; if (phase !== 3) land(); go(); });
+
   // It plays by itself, once per visit: later loads in the same session go straight to the list. Scrolling still moves it on sooner.
   let seen = false; try { seen = sessionStorage.getItem("cc-opened") === "1"; sessionStorage.setItem("cc-opened", "1"); } catch (e) {}
   (async () => {
     body.classList.add("opening"); scrollTo(0, 0);
-    if (reduce || seen) { await wait(50); return land(); }
+    if (reduce || seen || target()) { await wait(50); land(); return go(); }
     [...board.querySelectorAll("img")].forEach(im => im.decode().catch(() => {}));
     await wait(40); intro.classList.add("go");
     await wait(2200); phase = 1;

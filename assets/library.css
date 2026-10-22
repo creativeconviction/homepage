@@ -1,5 +1,9 @@
 /* Creative Conviction — the Library: every picture from the interviews on one wall. Click one to read its passage; click the card to go to the interview at that spot */
 .library { padding: 28px clamp(16px, 4vw, 48px) 80px; }
+/* On the home page the Library sits under the interviews; it waits until the opening has finished */
+#interviews, #library { scroll-margin-top: 64px; }
+body.home .library { max-width: calc(960px + 2 * clamp(16px, 4vw, 48px)); margin: 0 auto; padding-top: clamp(16px, 3vw, 40px); }
+body.home.opening .library { visibility: hidden; }
 .library h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 3.2vw, 40px); letter-spacing: -.02em; margin: 0 0 24px; }
 .wallgrid { display: grid; grid-template-columns: repeat(var(--lc, 6), 1fr); gap: 6px; }
 .wallgrid button { position: relative; aspect-ratio: 1; overflow: hidden; background: var(--paper); padding: 0; cursor: pointer; border: 0; }
