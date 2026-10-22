@@ -90,6 +90,8 @@
   .list:hover .row a .w b, .list:hover .row a .au { color: var(--ink-3); }
   .list:hover .row a:hover, .list:hover .row a:hover .w b, .list:hover .row a:hover .au { color: var(--ink); }
   .rails .interviews { padding-inline: 0; }
+  /* An interview that is not out yet: listed, dated "Coming soon", not a link */
+  .row a.soon { pointer-events: none; cursor: default; }
 
   /* Essays, Gatherings, About */
   body.sub .hero { display: none; }

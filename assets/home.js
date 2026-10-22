@@ -38,7 +38,7 @@
 
   // One row style for everything
   const rows = (items, id = "", five = false) => `<section class="interviews"${id ? ` id="${id}"` : ""}><ul class="list${five ? " five" : ""}">${items.map(x => `
-    <li class="row"><a href="${x.url}"${x.ext ? ' target="_blank" rel="noopener"' : ""}>
+    <li class="row"><a${x.soon ? ' class="soon" aria-disabled="true" tabindex="-1"' : ` href="${x.url}"`}${x.ext ? ' target="_blank" rel="noopener"' : ""}>
       <img class="ph" src="${x.img}" alt="" width="56" height="56" loading="lazy" />
       <span class="t">${esc(x.title)}</span>
       ${five ? `<span class="au">${esc(x.authors)}</span>` : ""}
@@ -46,7 +46,7 @@
       <span class="d">${esc(x.date)}</span>
     </a></li>`).join("")}</ul></section>`;
   // A page can bring its own rows (Writing, Community) and keep the same frame, pictures and type as Interviews
-  const listHTML = () => window.PAGE ? rows(PAGE.items, "interviews", !!PAGE.five) : rows(CC.interviews.map(x => ({ url: x.url, img: PORTS[x.slug], title: x.headline, line1: x.name, line2: x.role, accent: x.company, date: x.date })), "interviews");
+  const listHTML = () => window.PAGE ? rows(PAGE.items, "interviews", !!PAGE.five) : rows(CC.interviews.map(x => ({ url: x.url, img: PORTS[x.slug], title: x.headline, line1: x.name, line2: x.role, accent: x.company, date: x.date, soon: x.soon })), "interviews");
   const page = document.getElementById("page"), peek = document.getElementById("peek");
   const layouts = {
     wall:   () => listHTML() + wallHTML(),
