@@ -56,3 +56,11 @@ body.home.docked .cc-top .cc-top-mark, body.home.no-hero .cc-top .cc-top-mark { 
   .cc-right .cc-about { display: none; }
   .cc-index-list .cc-index-mob { display: block; }
 }
+
+/* Mobile article header: name on its own line, meta stacked */
+.cc-eb-br { display: none; }
+@media (max-width: 720px) {
+  .cc-eb-c { display: none; }
+  .cc-eb-br { display: inline; }
+  .cc-article-meta { flex-direction: column; gap: 4px; }
+}
