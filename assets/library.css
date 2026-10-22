@@ -1,30 +1,38 @@
-/* Creative Conviction — the Library: every picture from the interviews on one wall. Click one to read its passage; click the card to go to the interview at that spot */
-.library { padding: 28px clamp(16px, 4vw, 48px) 80px; }
+/* Creative Conviction — the Library: every picture from the interviews on one wall, the full width of the screen.
+   Tiles take the shape of their pictures; click one and it turns over to the passage, which links to that spot in the interview */
+.library { padding: 28px clamp(12px, 2vw, 24px) 80px; }
 /* On the home page the Library sits under the interviews; it waits until the opening has finished */
 #interviews, #library { scroll-margin-top: 64px; }
-body.home .library { max-width: calc(960px + 2 * clamp(16px, 4vw, 48px)); margin: 0 auto; padding-top: clamp(16px, 3vw, 40px); }
+body.home .library { padding-top: clamp(16px, 3vw, 40px); }
 body.home.opening .library { visibility: hidden; }
 .library h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 3.2vw, 40px); letter-spacing: -.02em; margin: 0 0 24px; }
-.wallgrid { display: grid; grid-template-columns: repeat(var(--lc, 6), 1fr); gap: 6px; }
-.wallgrid button { position: relative; aspect-ratio: 1; overflow: hidden; background: var(--paper); padding: 0; cursor: pointer; border: 0; }
-.wallgrid button img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s var(--ease); }
+
+/* The grid (sized in library.js): square cells about 180px across; wide pictures take two cells side by side, tall ones two stacked, a few squares four */
+.wallgrid { --cols: 8; --cell: 180px; --gap: 6px; display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); grid-auto-rows: var(--cell); grid-auto-flow: dense; gap: var(--gap); }
+.wallgrid .tile { position: relative; perspective: 1400px; cursor: pointer; outline: none; container-type: size; }
+.wallgrid .tile.wide { grid-column: span 2; }
+.wallgrid .tile.tall { grid-row: span 2; }
+.wallgrid .tile.big { grid-column: span 2; grid-row: span 2; }
+.wallgrid .tile:focus-visible .flip { outline: 1px solid var(--ink); outline-offset: 3px; }
+
+/* The card: picture on the front, passage on the back */
+.flip { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .8s cubic-bezier(.3, .7, .2, 1); }
+.tile.over .flip { transform: rotateY(180deg); }
+.face { position: absolute; inset: 0; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.front { background: var(--paper); }
+.front img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s var(--ease); }
+@media (hover: hover) { .tile:not(.over):hover .front img { transform: scale(1.035); } }
 /* The next picture waits on top, invisible, and dissolves in slowly */
-.wallgrid button img.next { position: absolute; inset: 0; opacity: 0; transition: opacity 1.8s ease-in-out, transform .5s var(--ease); }
-.wallgrid button img.next.on { opacity: 1; }
-.wallgrid button img.next:not([src]) { display: none; }
-.wallgrid button.spare { display: none; }
-@media (hover: hover) { .wallgrid button:hover img { transform: scale(1.04); } }
-@media (prefers-reduced-motion: reduce) { .wallgrid button img.next { transition: none; } }
-.card-back { position: fixed; inset: 0; z-index: 50; background: rgba(26, 17, 48, .45); backdrop-filter: blur(6px); opacity: 0; pointer-events: none; transition: opacity .3s ease; }
-.card-back.on { opacity: 1; pointer-events: auto; }
-.card { position: fixed; left: 50%; top: 50%; z-index: 51; width: min(92vw, 860px); max-height: 88vh; transform: translate(-50%, -50%) translateY(14px); background: var(--bg); color: var(--ink); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); opacity: 0; pointer-events: none; transition: opacity .35s ease, transform .45s var(--ease); overflow: hidden; cursor: pointer; text-decoration: none; }
-.card.on { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%); }
-.card img { width: 100%; height: 100%; max-height: 88vh; object-fit: cover; display: block; }
-.card .body { display: flex; flex-direction: column; justify-content: center; padding: clamp(24px, 4vw, 48px); min-height: 0; overflow: auto; }
-.card .q { font-family: var(--serif); font-size: clamp(20px, 2.2vw, 30px); line-height: 1.25; letter-spacing: -.01em; margin: 0; }
-.card .who { margin: 18px 0 0; color: var(--ink-3); font-size: 14px; line-height: 1.45; }
-.card .who b { font-weight: 400; color: var(--ink-2); }
-.card .who em { font-style: normal; color: var(--magenta); }
-.card .x { position: absolute; top: 10px; right: 12px; width: 36px; height: 36px; font-size: 22px; line-height: 1; color: var(--ink-3); z-index: 2; background: none; border: 0; cursor: pointer; }
-.card .x:hover { color: var(--ink); }
-@media (max-width: 720px) { .card { grid-template-columns: 1fr; width: min(94vw, 480px); max-height: 90vh; overflow: auto; } .card img { max-height: 42vh; } .wallgrid { gap: 3px; } }
+.front img.next { position: absolute; inset: 0; opacity: 0; transition: opacity 1.8s ease-in-out, transform .6s var(--ease); }
+.front img.next.on { opacity: 1; }
+.front img.next:not([src]) { display: none; }
+.back { transform: rotateY(180deg); background: var(--bg); box-shadow: inset 0 0 0 1px var(--rule); display: flex; flex-direction: column; padding: clamp(10px, 7cqmin, 28px); color: var(--ink); }
+.back .q { font-family: var(--serif); font-size: clamp(12px, 8.4cqmin, 26px); line-height: 1.22; letter-spacing: -.005em; margin: 0; overflow: auto; text-wrap: pretty; scrollbar-width: none; }
+.back .q::-webkit-scrollbar { display: none; }
+.back .who { margin: auto 0 0; padding-top: 8px; font-family: var(--sans); font-size: clamp(10px, 6cqmin, 13px); line-height: 1.35; color: var(--ink-3); }
+.back .who em { font-style: normal; color: var(--magenta); }
+.back .go { margin-top: 6px; font-family: var(--sans); font-size: clamp(10px, 6cqmin, 13px); color: var(--magenta); text-decoration: none; align-self: flex-start; border-bottom: 1px solid transparent; }
+.back .go:hover { border-bottom-color: currentColor; }
+.tile.wide .back .q { font-size: clamp(12px, 10cqh, 24px); }
+
+@media (prefers-reduced-motion: reduce) { .flip { transition: none; } .front img.next { transition: none; } }
