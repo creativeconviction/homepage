@@ -48,16 +48,17 @@
   // A page can bring its own rows (Writing, Community) and keep the same frame, pictures and type as Interviews
   const listHTML = () => window.PAGE ? rows(PAGE.items, "interviews", !!PAGE.five) : rows(CC.interviews.map(x => ({ url: x.url, img: PORTS[x.slug], title: x.headline, line1: x.name, line2: x.role, accent: x.company, date: x.date, soon: x.soon })), "interviews");
   const page = document.getElementById("page"), peek = document.getElementById("peek");
-  // Phones get one drifting ribbon of pictures instead of the side rails
+  // Phones, and the Interviews / Writing / Community pages at any size, get one drifting ribbon of pictures across the top instead of the side rails
   const isMobile = () => matchMedia("(max-width: 720px)").matches;
+  const topRibbon = () => isMobile() || document.body.dataset.heroless === "1";
   function mobileRibbonHTML() {
-    const h = Math.round(Math.min(innerWidth * .225, 96)), items = IMGS.map(im => tile(im)).join("");
+    const h = Math.round(Math.min(innerWidth * .225, isMobile() ? 96 : 120)), items = IMGS.map(im => tile(im)).join("");
     return `<div class="ribbon m-ribbon" data-dir="1" style="--h:${h}px"><div class="track">${items}${items}${items}</div></div>`;
   }
   const layouts = {
     wall:   () => listHTML() + wallHTML(),
     ribbon: () => { const h = Math.round(Math.min(innerHeight * .15, 150)); const per = Math.ceil(innerWidth / h) + 2; return listHTML() + ribbonHTML(h, 0, 1) + ribbonHTML(h, per, -1); },
-    rails:  () => isMobile() ? mobileRibbonHTML() + listHTML() : `<div class="rails">${railHTML(0, false)}${listHTML()}${railHTML(railPer(), true)}</div>`,
+    rails:  () => topRibbon() ? mobileRibbonHTML() + listHTML() : `<div class="rails">${railHTML(0, false)}${listHTML()}${railHTML(railPer(), true)}</div>`,
   };
   const pages = {};
   let current = "rails", rot = null, pageName = "home", ribbons = [];

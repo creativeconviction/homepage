@@ -172,3 +172,7 @@
     .logo .tag { animation: none; opacity: 1; transform: none; filter: none; }
     .rail .track { animation: none; }
   }
+
+  /* The top ribbon on the Interviews / Writing / Community pages: pictures stay pictures under the mouse; a click opens the passage */
+  @media (hover: hover) { .m-ribbon .tile:hover .pic img { opacity: 1; filter: none; } .m-ribbon .tile { cursor: pointer; } }
+  body.no-hero .m-ribbon { margin-top: 10px; }
