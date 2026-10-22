@@ -68,24 +68,24 @@
     busy = true; cue.classList.remove("on");
     board.classList.add("in"); $("grain").classList.add("on");
     await wait(500); intro.classList.add("out"); body.classList.add("docked");
-    await wait(1700); phase = 2; busy = false; stage.classList.add("live");
+    await wait(1200); phase = 2; busy = false; stage.classList.add("live");
     if (again) { again = false; buildBoard(); }
   }
   async function beat2() {
     busy = true; cue.classList.remove("on"); peek.classList.remove("on"); stage.classList.remove("live");
     stage.classList.add("colour");
-    await wait(1000);
+    await wait(450);
     const tiles = [...board.querySelectorAll(".tile.face")], order = CC.interviews.map(x => x.slug);
     tiles.sort((a, b) => order.indexOf(a.dataset.face) - order.indexOf(b.dataset.face));
     tiles.forEach((t, k) => {
       const ph = list.querySelector(`.ph[data-slug="${t.dataset.face}"]`); if (!ph) return;
       const a = t.getBoundingClientRect(), b = ph.getBoundingClientRect();
       const dx = (b.left + b.width / 2) - (a.left + a.width / 2), dy = (b.top + b.height / 2) - (a.top + a.height / 2), s = b.width / a.width;
-      t.style.setProperty("--dl", (k * 55) + "ms"); t.classList.add("fly"); void t.offsetWidth;
+      t.style.setProperty("--dl", (k * 30) + "ms"); t.classList.add("fly"); void t.offsetWidth;
       t.style.transform = `translate(${dx}px, ${dy}px) scale(${s})`;
     });
     stage.classList.add("leaving");
-    await wait(1300 + tiles.length * 55 + 100);
+    await wait(900 + tiles.length * 30 + 100);
     land();
   }
   const onScrollIntent = () => { if (busy || phase === 3) return; if (phase === 1) beat1(); else if (phase === 2) beat2(); };
@@ -103,7 +103,7 @@
     await wait(40); intro.classList.add("go");
     await wait(2200); phase = 1;
     if (!busy) await beat1();
-    await wait(1600);
+    await wait(600);
     if (phase === 2 && !busy) beat2();
   })();
 })();
