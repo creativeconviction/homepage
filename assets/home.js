@@ -37,8 +37,8 @@
   }
 
   // One row style for everything
-  const rows = (items, id = "", five = false) => `<section class="interviews"${id ? ` id="${id}"` : ""}><ul class="list${five ? " five" : ""}">${items.map(x => `
-    <li class="row"><a${x.soon ? ' class="soon" aria-disabled="true" tabindex="-1"' : ` href="${x.url}"`}${x.ext ? ' target="_blank" rel="noopener"' : ""}>
+  const rows = (items, id = "", five = false) => `<section class="interviews"${id ? ` id="${id}"` : ""}><ul class="list${five ? " five" : ""}">${items.map((x, i) => `
+    <li class="row" style="--i:${i}"><a${x.soon ? ' class="soon" aria-disabled="true" tabindex="-1"' : ` href="${x.url}"`}${x.ext ? ' target="_blank" rel="noopener"' : ""}>
       <img class="ph" src="${x.img}" alt="" width="56" height="56" loading="lazy" />
       <span class="t">${esc(x.title)}</span>
       ${five ? `<span class="au">${esc(x.authors)}</span>` : ""}
@@ -51,7 +51,7 @@
   // Phones get one drifting ribbon of pictures instead of the side rails
   const isMobile = () => matchMedia("(max-width: 720px)").matches;
   function mobileRibbonHTML() {
-    const h = Math.round(Math.min(innerWidth * .27, 124)), items = IMGS.map(im => tile(im)).join("");
+    const h = Math.round(Math.min(innerWidth * .225, 96)), items = IMGS.map(im => tile(im)).join("");
     return `<div class="ribbon m-ribbon" data-dir="1" style="--h:${h}px"><div class="track">${items}${items}${items}</div></div>`;
   }
   const layouts = {
@@ -75,6 +75,38 @@
   }
   function armTile(t) { t.addEventListener("click", e => { if (t.closest(".rail") || !(t.closest(".m-ribbon") || !canHover)) return; e.preventDefault(); openCard(t); }); }
 
+  // First visit on a phone: the squares scatter in from every side and settle into the ribbon (as the big letters do); the interviews load in after both
+  const body = document.body; let introDone = false;
+  const back = k => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(k - 1, 3) + c1 * Math.pow(k - 1, 2); };
+  const clamp01 = v => Math.min(1, Math.max(0, v));
+  function flyTiles(mr, done) {
+    const spots = [...mr.querySelectorAll(".tile")].map(t => ({ t, r: t.getBoundingClientRect() })).filter(o => o.r.right > -10 && o.r.left < innerWidth + 10);
+    const layer = document.createElement("div"); layer.className = "m-fly"; document.body.appendChild(layer);
+    const parts = spots.map((o, i) => {
+      const d = document.createElement("div"); d.style.cssText = `left:${o.r.left}px;top:${o.r.top + scrollY}px;width:${o.r.width}px;height:${o.r.height}px`;
+      const im = document.createElement("img"); im.src = o.t.querySelector("img").src; im.alt = ""; d.appendChild(im); layer.appendChild(d);
+      return { d, dx: (Math.random() - .5) * innerWidth * 1.1, dy: (Math.random() - .5) * innerHeight * .9, r: (Math.random() - .5) * 90, sc: .35 + Math.random() * 1.5, dl: Math.random() * 450 + i * 22 };
+    });
+    const finish = () => { layer.remove(); mr.style.visibility = ""; done(); };
+    const run = () => { const t0 = performance.now();
+      (function step(now) { let all = true;
+        parts.forEach(p => { const k = clamp01((now - t0 - p.dl) / 1300); if (k < 1) all = false; const amt = 1 - back(k);
+          p.d.style.transform = `translate(${(p.dx * amt).toFixed(1)}px, ${(p.dy * amt).toFixed(1)}px) rotate(${(p.r * amt).toFixed(1)}deg) scale(${(1 + (p.sc - 1) * Math.min(1.5, Math.max(-.2, amt))).toFixed(3)})`; });
+        if (all) finish(); else requestAnimationFrame(step); })(t0); };
+    // Start the squares scattered (before they are shown), once their pictures are ready
+    parts.forEach(p => { p.d.style.transform = `translate(${p.dx}px, ${p.dy}px) rotate(${p.r}deg) scale(${p.sc})`; });
+    Promise.race([Promise.all(parts.map(p => p.d.firstChild.decode().catch(() => {}))), new Promise(r => setTimeout(r, 700))]).then(run);
+  }
+  function runIntro(mr) {
+    body.classList.add("m-pending"); mr.classList.add("intro"); mr.style.visibility = "hidden";
+    const withLogo = body.dataset.logo === "assemble"; let ribbonDone = false, logoDone = !withLogo, released = false, started = false;
+    const release = () => { if (released) return; released = true; body.classList.remove("m-pending"); mr.classList.remove("intro"); mr.style.visibility = ""; document.querySelectorAll(".m-fly").forEach(n => n.remove()); };
+    const check = () => { if (ribbonDone && logoDone) release(); };
+    const go = () => { if (started) return; started = true; flyTiles(mr, () => { ribbonDone = true; check(); }); };
+    if (withLogo) { document.addEventListener("cc-logo-settled", () => { logoDone = true; check(); }, { once: true }); document.addEventListener("cc-logo-start", go, { once: true }); setTimeout(go, 900); } else go();
+    setTimeout(release, 6000); // never leave the list hidden
+  }
+
   // The phone ribbon scrolls natively under the finger (so a quick flick carries it further, fast); left alone it drifts and loops
   function armTouchRibbon(rb) {
     const third = () => rb.scrollWidth / 3; let fpos = third(), touching = false, lastUser = 0, last = performance.now(), settleT = 0, drag = null;
@@ -92,7 +124,7 @@
     rb.addEventListener("pointerup", end); rb.addEventListener("pointercancel", end);
     ribbons.push({ rb, tick: now => {
       const dt = Math.min(50, now - last); last = now;
-      if (reduce || touching || drag || peek.classList.contains("card") || now - lastUser < 260) return;
+      if (reduce || touching || drag || rb.classList.contains("intro") || peek.classList.contains("card") || now - lastUser < 260) return;
       fpos += 30 * dt / 1000; rb.scrollLeft = fpos;
       if (rb.scrollLeft > third() * 1.75) settle();
     } });
@@ -154,6 +186,7 @@
         if (rows * n - area <= 0) break; const used = new Set([...wall.children].map(t => t.dataset.n)), im = IMGS.find(x => !used.has(x.n)); if (!im) break; wall.insertAdjacentHTML("beforeend", tile(im)); } }
     page.querySelectorAll(".tile").forEach(armTile);
     page.querySelectorAll(".ribbon").forEach(rb => rb.classList.contains("m-ribbon") ? armTouchRibbon(rb) : armRibbon(rb));
+    const mr = page.querySelector(".m-ribbon"); if (mr && !introDone && !reduce) { introDone = true; runIntro(mr); }
     page.querySelectorAll(".rail").forEach(armRail);
     if (!reduce) rot = setInterval(rotate, 15000);
   }

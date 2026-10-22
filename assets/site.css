@@ -101,6 +101,14 @@
   .m-ribbon .track { gap: 3px; }
   .m-ribbon .tile .back { display: none; }
   body.no-hero .m-ribbon { margin-top: 6px; }
+  .m-fly { position: absolute; left: 0; top: 0; width: 0; height: 0; z-index: 32; pointer-events: none; }
+  .m-fly div { position: absolute; overflow: hidden; will-change: transform; background: var(--paper); }
+  .m-fly img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* On a phone the rows arrive one after another once the title and the ribbon have settled */
+  @media (max-width: 720px) {
+    .row { transition: opacity .7s var(--ease), transform .8s var(--ease); transition-delay: calc(min(var(--i, 0), 9) * 70ms); }
+    body.m-pending .row { opacity: 0; transform: translateY(18px); transition: none; }
+  }
 
   /* Essays, Gatherings, About */
   body.sub .hero { display: none; }

@@ -37,6 +37,9 @@
     parts = chars().map((c, i) => ({ c, dx: (Math.random() - .5) * innerWidth * 1.1, dy: (Math.random() - .5) * innerHeight * .9, r: (Math.random() - .5) * 90, sc: .35 + Math.random() * 1.5, d: Math.random() * 450 + i * 18, rx: 0, ry: 0 }));
     measure(); sp = wantOf();
     tagOpacity(0); later(() => { if (tagEl) { tagEl.style.removeProperty("opacity"); tagEl.classList.add("late"); } }, 1300);
+    // Tell the page the letters are starting, and when they have all landed (the phone ribbon and the interview list follow this)
+    document.dispatchEvent(new Event("cc-logo-start"));
+    later(() => document.dispatchEvent(new Event("cc-logo-settled")), Math.max(...parts.map(p => p.d)) + 1300 + 200);
     // Put every letter in its scattered place first, then reveal them, so nothing flashes in the wrong spot
     tick(performance.now());
     body.classList.add("logo-go");
