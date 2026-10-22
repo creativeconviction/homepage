@@ -136,7 +136,8 @@
   }
 
   // #interviews goes straight to the list with no title screen (the wordmark comes back in the top line); every other view shows the title
-  const setHero = skip => { document.body.classList.toggle("no-hero", skip); const top = document.querySelector(".cc-top"); if (top) top.classList.toggle("no-mark", !skip); };
+  const heroless = document.body.dataset.heroless === "1";
+  const setHero = skip => { skip = skip || heroless; document.body.classList.toggle("no-hero", skip); const top = document.querySelector(".cc-top"); if (top) top.classList.toggle("no-mark", !skip); };
   const fromHash = () => { const h = (location.hash || "#rails").slice(1);
     if (h === "interviews" || h === "top") {
       setHero(h === "interviews");
