@@ -3,7 +3,7 @@
   var root = document.documentElement, key = "cc-bg";
   function setBg(v) { root.setAttribute("data-bg", v); try { localStorage.setItem(key, v); } catch (e) {} }
   // "cc-bg-v" marks the one-time reset that moved the default from white to soft purple
-  var saved = null; try { if (localStorage.getItem("cc-bg-v") !== "2") { localStorage.removeItem(key); localStorage.setItem("cc-bg-v", "2"); } saved = localStorage.getItem(key); } catch (e) {}
+  var saved = null; try { if (localStorage.getItem("cc-bg-v") !== "3") { localStorage.removeItem(key); localStorage.setItem("cc-bg-v", "3"); } saved = localStorage.getItem(key); } catch (e) {}
   setBg(saved || "paper");
   var btn = document.querySelector(".cc-bg"); if (btn) btn.addEventListener("click", function () { setBg(root.getAttribute("data-bg") === "paper" ? "white" : "paper"); });
 

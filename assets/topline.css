@@ -1,8 +1,13 @@
 /* Creative Conviction — the top line every page shares: Index (top left), the wordmark (centre; on the landing page it appears once the big title has docked), and About, Subscribe and the background switch (top right). Also the highlighted passage a quote links to. */
+:root { --cc-paper: #F7F5FA; --cc-paper-soft: #F2EFF7; --cc-white: #FBFAFD; }  /* lavender is the default */
 :root[data-bg="white"] { --cc-paper: #FFFFFF; --cc-paper-soft: #F7F5FA; --cc-white: #FFFFFF; }
 :root[data-bg="paper"] { --cc-paper: #F7F5FA; --cc-paper-soft: #F2EFF7; --cc-white: #FBFAFD; }
 .cc-top { position: fixed; top: 0; left: 0; right: 0; z-index: 30; display: flex; justify-content: space-between; align-items: center; padding: 14px clamp(16px, 3vw, 32px); font-family: "Inter", ui-sans-serif, system-ui, sans-serif; font-size: 14px; background: var(--cc-paper, #fff); color: var(--cc-ink, #1A1130); }
 .cc-top.open { z-index: 32; }
+/* The top line looks and behaves the same whatever the page around it says */
+.cc-top, .cc-top * { box-sizing: border-box; }
+.cc-top { line-height: 1.5; letter-spacing: normal; text-transform: none; -webkit-font-smoothing: antialiased; }
+.cc-top a, .cc-top button { margin: 0; font-weight: 400; letter-spacing: normal; text-transform: none; text-decoration: none; }
 body.has-top { padding-top: 56px; }
 
 /* Wordmark: dead centre. On the landing page it stays hidden until the big title has gathered itself into the bar (body.docked) */
@@ -14,7 +19,7 @@ body.home.docked .cc-top .cc-top-mark, body.home.no-hero .cc-top .cc-top-mark { 
 /* Right side */
 .cc-right { display: flex; align-items: center; gap: clamp(16px, 2vw, 24px); }
 .cc-right .cc-about { color: var(--cc-ink-3, #6A6378); text-decoration: none; }
-.cc-right .cc-about:hover, .cc-right .cc-about[aria-current="page"] { color: var(--cc-ink, #1A1130); }
+.cc-right .cc-about:hover { color: var(--cc-ink, #1A1130); }
 .cc-top .cc-top-sub { color: #fff; background: var(--cc-magenta, #D8016A); padding: 6px 14px; text-decoration: none; }
 .cc-top .cc-top-sub:hover { color: #fff; background: #B80059; }
 .cc-top .cc-bg { width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--cc-ink, #1A1130); background: linear-gradient(90deg, #fff 50%, #ECE8F3 50%); padding: 0; cursor: pointer; flex: none; }

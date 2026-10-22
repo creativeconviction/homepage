@@ -13,7 +13,7 @@
   // The link carries the passage in #q=, and the site's own script marks just those words for a few seconds
   const jump = r => `${r.url}#q=${encodeURIComponent(r.q)}`;
   const backHTML = r => `<span class="q">${r.cap ? esc(r.q) : "&ldquo;" + esc(r.q) + "&rdquo;"}</span><small>${esc(r.name)}, ${esc(r.role)}, <em>${esc(r.company)}</em></small>`;
-  const tile = (im, cls = "") => { const r = refOf(im); return `<a class="tile ${cls}" href="${jump(r)}" data-n="${im.n}" aria-label="${esc(r.name)}: ${esc(r.q)}"><div class="back">${backHTML(r)}</div><div class="pic"><img src="${im.u}" alt="" loading="lazy" draggable="false" /></div></a>`; };
+  const tile = (im, cls = "") => { const r = refOf(im); return `<a class="tile ${cls}" href="${jump(r)}" data-n="${im.n}" aria-label="${esc(r.name)}: ${esc(r.q)}"><div class="back">${backHTML(r)}</div><div class="pic"><img src="${im.u}" alt="" loading="lazy" decoding="async" draggable="false" /></div></a>`; };
   const pick = (k, offset = 0) => Array.from({ length: k }, (_, i) => IMGS[(offset + i) % IMGS.length]);
 
   // Wall: one screen of pictures
@@ -42,10 +42,11 @@
       <img class="ph" src="${x.img}" alt="" width="56" height="56" loading="lazy" />
       <span class="t">${esc(x.title)}</span>
       ${five ? `<span class="au">${esc(x.authors)}</span>` : ""}
-      <span class="w">${x.line1 ? `<b>${esc(x.line1)}</b><br />` : ""}${esc(x.line2)}, <em>${esc(x.accent)}</em></span>
+      <span class="w">${x.line1 ? `<b>${esc(x.line1)}</b><br />` : ""}${esc(x.line2)}${x.accent ? `, <em>${esc(x.accent)}</em>` : ""}</span>
       <span class="d">${esc(x.date)}</span>
     </a></li>`).join("")}</ul></section>`;
-  const listHTML = () => rows(CC.interviews.map(x => ({ url: x.url, img: PORTS[x.slug], title: x.headline, line1: x.name, line2: x.role, accent: x.company, date: x.date })), "interviews");
+  // A page can bring its own rows (Writing, Community) and keep the same frame, pictures and type as Interviews
+  const listHTML = () => window.PAGE ? rows(PAGE.items, "interviews", !!PAGE.five) : rows(CC.interviews.map(x => ({ url: x.url, img: PORTS[x.slug], title: x.headline, line1: x.name, line2: x.role, accent: x.company, date: x.date })), "interviews");
   const page = document.getElementById("page"), peek = document.getElementById("peek");
   const layouts = {
     wall:   () => listHTML() + wallHTML(),
