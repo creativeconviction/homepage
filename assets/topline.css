@@ -62,5 +62,8 @@ body.home.docked .cc-top .cc-top-mark, body.home.no-hero .cc-top .cc-top-mark { 
 @media (max-width: 720px) {
   .cc-eb-c { display: none; }
   .cc-eb-br { display: inline; }
-  .cc-article-meta { flex-direction: column; gap: 4px; }
+  .cc-article-meta { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .cc-article-substack a.cc-highlight, .cc-article-substack a.cc-highlight:hover {
+    background: none; padding: 0; text-decoration: underline; text-underline-offset: 3px;
+  }
 }
