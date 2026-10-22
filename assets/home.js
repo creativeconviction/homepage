@@ -186,7 +186,7 @@
         if (rows * n - area <= 0) break; const used = new Set([...wall.children].map(t => t.dataset.n)), im = IMGS.find(x => !used.has(x.n)); if (!im) break; wall.insertAdjacentHTML("beforeend", tile(im)); } }
     page.querySelectorAll(".tile").forEach(armTile);
     page.querySelectorAll(".ribbon").forEach(rb => rb.classList.contains("m-ribbon") ? armTouchRibbon(rb) : armRibbon(rb));
-    const mr = page.querySelector(".m-ribbon"); if (mr && !introDone && !reduce) { introDone = true; runIntro(mr); }
+    const mr = page.querySelector(".m-ribbon"); if (mr && !introDone && !reduce && body.dataset.heroless !== "1") { introDone = true; runIntro(mr); }
     page.querySelectorAll(".rail").forEach(armRail);
     if (!reduce) rot = setInterval(rotate, 15000);
   }
