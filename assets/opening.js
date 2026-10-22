@@ -103,7 +103,7 @@
     await wait(40); intro.classList.add("go");
     await wait(2200); phase = 1;
     if (!busy) await beat1();
-    await wait(2600);
+    await wait(1600);
     if (phase === 2 && !busy) beat2();
   })();
 })();

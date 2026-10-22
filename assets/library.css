@@ -3,10 +3,14 @@
 .library h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 3.2vw, 40px); letter-spacing: -.02em; margin: 0 0 24px; }
 .wallgrid { display: grid; grid-template-columns: repeat(var(--lc, 6), 1fr); gap: 6px; }
 .wallgrid button { position: relative; aspect-ratio: 1; overflow: hidden; background: var(--paper); padding: 0; cursor: pointer; border: 0; }
-.wallgrid button img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s var(--ease), opacity .45s ease; }
-.wallgrid button img.fade { opacity: 0; }
+.wallgrid button img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s var(--ease); }
+/* The next picture waits on top, invisible, and dissolves in slowly */
+.wallgrid button img.next { position: absolute; inset: 0; opacity: 0; transition: opacity 1.8s ease-in-out, transform .5s var(--ease); }
+.wallgrid button img.next.on { opacity: 1; }
+.wallgrid button img.next:not([src]) { display: none; }
 .wallgrid button.spare { display: none; }
 @media (hover: hover) { .wallgrid button:hover img { transform: scale(1.04); } }
+@media (prefers-reduced-motion: reduce) { .wallgrid button img.next { transition: none; } }
 .card-back { position: fixed; inset: 0; z-index: 50; background: rgba(26, 17, 48, .45); backdrop-filter: blur(6px); opacity: 0; pointer-events: none; transition: opacity .3s ease; }
 .card-back.on { opacity: 1; pointer-events: auto; }
 .card { position: fixed; left: 50%; top: 50%; z-index: 51; width: min(92vw, 860px); max-height: 88vh; transform: translate(-50%, -50%) translateY(14px); background: var(--bg); color: var(--ink); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); opacity: 0; pointer-events: none; transition: opacity .35s ease, transform .45s var(--ease); overflow: hidden; cursor: pointer; text-decoration: none; }

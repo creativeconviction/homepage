@@ -27,22 +27,31 @@
   const close = () => { back.classList.remove("on"); card.classList.remove("on"); };
   wall.addEventListener("click", e => { const b = e.target.closest("button"); if (b) open(items[b.dataset.i]); });
 
-  // The wall changes by itself: every couple of seconds one picture fades into another that isn't on show
-  // (or two on show trade places when the window shows them all). It holds still while a card is open, and never changes the picture under the pointer.
+  // The wall changes by itself, all at once and slowly: every nine seconds a soft ripple crosses it from one corner and
+  // each picture dissolves into the next of a fresh shuffle, so nothing on show ever repeats. It holds still while a card
+  // is open, and the picture under the pointer stays put.
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const swapTo = (b, i) => { const img = b.querySelector("img"), next = new Image(); next.src = items[i].u;
-    const go = () => { img.classList.add("fade"); setTimeout(() => { img.src = items[i].u; b.dataset.i = i; b.setAttribute("aria-label", items[i].ref.x.name); img.classList.remove("fade"); }, 450); };
-    next.decode ? next.decode().then(go, go) : (next.onload = go); };
-  function tick() {
+  [...wall.children].forEach(b => { const n = document.createElement("img"); n.className = "next"; n.alt = ""; b.appendChild(n); });
+  const show = (b, i, delay) => setTimeout(() => {
+    const cur = b.querySelector("img:not(.next)"), nxt = b.querySelector("img.next");
+    nxt.onload = () => { nxt.classList.add("on"); setTimeout(() => { cur.src = items[i].u; cur.onload = () => nxt.classList.remove("on"); }, 1800); };
+    nxt.src = items[i].u; b.dataset.i = i; b.setAttribute("aria-label", items[i].ref.x.name);
+  }, delay);
+  function wave() {
     if (card.classList.contains("on") || document.hidden) return;
-    const all = [...wall.children], shown = all.filter(b => !b.classList.contains("spare") && !b.matches(":hover")), onShow = new Set(all.filter(b => !b.classList.contains("spare")).map(b => +b.dataset.i));
-    if (!shown.length) return;
-    const b = shown[Math.random() * shown.length | 0], waiting = items.map((_, i) => i).filter(i => !onShow.has(i));
-    if (waiting.length) { const i = waiting[Math.random() * waiting.length | 0], spare = [...wall.children].find(x => +x.dataset.i === i); if (spare) { spare.dataset.i = b.dataset.i; spare.querySelector("img").src = items[+b.dataset.i].u; } swapTo(b, i); return; }
-    const c = shown[Math.random() * shown.length | 0]; if (c === b) return;
-    const bi = +b.dataset.i, ci = +c.dataset.i; swapTo(b, ci); swapTo(c, bi);
+    const all = [...wall.children], held = all.find(b => b.matches(":hover")), keep = held ? +held.dataset.i : -1;
+    const order = shuffle(items.map((_, i) => i).filter(i => i !== keep));
+    const cols = +getComputedStyle(wall).getPropertyValue("--lc") || 6, rows = Math.ceil(all.length / cols), corner = Math.random() * 4 | 0;
+    let k = 0;
+    all.forEach((b, idx) => {
+      if (b === held) return;
+      const i = order[k++]; let c = idx % cols, r = idx / cols | 0;
+      if (corner & 1) c = cols - 1 - c; if (corner & 2) r = rows - 1 - r;
+      show(b, i, (c + r) / (cols + rows) * 1600);
+    });
   }
-  if (!reduce) setInterval(tick, 2200);
+  if (!reduce) setInterval(wave, 9000);
+
   back.addEventListener("click", close);
   card.querySelector(".x").addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); close(); });
   addEventListener("keydown", e => { if (e.key === "Escape") close(); });
