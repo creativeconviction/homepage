@@ -68,7 +68,7 @@
     busy = true; cue.classList.remove("on");
     board.classList.add("in"); $("grain").classList.add("on");
     await wait(500); intro.classList.add("out"); body.classList.add("docked");
-    await wait(1200); phase = 2; busy = false; stage.classList.add("live");
+    await wait(800); phase = 2; busy = false; stage.classList.add("live");
     if (again) { again = false; buildBoard(); }
   }
   async function beat2() {
@@ -108,7 +108,7 @@
     await wait(40); intro.classList.add("go");
     await wait(2200); phase = 1;
     if (!busy) await beat1();
-    await wait(600);
+    await wait(250);
     if (phase === 2 && !busy) beat2();
   })();
 })();
