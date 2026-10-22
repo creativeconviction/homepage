@@ -19,7 +19,7 @@
   }
 
   let parts = [], px = -1e4, py = -1e4, t0 = 0, geo = null, sp = 0;
-  addEventListener("pointermove", e => { px = e.clientX; py = e.clientY; }, { passive: true });
+  addEventListener("pointermove", e => { if (e.pointerType !== "mouse") { px = py = -1e4; return; } px = e.clientX; py = e.clientY; }, { passive: true });
   document.addEventListener("pointerleave", () => { px = py = -1e4; });
   const back = k => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(k - 1, 3) + c1 * Math.pow(k - 1, 2); };
   const smooth = x => x * x * x * (x * (x * 6 - 15) + 10);
@@ -35,14 +35,17 @@
   function start() {
     t0 = performance.now(); sp = 0;
     parts = chars().map((c, i) => ({ c, dx: (Math.random() - .5) * innerWidth * 1.1, dy: (Math.random() - .5) * innerHeight * .9, r: (Math.random() - .5) * 90, sc: .35 + Math.random() * 1.5, d: Math.random() * 450 + i * 18, rx: 0, ry: 0 }));
-    measure(); sp = clamp(scrollY / geo.travel);
+    measure(); sp = wantOf();
     tagOpacity(0); later(() => { if (tagEl) { tagEl.style.removeProperty("opacity"); tagEl.classList.add("late"); } }, 1300);
     // Put every letter in its scattered place first, then reveal them, so nothing flashes in the wrong spot
     tick(performance.now());
     body.classList.add("logo-go");
   }
+  // On a phone the title only breaks apart on a clear, long scroll down; a nudge, a drag on the ribbon or a small scroll leaves it be
+  const phone = matchMedia("(max-width: 720px)");
+  const wantOf = () => { const dead = phone.matches ? Math.max(90, geo.travel * .3) : 0; return clamp((scrollY - dead) / Math.max(1, geo.travel - dead)); };
   function tick(now) {
-    const want = clamp(scrollY / geo.travel);
+    const want = wantOf();
     sp += (want - sp) * (reduce ? 1 : .08); if (Math.abs(want - sp) < .0004) sp = want;
     const e = smooth(sp), burst = reduce ? 0 : Math.sin(Math.PI * sp) * 1.15, hb = { left: geo.hl, top: geo.ht - scrollY };
     parts.forEach(p => {

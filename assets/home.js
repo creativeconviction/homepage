@@ -48,16 +48,55 @@
   // A page can bring its own rows (Writing, Community) and keep the same frame, pictures and type as Interviews
   const listHTML = () => window.PAGE ? rows(PAGE.items, "interviews", !!PAGE.five) : rows(CC.interviews.map(x => ({ url: x.url, img: PORTS[x.slug], title: x.headline, line1: x.name, line2: x.role, accent: x.company, date: x.date, soon: x.soon })), "interviews");
   const page = document.getElementById("page"), peek = document.getElementById("peek");
+  // Phones get one drifting ribbon of pictures instead of the side rails
+  const isMobile = () => matchMedia("(max-width: 720px)").matches;
+  function mobileRibbonHTML() {
+    const h = Math.round(Math.min(innerWidth * .27, 124)), items = IMGS.map(im => tile(im)).join("");
+    return `<div class="ribbon m-ribbon" data-dir="1" style="--h:${h}px"><div class="track">${items}${items}${items}</div></div>`;
+  }
   const layouts = {
     wall:   () => listHTML() + wallHTML(),
     ribbon: () => { const h = Math.round(Math.min(innerHeight * .15, 150)); const per = Math.ceil(innerWidth / h) + 2; return listHTML() + ribbonHTML(h, 0, 1) + ribbonHTML(h, per, -1); },
-    rails:  () => `<div class="rails">${railHTML(0, false)}${listHTML()}${railHTML(railPer(), true)}</div>`,
+    rails:  () => isMobile() ? mobileRibbonHTML() + listHTML() : `<div class="rails">${railHTML(0, false)}${listHTML()}${railHTML(railPer(), true)}</div>`,
   };
   const pages = {};
   let current = "rails", rot = null, pageName = "home", ribbons = [];
 
-  // On a touch screen the first tap reveals the passage, the second follows the link
-  function armTile(t) { t.addEventListener("click", e => { if (!canHover && !t.closest(".rail") && !t.classList.contains("show")) { e.preventDefault(); page.querySelectorAll(".tile.show").forEach(o => o.classList.remove("show")); t.classList.add("show"); } }); }
+  // On a touch screen, tapping a picture opens a card with the passage; the magenta arrow under it opens the article
+  let veil = null;
+  const closeCard = () => { peek.classList.remove("on", "card"); if (veil) veil.classList.remove("on"); };
+  function openCard(t) {
+    const im = IMGS.find(x => x.n === t.dataset.n), r = refOf(im);
+    const who = `${esc(r.name)}, ${esc(r.role)}, <em>${esc(r.company)}</em> <a class="go" href="${jump(r)}" aria-label="Read the interview">&rarr;</a>`;
+    peek.innerHTML = `<img src="${im.u}" alt="" /><div class="cap"><span class="q">${r.cap ? esc(r.q) : "&ldquo;" + esc(r.q) + "&rdquo;"}</span><small>${who}</small></div>`;
+    if (!veil) { veil = document.createElement("div"); veil.className = "peekveil"; veil.addEventListener("click", closeCard); document.body.appendChild(veil); }
+    peek.style.left = peek.style.right = peek.style.top = "";
+    peek.classList.add("on", "card"); veil.classList.add("on");
+  }
+  function armTile(t) { t.addEventListener("click", e => { if (t.closest(".rail") || !(t.closest(".m-ribbon") || !canHover)) return; e.preventDefault(); openCard(t); }); }
+
+  // The phone ribbon scrolls natively under the finger (so a quick flick carries it further, fast); left alone it drifts and loops
+  function armTouchRibbon(rb) {
+    const third = () => rb.scrollWidth / 3; let fpos = third(), touching = false, lastUser = 0, last = performance.now(), settleT = 0, drag = null;
+    rb.scrollLeft = fpos;
+    const settle = () => { const t = third(); if (rb.scrollLeft < t * .5) rb.scrollLeft += t; else if (rb.scrollLeft > t * 1.5) rb.scrollLeft -= t; fpos = rb.scrollLeft; };
+    rb.addEventListener("touchstart", () => { touching = true; lastUser = performance.now(); }, { passive: true });
+    const lift = () => { touching = false; lastUser = performance.now(); };
+    rb.addEventListener("touchend", lift, { passive: true }); rb.addEventListener("touchcancel", lift, { passive: true });
+    // Our own nudges are not the reader's; only a real move pauses the drift (and keeps us from cutting a flick short)
+    rb.addEventListener("scroll", () => { if (Math.abs(rb.scrollLeft - fpos) > 1.5) { lastUser = performance.now(); fpos = rb.scrollLeft; } clearTimeout(settleT); settleT = setTimeout(() => { if (!touching) settle(); }, 160); }, { passive: true });
+    // A mouse on a narrow window can drag it too
+    rb.addEventListener("pointerdown", e => { if (e.pointerType !== "mouse" || e.button !== 0) return; drag = { x: e.clientX, left: rb.scrollLeft }; rb.classList.add("dragging"); rb.setPointerCapture(e.pointerId); });
+    rb.addEventListener("pointermove", e => { if (drag) rb.scrollLeft = drag.left - (e.clientX - drag.x); });
+    const end = () => { drag = null; rb.classList.remove("dragging"); lastUser = performance.now(); };
+    rb.addEventListener("pointerup", end); rb.addEventListener("pointercancel", end);
+    ribbons.push({ rb, tick: now => {
+      const dt = Math.min(50, now - last); last = now;
+      if (reduce || touching || drag || peek.classList.contains("card") || now - lastUser < 260) return;
+      fpos += 30 * dt / 1000; rb.scrollLeft = fpos;
+      if (rb.scrollLeft > third() * 1.75) settle();
+    } });
+  }
 
   // Ribbons drift on their own, loop, and can be dragged or scrolled by hand
   function armRibbon(rb) {
@@ -100,7 +139,7 @@
       t.addEventListener("contextmenu", e => e.preventDefault());
     });
   }
-  addEventListener("scroll", () => peek.classList.remove("on"), { passive: true });
+  addEventListener("scroll", () => { if (!peek.classList.contains("card")) peek.classList.remove("on"); }, { passive: true });
 
   function render(v) {
     ribbons = []; clearInterval(rot);
@@ -114,7 +153,7 @@
       for (let k = 0; k < 20; k++) { const rows = Math.round((wall.offsetHeight + 4) / (cell + 4)), area = [...wall.children].reduce((a, t) => a + (t.classList.contains("h2") ? 2 : 1), 0);
         if (rows * n - area <= 0) break; const used = new Set([...wall.children].map(t => t.dataset.n)), im = IMGS.find(x => !used.has(x.n)); if (!im) break; wall.insertAdjacentHTML("beforeend", tile(im)); } }
     page.querySelectorAll(".tile").forEach(armTile);
-    page.querySelectorAll(".ribbon").forEach(armRibbon);
+    page.querySelectorAll(".ribbon").forEach(rb => rb.classList.contains("m-ribbon") ? armTouchRibbon(rb) : armRibbon(rb));
     page.querySelectorAll(".rail").forEach(armRail);
     if (!reduce) rot = setInterval(rotate, 15000);
   }
@@ -123,7 +162,7 @@
   function rotate() {
     shift += 7;
     const showing = () => new Set([...page.querySelectorAll(".tile")].map(t => t.dataset.n));
-    [...page.querySelectorAll(".wall .tile, .ribbon .tile")].forEach((t, i) => setTimeout(() => {
+    [...page.querySelectorAll(".wall .tile, .ribbon:not(.m-ribbon) .tile")].forEach((t, i) => setTimeout(() => {
       if (t.matches(":hover") || t.classList.contains("show")) return;
       const used = showing(), start = IMGS.findIndex(x => x.n === t.dataset.n) + shift;
       let im = null; for (let k = 0; k < IMGS.length; k++) { const c = IMGS[(start + k) % IMGS.length]; if (!used.has(c.n)) { im = c; break; } }
@@ -147,6 +186,6 @@
     } else { setHero(false); render(h); } };
   addEventListener("hashchange", () => { const h = location.hash.slice(1); if (!h || layouts[h] || pages[h] || h === "interviews" || h === "top") fromHash(); });
   fromHash();
-  let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { if (pageName === "home") render(current); }, 200); });
+  let lastW = innerWidth, rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { if (pageName === "home" && Math.abs(innerWidth - lastW) > 1) { lastW = innerWidth; render(current); } }, 200); });
   addEventListener("scroll", () => document.body.classList.toggle("past", scrollY > innerHeight * .4), { passive: true });
 })();
