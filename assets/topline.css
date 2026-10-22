@@ -13,8 +13,8 @@
 .cc-top nav .cc-top-sub:hover { color: #fff; background: #B80059; }
 .cc-top .cc-bg { width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--cc-ink, #1A1130); background: linear-gradient(90deg, #fff 50%, #ECE8F3 50%); padding: 0; cursor: pointer; flex: none; }
 body.has-top { padding-top: 56px; }
-.cc-jump { background: var(--cc-magenta-tint, #FBE0EC); color: var(--cc-magenta, #D8016A); box-shadow: 0 0 0 6px var(--cc-magenta-tint, #FBE0EC); border-radius: 2px; transition: background 1s ease, box-shadow 1s ease, color 1s ease; }
-.cc-jump.is-fading { background: transparent; box-shadow: 0 0 0 6px transparent; color: inherit; }
+.cc-jump { background: var(--cc-magenta-tint, #FBE0EC); color: var(--cc-magenta, #D8016A); box-shadow: 0 0 0 3px var(--cc-magenta-tint, #FBE0EC); -webkit-box-decoration-break: clone; box-decoration-break: clone; border-radius: 2px; transition: background 1s ease, box-shadow 1s ease, color 1s ease; }
+.cc-jump.is-fading { background: transparent; box-shadow: 0 0 0 3px transparent; color: inherit; }
 @media (max-width: 720px) {
   .cc-top { padding: 10px 12px; gap: 8px; }
   .cc-top .cc-top-mark { font-size: 15px; white-space: nowrap; flex: none; }

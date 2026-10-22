@@ -10,8 +10,8 @@
   // Every picture is paired with the passage of the interview it comes from (REFS), checked by hand
   const bySlug = Object.fromEntries(CC.interviews.map(x => [x.slug, x]));
   const refOf = im => { const r = REFS[im.n]; return { ...bySlug[r.slug], q: r.q, cap: !!r.cap, frag: r.frag }; };
-  // The link carries the passage twice: #q= for the site's own highlight script, and a text fragment browsers follow on their own
-  const jump = r => { const frag = r.frag || r.q.split(/\s+/).slice(0, 7).join(" ").replace(/[“”"]/g, "").replace(/[.,;:!?]+$/, ""); return `${r.url}#q=${encodeURIComponent(r.q)}:~:text=${encodeURIComponent(frag)}`; };
+  // The link carries the passage in #q=, and the site's own script marks just those words for a few seconds
+  const jump = r => `${r.url}#q=${encodeURIComponent(r.q)}`;
   const backHTML = r => `<span class="q">${r.cap ? esc(r.q) : "&ldquo;" + esc(r.q) + "&rdquo;"}</span><small>${esc(r.name)}, ${esc(r.role)}, <em>${esc(r.company)}</em></small>`;
   const tile = (im, cls = "") => { const r = refOf(im); return `<a class="tile ${cls}" href="${jump(r)}" data-n="${im.n}" aria-label="${esc(r.name)}: ${esc(r.q)}"><div class="back">${backHTML(r)}</div><div class="pic"><img src="${im.u}" alt="" loading="lazy" draggable="false" /></div></a>`; };
   const pick = (k, offset = 0) => Array.from({ length: k }, (_, i) => IMGS[(offset + i) % IMGS.length]);
