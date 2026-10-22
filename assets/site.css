@@ -76,7 +76,7 @@
 
   /* Lists */
   .interviews { padding: 0 clamp(16px, 4vw, 48px) clamp(32px, 4vw, 56px); }
-  .list { list-style: none; max-width: 960px; margin: 0 auto; border-top: 1px solid var(--rule); }
+  .list { list-style: none; max-width: 960px; margin: 0 auto; }
   .row a { display: grid; grid-template-columns: 56px minmax(0, 1.2fr) minmax(0, 1fr) 88px; gap: 20px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--rule); transition: color .2s ease; }
   .list.five .row a { grid-template-columns: 56px minmax(0, 1.2fr) minmax(0, .9fr) minmax(0, .8fr) 88px; }
   .row .ph { width: 56px; height: 56px; object-fit: cover; }
@@ -94,7 +94,10 @@
   /* Essays, Gatherings, About */
   body.sub .hero { display: none; }
   body.no-hero .hero { display: none; }
-  body.sub #page { padding-top: 16px; min-height: 100vh; }
+  body.sub #page { padding-top: 0; min-height: 100vh; }
+  /* Writing and Community sit in the same three-column frame as Interviews (empty side columns where the pictures are), so the list is the same width and starts at the same height on all three */
+  body.sub .interviews { display: grid; grid-template-columns: var(--rail) minmax(0, 1fr) var(--rail); gap: clamp(16px, 2.5vw, 40px); padding-inline: 0; }
+  body.sub .interviews .list { grid-column: 2; width: 100%; }
   .about { max-width: 640px; margin: 0 auto; padding: clamp(24px, 4vw, 56px) clamp(16px, 4vw, 48px) 96px; text-align: center; }
   .about .people { display: flex; justify-content: center; gap: 24px; margin-bottom: 36px; }
   .about .person { display: flex; flex-direction: column; align-items: center; gap: 8px; }
@@ -107,29 +110,22 @@
 
 
   @media (max-width: 1100px) {
-    .rails .row a { grid-template-columns: 48px minmax(0, 1fr); gap: 4px 14px; align-items: start; }
-    .rails .row .ph { width: 48px; height: 48px; grid-row: 1 / span 4; }
-    .rails .row .t, .rails .row .w, .rails .row .d { grid-column: 2; text-align: left; }
-    .rails .row .t { font-size: 20px; }
-    .rails .row .d { font-size: 12px; }
+    .row a, .list.five .row a { grid-template-columns: 48px minmax(0, 1fr); gap: 4px 14px; align-items: start; }
+    .row .ph { width: 48px; height: 48px; grid-row: 1 / span 4; }
+    .row .t, .row .w, .row .au, .row .d { grid-column: 2; text-align: left; }
     .row .t { font-size: 20px; }
     .row .d { font-size: 12px; }
   }
   @media (max-width: 720px) {
     .hero { padding-top: 72px; }
-    .row a, .list.five .row a { grid-template-columns: 48px minmax(0, 1fr); gap: 4px 14px; align-items: start; }
-    .row .ph { width: 48px; height: 48px; grid-row: 1 / span 4; }
-    .row .t, .row .w, .row .au, .row .d { grid-column: 2; text-align: left; }
     .row .t { font-size: 17px; }
     .row .w, .row .au { font-size: 13px; }
     .row .d { font-size: 12px; }
     /* Phone: one narrow column of pictures each side, the list between them */
     :root { --rail: 56px; --rail-cols: 1; }
-    .rails { gap: 10px; }
-    .rails .row a { grid-template-columns: 40px minmax(0, 1fr); gap: 3px 10px; padding: 14px 0; }
-    .rails .row .ph { width: 40px; height: 40px; }
-    .rails .row .t { font-size: 17px; }
-    .rails .row .w { font-size: 13px; }
+    .rails, body.sub .interviews { gap: 10px; }
+    .row a, .list.five .row a { grid-template-columns: 40px minmax(0, 1fr); gap: 3px 10px; padding: 14px 0; }
+    .row .ph { width: 40px; height: 40px; }
     /* Press and hold a picture and it appears large, with its passage, over the middle of the screen; let go and it leaves */
     .peek { left: 50%; right: auto; top: 50%; width: min(84vw, 360px); transform: translate(-50%, -50%) translateY(8px); }
     .peek.on { transform: translate(-50%, -50%); }
