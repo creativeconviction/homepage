@@ -1,30 +1,53 @@
-/* Creative Conviction — the top line every page shares (the wordmark is left off the landing page), the background switch, and the highlighted passage a quote links to */
+/* Creative Conviction — the top line every page shares: Index (top left), the wordmark (centre; on the landing page it appears once the big title has docked), and About, Subscribe and the background switch (top right). Also the highlighted passage a quote links to. */
 :root[data-bg="white"] { --cc-paper: #FFFFFF; --cc-paper-soft: #F7F5FA; --cc-white: #FFFFFF; }
 :root[data-bg="paper"] { --cc-paper: #F7F5FA; --cc-paper-soft: #F2EFF7; --cc-white: #FBFAFD; }
-.cc-top.no-mark { justify-content: flex-end; }
-.cc-top.no-mark .cc-top-mark { display: none; }
 .cc-top { position: fixed; top: 0; left: 0; right: 0; z-index: 30; display: flex; justify-content: space-between; align-items: center; padding: 14px clamp(16px, 3vw, 32px); font-family: "Inter", ui-sans-serif, system-ui, sans-serif; font-size: 14px; background: var(--cc-paper, #fff); color: var(--cc-ink, #1A1130); }
-.cc-top .cc-top-mark { font-family: "EB Garamond", Garamond, Georgia, serif; font-size: 20px; color: var(--cc-ink, #1A1130); text-decoration: none; }
-.cc-top .cc-top-mark em { color: var(--cc-magenta, #D8016A); font-style: italic; }
-.cc-top nav { display: flex; gap: clamp(14px, 2vw, 24px); align-items: center; }
-.cc-top nav a { color: var(--cc-ink-3, #6A6378); text-decoration: none; }
-.cc-top nav a:hover, .cc-top nav a[aria-current="page"] { color: var(--cc-ink, #1A1130); }
-.cc-top nav .cc-top-sub { color: #fff; background: var(--cc-magenta, #D8016A); padding: 6px 14px; }
-.cc-top nav .cc-top-sub:hover { color: #fff; background: #B80059; }
-.cc-top .cc-bg { width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--cc-ink, #1A1130); background: linear-gradient(90deg, #fff 50%, #ECE8F3 50%); padding: 0; cursor: pointer; flex: none; }
+.cc-top.open { z-index: 32; }
 body.has-top { padding-top: 56px; }
+
+/* Wordmark: dead centre. On the landing page it stays hidden until the big title has gathered itself into the bar (body.docked) */
+.cc-top .cc-top-mark { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-family: "EB Garamond", Garamond, Georgia, serif; font-size: 20px; color: var(--cc-ink, #1A1130); text-decoration: none; white-space: nowrap; transition: opacity .25s ease; }
+.cc-top .cc-top-mark em { color: var(--cc-magenta, #D8016A); font-style: italic; }
+body.home .cc-top .cc-top-mark { opacity: 0; pointer-events: none; }
+body.home.docked .cc-top .cc-top-mark, body.home.no-hero .cc-top .cc-top-mark { opacity: 1; pointer-events: auto; }
+
+/* Right side */
+.cc-right { display: flex; align-items: center; gap: clamp(16px, 2vw, 24px); }
+.cc-right .cc-about { color: var(--cc-ink-3, #6A6378); text-decoration: none; }
+.cc-right .cc-about:hover, .cc-right .cc-about[aria-current="page"] { color: var(--cc-ink, #1A1130); }
+.cc-top .cc-top-sub { color: #fff; background: var(--cc-magenta, #D8016A); padding: 6px 14px; text-decoration: none; }
+.cc-top .cc-top-sub:hover { color: #fff; background: #B80059; }
+.cc-top .cc-bg { width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--cc-ink, #1A1130); background: linear-gradient(90deg, #fff 50%, #ECE8F3 50%); padding: 0; cursor: pointer; flex: none; }
+
+/* Index: one word top left with a plus. It opens a plain vertical list beneath it; nothing else on the page moves */
+.cc-index-btn { font: inherit; color: var(--cc-ink, #1A1130); background: none; border: 0; padding: 6px 0; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; flex: none; line-height: 1; }
+.cc-index-btn i { position: relative; width: 11px; height: 11px; flex: none; transition: transform .35s cubic-bezier(.16, 1, .3, 1); }
+.cc-index-btn i::before, .cc-index-btn i::after { content: ""; position: absolute; background: currentColor; }
+.cc-index-btn i::before { left: 0; right: 0; top: 5px; height: 1px; }
+.cc-index-btn i::after { top: 0; bottom: 0; left: 5px; width: 1px; }
+.cc-index-btn[aria-expanded="true"] i { transform: rotate(45deg); }
+.cc-index-menu { position: absolute; top: 100%; left: 0; padding: 4px clamp(16px, 3vw, 32px) 20px; background: var(--cc-paper, #fff); }
+.cc-index-menu[hidden] { display: none; }
+.cc-index-list { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; padding-left: 21px; }
+.cc-index-list a { display: block; font-size: 14px; line-height: 17px; color: var(--cc-ink-3, #6A6378); text-decoration: none; white-space: nowrap; opacity: 0; transform: translateY(-6px); transition: opacity .3s ease, transform .4s cubic-bezier(.16, 1, .3, 1), color .2s ease; transition-delay: calc(var(--k, 0) * 40ms), calc(var(--k, 0) * 40ms), 0s; }
+.cc-index-list a small { position: relative; top: -.5em; font-size: 10px; line-height: 0; margin-left: 3px; font-variant-numeric: tabular-nums; }
+.cc-index-list a:hover, .cc-index-list a[aria-current="page"] { color: var(--cc-ink, #1A1130); }
+.cc-index-list .cc-index-mob { display: none; }
+.cc-top.open .cc-index-list a { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .cc-index-list a { transition: none; } }
+
+/* The passage a quote links to */
 .cc-jump { background: var(--cc-magenta-tint, #FBE0EC); color: var(--cc-magenta, #D8016A); box-shadow: 0 0 0 3px var(--cc-magenta-tint, #FBE0EC); -webkit-box-decoration-break: clone; box-decoration-break: clone; border-radius: 2px; transition: background 1s ease, box-shadow 1s ease, color 1s ease; }
 .cc-jump.is-fading { background: transparent; box-shadow: 0 0 0 3px transparent; color: inherit; }
+
 @media (max-width: 720px) {
-  .cc-top { padding: 10px 12px; gap: 8px; }
-  .cc-top .cc-top-mark { font-size: 15px; white-space: nowrap; flex: none; }
-  .cc-top nav { gap: 9px; font-size: 11.5px; min-width: 0; }
-  .cc-top nav .cc-top-sub { padding: 5px 9px; }
+  .cc-top { padding: 10px 12px; }
+  .cc-top .cc-top-mark { font-size: 16px; }
+  .cc-top .cc-top-sub { padding: 5px 10px; }
+  .cc-right { gap: 12px; }
 }
-/* On a phone the wordmark takes its own line and the four links sit under it; the landing page has no wordmark, so it keeps one line */
+/* On a narrow phone About moves from the right side into the Index list */
 @media (max-width: 560px) {
-  .cc-top:not(.no-mark) { flex-wrap: wrap; row-gap: 6px; padding-bottom: 8px; }
-  .cc-top:not(.no-mark) .cc-top-mark { width: 100%; }
-  .cc-top:not(.no-mark) nav { width: 100%; justify-content: space-between; }
-  body.has-top:has(.cc-top:not(.no-mark)) { padding-top: 78px; }
+  .cc-right .cc-about { display: none; }
+  .cc-index-list .cc-index-mob { display: block; }
 }

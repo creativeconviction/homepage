@@ -109,6 +109,14 @@
   .about p a:hover { color: var(--magenta); }
 
 
+  /* The big wordmark's motion (see logo.js): the letters take over from the rise-in, sit above the top bar, and hand over to the small wordmark once docked */
+  body[data-logo="assemble"] .logo h1 { position: relative; z-index: 31; pointer-events: none; transition: opacity .25s ease; }
+  body[data-logo="assemble"] .logo .line { overflow: visible; }
+  body[data-logo="assemble"] .logo .ch { animation: none; opacity: 1; transform-origin: 50% 50%; }
+  body[data-logo="assemble"].docked .logo h1 { opacity: 0; }
+  .logo .tag.late { animation: tag-late .9s var(--ease) forwards; }
+  @keyframes tag-late { from { opacity: 0; transform: translateY(14px); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
+
   @media (max-width: 1100px) {
     .row a, .list.five .row a { grid-template-columns: 48px minmax(0, 1fr); gap: 4px 14px; align-items: start; }
     .row .ph { width: 48px; height: 48px; grid-row: 1 / span 4; }

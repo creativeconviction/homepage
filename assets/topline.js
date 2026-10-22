@@ -1,4 +1,4 @@
-// Background switch (soft purple by default, or white), remembered per browser; and the jump-to-quote highlight
+// Background switch (soft purple by default, or white), remembered per browser; the Index menu; and the jump-to-quote highlight
 (function () {
   var root = document.documentElement, key = "cc-bg";
   function setBg(v) { root.setAttribute("data-bg", v); try { localStorage.setItem(key, v); } catch (e) {} }
@@ -6,6 +6,22 @@
   var saved = null; try { if (localStorage.getItem("cc-bg-v") !== "2") { localStorage.removeItem(key); localStorage.setItem("cc-bg-v", "2"); } saved = localStorage.getItem(key); } catch (e) {}
   setBg(saved || "paper");
   var btn = document.querySelector(".cc-bg"); if (btn) btn.addEventListener("click", function () { setBg(root.getAttribute("data-bg") === "paper" ? "white" : "paper"); });
+
+  // Index: opens a vertical list under the word; a choice, a click elsewhere or Escape closes it
+  var ib = document.querySelector(".cc-index-btn"), im = document.getElementById("cc-index-menu");
+  if (ib && im) {
+    var top = ib.closest(".cc-top"), closing = 0;
+    [].forEach.call(im.querySelectorAll("a"), function (a, k) { a.style.setProperty("--k", k); });
+    var setOpen = function (o) {
+      clearTimeout(closing); ib.setAttribute("aria-expanded", o ? "true" : "false");
+      if (o) { im.hidden = false; void im.offsetHeight; top.classList.add("open"); }
+      else { top.classList.remove("open"); closing = setTimeout(function () { im.hidden = true; }, 300); }
+    };
+    ib.addEventListener("click", function (e) { e.stopPropagation(); setOpen(ib.getAttribute("aria-expanded") !== "true"); });
+    im.addEventListener("click", function (e) { if (e.target.closest("a")) setOpen(false); });
+    document.addEventListener("click", function (e) { if (ib.getAttribute("aria-expanded") === "true" && !e.target.closest(".cc-index-menu")) setOpen(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && ib.getAttribute("aria-expanded") === "true") { setOpen(false); ib.focus(); } });
+  }
 
   // A link like /interviews/x/#q=<passage> scrolls to that passage and marks just the quote in magenta; after a few seconds the mark fades away
   var m = /^#q=([^:]+)/.exec(location.hash); if (!m) return;
