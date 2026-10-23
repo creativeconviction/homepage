@@ -65,15 +65,22 @@
 
   // On a touch screen, tapping a picture opens a card with the passage; the magenta arrow under it opens the article
   let veil = null;
-  const closeCard = () => { peek.classList.remove("on", "card"); if (veil) veil.classList.remove("on"); };
+  const closeCard = () => { if (veil) { veil.classList.remove("on"); veil.setAttribute("aria-hidden", "true"); } };
   function openCard(t) {
     const im = IMGS.find(x => x.n === t.dataset.n), r = refOf(im);
-    const who = `${esc(r.name)}, ${esc(r.role)}, <em>${esc(r.company)}</em> <a class="go" href="${jump(r)}" aria-label="Read the interview">&rarr;</a>`;
-    peek.innerHTML = `<img src="${im.u}" alt="" /><div class="cap"><span class="q">${r.cap ? esc(r.q) : "&ldquo;" + esc(r.q) + "&rdquo;"}</span><small>${who}</small></div><button class="x" type="button" aria-label="Close"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>`;
-    peek.querySelector(".x").addEventListener("click", closeCard);
-    if (!veil) { veil = document.createElement("div"); veil.className = "peekveil"; veil.addEventListener("click", closeCard); document.body.appendChild(veil); }
-    peek.style.left = peek.style.right = peek.style.top = "";
-    peek.classList.add("on", "card"); veil.classList.add("on");
+    if (!veil) {
+      veil = document.createElement("div"); veil.className = "libveil"; veil.setAttribute("aria-hidden", "true");
+      veil.addEventListener("click", e => { if (e.target === veil) closeCard(); });
+      document.body.appendChild(veil);
+    }
+    veil.innerHTML = `<div class="libcard" role="dialog" aria-modal="true" aria-label="${esc(r.name)}">
+      <button class="x" type="button" aria-label="Close"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
+      <img src="${im.u}" alt="" />
+      <div class="cap"><a class="q" href="${jump(r)}">${r.cap ? esc(r.q) : "&ldquo;" + esc(r.q) + "&rdquo;"}</a>
+      <p class="who">${esc(r.name)}, ${esc(r.role)}, <em>${esc(r.company)}</em></p>${r.credit ? `<p class="credit">${esc(r.credit)}</p>` : ""}</div></div>`;
+    veil.querySelector(".x").addEventListener("click", closeCard);
+    veil.removeAttribute("aria-hidden"); veil.classList.add("on");
+    veil.querySelector(".x").focus({ preventScroll: true });
   }
   addEventListener("keydown", e => { if (e.key === "Escape") closeCard(); });
   function armTile(t) { t.addEventListener("click", e => { if (t.closest(".rail") || !(t.closest(".m-ribbon") || !canHover)) return; e.preventDefault(); openCard(t); }); }
@@ -128,7 +135,7 @@
     rb.addEventListener("pointerup", end); rb.addEventListener("pointercancel", end);
     ribbons.push({ rb, tick: now => {
       const dt = Math.min(50, now - last); last = now;
-      if (reduce || touching || drag || rb.classList.contains("intro") || peek.classList.contains("card") || now - lastUser < 260) return;
+      if (reduce || touching || drag || rb.classList.contains("intro") || (veil && veil.classList.contains("on")) || now - lastUser < 260) return;
       fpos += 30 * dt / 1000; rb.scrollLeft = fpos;
       if (rb.scrollLeft > third() * 1.75) settle();
     } });
