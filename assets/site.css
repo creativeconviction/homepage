@@ -148,9 +148,9 @@
   }
   @media (max-width: 720px) {
     .hero { padding-top: 72px; padding-bottom: 28px; }
-    .row .t { font-size: 17px; }
-    .row .w, .row .au { font-size: 13px; }
-    .row .d { font-size: 12px; }
+    .row .t { font-size: 16px; }
+    .row .w, .row .au { font-size: 12px; }
+    .row .d { font-size: 11px; }
     /* Phone: one narrow column of pictures each side, the list between them */
     :root { --rail: 56px; --rail-cols: 1; }
     .rails, body.sub .interviews { gap: 10px; }

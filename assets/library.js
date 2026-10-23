@@ -1,5 +1,5 @@
 // Creative Conviction — the Library wall on the home page. Uses the CC / IMGS / REFS data the page carries.
-// Full width, square tiles. Click a tile and it flips over to the passage it comes from; the passage links to that spot
+// Full width, square tiles. Click a tile and it pops out with the whole passage it comes from; the passage links to that spot
 // in the interview. The wall shows seven rows; the pictures not on it wait their turn, so when it changes nothing on screen ever repeats.
 (() => {
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -12,11 +12,9 @@
 
   // Pictures from the interviews (no headshots), and public-domain works from The Met that show what a guest is talking about (credited on the back)
   const items = shuffle(IMGS.map(im => ({ u: im.u, ref: refOf(im.n) })).filter(o => o.ref));
-  const backHTML = o => `<p class="q">${o.ref.cap || /^[“"]/.test(o.ref.q) ? esc(o.ref.q) : "&ldquo;" + esc(o.ref.q) + "&rdquo;"}</p>
-      <p class="who">${esc(o.ref.x.name)}<br /><em>${esc(o.ref.x.company)}</em></p>
-      <a class="go" href="${jump(o.ref.x, o.ref.q)}">Read the interview &rarr;</a>${o.ref.credit ? `<p class="credit">${esc(o.ref.credit)}</p>` : ""}`;
-  const tileHTML = i => `<div class="tile" data-i="${i}" role="button" tabindex="0" aria-pressed="false" aria-label="${esc(items[i].ref.x.name)}: show the passage">
-      <div class="flip"><div class="face front"><img src="${items[i].u}" alt="" loading="lazy" /><img class="next" alt="" /></div><div class="face back">${backHTML(items[i])}</div></div></div>`;
+  const quoteText = o => o.ref.cap || /^[“"]/.test(o.ref.q) ? esc(o.ref.q) : "&ldquo;" + esc(o.ref.q) + "&rdquo;";
+  const tileHTML = i => `<div class="tile" data-i="${i}" role="button" tabindex="0" aria-haspopup="dialog" aria-label="${esc(items[i].ref.x.name)}: read the passage">
+      <div class="flip"><div class="face front"><img src="${items[i].u}" alt="" loading="lazy" /><img class="next" alt="" /></div></div></div>`;
 
   const lib = document.getElementById("library");
   lib.innerHTML = `<h2>Library</h2><div class="wallgrid" id="wall"></div>`;
@@ -38,27 +36,43 @@
   }
   layout(); addEventListener("resize", layout);
 
-  // Flip: one card over at a time. Click it again, press Escape, flip another card, or move off the wall to turn it back
-  const setFlip = (t, on) => { t.classList.toggle("over", on); t.setAttribute("aria-pressed", on); t.setAttribute("aria-label", `${items[t.dataset.i].ref.x.name}: ${on ? "show the picture" : "show the passage"}`); };
-  const flipOnly = t => tiles().forEach(o => { if (o !== t && o.classList.contains("over")) setFlip(o, false); });
-  wall.addEventListener("click", e => { if (e.target.closest(".go")) return; const t = e.target.closest(".tile"); if (!t) return; const on = !t.classList.contains("over"); flipOnly(t); setFlip(t, on); });
-  wall.addEventListener("keydown", e => { const t = e.target.closest(".tile"); if (!t || e.target.closest(".go")) return; if (e.key === "Enter" || e.key === " ") { e.preventDefault(); t.click(); } });
-  addEventListener("keydown", e => { if (e.key === "Escape") flipOnly(null); });
-  if (canHover) wall.addEventListener("pointerleave", () => flipOnly(null));
+  // Click a tile and it pops out bigger: the picture and the whole passage. The passage is the link (underlined on hover) to that spot in
+  // the interview. X, Escape or a click outside closes it.
+  let veil = null, openTile = null;
+  const closeCard = () => { if (!veil) return; veil.classList.remove("on"); veil.setAttribute("aria-hidden", "true"); if (openTile) openTile.focus({ preventScroll: true }); openTile = null; };
+  function openCard(t) {
+    const o = items[t.dataset.i];
+    if (!veil) {
+      veil = document.createElement("div"); veil.className = "libveil"; veil.setAttribute("aria-hidden", "true");
+      veil.addEventListener("click", e => { if (e.target === veil) closeCard(); });
+      document.body.appendChild(veil);
+    }
+    veil.innerHTML = `<div class="libcard" role="dialog" aria-modal="true" aria-label="${esc(o.ref.x.name)}">
+      <button class="x" type="button" aria-label="Close">&times;</button>
+      <img src="${o.u}" alt="" />
+      <div class="cap"><a class="q" href="${jump(o.ref.x, o.ref.q)}">${quoteText(o)}</a>
+      <p class="who">${esc(o.ref.x.name)}, ${esc(o.ref.x.role)}, <em>${esc(o.ref.x.company)}</em></p>${o.ref.credit ? `<p class="credit">${esc(o.ref.credit)}</p>` : ""}</div></div>`;
+    veil.querySelector(".x").addEventListener("click", closeCard);
+    openTile = t; veil.removeAttribute("aria-hidden"); veil.classList.add("on");
+    veil.querySelector(".x").focus({ preventScroll: true });
+  }
+  wall.addEventListener("click", e => { const t = e.target.closest(".tile"); if (t) openCard(t); });
+  wall.addEventListener("keydown", e => { const t = e.target.closest(".tile"); if (t && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); openCard(t); } });
+  addEventListener("keydown", e => { if (e.key === "Escape") closeCard(); });
 
   // The wall changes by itself, all at once and slowly: every nine seconds a soft ripple crosses it from one corner and each
   // of the tiles dissolves into a picture that isn't on the wall (as many as are waiting, scattered across it). A card that is
   // turned over, or the picture under the pointer, stays put.
   const show = (t, i, delay) => setTimeout(() => {
     const cur = t.querySelector(".front img:not(.next)"), nxt = t.querySelector(".front img.next");
-    t.dataset.i = i; t.querySelector(".back").innerHTML = backHTML(items[i]); t.setAttribute("aria-label", `${items[i].ref.x.name}: show the passage`);
+    t.dataset.i = i; t.setAttribute("aria-label", `${items[i].ref.x.name}: read the passage`);
     nxt.onload = () => { nxt.classList.add("on"); setTimeout(() => { cur.src = items[i].u; cur.onload = () => nxt.classList.remove("on"); }, 1800); };
     nxt.src = items[i].u;
   }, delay);
   function wave() {
     if (document.hidden) return;
     const all = tiles(), onWall = new Set(all.map(t => +t.dataset.i)), waiting = shuffle(items.map((_, i) => i).filter(i => !onWall.has(i)));
-    const free = all.filter(t => !t.classList.contains("over") && !t.matches(":hover"));
+    const free = all.filter(t => t !== openTile && !t.matches(":hover"));
     const corner = Math.random() * 4 | 0, W = wall.clientWidth || 1, H = wall.clientHeight || 1, top = wall.getBoundingClientRect();
     shuffle(free).slice(0, waiting.length).forEach((t, k) => {
       const b = t.getBoundingClientRect(); let x = (b.left - top.left) / W, y = (b.top - top.top) / H;
