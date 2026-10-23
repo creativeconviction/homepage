@@ -69,11 +69,13 @@
   function openCard(t) {
     const im = IMGS.find(x => x.n === t.dataset.n), r = refOf(im);
     const who = `${esc(r.name)}, ${esc(r.role)}, <em>${esc(r.company)}</em> <a class="go" href="${jump(r)}" aria-label="Read the interview">&rarr;</a>`;
-    peek.innerHTML = `<img src="${im.u}" alt="" /><div class="cap"><span class="q">${r.cap ? esc(r.q) : "&ldquo;" + esc(r.q) + "&rdquo;"}</span><small>${who}</small></div>`;
+    peek.innerHTML = `<img src="${im.u}" alt="" /><div class="cap"><span class="q">${r.cap ? esc(r.q) : "&ldquo;" + esc(r.q) + "&rdquo;"}</span><small>${who}</small></div><button class="x" type="button" aria-label="Close">&times;</button>`;
+    peek.querySelector(".x").addEventListener("click", closeCard);
     if (!veil) { veil = document.createElement("div"); veil.className = "peekveil"; veil.addEventListener("click", closeCard); document.body.appendChild(veil); }
     peek.style.left = peek.style.right = peek.style.top = "";
     peek.classList.add("on", "card"); veil.classList.add("on");
   }
+  addEventListener("keydown", e => { if (e.key === "Escape") closeCard(); });
   function armTile(t) { t.addEventListener("click", e => { if (t.closest(".rail") || !(t.closest(".m-ribbon") || !canHover)) return; e.preventDefault(); openCard(t); }); }
 
   // First visit on a phone: the squares scatter in from every side and settle into the ribbon (as the big letters do); the interviews load in after both
@@ -119,9 +121,10 @@
     // Our own nudges are not the reader's; only a real move pauses the drift (and keeps us from cutting a flick short)
     rb.addEventListener("scroll", () => { if (Math.abs(rb.scrollLeft - fpos) > 1.5) { lastUser = performance.now(); fpos = rb.scrollLeft; } clearTimeout(settleT); settleT = setTimeout(() => { if (!touching) settle(); }, 160); }, { passive: true });
     // A mouse on a narrow window can drag it too
-    rb.addEventListener("pointerdown", e => { if (e.pointerType !== "mouse" || e.button !== 0) return; drag = { x: e.clientX, left: rb.scrollLeft }; rb.classList.add("dragging"); rb.setPointerCapture(e.pointerId); });
-    rb.addEventListener("pointermove", e => { if (drag) rb.scrollLeft = drag.left - (e.clientX - drag.x); });
-    const end = () => { drag = null; rb.classList.remove("dragging"); lastUser = performance.now(); };
+    rb.addEventListener("pointerdown", e => { if (e.pointerType !== "mouse" || e.button !== 0) return; drag = { x: e.clientX, left: rb.scrollLeft, id: e.pointerId, moved: false }; });
+    rb.addEventListener("pointermove", e => { if (!drag) return; const dx = e.clientX - drag.x; if (!drag.moved && Math.abs(dx) > 6) { drag.moved = true; rb.classList.add("dragging"); rb.setPointerCapture(drag.id); } if (drag.moved) rb.scrollLeft = drag.left - dx; });
+    rb.addEventListener("click", e => { if (drag && drag.moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+    const end = () => { setTimeout(() => { drag = null; }, 0); rb.classList.remove("dragging"); lastUser = performance.now(); };
     rb.addEventListener("pointerup", end); rb.addEventListener("pointercancel", end);
     ribbons.push({ rb, tick: now => {
       const dt = Math.min(50, now - last); last = now;
