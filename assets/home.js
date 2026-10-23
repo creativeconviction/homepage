@@ -9,7 +9,7 @@
 
   // Every picture is paired with the passage of the interview it comes from (REFS), checked by hand
   const bySlug = Object.fromEntries(CC.interviews.map(x => [x.slug, x]));
-  const refOf = im => { const r = REFS[im.n]; return { ...bySlug[r.slug], q: r.q, cap: !!r.cap, frag: r.frag }; };
+  const refOf = im => { const r = REFS[im.n]; return { ...bySlug[r.slug], q: r.q, cap: !!r.cap, frag: r.frag, credit: r.credit }; };
   // The link carries the passage in #q=, and the site's own script marks just those words for a few seconds
   const jump = r => `${r.url}#q=${encodeURIComponent(r.q)}`;
   const backHTML = r => `<span class="q">${r.cap ? esc(r.q) : "&ldquo;" + esc(r.q) + "&rdquo;"}</span><small>${esc(r.name)}, ${esc(r.role)}, <em>${esc(r.company)}</em></small>`;
