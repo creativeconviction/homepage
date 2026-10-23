@@ -69,7 +69,7 @@
   function openCard(t) {
     const im = IMGS.find(x => x.n === t.dataset.n), r = refOf(im);
     const who = `${esc(r.name)}, ${esc(r.role)}, <em>${esc(r.company)}</em> <a class="go" href="${jump(r)}" aria-label="Read the interview">&rarr;</a>`;
-    peek.innerHTML = `<img src="${im.u}" alt="" /><div class="cap"><span class="q">${r.cap ? esc(r.q) : "&ldquo;" + esc(r.q) + "&rdquo;"}</span><small>${who}</small></div><button class="x" type="button" aria-label="Close">&times;</button>`;
+    peek.innerHTML = `<img src="${im.u}" alt="" /><div class="cap"><span class="q">${r.cap ? esc(r.q) : "&ldquo;" + esc(r.q) + "&rdquo;"}</span><small>${who}</small></div><button class="x" type="button" aria-label="Close"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>`;
     peek.querySelector(".x").addEventListener("click", closeCard);
     if (!veil) { veil = document.createElement("div"); veil.className = "peekveil"; veil.addEventListener("click", closeCard); document.body.appendChild(veil); }
     peek.style.left = peek.style.right = peek.style.top = "";

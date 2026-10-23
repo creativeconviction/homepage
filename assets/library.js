@@ -48,7 +48,7 @@
       document.body.appendChild(veil);
     }
     veil.innerHTML = `<div class="libcard" role="dialog" aria-modal="true" aria-label="${esc(o.ref.x.name)}">
-      <button class="x" type="button" aria-label="Close">&times;</button>
+      <button class="x" type="button" aria-label="Close"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
       <img src="${o.u}" alt="" />
       <div class="cap"><a class="q" href="${jump(o.ref.x, o.ref.q)}">${quoteText(o)}</a>
       <p class="who">${esc(o.ref.x.name)}, ${esc(o.ref.x.role)}, <em>${esc(o.ref.x.company)}</em></p>${o.ref.credit ? `<p class="credit">${esc(o.ref.credit)}</p>` : ""}</div></div>`;
