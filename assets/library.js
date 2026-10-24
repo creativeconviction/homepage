@@ -54,7 +54,6 @@
       <p class="who">${esc(o.ref.x.name)}, ${esc(o.ref.x.role)}, <em>${esc(o.ref.x.company)}</em></p>${o.ref.credit ? `<p class="credit">${esc(o.ref.credit)}</p>` : ""}</div></div>`;
     veil.querySelector(".x").addEventListener("click", closeCard);
     openTile = t; veil.removeAttribute("aria-hidden"); veil.classList.add("on");
-    veil.querySelector(".x").focus({ preventScroll: true });
   }
   wall.addEventListener("click", e => { const t = e.target.closest(".tile"); if (t) openCard(t); });
   wall.addEventListener("keydown", e => { const t = e.target.closest(".tile"); if (t && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); openCard(t); } });

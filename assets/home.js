@@ -80,7 +80,6 @@
       <p class="who">${esc(r.name)}, ${esc(r.role)}, <em>${esc(r.company)}</em></p>${r.credit ? `<p class="credit">${esc(r.credit)}</p>` : ""}</div></div>`;
     veil.querySelector(".x").addEventListener("click", closeCard);
     veil.removeAttribute("aria-hidden"); veil.classList.add("on");
-    veil.querySelector(".x").focus({ preventScroll: true });
   }
   addEventListener("keydown", e => { if (e.key === "Escape") closeCard(); });
   function armTile(t) { t.addEventListener("click", e => { if (t.closest(".rail") || !(t.closest(".m-ribbon") || !canHover)) return; e.preventDefault(); openCard(t); }); }
