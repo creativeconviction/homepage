@@ -344,6 +344,14 @@
     .cc-highlight:hover { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
     .cc-highlight.is-on { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
 
+    .cc-refs { padding-top: 32px; }
+    .cc-refs-list { list-style: none; margin: 18px 0 0; padding: 0; counter-reset: ref; }
+    .cc-refs-list li { counter-increment: ref; display: grid; grid-template-columns: 28px 170px minmax(0, 1fr); gap: 0 12px; padding: 9px 0; border-top: 1px solid var(--cc-rule, rgba(54, 28, 118, 0.12)); font-size: 15px; line-height: 1.4; }
+    .cc-refs-list li::before { content: counter(ref); color: var(--cc-ink-3, #8a85a0); font-variant-numeric: tabular-nums; }
+    .cc-refs-list li span { color: var(--cc-ink, #1a1130); }
+    .cc-refs-list li a { color: inherit; opacity: .75; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; overflow-wrap: anywhere; }
+    .cc-refs-list li a:hover { opacity: 1; color: var(--cc-magenta); }
+    @media (max-width: 720px) { .cc-refs-list li { grid-template-columns: 24px minmax(0, 1fr); } .cc-refs-list li a { grid-column: 2; font-size: 13px; } }
     .cc-hot-takes { padding-top: 32px; }
     .cc-hot-takes-title {
       font-family: var(--font-serif);
@@ -700,7 +708,7 @@
               <div>
                 <div class="cc-hot-take-q">Companies or brands you admire?</div>
                 <div class="cc-hot-take-a">
-                  <p>Berkshire Hathaway. Their aesthetics and mythology aren&rsquo;t visual but have a lot of aura. They run one of the largest companies in the world from Nebraska, not Manhattan, not San Francisco. They&rsquo;re old school cool, very principled. Substance over spectacle. I really admire them.</p>
+                  <p><a href="https://www.berkshirehathaway.com/" target="_blank" rel="noopener">Berkshire Hathaway</a>. Their aesthetics and mythology aren&rsquo;t visual but have a lot of aura. They run one of the largest companies in the world from Nebraska, not Manhattan, not San Francisco. They&rsquo;re old school cool, very principled. Substance over spectacle. I really admire them.</p>
                 </div>
               </div>
             </div>
@@ -732,6 +740,26 @@
 
           </div>
         </section>
+
+        <section class="cc-refs" id="links">
+          <h2 class="cc-hot-takes-title">Links</h2>
+          <ol class="cc-refs-list">
+            <li><span>Viral tweet</span><a href="https://x.com/kickingkeys/status/2091570990048276897" target="_blank" rel="noopener">x.com/kickingkeys/status/2091570990048276897</a></li>
+            <li><span>Cameron</span><a href="https://hollowaya.dev/" target="_blank" rel="noopener">hollowaya.dev</a></li>
+            <li><span>Fabri</span><a href="https://x.com/fabricated_it" target="_blank" rel="noopener">x.com/fabricated_it</a></li>
+            <li><span>Kim&rsquo;s Substack</span><a href="https://fasancoffee.substack.com/p/thoughts-from-fasan" target="_blank" rel="noopener">fasancoffee.substack.com/p/thoughts-from-fasan</a></li>
+            <li><span>Fasan coffee</span><a href="https://fasancoffee.us/" target="_blank" rel="noopener">fasancoffee.us</a></li>
+            <li><span>Morry&rsquo;s 100 prompts</span><a href="https://wttdotm.com/prompts.html" target="_blank" rel="noopener">wttdotm.com/prompts.html</a></li>
+            <li><span>BrushArena</span><a href="https://brusharena.art/" target="_blank" rel="noopener">brusharena.art</a></li>
+            <li><span>Recurse Center</span><a href="https://www.recurse.com/" target="_blank" rel="noopener">www.recurse.com</a></li>
+            <li><span>Mich&egrave;le Mouton reel</span><a href="https://www.instagram.com/reel/CzgEQCDo1T4/" target="_blank" rel="noopener">www.instagram.com/reel/CzgEQCDo1T4</a></li>
+            <li><span>ITP</span><a href="https://itp.nyu.edu/" target="_blank" rel="noopener">itp.nyu.edu</a></li>
+            <li><span>WebSim</span><a href="https://websim.ai/" target="_blank" rel="noopener">websim.ai</a></li>
+            <li><span>p5.js</span><a href="https://p5js.org/" target="_blank" rel="noopener">p5js.org</a></li>
+            <li><span>Berkshire Hathaway</span><a href="https://www.berkshirehathaway.com/" target="_blank" rel="noopener">berkshirehathaway.com</a></li>
+          </ol>
+        </section>
+
 
       </main>
 
