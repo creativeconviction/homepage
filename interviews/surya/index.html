@@ -507,6 +507,7 @@
             <button class="cc-sidebar-link" data-target="art-without-utility">Art without utility</button>
             <button class="cc-sidebar-link" data-target="layer-of-work">The layer of work is changing</button>
             <button class="cc-sidebar-link" data-target="rapid-fire">Rapid fire</button>
+            <button class="cc-sidebar-link" data-target="links">Links</button>
           </div>
         </div>
       </aside>
@@ -523,7 +524,7 @@
         <div class="cc-article-dek">
           <p>&ldquo;I had this crazy idea last night at dinner with friends, so I accidentally was up working on it till 5am. I can&rsquo;t wait to tell you about it after the interview.&rdquo; These were <a href="https://surya.website/" target="_blank" rel="noopener">Surya</a>&rsquo;s first words to us as we sat down on the bench outside of Milkweed Studio in Chinatown on a misty Friday morning. This captures Surya&rsquo;s energy well - he lets his wildest ideas run long distances and is excellent at show-and-tell.</p>
           <p>It was through one of these crazy ideas where we discovered Surya in the first place - his <a href="https://x.com/kickingkeys/status/2091570990048276897" target="_blank" rel="noopener">viral tweet</a>, &ldquo;You can just RL a coding model to paint with javascript btw.&rdquo; When we read his thoughtful <a href="https://surya.website/rling-qwen-to-paint-with-code" target="_blank" rel="noopener">writeup</a> on how it works and the process, we thought surely this guy is some fancy CTO or founder that worked at Deepmind or something. So it was pretty mind blowing when we learned that Surya didn&rsquo;t even know what RL meant before January this year, and he wrote his first line of code in 2024. His story gets even better because, before this, Surya was a civil engineer in Canada, architect in the Netherlands, researcher in a tiger reserve and furniture maker sourcing materials from an invasive species, founder of a product design studio in India, and graduate from NYU&rsquo;s ITP. Now he is designer at the consumer AI research startup Websim.</p>
-          <p>Surya is an opinionated designer who is screaming from the front of the parade that the engineers have done their part, and it&rsquo;s the artists&rsquo; turn to figure out what this technology is for. He is also extremely gracious toward the technical friends he &ldquo;annoyed the hell out of&rdquo; when he first stepped into AI, the ones who told him, &ldquo;Code can do anything you want, so what do you want?&rdquo; He felt strongly enough about this that insisted we tag, link, and thank these people in the interview. His influences aren&rsquo;t famous AI researchers or celebrity CEOs - they&rsquo;re the person behind the coffee counter he visits daily, the professors who taught him, and the real friends he&rsquo;s made from school, NYC, and the internet.</p>
+          <p>Surya is an opinionated designer who is screaming from the front of the parade that the engineers have done their part, and it&rsquo;s the artists&rsquo; turn to figure out what this technology is for. He is also extremely gracious toward the technical friends he &ldquo;annoyed the hell out of&rdquo; when he first stepped into AI, the ones who told him, &ldquo;Code can do anything you want, so what do you want?&rdquo; He felt strongly enough about this that insisted we <a href="#links" class="cc-jump-links">tag, link, and thank</a> these people in the interview. His influences aren&rsquo;t famous AI researchers or celebrity CEOs - they&rsquo;re the person behind the coffee counter he visits daily, the professors who taught him, and the real friends he&rsquo;s made from school, NYC, and the internet.</p>
           <p>Importantly, Surya is not searching for utility in how he uses AI. He&rsquo;s exploring what happens when you train different models to paint under the influence of digital drugs (!?). He&rsquo;s passionate about making AI useful for people in his local communities so they can have their lives back. He&rsquo;s making agents that watch him and his fellow artist friends working in a studio and turn the footage into a reality-TV-style story (this was his stay-up-til-5am-before-this-interview idea btw).</p>
           <p>Surya is doing this for the love of the game.</p>
         </div>
@@ -797,6 +798,11 @@
           </ol>
         </section>
 
+        <figure class="cc-figure">
+          <img class="cc-plate-img" src="images/milkweed-bench.jpg" alt="Two people smiling in a selfie on a bench outside Milkweed Studio, with a third joining by video call at the top of the frame" width="2506" height="1398" loading="lazy" decoding="async" />
+          <figcaption><span class="cc-figure-label">sitting on bench at milkweed studio, chinatown</span></figcaption>
+        </figure>
+
 
       </main>
 
@@ -843,6 +849,15 @@
         if (window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 4) activeIdx = links.length - 1;
         setActive(activeIdx);
       }
+
+      Array.prototype.forEach.call(document.querySelectorAll('.cc-jump-links'), function (a) {
+        a.addEventListener('click', function (e) {
+          var el = document.getElementById('links');
+          if (!el) return;
+          e.preventDefault();
+          el.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
 
       window.addEventListener('scroll', update, { passive: true });
       window.addEventListener('resize', update);
