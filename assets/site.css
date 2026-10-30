@@ -80,12 +80,12 @@
   .row a { display: grid; grid-template-columns: 56px minmax(0, 1.2fr) minmax(0, 1fr) 88px; gap: 20px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--rule); transition: color .2s ease; }
   .list.five .row a { grid-template-columns: 56px minmax(0, 1.2fr) minmax(0, .9fr) minmax(0, .8fr) 88px; }
   .row .ph { width: 56px; height: 56px; object-fit: cover; }
-  .row .t { font-family: var(--serif); font-size: 24px; line-height: 1.15; text-align: center; }
-  .row .w, .row .au { color: var(--ink-3); font-size: 14px; text-align: center; line-height: 1.4; }
+  .row .t { font-family: var(--serif); font-size: 20px; line-height: 1.15; text-align: center; }
+  .row .w, .row .au { color: var(--ink-3); font-size: 13px; text-align: center; line-height: 1.4; }
   .row .au { color: var(--ink-2); }
   .row .w b { font-weight: 400; color: var(--ink-2); }
   .row .w em { font-style: normal; color: var(--magenta); }
-  .row .d { color: var(--ink-3); font-size: 14px; text-align: right; font-variant-numeric: tabular-nums; }
+  .row .d { color: var(--ink-3); font-size: 13px; text-align: right; font-variant-numeric: tabular-nums; }
   .list:hover .row a { color: var(--ink-3); }
   .list:hover .row a .w b, .list:hover .row a .au { color: var(--ink-3); }
   .list:hover .row a:hover, .list:hover .row a:hover .w b, .list:hover .row a:hover .au { color: var(--ink); }
@@ -143,12 +143,12 @@
     .row a, .list.five .row a { grid-template-columns: 48px minmax(0, 1fr); gap: 4px 14px; align-items: start; }
     .row .ph { width: 48px; height: 48px; grid-row: 1 / span 4; }
     .row .t, .row .w, .row .au, .row .d { grid-column: 2; text-align: left; }
-    .row .t { font-size: 20px; }
+    .row .t { font-size: 17px; }
     .row .d { font-size: 12px; }
   }
   @media (max-width: 720px) {
     .hero { padding-top: 72px; padding-bottom: 28px; }
-    .row .t { font-size: 16px; }
+    .row .t { font-size: 15px; }
     .row .w, .row .au { font-size: 12px; }
     .row .d { font-size: 11px; }
     /* Phone: one narrow column of pictures each side, the list between them */
