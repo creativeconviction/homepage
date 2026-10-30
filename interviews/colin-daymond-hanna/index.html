@@ -439,6 +439,22 @@
       .cc-nav { gap: 11px; }
       .cc-nav-link { font-size: 12px; }
     }
+    .cc-figure { margin: 34px 0; }
+    .cc-figure .cc-plate-img { width: 100%; height: auto; border-color: #22104A; border-width: 4px; }
+    @media (max-width: 640px) { .cc-figure .cc-plate-img { border-width: 3px; } }
+    .cc-figure figcaption {
+      margin-top: 10px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--fg-3);
+    }
+    .cc-figure.is-small { width: 60%; margin-left: auto; margin-right: auto; }
+    @media (max-width: 640px) { .cc-figure.is-small { width: 80%; } }
+    .cc-figure-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cc-figure-pair .cc-plate-img { width: 100%; height: auto; }
+    .cc-figure-label { display: block; color: var(--fg-2); font-weight: 500; }
+    .cc-figure-note { display: block; margin-top: 2px; }
   </style>
 </head>
 
@@ -565,10 +581,10 @@
             </div>
           </div>
 
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Earendil values and principles</span></div>
+          <figure class="cc-figure">
             <img class="cc-plate-img" src="images/earendil-values.jpg" alt="The Earendil values and operating principles page" width="1300" height="1199" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Earendil values and principles</span></figcaption>
+          </figure>
 
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
@@ -623,20 +639,20 @@
             </div>
           </div>
 
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Colin&rsquo;s personal website</span></div>
+          <figure class="cc-figure">
             <img class="cc-plate-img" src="images/colin-site.jpg" alt="Colin Daymond Hanna&rsquo;s personal website, a black and white photograph of the ocean" width="1300" height="715" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Colin&rsquo;s personal website</span></figcaption>
+          </figure>
 
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Armin&rsquo;s personal website</span></div>
+          <figure class="cc-figure">
             <video class="cc-plate-img" src="images/armin-site.mp4?v=2" width="1124" height="722" autoplay muted loop playsinline preload="metadata"></video>
-          </div>
+            <figcaption><span class="cc-figure-label">Armin&rsquo;s personal website</span></figcaption>
+          </figure>
 
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Earendil&rsquo;s landing page</span></div>
+          <figure class="cc-figure">
             <video class="cc-plate-img" src="images/earendil-landing.mp4" poster="images/earendil-landing.jpg" width="640" height="380" autoplay muted loop playsinline preload="metadata"></video>
-          </div>
+            <figcaption><span class="cc-figure-label">Earendil&rsquo;s landing page</span></figcaption>
+          </figure>
 
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Colin</span>
@@ -659,10 +675,10 @@
             </div>
           </div>
 
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">The Pi landing page</span></div>
+          <figure class="cc-figure">
             <video class="cc-plate-img" src="images/pi-landing.mp4" poster="images/pi-landing.jpg" width="800" height="394" autoplay muted loop playsinline preload="metadata"></video>
-          </div>
+            <figcaption><span class="cc-figure-label">The Pi landing page</span></figcaption>
+          </figure>
 
           <div id="language-voice-machine" class="scroll-anchor"></div>
 

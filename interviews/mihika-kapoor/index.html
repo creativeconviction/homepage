@@ -439,6 +439,22 @@
       .cc-nav { gap: 11px; }
       .cc-nav-link { font-size: 12px; }
     }
+    .cc-figure { margin: 34px 0; }
+    .cc-figure .cc-plate-img { width: 100%; height: auto; border-color: #22104A; border-width: 4px; }
+    @media (max-width: 640px) { .cc-figure .cc-plate-img { border-width: 3px; } }
+    .cc-figure figcaption {
+      margin-top: 10px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--fg-3);
+    }
+    .cc-figure.is-small { width: 60%; margin-left: auto; margin-right: auto; }
+    @media (max-width: 640px) { .cc-figure.is-small { width: 80%; } }
+    .cc-figure-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cc-figure-pair .cc-plate-img { width: 100%; height: auto; }
+    .cc-figure-label { display: block; color: var(--fg-2); font-weight: 500; }
+    .cc-figure-note { display: block; margin-top: 2px; }
   </style>
 </head>
 
@@ -536,10 +552,10 @@
             </div>
           </div>
 
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Figma Maker Week</span></div>
+          <figure class="cc-figure">
             <img class="cc-plate-img" src="images/figma-maker-week.jpg" alt="Mihika on stage at Figma Config presenting Figma Slides" width="1712" height="948" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Figma Maker Week</span></figcaption>
+          </figure>
 
           <div id="road-to-simile" class="scroll-anchor"></div>
 
@@ -560,10 +576,10 @@
             </div>
           </div>
 
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label"><a href="https://www.joonsungpark.com/#artanddesign" target="_blank" rel="noopener">Joon&rsquo;s work</a></span></div>
+          <figure class="cc-figure">
             <img class="cc-plate-img" src="images/joon-work.jpg" alt="Joon Sung Park&rsquo;s exhibitions page, showing his paintings and drawings" width="1300" height="1225" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label"><a href="https://www.joonsungpark.com/#artanddesign" target="_blank" rel="noopener">Joon&rsquo;s work</a></span></figcaption>
+          </figure>
 
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Mihika</span>
@@ -593,10 +609,10 @@
             </div>
           </div>
 
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">A Simile simulation</span></div>
+          <figure class="cc-figure">
             <video class="cc-plate-img" src="images/simulated-city.mp4" poster="images/simulated-city.jpg" width="1300" height="846" autoplay muted loop playsinline preload="metadata"></video>
-          </div>
+            <figcaption><span class="cc-figure-label">A Simile simulation</span></figcaption>
+          </figure>
 
           <div id="the-game-town" class="scroll-anchor"></div>
 
@@ -637,10 +653,10 @@
             </div>
           </div>
 
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">The game town Easter egg</span></div>
+          <figure class="cc-figure">
             <video class="cc-plate-img" src="images/game-town.mp4" poster="images/game-town.jpg" width="1300" height="984" autoplay muted loop playsinline preload="metadata"></video>
-          </div>
+            <figcaption><span class="cc-figure-label">The game town Easter egg</span></figcaption>
+          </figure>
 
           <div id="hiring-and-storytelling" class="scroll-anchor"></div>
 
@@ -692,10 +708,10 @@
             </div>
           </div>
 
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Alice in Wonderland</span></div>
+          <figure class="cc-figure">
             <img class="cc-plate-img" src="images/alice.jpg" alt="An illustration of Alice in Wonderland among oversized flowers" width="1000" height="1236" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Alice in Wonderland</span></figcaption>
+          </figure>
 
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
@@ -725,10 +741,10 @@
             </div>
           </div>
 
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Simile team</span></div>
+          <figure class="cc-figure">
             <img class="cc-plate-img" src="images/simile-team.jpg" alt="The Simile team posing on a playground structure" width="1718" height="1142" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Simile team</span></figcaption>
+          </figure>
 
         </div>
 

@@ -437,6 +437,22 @@
       .cc-nav { gap: 11px; }
       .cc-nav-link { font-size: 12px; }
     }
+    .cc-figure { margin: 34px 0; }
+    .cc-figure .cc-plate-img { width: 100%; height: auto; border-color: #22104A; border-width: 4px; }
+    @media (max-width: 640px) { .cc-figure .cc-plate-img { border-width: 3px; } }
+    .cc-figure figcaption {
+      margin-top: 10px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--fg-3);
+    }
+    .cc-figure.is-small { width: 60%; margin-left: auto; margin-right: auto; }
+    @media (max-width: 640px) { .cc-figure.is-small { width: 80%; } }
+    .cc-figure-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cc-figure-pair .cc-plate-img { width: 100%; height: auto; }
+    .cc-figure-label { display: block; color: var(--fg-2); font-weight: 500; }
+    .cc-figure-note { display: block; margin-top: 2px; }
   </style>
 </head>
 
@@ -581,10 +597,10 @@
             </div>
           </div>
 
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Chasing Cool by Noah Kerner, Gene Pressman</span></div>
+          <figure class="cc-figure">
             <img class="cc-plate-img" src="images/chasing-cool.jpg?v=2" alt="Cover of Chasing Cool by Noah Kerner and Gene Pressman, alongside the book&rsquo;s description" width="1610" height="1028" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Chasing Cool by Noah Kerner, Gene Pressman</span></figcaption>
+          </figure>
 
           <div id="born-an-artist" class="scroll-anchor"></div>
 
@@ -604,10 +620,10 @@
             </div>
           </div>
 
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Give Kids Art - Create Fearlessly Kids Gallery</span></div>
+          <figure class="cc-figure">
             <img class="cc-plate-img" src="images/kids-art.gif?v=2" alt="Animated gallery of children&rsquo;s paintings from Give Kids Art&rsquo;s Create Fearlessly show" width="600" height="600" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Give Kids Art - Create Fearlessly Kids Gallery</span></figcaption>
+          </figure>
 
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>

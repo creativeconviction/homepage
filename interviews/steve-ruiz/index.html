@@ -439,6 +439,22 @@
       .cc-nav { gap: 11px; }
       .cc-nav-link { font-size: 12px; }
     }
+    .cc-figure { margin: 34px 0; }
+    .cc-figure .cc-plate-img { width: 100%; height: auto; border-color: #22104A; border-width: 4px; }
+    @media (max-width: 640px) { .cc-figure .cc-plate-img { border-width: 3px; } }
+    .cc-figure figcaption {
+      margin-top: 10px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--fg-3);
+    }
+    .cc-figure.is-small { width: 60%; margin-left: auto; margin-right: auto; }
+    @media (max-width: 640px) { .cc-figure.is-small { width: 80%; } }
+    .cc-figure-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cc-figure-pair .cc-plate-img { width: 100%; height: auto; }
+    .cc-figure-label { display: block; color: var(--fg-2); font-weight: 500; }
+    .cc-figure-note { display: block; margin-top: 2px; }
   </style>
 </head>
 
@@ -513,26 +529,26 @@
               <p>I was a painter. Mostly beautiful landscapes&hellip;</p>
             </div>
           </div>
-          <div class="cc-plate is-portrait">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Logan Square Whooooosh</span></div>
+          <figure class="cc-figure is-small">
             <img class="cc-plate-img" src="images/logan-square-whooooosh.jpg" alt="A painted tree against a green and yellow watercolor ground, with orange comic-style captions reading WHHOOOOSSSSHHHH threaded through its branches" width="1183" height="1600" loading="lazy" decoding="async" />
-          </div>
-          <div class="cc-plate is-portrait">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Roman Road</span></div>
+            <figcaption><span class="cc-figure-label">Logan Square Whooooosh</span></figcaption>
+          </figure>
+          <figure class="cc-figure is-small">
             <img class="cc-plate-img" src="images/roman-road.jpg" alt="An ink and gouache painting of a tree with brown trunks and green leaves above a pale blue sky, framed in black" width="1094" height="1600" loading="lazy" decoding="async" />
-          </div>
-          <div class="cc-plate is-portrait">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Negril Slides</span></div>
+            <figcaption><span class="cc-figure-label">Roman Road</span></figcaption>
+          </figure>
+          <figure class="cc-figure is-small">
             <img class="cc-plate-img" src="images/negril-slides.jpg" alt="A painting of blue waterslide tubes winding through green tropical foliage, against a yellow and turquoise watercolor sky" width="1094" height="1600" loading="lazy" decoding="async" />
-          </div>
-          <div class="cc-plate is-portrait">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Money Tree, Logan Square</span></div>
+            <figcaption><span class="cc-figure-label">Negril Slides</span></figcaption>
+          </figure>
+          <figure class="cc-figure is-small">
             <img class="cc-plate-img" src="images/money-tree.jpg" alt="A painting of a money tree plant with a comic caption reading BRING ME MONEY..!, on pale turquoise paper" width="1000" height="1228" loading="lazy" decoding="async" />
-          </div>
-          <div class="cc-plate is-portrait">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Oh God, Oh No!</span></div>
+            <figcaption><span class="cc-figure-label">Money Tree, Logan Square</span></figcaption>
+          </figure>
+          <figure class="cc-figure is-small">
             <img class="cc-plate-img" src="images/oh-god-oh-no.jpg" alt="A black silhouetted garden of trees and shrubs in front of a building, with comic captions reading OH GOD, OH NO, on a blue and yellow watercolor ground" width="900" height="1198" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Oh God, Oh No!</span></figcaption>
+          </figure>
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Steve</span>
             <div class="cc-qa-body is-response">
@@ -543,10 +559,10 @@
               <p>A year of posting works-in-progress on Twitter led to a design tool I built named globs and an algorithm for freehand ink. Then it turned into, let&rsquo;s just build a canvas. Something like Figma&rsquo;s canvas, but open source and on the web. That became tldraw.</p>
             </div>
           </div>
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label"><a href="https://globs.design" target="_blank" rel="noopener">globs.design</a></span></div>
+          <figure class="cc-figure">
             <img class="cc-plate-img" src="images/globs.jpg" alt="A screenshot of the globs design tool in dark mode, showing a curved glob shape with node handles and control points" width="1600" height="1138" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label"><a href="https://globs.design" target="_blank" rel="noopener">globs.design</a></span></figcaption>
+          </figure>
           <div id="working-in-public" class="scroll-anchor"></div>
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
@@ -590,10 +606,10 @@
               <p>A good example is fairies. A lot of our customers are building AI products and looking to differentiate. When your user is generating a lot of different artifacts, it needs to be collaborative, and it needs to let people zoom out and see what they&rsquo;ve done. Go to Replit and say, &ldquo;I want to make a website for my coffee shop,&rdquo; and you&rsquo;re taken to a canvas built on tldraw. On Luma AI, if you&rsquo;re generating thousands of images, you need a place for them to live, and that&rsquo;s the canvas. Even companies that don&rsquo;t sound like creative tools, like Honeycomb or BlackRock, use it. To get people doing advanced and collaborative things with AI, you need more than a chatbot.</p>
             </div>
           </div>
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Fairies</span></div>
+          <figure class="cc-figure">
             <video class="cc-plate-img" src="images/fairies-video.mp4" poster="images/fairies-video.jpg" width="960" height="542" autoplay muted loop playsinline preload="metadata"></video>
-          </div>
+            <figcaption><span class="cc-figure-label">Fairies</span></figcaption>
+          </figure>
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Steve</span>
             <div class="cc-qa-body is-response">
@@ -614,10 +630,10 @@
               <p><span class="cc-highlight">In the other direction, the lore inspired the product.</span> Fairies love leaving gifts. Think of the tooth fairy, where you leave a gift and they replace it with another. So what&rsquo;s the metaphor for gift-giving in AI assistance? Maybe a fairy leaves a little note or a piece of context for later. An agent might say, &ldquo;I can&rsquo;t do this right now, but it&rsquo;s a good idea, let me leave it here for another fairy to come by and pick up as a task.&rdquo;</p>
             </div>
           </div>
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Fairy lore</span></div>
+          <figure class="cc-figure">
             <img class="cc-plate-img" src="images/fairies.jpg" alt="A vintage illustration of winged fairies among trees in a green forest" width="750" height="250" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Fairy lore</span></figcaption>
+          </figure>
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
             <div class="cc-qa-body is-question">
@@ -669,10 +685,10 @@
               <p>It&rsquo;s a bit of a psychological move, but it&rsquo;s also just a good creative tool. A good creative tool doesn&rsquo;t fight you, but it doesn&rsquo;t give you everything you want either. <span class="cc-highlight">You have to be creative with the tool itself to get the most out of it.</span></p>
             </div>
           </div>
-          <div class="cc-plate is-portrait">
-            <div class="cc-plate-tab"><span class="cc-plate-label">12 colors, 4 sizes</span></div>
+          <figure class="cc-figure is-small">
             <img class="cc-plate-img" src="images/style-panel.jpg?v=2" alt="The tldraw style panel: a grid of twelve color swatches, an opacity slider, fill and dash options, and four sizes from S to XL" width="314" height="586" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">12 colors, 4 sizes</span></figcaption>
+          </figure>
           <div id="tldraw-offline" class="scroll-anchor"></div>
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
@@ -687,10 +703,10 @@
               <p>tldraw is designed to be an SDK, but there was never an easy way to just experiment with that. Not everyone wants to set up a website and play with a JavaScript API. So this app is a fun way to fire up your terminal, run Codex or Claude, and say, &ldquo;in dataviz.tldraw, make it dark mode.&rdquo; It can write into the document, read it, and update it. The community has gone wild with it, because it&rsquo;s like a local MCP server. Agents can just reach into it.</p>
             </div>
           </div>
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">tldraw offline</span></div>
+          <figure class="cc-figure">
             <img class="cc-plate-img" src="images/tldraw-offline.jpg" alt="The tldraw offline desktop app showing a wireframes file full of connected screens, with a Codex terminal window open over it asking about the best architecture for a self-hostable sync engine" width="1600" height="1033" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">tldraw offline</span></figcaption>
+          </figure>
         </div>
 
         <section id="rapid-fire" class="cc-hot-takes scroll-anchor">

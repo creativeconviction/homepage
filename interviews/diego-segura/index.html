@@ -420,6 +420,22 @@
       .cc-nav { gap: 11px; }
       .cc-nav-link { font-size: 12px; }
     }
+    .cc-figure { margin: 34px 0; }
+    .cc-figure .cc-plate-img { width: 100%; height: auto; border-color: #22104A; border-width: 4px; }
+    @media (max-width: 640px) { .cc-figure .cc-plate-img { border-width: 3px; } }
+    .cc-figure figcaption {
+      margin-top: 10px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--fg-3);
+    }
+    .cc-figure.is-small { width: 60%; margin-left: auto; margin-right: auto; }
+    @media (max-width: 640px) { .cc-figure.is-small { width: 80%; } }
+    .cc-figure-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cc-figure-pair .cc-plate-img { width: 100%; height: auto; }
+    .cc-figure-label { display: block; color: var(--fg-2); font-weight: 500; }
+    .cc-figure-note { display: block; margin-top: 2px; }
   </style>
 </head>
 
@@ -481,10 +497,10 @@
           <p>Our conversation left the mechanics of design behind fairly quickly. Diego moves between subjects at speed, touching on everything from brand systems, founder psychology, venture dynamics, private equity, whatever cultural current happens to be running underneath the work. His breadth of perspective is why so much of what he says lands somewhere between a designer&rsquo;s language and an investor&rsquo;s. He articulated something we have long believed: that design, done properly, is one of the most underrated levers available to a growing company.</p>
         </div>
 
-        <div class="cc-plate">
-          <div class="cc-plate-tab"><span class="cc-plate-label">Family Office bookshelf</span></div>
+        <figure class="cc-figure">
           <img class="cc-plate-img" src="images/studio-shelves.jpg?v=2" alt="A wall of shelves in the Family Office studio, books stacked from design to geopolitics" />
-        </div>
+          <figcaption><span class="cc-figure-label">Family Office bookshelf</span></figcaption>
+        </figure>
 
         <div id="founding-story" class="scroll-anchor"></div>
 
@@ -505,10 +521,10 @@
             </div>
           </div>
 
-          <div class="cc-plate is-portrait">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Diego</span></div>
+          <figure class="cc-figure is-small">
             <img class="cc-plate-img" src="images/diego-portrait.jpg?v=3" alt="Black and white portrait of Diego Segura in profile" />
-          </div>
+            <figcaption><span class="cc-figure-label">Diego</span></figcaption>
+          </figure>
 
           <div id="design-alpha" class="scroll-anchor"></div>
 
@@ -560,10 +576,10 @@
             </div>
           </div>
 
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Studio morning</span></div>
+          <figure class="cc-figure">
             <img class="cc-plate-img" src="images/studio-morning.jpg?v=2" alt="Two people talking by the studio windows in morning light" />
-          </div>
+            <figcaption><span class="cc-figure-label">Studio morning</span></figcaption>
+          </figure>
 
           <div id="saying-no" class="scroll-anchor"></div>
 
@@ -600,10 +616,10 @@
             </div>
           </div>
 
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">COLLINS crew at Storm King, 2019</span></div>
+          <figure class="cc-figure">
             <img class="cc-plate-img" src="images/upstate.jpg?v=2" alt="A group sitting on a grass hillside looking out at rolling fields and autumn woods" />
-          </div>
+            <figcaption><span class="cc-figure-label">COLLINS crew at Storm King, 2019</span></figcaption>
+          </figure>
 
           <div id="making-the-hire" class="scroll-anchor"></div>
 
@@ -656,10 +672,10 @@
 
         </div>
 
-        <div class="cc-plate">
-          <div class="cc-plate-tab"><span class="cc-plate-label">Tax Day 2026</span></div>
+        <figure class="cc-figure">
           <img class="cc-plate-img" src="images/talk.jpg?v=2" alt="A packed loft audience seated on the floor watching a speaker with a microphone" />
-        </div>
+          <figcaption><span class="cc-figure-label">Tax Day 2026</span></figcaption>
+        </figure>
 
         <section id="hot-takes" class="cc-hot-takes scroll-anchor">
           <h2 class="cc-hot-takes-title">Hot takes</h2>

@@ -441,6 +441,22 @@
     }
     .cc-embed { margin: 34px 0; }
     .cc-embed .twitter-tweet { margin-left: auto; margin-right: auto; }
+    .cc-figure { margin: 34px 0; }
+    .cc-figure .cc-plate-img { width: 100%; height: auto; border-color: #22104A; border-width: 4px; }
+    @media (max-width: 640px) { .cc-figure .cc-plate-img { border-width: 3px; } }
+    .cc-figure figcaption {
+      margin-top: 10px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--fg-3);
+    }
+    .cc-figure.is-small { width: 60%; margin-left: auto; margin-right: auto; }
+    @media (max-width: 640px) { .cc-figure.is-small { width: 80%; } }
+    .cc-figure-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cc-figure-pair .cc-plate-img { width: 100%; height: auto; }
+    .cc-figure-label { display: block; color: var(--fg-2); font-weight: 500; }
+    .cc-figure-note { display: block; margin-top: 2px; }
   </style>
 </head>
 
@@ -515,20 +531,20 @@
               <p>I was always resistant to the idea of being an engineer. I really wanted to go to animation school. When I was a kid, I mowed every yard on planet earth, saved up money, and bought Macromedia Flash. As a 13 year old, I taught myself this so I could make animations with my friends. So this was how I learned to code. My parents didn&rsquo;t want me to go to art school, and so I was like, &ldquo;Ha, I&rsquo;ll be a literature major.&rdquo;</p>
             </div>
           </div>
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Macromedia Flash 4</span></div>
+          <figure class="cc-figure">
             <img class="cc-plate-img" src="images/flash-4.jpg" alt="The About Flash window of Macromedia Flash 4 on Windows, with the splash artwork and development credits" width="655" height="468" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Macromedia Flash 4</span></figcaption>
+          </figure>
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Jacob</span>
             <div class="cc-qa-body is-response">
               <p>After school, I thought I would be a professor. This was 2008. I didn&rsquo;t even really know what startups were, but I moved to SF and started working at a startup in this place called Pier 38. It was this crazy co-working space that all of these iconic companies came out of: Twilio, Instagram, Appjet (which became Google wave). The company I had joined was building email for kids. Within the first few months, we pivoted to power user email, which felt lame to me. But the nice side effect was that a startup called Twitter launched around the same time, and they were doing all this brand stuff that I was obsessed with.</p>
             </div>
           </div>
-          <div class="cc-plate is-portrait">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Pier 38, San Francisco</span></div>
+          <figure class="cc-figure is-small">
             <img class="cc-plate-img" src="images/pier-38.jpg" alt="A map of San Francisco&rsquo;s South Beach and the Embarcadero with Pier 38 marked, near AT&amp;T Park and the China Basin harbor" width="666" height="1052" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Pier 38, San Francisco</span></figcaption>
+          </figure>
           <div id="early-twitter" class="scroll-anchor"></div>
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
@@ -543,10 +559,10 @@
               <p>They created a team for me and my friend Jason called &ldquo;internal tools,&rdquo; but we just did a bunch of art projects and installations for Twitter. We would buy massive screens and do fire hose visualizations, Space Invaders with Lady Gaga versus Justin Bieber. <span class="cc-highlight">My entire Twitter days really imprinted on me&hellip; what is a brand, and what is a company culture that is very, very special.</span></p>
             </div>
           </div>
-          <div class="cc-plate is-portrait">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Early Twitter art projects</span></div>
+          <figure class="cc-figure is-small">
             <img class="cc-plate-img" src="images/twitter-game-over.jpg" alt="A pixel-art Twitter bird above the words GAME OVER on a black background" width="387" height="459" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Early Twitter art projects</span></figcaption>
+          </figure>
           <div id="founding-of-pierre" class="scroll-anchor"></div>
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
@@ -560,10 +576,10 @@
               <p>I met a bunch of people at Twitter that I&rsquo;m still really close with today. In fact, a third of Pierre is early Twitter people. And importantly, I connected with this guy <a href="https://www.linkedin.com/in/markdotto/" target="_blank" rel="noopener">Mark Otto</a>. He and I created this thing called <a href="https://getbootstrap.com/docs/4.0/about/team/" target="_blank" rel="noopener">Bootstrap</a> on the side, nights and weekends. That became a whole open source thing, and then Mark went to GitHub and led design there for a decade. I was spending a ton of time in the GitHub office. Early GitHub was basically the coolest company of all time. Everyone was extremely punk rock in a way that was so romantic. They had <a href="https://fm-arch.com/workitems/github/" target="_blank" rel="noopener">secret hidden bars in the office</a>. If you think of GitHub today, they&rsquo;re going down all the time and people are completely dunking on them. <span class="cc-highlight">A lot of these services in the past, like Twitter, went down constantly but turned it into a real brand moment that people liked.</span></p>
             </div>
           </div>
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Early GitHub</span></div>
+          <figure class="cc-figure">
             <img class="cc-plate-img" src="images/github-office.jpg" alt="Two photos of the early GitHub office: a woman at a small table in the hidden bar, and a long row of desks under exposed wooden beams" width="1600" height="910" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Early GitHub</span></figcaption>
+          </figure>
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Jacob</span>
             <div class="cc-qa-body is-response">
@@ -608,10 +624,10 @@
               <p><span class="cc-highlight">A lot of it is finding the people that are really special and then giving them space to be very special.</span> Fun is such a corny word, but if I go through any stretch where I&rsquo;m like, &ldquo;I&rsquo;m not having fun,&rdquo; then I know that will start going through everything we&rsquo;re doing. The brand, the products we&rsquo;re building, the risks we&rsquo;re taking - will all become lamer. We make fun of MVP culture a lot internally. The, &ldquo;This works great, ship it,&rdquo; type energy is cringe to us. <span class="cc-highlight">Instead we say, &ldquo;What if a project that might have been scoped to take two weeks&hellip; what if you give some of the best engineers in the world five weeks to work on it? What happens?&rdquo;</span></p>
             </div>
           </div>
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Special shoutout</span></div>
+          <figure class="cc-figure">
             <img class="cc-plate-img" src="images/team-shoutout.jpg" alt="A post from Jacob (@fat) on X: a shoutout to Pierre&rsquo;s newest primitives team member and others who drove much of the work" width="1600" height="456" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Special shoutout</span></figcaption>
+          </figure>
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
             <div class="cc-qa-body is-question">
@@ -656,10 +672,10 @@
               <p>My favorite brand of all time is MTV, so I think about that. I also think a lot about skateboard culture - pretty much every skate brand has the exact same skateboard. If you pulled up a Baker board and a Birdhouse board and Antihero, they&rsquo;re basically all the same board. But the whole factory of skateboarding is just brand culture. That&rsquo;s it. And people are psycho allegiant to their different brands. &ldquo;I only skate Hockey,&rdquo; or &ldquo;I only skate Baker or Enjoi,&rdquo; because of those brands.</p>
             </div>
           </div>
-          <div class="cc-plate is-portrait">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Skateboard decks</span></div>
+          <figure class="cc-figure is-small">
             <img class="cc-plate-img" src="images/skate-decks.jpg" alt="A catalog page of skateboard decks in a grid of four rows and eight columns, each labeled with its brand and graphic" width="828" height="1022" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Skateboard decks</span></figcaption>
+          </figure>
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Jacob</span>
             <div class="cc-qa-body is-response">
@@ -681,10 +697,10 @@
               <p>We use <a href="https://www.cosmos.so/" target="_blank" rel="noopener">Cosmos</a>, and when we&rsquo;re doing design exercises we&rsquo;ll go through and figure out different aesthetics, different types of visual explorations. A long time ago there was this famous interview at Twitter where this guy said, &ldquo;Oh, I did this thing on the metal,&rdquo; and everyone thought it was extremely funny at the time. Metal has become associated with planet scale, performance, low level engineering. We wanted to play with that motif, which is why we have the chrome blobs. I was also thinking a lot about early engineering print, and trying to mash those together in my head. Typically I&rsquo;m having conversations with people and then get obsessed with a specific idea. &ldquo;What would it look like to do a metal website? What does that even mean?&rdquo; Then I&rsquo;m combing through something like Cosmos and thinking about what digital artists and other creatives are doing in that space that speaks to me. And then how can I combine discrete versions of those things into a cohesive visual treatment.</p>
             </div>
           </div>
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Your code is a blob</span></div>
+          <figure class="cc-figure">
             <video class="cc-plate-img" src="images/blob.mp4" width="1154" height="1100" autoplay muted loop playsinline preload="metadata"></video>
-          </div>
+            <figcaption><span class="cc-figure-label">Your code is a blob</span></figcaption>
+          </figure>
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
             <div class="cc-qa-body is-question">
@@ -697,10 +713,10 @@
               <p>We built our last website with Nick and Devin, and we did these <a href="https://x.com/afterimagestu?lang=en" target="_blank" rel="noopener">Afterimage</a> videos most recently. It started with me fixating on the monsters from Power Rangers. I thought there&rsquo;s some version of analogness that would be cool to be associated with, in a hyper tech industry doing a super technical thing. It feels special, the anti slop, anti vibe coded way of making a video. We shot it on 35 millimeter, we developed it in the same place that The Odyssey was developed. We could have done an AI blob head or something digital, but we were like, &ldquo;No, let&rsquo;s find someone to sculpt a giant styrofoam head and see if they&rsquo;ll wear it in a bunch of different scenarios.&rdquo;</p>
             </div>
           </div>
-          <div class="cc-plate is-portrait">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Power Rangers</span></div>
+          <figure class="cc-figure is-small">
             <img class="cc-plate-img" src="images/power-rangers.jpg" alt="Five Power Rangers in colored helmets seen from below in a circle against a blue sky" width="872" height="1068" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Power Rangers</span></figcaption>
+          </figure>
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Jacob</span>
             <div class="cc-qa-body is-response">
@@ -732,10 +748,10 @@
                 <div class="cc-hot-take-q">If you&rsquo;re having a creative slump, where do you go?</div>
                 <div class="cc-hot-take-a">
                   <p><a href="https://heathnewsstand.com/" target="_blank" rel="noopener">Heath newsstand</a>. I just go in there, put music on, spend an hour, buy 10 magazines, get a cup of coffee, and go page by page through all of them. Digital to me is lagging so far behind print. There&rsquo;s just so much to be inspired by in print graphic design.</p>
-                  <div class="cc-plate">
-                    <div class="cc-plate-tab"><span class="cc-plate-label">Heath newsstand</span></div>
+                  <figure class="cc-figure">
                     <img class="cc-plate-img" src="images/heath-newsstand.jpg" alt="Floor-to-ceiling shelves of magazines, zines and art books at Heath newsstand" width="1600" height="821" loading="lazy" decoding="async" />
-                  </div>
+                    <figcaption><span class="cc-figure-label">Heath newsstand</span></figcaption>
+                  </figure>
                 </div>
               </div>
             </div>

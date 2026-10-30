@@ -450,6 +450,22 @@
     }
     .cc-embed { margin: 34px 0; }
     .cc-embed .twitter-tweet { margin-left: auto; margin-right: auto; }
+    .cc-figure { margin: 34px 0; }
+    .cc-figure .cc-plate-img { width: 100%; height: auto; border-color: #22104A; border-width: 4px; }
+    @media (max-width: 640px) { .cc-figure .cc-plate-img { border-width: 3px; } }
+    .cc-figure figcaption {
+      margin-top: 10px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--fg-3);
+    }
+    .cc-figure.is-small { width: 60%; margin-left: auto; margin-right: auto; }
+    @media (max-width: 640px) { .cc-figure.is-small { width: 80%; } }
+    .cc-figure-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cc-figure-pair .cc-plate-img { width: 100%; height: auto; }
+    .cc-figure-label { display: block; color: var(--fg-2); font-weight: 500; }
+    .cc-figure-note { display: block; margin-top: 2px; }
   </style>
 </head>
 
@@ -539,10 +555,10 @@
               <p>When I saw AI happening, I was still in India, and I was blown away. I was surprised that people around me weren&rsquo;t shocked, and I knew I wanted to be closer to where this technology was being built. So I decided to go back to school and I knew NY was the creative capital of the world. <span class="cc-highlight">I chose an art program, <a href="https://itp.nyu.edu/" target="_blank" rel="noopener">ITP</a>, because I think artists are best positioned to work with new innovations even more than engineers. I felt like I had to think like an artist to really imagine the ways this new technology would interact with society, culture and real people.</span> So I figured I&rsquo;d come here, do stuff, and figure it out.</p>
             </div>
           </div>
-          <div class="cc-plate is-portrait">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Surya at ITP lab desk</span></div>
+          <figure class="cc-figure is-small">
             <img class="cc-plate-img" src="images/itp-lab-desk.jpg" alt="Surya at a desk in the ITP lab, in a room lit orange with people working at computers" width="1045" height="1400" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Surya at ITP lab desk</span></figcaption>
+          </figure>
           <div id="get-in-front" class="scroll-anchor"></div>
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
@@ -571,10 +587,10 @@
               <p>That project is a collaboration with one of my good friends, <a href="https://hollowaya.dev/" target="_blank" rel="noopener">Cameron</a>. He&rsquo;s a free spirit and a true artist.</p>
             </div>
           </div>
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Cameron</span></div>
+          <figure class="cc-figure">
             <img class="cc-plate-img" src="images/cameron.gif" alt="Cameron laughing at a laptop in a warm-lit room, beside a Discord direct message window with him" width="1780" height="960" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Cameron</span></figcaption>
+          </figure>
           <div class="cc-qa">
             <span class="cc-speaker"></span>
             <div class="cc-qa-body is-response">
@@ -595,10 +611,10 @@
               <p><span class="cc-highlight">But when you ask a coding model to make images by writing code: you get both &mdash; the image and the code behind it. You can look at it, or you can open the code and change a colour, move something, adjust a brushstroke.</span></p>
             </div>
           </div>
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label"><a href="https://brusharena.art/" target="_blank" rel="noopener">BrushArena</a></span></div>
+          <figure class="cc-figure">
             <img class="cc-plate-img" src="images/brush-arena.jpg" alt="The Brush Arena site showing two stereoscope-card paintings side by side with buttons reading I prefer A and I prefer B" width="1400" height="777" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label"><a href="https://brusharena.art/" target="_blank" rel="noopener">BrushArena</a></span></figcaption>
+          </figure>
           <div id="learning-rl" class="scroll-anchor"></div>
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
@@ -612,10 +628,10 @@
               <p>Yeah it&rsquo;s interesting because a lot of this was just me looking at resources online and free books like <a href="https://rlhfbook.com/" target="_blank" rel="noopener">Nathan Lambert&rsquo;s book on RLHF</a>. I&rsquo;d read the chapters and have Claude quiz me.</p>
             </div>
           </div>
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Nathan Lambert's RLHF book</span></div>
+          <figure class="cc-figure">
             <img class="cc-plate-img" src="images/rlhf-book.jpg" alt="The front page of Nathan Lambert&#x27;s online book Reinforcement Learning from Human Feedback, with its table of contents" width="1400" height="1310" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Nathan Lambert's RLHF book</span></figcaption>
+          </figure>
           <div class="cc-qa">
             <span class="cc-speaker is-guest">Surya</span>
             <div class="cc-qa-body is-response">
@@ -638,20 +654,20 @@
               <p>One example project I did recently was with this wet lab in Manhattan. My friend <a href="https://x.com/fabricated_it" target="_blank" rel="noopener">Fabri</a> and I grabbed coffee with one of the lead researchers and asked, have you guys tried AI? They said no so we built them a group chat where they could talk to AI in it. They told us it saved them 10 to 30 percent of their time. They&rsquo;re doing research for leukemia drugs, and it&rsquo;s 10 years to get the drugs out. If you can save one to three years, that&rsquo;s net good, net really good.</p>
             </div>
           </div>
-          <div class="cc-plate is-portrait">
-            <div class="cc-plate-tab"><span class="cc-plate-label">The wet lab</span></div>
+          <figure class="cc-figure is-small">
             <img class="cc-plate-img" src="images/wet-lab.jpg" alt="A watercolour sketch of four people in a lab, two in lab coats and gloves, holding coffees and laughing together" width="1200" height="1200" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">The wet lab</span></figcaption>
+          </figure>
           <div class="cc-qa">
             <span class="cc-speaker"></span>
             <div class="cc-qa-body is-response">
               <p>Then there&rsquo;s my friend Kim, who runs a coffee shop called <a href="https://fasancoffee.us/" target="_blank" rel="noopener">Fasan</a> on Allen Street. Max and I helped him set up an AI tool for his business. <span class="cc-highlight">The best part wasn&rsquo;t the time he saved &mdash; it&rsquo;s that he started updating a journal on his website and made a Substack, because now he had the ability and time to write about his life. He writes about how much he loves his wife and his daily interactions with customers. That&rsquo;s what this is for. You&rsquo;re doing this so people have their life back.</span></p>
             </div>
           </div>
-          <div class="cc-plate is-portrait">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Kim behind the Fasan counter</span></div>
+          <figure class="cc-figure is-small">
             <img class="cc-plate-img" src="images/fasan-counter.jpg" alt="Kim at work behind the counter of Fasan, a narrow coffee shop with a wooden ceiling and a rack of clothes along one wall" width="1284" height="1400" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Kim behind the Fasan counter</span></figcaption>
+          </figure>
           <div id="what-websim-taught-him" class="scroll-anchor"></div>
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
@@ -681,10 +697,10 @@
               <p>People seemed to be enamoured with the aesthetic of the paintings but the core of it for us is that <span class="cc-highlight">we&rsquo;re very interested in a deeply effortful, collaborative future where humans and machines produce something better than what we could do by ourselves.</span> And I appreciate that people like the outputs, because that means you like the output of a person and a machine collaborating together.</p>
             </div>
           </div>
-          <div class="cc-plate">
-            <div class="cc-plate-tab"><span class="cc-plate-label">Surya on stage</span></div>
+          <figure class="cc-figure">
             <img class="cc-plate-img" src="images/on-stage.jpg" alt="Surya standing beside a projected slide that reads: Coding got really fast with AI, design didn&#x27;t really speed up" width="1400" height="941" loading="lazy" decoding="async" />
-          </div>
+            <figcaption><span class="cc-figure-label">Surya on stage</span></figcaption>
+          </figure>
           <div id="art-without-utility" class="scroll-anchor"></div>
           <div class="cc-qa">
             <span class="cc-speaker is-interviewer">LF + RA</span>
@@ -742,10 +758,10 @@
               </div>
             </div>
 
-            <div class="cc-plate">
-              <div class="cc-plate-tab"><span class="cc-plate-label">Michèle Mouton</span></div>
+            <figure class="cc-figure">
               <img class="cc-plate-img" src="images/michele-mouton.jpg" alt="Rally driver Michèle Mouton in a racing suit leaning on a blue car against a red striped background" width="1400" height="1030" loading="lazy" decoding="async" />
-            </div>
+              <figcaption><span class="cc-figure-label">Michèle Mouton</span></figcaption>
+            </figure>
 
             <div class="cc-hot-take">
               <span class="cc-hot-take-num">III</span>
