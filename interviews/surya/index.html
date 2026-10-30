@@ -345,13 +345,12 @@
     .cc-highlight.is-on { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
 
     .cc-refs { padding-top: 32px; }
-    .cc-refs-list { list-style: none; margin: 18px 0 0; padding: 0; counter-reset: ref; }
-    .cc-refs-list li { counter-increment: ref; display: grid; grid-template-columns: 28px 170px minmax(0, 1fr); gap: 0 12px; padding: 9px 0; border-top: 1px solid var(--cc-rule, rgba(54, 28, 118, 0.12)); font-size: 15px; line-height: 1.4; }
-    .cc-refs-list li::before { content: counter(ref); color: var(--cc-ink-3, #8a85a0); font-variant-numeric: tabular-nums; }
+    .cc-refs-list { list-style: none; margin: 18px 0 0; padding: 0; }
+    .cc-refs-list li { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 0 12px; padding: 9px 0; border-top: 1px solid var(--cc-rule, rgba(54, 28, 118, 0.12)); font-size: 15px; line-height: 1.4; }
     .cc-refs-list li span { color: var(--cc-ink, #1a1130); }
     .cc-refs-list li a { color: inherit; opacity: .75; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; overflow-wrap: anywhere; }
     .cc-refs-list li a:hover { opacity: 1; color: var(--cc-magenta); }
-    @media (max-width: 720px) { .cc-refs-list li { grid-template-columns: 24px minmax(0, 1fr); } .cc-refs-list li a { grid-column: 2; font-size: 13px; } }
+    @media (max-width: 720px) { .cc-refs-list li { grid-template-columns: 1fr; gap: 2px; } .cc-refs-list li a { font-size: 13px; } }
     .cc-hot-takes { padding-top: 32px; }
     .cc-hot-takes-title {
       font-family: var(--font-serif);
