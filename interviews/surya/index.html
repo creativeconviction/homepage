@@ -348,12 +348,12 @@
     .cc-highlight.is-on { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
 
     .cc-refs { padding-top: 32px; }
-    .cc-refs-list { list-style: none; margin: 18px 0 0; padding: 0; }
-    .cc-refs-list li { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 0 12px; padding: 9px 0; border-top: 1px solid var(--cc-rule, rgba(54, 28, 118, 0.12)); font-size: 15px; line-height: 1.4; }
+    .cc-refs-list { list-style: disc; margin: 18px 0 0; padding: 0 0 0 22px; }
+    .cc-refs-list li { padding: 4px 0; font-size: 15px; line-height: 1.5; }
     .cc-refs-list li span { color: var(--cc-ink, #1a1130); }
-    .cc-refs-list li a { color: inherit; opacity: .75; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; overflow-wrap: anywhere; }
+    .cc-refs-list li span::after { content: ":"; }
+    .cc-refs-list li a { margin-left: 4px; color: inherit; opacity: .75; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; overflow-wrap: anywhere; }
     .cc-refs-list li a:hover { opacity: 1; color: var(--cc-magenta); }
-    @media (max-width: 720px) { .cc-refs-list li { grid-template-columns: 1fr; gap: 2px; } .cc-refs-list li a { font-size: 13px; } }
     .cc-hot-takes { padding-top: 32px; }
     .cc-hot-takes-title {
       font-family: var(--font-serif);
@@ -786,7 +786,7 @@
 
         <section class="cc-refs" id="links">
           <h2 class="cc-hot-takes-title">Links</h2>
-          <ol class="cc-refs-list">
+          <ul class="cc-refs-list">
             <li><span>Viral tweet</span><a href="https://x.com/kickingkeys/status/2091570990048276897" target="_blank" rel="noopener">x.com/kickingkeys/status/2091570990048276897</a></li>
             <li><span>Cameron</span><a href="https://hollowaya.dev/" target="_blank" rel="noopener">hollowaya.dev</a></li>
             <li><span>Fabri</span><a href="https://x.com/fabricated_it" target="_blank" rel="noopener">x.com/fabricated_it</a></li>
@@ -800,7 +800,7 @@
             <li><span>WebSim</span><a href="https://websim.ai/" target="_blank" rel="noopener">websim.ai</a></li>
             <li><span>p5.js</span><a href="https://p5js.org/" target="_blank" rel="noopener">p5js.org</a></li>
             <li><span>Berkshire Hathaway</span><a href="https://www.berkshirehathaway.com/" target="_blank" rel="noopener">berkshirehathaway.com</a></li>
-          </ol>
+          </ul>
         </section>
 
         <figure class="cc-figure">
