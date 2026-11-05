@@ -1,0 +1,7 @@
+/* Creative Conviction — anything you can click shows a small magenta dot instead of the pointing hand */
+@media (hover: hover) and (pointer: fine) {
+  a[href], button:not(:disabled), [role="button"], [onclick], summary, label[for], select, input[type="submit"], input[type="checkbox"], input[type="radio"],
+  .tile, .row a:not(.soon), .cc-highlight, .cc-sidebar-link, .cc-index-btn, .cc-figure video.cc-video, .libveil, .peekveil {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='10' cy='10' r='6.5' fill='%23D8016A' stroke='%23fff' stroke-width='1.5'/%3E%3C/svg%3E") 10 10, pointer !important;
+  }
+}
