@@ -1,7 +1,16 @@
-// The site background (always soft purple); the Index menu; and the jump-to-quote highlight
+// The site background (warm paper); each guest's colour; the Index menu; and the jump-to-quote highlight
 (function () {
-  // One background for the whole site: soft purple
+  // One background for the whole site: warm paper
   document.documentElement.setAttribute("data-bg", "paper");
+
+  // Each guest keeps one of the eight print colours, in interview order (the same order as the home list and the films).
+  // On an interview page it becomes --guest, which colours that interview's highlighted lines.
+  var GUESTS = ["surya", "steve-ruiz", "jacob-thornton", "mihika-kapoor", "adam-ho", "liz-dorman", "colin-daymond-hanna", "noah-kerner",
+    "diego-segura", "quinten-farmer", "paul-jun", "ben-and-zubin-raindrop", "nir-zicherman", "stephen-haney", "dylan-babbs"];
+  var PRINT = ["pink", "yellow", "blue-print", "orange-print", "green", "lilac", "red", "sky"];
+  var m = location.pathname.match(/\/interviews\/([^\/]+)/), slug = m && (m[1] === "ben-hylak" ? "ben-and-zubin-raindrop" : m[1]);
+  var gi = slug ? GUESTS.indexOf(slug) : -1;
+  if (gi > -1) document.documentElement.style.setProperty("--guest", "var(--cc-" + PRINT[gi % 8] + ")");
 
   // Index: opens a vertical list under the word; a choice, a click elsewhere or Escape closes it
   var ib = document.querySelector(".cc-index-btn"), im = document.getElementById("cc-index-menu");

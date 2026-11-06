@@ -47,7 +47,9 @@
       veil.addEventListener("click", e => { if (e.target === veil) closeCard(); });
       document.body.appendChild(veil);
     }
-    veil.innerHTML = `<div class="libcard" role="dialog" aria-modal="true" aria-label="${esc(o.ref.x.name)}">
+    // the caption sits on that guest's print colour (the same order as the interview list)
+    const gi = CC.interviews.findIndex(x => x.slug === o.ref.x.slug), print = ["pink", "yellow", "blue-print", "orange-print", "green", "lilac", "red", "sky"][Math.max(0, gi) % 8];
+    veil.innerHTML = `<div class="libcard" role="dialog" aria-modal="true" aria-label="${esc(o.ref.x.name)}" style="--g: var(--cc-${print})">
       <button class="x" type="button" aria-label="Close"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
       <img src="${o.u}" alt="" />
       <div class="cap"><a class="q" href="${jump(o.ref.x, o.ref.q)}">${quoteText(o)}</a>

@@ -2,7 +2,7 @@
 (() => {
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches, body = document.body;
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  const PALETTE = ["#E79AAB", "#7B6DE6", "#E66A5B", "#E8AD35", "#4FAE8C", "#4A8EE8", "#EC8549", "#2F8A2C", "#4D7AA8"];
+  const PALETTE = ["#F37DB6", "#F6DE3D", "#4A8FE7", "#F39B47", "#43B86E", "#B99AE8", "#EF5B3E", "#9FD3F2"];   // the eight print colours
   const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
   const wait = ms => new Promise(r => setTimeout(r, ms));
   const $ = id => document.getElementById(id);
