@@ -26,7 +26,17 @@ html ::selection { background: var(--guest, var(--cc-yellow)); color: #161514; }
 /* Inside an interview, the guest's colour runs through the page: a marker under the title, their initials, the section marker, the links */
 html .cc-article-title .cc-mark { background: linear-gradient(var(--guest), var(--guest)) no-repeat 0 60% / 100% 78%; -webkit-box-decoration-break: clone; box-decoration-break: clone; padding: 0 .12em; margin-left: -.12em; }
 html .cc-speaker.is-guest { width: max-content; justify-self: start; align-self: start; background: var(--guest, transparent); box-shadow: 0 0 0 3px var(--guest, transparent); }
-html .cc-sidebar-track-indicator { background: var(--guest, var(--cc-ink)); width: 3px; left: -1px; }
+/* The Contents tracker: a thin line in the guest's colour that fills down the track as you read (topline.js sets --fill) */
+html .cc-sidebar-track-indicator { display: none; }
+html .cc-sidebar-track::after { content: ""; position: absolute; left: -.5px; top: 0; width: 2px; height: var(--fill, 0px); background: var(--guest, var(--cc-ink)); }
+/* each section name lights up in its own print colour when pointed at; the one you're in keeps the guest's wash */
+html .cc-sidebar-link { padding-inline: 4px; margin-left: -4px; transition: background-color .2s ease, color .2s ease; }
+html .cc-sidebar-link:nth-child(8n+1):hover { background: var(--cc-pink); } html .cc-sidebar-link:nth-child(8n+2):hover { background: var(--cc-yellow); }
+html .cc-sidebar-link:nth-child(8n+3):hover { background: var(--cc-blue-print); } html .cc-sidebar-link:nth-child(8n+4):hover { background: var(--cc-orange-print); }
+html .cc-sidebar-link:nth-child(8n+5):hover { background: var(--cc-green); } html .cc-sidebar-link:nth-child(8n+6):hover { background: var(--cc-lilac); }
+html .cc-sidebar-link:nth-child(8n+7):hover { background: var(--cc-red); } html .cc-sidebar-link:nth-child(8n+8):hover { background: var(--cc-sky); }
+html .cc-sidebar-link:hover { color: #161514; }
+html .cc-sidebar-link.is-active { background: color-mix(in srgb, var(--guest, var(--cc-yellow)) 35%, transparent); }
 html .cc-sidebar-link.is-active { color: var(--cc-ink, #161514); }
 html .cc-qa-body a, html .cc-article-dek a { text-decoration-color: var(--guest, currentColor); text-decoration-thickness: 2px; transition: background-color .2s ease; }
 html .cc-qa-body a:hover, html .cc-article-dek a:hover { background: color-mix(in srgb, var(--guest, var(--cc-yellow)) 45%, transparent); }

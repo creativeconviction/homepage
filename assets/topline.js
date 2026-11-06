@@ -32,6 +32,20 @@
     sub.addEventListener("mouseenter", function () { k = (k + 1) % 8; sub.style.setProperty("--sub", HEX[k]); });
   }
 
+  // The Contents tracker fills down its track as you read through the interview
+  var track = document.querySelector(".cc-sidebar-track"), article = document.querySelector(".cc-article");
+  if (track && article) {
+    var fillTick = 0;
+    var fill = function () {
+      fillTick = 0;
+      var r = article.getBoundingClientRect(), span = Math.max(1, r.height - innerHeight * .6);
+      var p = Math.min(1, Math.max(0, (innerHeight * .3 - r.top) / span));
+      track.style.setProperty("--fill", (p * track.clientHeight).toFixed(1) + "px");
+    };
+    addEventListener("scroll", function () { if (!fillTick) fillTick = requestAnimationFrame(fill); }, { passive: true });
+    addEventListener("resize", fill); fill();
+  }
+
   // Index: opens a vertical list under the word; a choice, a click elsewhere or Escape closes it
   var ib = document.querySelector(".cc-index-btn"), im = document.getElementById("cc-index-menu");
   if (ib && im) {
