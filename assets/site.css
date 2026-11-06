@@ -107,25 +107,74 @@
   .list.spines .row a .w em { font-style: italic; }
   .list:hover .row a, .list.spines:hover .row a .w b { color: #161514; }
   @media (min-width: 900px) {
-    .list.spines { display: flex; max-width: 1240px; height: clamp(500px, 64vh, 640px); }
-    .list.spines .row { position: relative; flex: 1 1 0; min-width: 0; transition: flex-grow .7s var(--ease), opacity .7s var(--ease), transform .8s var(--ease); }
-    .list.spines .row.open { flex-grow: 10; }
-    .list.spines .row a { display: block; position: absolute; inset: 0; padding: 0; overflow: hidden; }
-    .list.spines .row a:hover { box-shadow: none; }
-    .list.spines .ph { position: absolute; left: 6px; top: 6px; width: calc(100% - 12px); max-width: 44px; height: auto; aspect-ratio: 1; }
-    .list.spines .sp-label { display: flex; position: absolute; left: 0; bottom: 0; width: 56px; max-width: 100%; justify-content: center; padding-bottom: 24px; writing-mode: vertical-rl; transform: rotate(180deg); font-size: 13px; font-weight: 600; white-space: nowrap; gap: 10px; }
-    .list.spines .sp-label b { font-weight: 500; }
-    .list.spines .sp-open { display: flex; flex-direction: column; gap: 14px; position: absolute; top: 0; bottom: 0; left: 56px; width: min(560px, calc(100% - 56px)); min-width: 360px; padding: 34px 32px 30px 8px; background: var(--g); opacity: 0; transition: opacity .35s ease; }
-    .list.spines .row.open .sp-open { opacity: 1; transition-delay: .25s; }
-    .list.spines .ph { transition: max-width .6s var(--ease), left .6s var(--ease), top .6s var(--ease); z-index: 1; }
-    .list.spines .row.open .ph { left: 64px; top: 34px; max-width: 150px; }
-    .list.spines .row.open .sp-open { padding-top: 204px; }
-    .list.spines .sp-open .t { font-size: clamp(32px, 3.4vw, 48px); line-height: 1.02; letter-spacing: -.01em; text-wrap: balance; }
-    .list.spines .sp-q { display: block; font-family: var(--serif); font-style: italic; font-size: 21px; line-height: 1.3; max-width: 34ch; }
-    .list.spines .sp-open .w { font-size: 14px; margin-top: auto; }
-    .list.spines .sp-open .d { text-align: left; font-size: 13px; }
-    .list.spines .sp-go { display: inline-block; align-self: flex-start; font-size: 14px; font-weight: 500; border-bottom: 1.5px solid currentColor; padding-bottom: 1px; }
+    .list.spines.v-spine { display: flex; max-width: 1240px; height: clamp(500px, 64vh, 640px); }
+    .list.spines.v-spine .row { position: relative; flex: 1 1 0; min-width: 0; transition: flex-grow .7s var(--ease), opacity .7s var(--ease), transform .8s var(--ease); }
+    .list.spines.v-spine .row.open { flex-grow: 10; }
+    .list.spines.v-spine .row a { display: block; position: absolute; inset: 0; padding: 0; overflow: hidden; }
+    .list.spines.v-spine .row a:hover { box-shadow: none; }
+    .list.spines.v-spine .ph { position: absolute; left: 6px; top: 6px; width: calc(100% - 12px); max-width: 44px; height: auto; aspect-ratio: 1; }
+    .list.spines.v-spine .sp-label { display: flex; position: absolute; left: 0; bottom: 0; width: 56px; max-width: 100%; justify-content: center; padding-bottom: 24px; writing-mode: vertical-rl; transform: rotate(180deg); font-size: 13px; font-weight: 600; white-space: nowrap; gap: 10px; }
+    .list.spines.v-spine .sp-label b { font-weight: 500; }
+    .list.spines.v-spine .sp-open { display: flex; flex-direction: column; gap: 14px; position: absolute; top: 0; bottom: 0; left: 56px; width: min(560px, calc(100% - 56px)); min-width: 360px; padding: 34px 32px 30px 8px; background: var(--g); opacity: 0; transition: opacity .35s ease; }
+    .list.spines.v-spine .row.open .sp-open { opacity: 1; transition-delay: .25s; }
+    .list.spines.v-spine .ph { transition: max-width .6s var(--ease), left .6s var(--ease), top .6s var(--ease); z-index: 1; }
+    .list.spines.v-spine .row.open .ph { left: 64px; top: 34px; max-width: 150px; }
+    .list.spines.v-spine .row.open .sp-open { padding-top: 204px; }
+    .list.spines.v-spine .sp-open .t { font-size: clamp(32px, 3.4vw, 48px); line-height: 1.02; letter-spacing: -.01em; text-wrap: balance; }
+    .list.spines.v-spine .sp-q { display: block; font-family: var(--serif); font-style: italic; font-size: 21px; line-height: 1.3; max-width: 34ch; }
+    .list.spines.v-spine .sp-open .w { font-size: 14px; margin-top: auto; }
+    .list.spines.v-spine .sp-open .d { text-align: left; font-size: 13px; }
+    .list.spines.v-spine .sp-go { display: inline-block; align-self: flex-start; font-size: 14px; font-weight: 500; border-bottom: 1.5px solid currentColor; padding-bottom: 1px; }
   }
+  /* Other ways to show the same list on a wide screen (opening.js picks one with a class on the list) */
+  @media (min-width: 900px) {
+    /* Bands: full-width colour bands; the one you point at opens to show the line we kept */
+    .list.spines.v-bands { max-width: 1240px; }
+    .list.spines.v-bands .row a { display: grid; grid-template-columns: 64px minmax(0, 1fr) minmax(0, 260px); column-gap: 28px; align-items: center; padding: 16px 28px; transition: padding .5s var(--ease); }
+    .list.spines.v-bands .ph { width: 64px; height: 64px; grid-row: 1 / span 2; }
+    .list.spines.v-bands .t { font-size: 32px; line-height: 1.05; grid-column: 2; }
+    .list.spines.v-bands .w { grid-column: 3; grid-row: 1; text-align: right; }
+    .list.spines.v-bands .d { display: none; }
+    .list.spines.v-bands .sp-q { display: block; grid-column: 2 / 4; font-family: var(--serif); font-style: italic; font-size: 20px; line-height: 1.3; max-height: 0; opacity: 0; overflow: hidden; transition: max-height .5s var(--ease), opacity .3s ease, margin .5s var(--ease); }
+    .list.spines.v-bands .row.open a { padding-block: 28px; }
+    .list.spines.v-bands .row.open .sp-q { max-height: 90px; opacity: 1; margin-top: 10px; }
+
+    /* Covers: a grid of colour cards, face and title; pointing at one turns the face into the quote */
+    .list.spines.v-covers { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; max-width: 1240px; }
+    .list.spines.v-covers .row a { position: relative; display: flex; flex-direction: column; gap: 10px; aspect-ratio: .8; padding: 16px; overflow: hidden; }
+    .list.spines.v-covers .sp-label { display: block; font-size: 12px; font-weight: 600; }
+    .list.spines.v-covers .sp-label b { font-weight: 500; padding-right: 8px; }
+    .list.spines.v-covers .t { font-size: 24px; line-height: 1.05; }
+    .list.spines.v-covers .w, .list.spines.v-covers .d { display: none; }
+    .list.spines.v-covers .ph { order: 9; margin-top: auto; width: 58%; height: auto; aspect-ratio: 1; transition: opacity .3s ease; }
+    .list.spines.v-covers .sp-q { display: block; position: absolute; left: 16px; right: 16px; bottom: 16px; font-family: var(--serif); font-style: italic; font-size: 18px; line-height: 1.25; opacity: 0; transform: translateY(8px); transition: opacity .3s ease, transform .4s var(--ease); }
+    .list.spines.v-covers .row a:hover .ph { opacity: 0; }
+    .list.spines.v-covers .row a:hover .sp-q { opacity: 1; transform: none; }
+
+    /* Marker: quiet paper rows; the title gets a highlighter stroke in the guest's colour */
+    .list.spines.v-marker { max-width: 1000px; }
+    .list.spines.v-marker .row a { display: grid; grid-template-columns: 72px minmax(0, 1fr) minmax(0, 220px); column-gap: 28px; align-items: center; padding: 18px 0; background: none; }
+    .list.spines.v-marker .ph { width: 72px; height: 72px; grid-row: 1 / span 2; }
+    .list.spines.v-marker .t { grid-column: 2; width: fit-content; font-size: 30px; line-height: 1.1; padding: 0 .1em; margin-left: -.1em; background: linear-gradient(var(--g), var(--g)) no-repeat 0 62% / 0% 72%; transition: background-size .5s var(--ease); }
+    .list.spines.v-marker .sp-q { display: block; grid-column: 2; font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--ink-3); margin-top: 4px; }
+    .list.spines.v-marker .w { grid-column: 3; grid-row: 1 / span 2; }
+    .list.spines.v-marker .w, .list.spines.v-marker .w b, .list.spines.v-marker .w em { color: var(--ink-2); }
+    .list.spines.v-marker .d { display: none; }
+    .list.spines.v-marker .row a:hover .t { background-size: 100% 72%; }
+
+    /* Contents: a magazine contents page; big numbers in each guest's colour, a soft wash on the row you point at */
+    .list.spines.v-contents { max-width: 1100px; }
+    .list.spines.v-contents .row a { display: grid; grid-template-columns: 110px minmax(0, 1fr) minmax(0, 230px) 64px; column-gap: 24px; align-items: center; padding: 12px 16px; background: none; transition: background-color .25s ease; }
+    .list.spines.v-contents .sp-label { display: block; font-size: 0; }
+    .list.spines.v-contents .sp-label b { font-family: var(--serif); font-weight: 400; font-size: 64px; line-height: 1; color: var(--g); font-variant-numeric: lining-nums tabular-nums; }
+    .list.spines.v-contents .t { grid-column: 2; font-size: 30px; line-height: 1.1; }
+    .list.spines.v-contents .w { grid-column: 3; }
+    .list.spines.v-contents .w, .list.spines.v-contents .w b, .list.spines.v-contents .w em { color: var(--ink-2); }
+    .list.spines.v-contents .d { display: none; }
+    .list.spines.v-contents .ph { grid-column: 4; grid-row: 1; width: 64px; height: 64px; }
+    .list.spines.v-contents .row a:hover { background: color-mix(in srgb, var(--g) 35%, transparent); }
+  }
+
   /* An interview that is not out yet: listed, dated "Coming soon", not a link */
   .row a.soon { pointer-events: none; cursor: default; }
   /* Card shown when a picture is tapped: the passage, and a magenta arrow to the article */
