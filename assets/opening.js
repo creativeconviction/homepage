@@ -2,7 +2,6 @@
 (() => {
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches, body = document.body;
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  const PALETTE = ["#F37DB6", "#F6DE3D", "#4A8FE7", "#F39B47", "#43B86E", "#B99AE8", "#EF5B3E", "#9FD3F2"];   // the eight print colours
   const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
   const wait = ms => new Promise(r => setTimeout(r, ms));
   const $ = id => document.getElementById(id);
@@ -38,7 +37,6 @@
   // it's in and laid out again whenever the window changes size, so it always fills the width with whole rows and sits above the fold.
   const faces = CC.interviews.map(x => ({ face: x.slug, u: PORTS[x.slug] })), pics = shuffle(IMGS.filter(i => REFS[i.n]).map(i => ({ n: i.n, u: i.u }))), total = faces.length + pics.length;
   const seats = shuffle([...Array(total).keys()]);
-  const colour = {}; [...faces, ...pics].forEach(it => { colour[it.face || it.n] = PALETTE[Math.random() * PALETTE.length | 0]; });
   function buildBoard() {
     const pad = innerWidth < 560 ? 12 : 32, gap = innerWidth < 560 ? 3 : 5, availH = innerHeight - 56 - pad * 2;
     let cols = innerWidth < 560 ? 6 : 10, cell, rows;
@@ -46,7 +44,7 @@
     board.style.setProperty("--cols", cols); board.style.setProperty("--cell", cell + "px"); board.style.setProperty("--gap", gap + "px");
     const want = rows * cols, chosen = [...faces, ...pics.slice(0, want - faces.length)];
     const slots = seats.filter(i => i < want).map(i => chosen[i]);
-    board.innerHTML = slots.map(it => `<div class="tile ${it.face ? "face" : "pic"}" ${it.face ? `data-face="${it.face}"` : `data-n="${it.n}"`} style="--c:${colour[it.face || it.n]}; --dl:${Math.random() * 240 | 0}ms"><img src="${it.u}" alt="" /></div>`).join("");
+    board.innerHTML = slots.map(it => `<div class="tile ${it.face ? "face" : "pic"}" ${it.face ? `data-face="${it.face}"` : `data-n="${it.n}"`} style="--dl:${Math.random() * 240 | 0}ms"><img src="${it.u}" alt="" /></div>`).join("");
   }
   buildBoard();
   let phase = 0, busy = false, rsz = 0, again = false;
