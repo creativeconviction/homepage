@@ -23,7 +23,7 @@
   .logo { display: flex; flex-direction: column; align-items: center; }
   .logo h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(64px, 15.5vw, 212px); line-height: .86; letter-spacing: -.035em; text-align: center; display: flex; flex-direction: column; align-items: center; }
   .logo .line { display: block; overflow: hidden; padding: .06em .04em 0; margin: -.06em -.04em 0; }
-  .logo .l2 { font-style: italic; color: var(--magenta); margin-top: .02em; }
+  .logo .l2 { font-style: italic; color: var(--cc-pink, #F37DB6); margin-top: .02em; }
   .logo .ch { display: inline-block; transform: translateY(115%) rotate(4deg); opacity: 0; animation: letter 1.1s var(--ease) forwards; animation-delay: calc(var(--i) * 45ms + var(--d, 0ms)); transform-origin: left bottom; }
   @keyframes letter { to { transform: none; opacity: 1; } }
   .logo .tag { margin-top: clamp(12px, 2vw, 24px); font-family: var(--serif); font-size: clamp(18px, 2vw, 26px); line-height: 1.3; text-align: center; color: var(--ink); max-width: 30ch; text-wrap: balance; opacity: 0; transform: translateY(14px); filter: blur(6px); animation: tag 1s 1.05s var(--ease) forwards; }
@@ -90,8 +90,8 @@
   .list:hover .row a .w b, .list:hover .row a .au { color: var(--ink-3); }
   .list:hover .row a:hover, .list:hover .row a:hover .w b, .list:hover .row a:hover .au { color: var(--ink); }
   /* Each guest's print colour, in list order; pointing at a row lays it down as a band (wider than the row, so nothing moves) */
-  .row:nth-child(8n+1) { --g: var(--cc-pink); } .row:nth-child(8n+2) { --g: var(--cc-yellow); } .row:nth-child(8n+3) { --g: var(--cc-blue-print); } .row:nth-child(8n+4) { --g: var(--cc-orange-print); }
-  .row:nth-child(8n+5) { --g: var(--cc-green); } .row:nth-child(8n+6) { --g: var(--cc-lilac); } .row:nth-child(8n+7) { --g: var(--cc-red); } .row:nth-child(8n+8) { --g: var(--cc-sky); }
+  .row:nth-child(8n+1) { --g: var(--cc-pink); } .row:nth-child(8n+2) { --g: var(--cc-yellow); --gt: #A98B00; } .row:nth-child(8n+3) { --g: var(--cc-blue-print); } .row:nth-child(8n+4) { --g: var(--cc-orange-print); }
+  .row:nth-child(8n+5) { --g: var(--cc-green); } .row:nth-child(8n+6) { --g: var(--cc-lilac); } .row:nth-child(8n+7) { --g: var(--cc-red); } .row:nth-child(8n+8) { --g: var(--cc-sky); --gt: #3B88B8; }
   @media (hover: hover) {
     .row a { transition: color .2s ease, background-color .25s ease, box-shadow .25s ease; }
     .list .row a:hover { background: var(--g); box-shadow: -14px 0 0 var(--g), 14px 0 0 var(--g); }
@@ -120,7 +120,7 @@
     .list.spines.v-contents .ph { grid-column: 4; grid-row: 1; width: 64px; height: 64px; }
 
     /* the row you point at fills with the guest's colour; its number and company turn to ink */
-    .list.spines.v-contents .row a .w em { font-style: normal; color: var(--g); transition: color .25s ease; }
+    .list.spines.v-contents .row a .w em { font-style: normal; color: var(--gt, var(--g)); transition: color .25s ease; }  /* yellow and sky are darkened for small text */
     .list.spines.v-contents .row a:hover .w em, .list.spines.v-contents:hover .row a:hover .w em { color: #161514; }
     .list.spines.v-contents .row a:hover { background: var(--g); }
     .list.spines.v-contents .sp-label b { transition: color .25s ease; }

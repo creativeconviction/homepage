@@ -46,7 +46,7 @@ body.has-top { padding-top: 56px; }
 
 /* Wordmark: dead centre. On the landing page it stays hidden until the big title has gathered itself into the bar (body.docked) */
 .cc-top .cc-top-mark { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-family: "EB Garamond", Garamond, Georgia, serif; font-size: 20px; color: var(--cc-ink, #161514); text-decoration: none; white-space: nowrap; transition: opacity .25s ease; }
-.cc-top .cc-top-mark em { color: var(--cc-magenta, #D8016A); font-style: italic; }
+.cc-top .cc-top-mark em { color: var(--cc-pink, #F37DB6); font-style: italic; }   /* the same pink as the print palette */
 body.home .cc-top .cc-top-mark { opacity: 0; pointer-events: none; }
 body.home.docked .cc-top .cc-top-mark, body.home.no-hero .cc-top .cc-top-mark { opacity: 1; pointer-events: auto; }
 
