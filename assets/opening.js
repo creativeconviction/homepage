@@ -18,13 +18,13 @@
     c.style.transform = `translate(${(Math.random() - .5) * innerWidth * .9}px, ${(Math.random() - .5) * innerHeight * .8}px) rotate(${(Math.random() - .5) * 80}deg) scale(${.4 + Math.random() * 1.3})`;
   });
 
-  // Which way the list is shown on a wide screen; spines unless a viewer has picked another (the switcher in previews sets it)
-  const LOOKS = ["spine", "bands", "covers", "marker", "contents"];
-  const listLook = () => { try { const v = localStorage.getItem("cc-list-look"); return LOOKS.includes(v) ? v : "spine"; } catch (e) { return "spine"; } };
-  // The list, as a shelf of spines: one per guest in their print colour. On a wide screen the newest stands open and pointing at any
-  // spine opens it (face, title, the line we kept); on a phone the spines lie down as stacked colour bands. Each face lands in its spine.
-  main.innerHTML = `<section class="interviews" id="interviews"><ul class="list spines v-${listLook()}" id="list">${CC.interviews.map((x, i) => `
-    <li class="row${i === 0 ? " open" : ""}" style="--i:${i}"><a${x.soon ? ' class="soon" aria-disabled="true" tabindex="-1"' : ` href="${x.url}"`}>
+  // Which Contents style the list uses on a wide screen; plain unless a viewer has picked another (the switcher in previews sets it)
+  const LOOKS = ["plain", "quote", "band", "big", "cols"];
+  const listLook = () => { try { const v = localStorage.getItem("cc-contents-look"); return LOOKS.includes(v) ? v : "plain"; } catch (e) { return "plain"; } };
+  // The list, one row per guest in their print colour: on a wide screen a magazine contents page (big coloured numbers, titles, faces);
+  // on a phone stacked colour bands. Each face from the opening lands in its row.
+  main.innerHTML = `<section class="interviews" id="interviews"><ul class="list spines v-contents c-${listLook()}" id="list">${CC.interviews.map((x, i) => `
+    <li class="row" style="--i:${i}"><a${x.soon ? ' class="soon" aria-disabled="true" tabindex="-1"' : ` href="${x.url}"`}>
       <img class="ph" src="${PORTS[x.slug]}" alt="" width="56" height="56" data-slug="${x.slug}" />
       <span class="sp-label" aria-hidden="true"><b>${String(i + 1).padStart(2, "0")}</b>${esc(x.name)}</span>
       <span class="sp-open">
@@ -36,9 +36,6 @@
       </span>
     </a></li>`).join("")}</ul></section>`;
   const list = $("list");
-  // Pointing at a spine (or focusing it) opens it; the last one opened stays open
-  const rowsEls = [...list.children], openRow = r => rowsEls.forEach(o => o.classList.toggle("open", o === r));
-  rowsEls.forEach(r => { r.addEventListener("pointerenter", () => openRow(r)); r.addEventListener("focusin", () => openRow(r)); });
 
   // The board: every face, plus as many pictures as fill the rows exactly (the rest wait for another day). It is laid out for the window
   // it's in and laid out again whenever the window changes size, so it always fills the width with whole rows and sits above the fold.

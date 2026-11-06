@@ -16,10 +16,6 @@ html .cc-highlight { background: color-mix(in srgb, var(--guest, var(--cc-pink))
 html .cc-highlight:hover, html .cc-highlight.is-on { background: var(--guest, var(--cc-pink)); color: #161514; }
 html .cc-article-substack a.cc-highlight:hover { background: var(--guest, var(--cc-pink)); color: #161514; }
 
-/* The signature: the eight print colours as a thin stripe along the very top of every page */
-.cc-top::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 5px; pointer-events: none;
-  background: linear-gradient(90deg, var(--cc-pink) 0 12.5%, var(--cc-yellow) 0 25%, var(--cc-blue-print) 0 37.5%, var(--cc-orange-print) 0 50%, var(--cc-green) 0 62.5%, var(--cc-lilac) 0 75%, var(--cc-red) 0 87.5%, var(--cc-sky) 0); }
-
 /* Text you select is marked in the page's colour */
 html ::selection { background: var(--guest, var(--cc-yellow)); color: #161514; }
 
