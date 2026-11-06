@@ -11,6 +11,26 @@
   var m = location.pathname.match(/\/interviews\/([^\/]+)/), slug = m && (m[1] === "ben-hylak" ? "ben-and-zubin-raindrop" : m[1]);
   var gi = slug ? GUESTS.indexOf(slug) : -1;
   if (gi > -1) document.documentElement.style.setProperty("--guest", "var(--cc-" + PRINT[gi % 8] + ")");
+  var HEX = ["#F37DB6", "#F6DE3D", "#4A8FE7", "#F39B47", "#43B86E", "#B99AE8", "#EF5B3E", "#9FD3F2"];
+
+  // The interview title gets a marker stroke in the guest's colour
+  var title = gi > -1 && document.querySelector(".cc-article-title");
+  if (title && !title.querySelector(".cc-mark")) title.innerHTML = '<span class="cc-mark">' + title.innerHTML + "</span>";
+
+  // On an interview the cursor dot is the guest's colour
+  if (gi > -1) {
+    var dot = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Ccircle cx='6' cy='6' r='4.3' fill='%23" + HEX[gi % 8].slice(1) + "'/%3E%3C/svg%3E\") 6 6, pointer";
+    var cs = document.createElement("style");
+    cs.textContent = "@media (hover: hover) and (pointer: fine) { a[href], button:not(:disabled), [role=\"button\"], summary, label[for], .tile, .row a:not(.soon), .cc-highlight, .cc-sidebar-link, .cc-index-btn { cursor: " + dot + " !important; } }";
+    document.head.appendChild(cs);
+  }
+
+  // Subscribe steps to the next print colour each time it's pointed at
+  var sub = document.querySelector(".cc-top-sub");
+  if (sub) {
+    var k = gi > -1 ? gi % 8 : 0;
+    sub.addEventListener("mouseenter", function () { k = (k + 1) % 8; sub.style.setProperty("--sub", HEX[k]); });
+  }
 
   // Index: opens a vertical list under the word; a choice, a click elsewhere or Escape closes it
   var ib = document.querySelector(".cc-index-btn"), im = document.getElementById("cc-index-menu");
