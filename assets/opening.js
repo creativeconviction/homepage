@@ -18,12 +18,9 @@
     c.style.transform = `translate(${(Math.random() - .5) * innerWidth * .9}px, ${(Math.random() - .5) * innerHeight * .8}px) rotate(${(Math.random() - .5) * 80}deg) scale(${.4 + Math.random() * 1.3})`;
   });
 
-  // Which Contents style the list uses on a wide screen; plain unless a viewer has picked another (the switcher in previews sets it)
-  const LOOKS = ["plain", "quote", "band", "big", "cols"];
-  const listLook = () => { try { const v = localStorage.getItem("cc-contents-look"); return LOOKS.includes(v) ? v : "plain"; } catch (e) { return "plain"; } };
   // The list, one row per guest in their print colour: on a wide screen a magazine contents page (big coloured numbers, titles, faces);
   // on a phone stacked colour bands. Each face from the opening lands in its row.
-  main.innerHTML = `<section class="interviews" id="interviews"><ul class="list spines v-contents c-${listLook()}" id="list">${CC.interviews.map((x, i) => `
+  main.innerHTML = `<section class="interviews" id="interviews"><ul class="list spines v-contents" id="list">${CC.interviews.map((x, i) => `
     <li class="row" style="--i:${i}"><a${x.soon ? ' class="soon" aria-disabled="true" tabindex="-1"' : ` href="${x.url}"`}>
       <img class="ph" src="${PORTS[x.slug]}" alt="" width="56" height="56" data-slug="${x.slug}" />
       <span class="sp-label" aria-hidden="true"><b>${String(i + 1).padStart(2, "0")}</b>${esc(x.name)}</span>
