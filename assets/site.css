@@ -104,22 +104,23 @@
   .list.spines .sp-open { display: contents; }
   .list.spines .row a { color: #161514; box-shadow: none; }
   .list.spines .row a .w em { font-style: normal; }
-  /* Phone: the same contents page, compact; the number in the guest's colour, name and company under the title, the face on the right */
+  /* Phone: the same contents page, compact and calm: the number in the guest's colour, then two lines only, the title and "name, company"; no faces */
   @media (max-width: 899px) {
-    .list.spines .row a { display: grid; grid-template-columns: 52px minmax(0, 1fr) 48px; grid-template-rows: auto auto; column-gap: 14px; row-gap: 3px; align-items: center; padding: 12px 6px; background: none; transition: background-color .2s ease; }
+    .list.spines .row a { display: grid; grid-template-columns: 52px minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 14px; row-gap: 2px; align-items: center; padding: 12px 6px; background: none; transition: background-color .2s ease; }
     .list.spines .row a:active { background: var(--g); }
     .list.spines .row .sp-label { display: block; grid-column: 1; grid-row: 1 / span 2; font-size: 0; }
     .list.spines .row .sp-label b { font-family: var(--serif); font-weight: 400; font-size: 40px; line-height: 1; color: var(--g); font-variant-numeric: lining-nums tabular-nums; }
     .list.spines .row a:active .sp-label b { color: #161514; }
-    .list.spines .row .t { grid-column: 2; grid-row: 1; align-self: end; font-size: 19px; line-height: 1.15; }
-    .list.spines .row .w { grid-column: 2; grid-row: 2; align-self: start; font-size: 12px; line-height: 1.35; color: var(--ink-2); }
+    .list.spines .row .t { grid-column: 2; grid-row: 1; align-self: end; font-size: 19px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .list.spines .row .w { grid-column: 2; grid-row: 2; align-self: start; font-size: 0; line-height: 1.35; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .list.spines .row .w b, .list.spines .row .w em { font-size: 13px; }   /* the role is left out on a phone */
     .list.spines .row .w b { font-weight: 400; color: var(--ink-2); }
     .list.spines .row .w br { display: none; }
     .list.spines .row .w b::after { content: ", "; }
     .list.spines .row a .w em { color: var(--gt, var(--g)); }
     .list.spines .row a:active .w em { color: #161514; }
     .list.spines .row .d { display: none; }
-    .list.spines .row .ph { grid-column: 3; grid-row: 1 / span 2; width: 48px; height: 48px; }
+    .list.spines .row .ph { display: none; }
   }
   .list:hover .row a, .list.spines:hover .row a .w b { color: #161514; }
   /* Wide screens: the list as a magazine contents page; the row you point at fills with that guest's colour */

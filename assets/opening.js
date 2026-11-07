@@ -82,7 +82,9 @@
     const tiles = [...board.querySelectorAll(".tile.face")], order = CC.interviews.map(x => x.slug);
     tiles.sort((a, b) => order.indexOf(a.dataset.face) - order.indexOf(b.dataset.face));
     tiles.forEach((t, k) => {
-      const ph = list.querySelector(`.ph[data-slug="${t.dataset.face}"]`); if (!ph) return;
+      const ph = list.querySelector(`.ph[data-slug="${t.dataset.face}"]`);
+      // on a phone the list has no faces, so each one fades where it is instead of travelling
+      if (!ph || !ph.offsetWidth) { t.style.transition = "opacity .5s ease"; t.style.opacity = 0; return; }
       const a = t.getBoundingClientRect(), b = ph.getBoundingClientRect();
       const dx = (b.left + b.width / 2) - (a.left + a.width / 2), dy = (b.top + b.height / 2) - (a.top + a.height / 2), s = b.width / a.width;
       t.style.setProperty("--dl", (k * 30) + "ms"); t.classList.add("fly"); void t.offsetWidth;
