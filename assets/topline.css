@@ -86,8 +86,9 @@ body.home.docked .cc-top .cc-top-mark, body.home.no-hero .cc-top .cc-top-mark { 
 @media (max-width: 720px) {
   .cc-top { padding: 14px max(20px, env(safe-area-inset-right, 0px)) 14px max(20px, env(safe-area-inset-left, 0px)); }
   .cc-top .cc-top-mark { font-size: 18px; }
-  /* on a phone Subscribe stays a colour box, just a little smaller */
-  .cc-top .cc-top-sub { padding: 5px 10px; font-size: 13px; }
+  /* on a phone Subscribe is the word in ink sitting on a thin strip of all eight print colours */
+  .cc-top .cc-top-sub, .cc-top .cc-top-sub:hover { padding: 0 0 4px; color: #161514; font-weight: 500;
+    background: linear-gradient(90deg, #F37DB6 0 12.5%, #F6DE3D 0 25%, #4A8FE7 0 37.5%, #F39B47 0 50%, #43B86E 0 62.5%, #B99AE8 0 75%, #EF5B3E 0 87.5%, #9FD3F2 0) no-repeat 0 100% / 100% 2px; }
   .cc-right { gap: 12px; }
 }
 /* On a narrow phone About moves from the right side into the Index list */
