@@ -84,9 +84,10 @@ body.home.docked .cc-top .cc-top-mark, body.home.no-hero .cc-top .cc-top-mark { 
 .cc-jump.is-fading { background: transparent; box-shadow: 0 0 0 3px transparent; color: inherit; }
 
 @media (max-width: 720px) {
-  .cc-top { padding: 10px 12px; }
-  .cc-top .cc-top-mark { font-size: 16px; }
-  .cc-top .cc-top-sub { padding: 5px 10px; }
+  .cc-top { padding: 14px max(20px, env(safe-area-inset-right, 0px)) 14px max(20px, env(safe-area-inset-left, 0px)); }
+  .cc-top .cc-top-mark { font-size: 18px; }
+  /* on a phone Subscribe is a pink word, not a block, so the wordmark has room */
+  .cc-top .cc-top-sub, .cc-top .cc-top-sub:hover { padding: 0; background: none; color: #C93D82; font-weight: 500; }
   .cc-right { gap: 12px; }
 }
 /* On a narrow phone About moves from the right side into the Index list */
