@@ -37,16 +37,19 @@
   }
 
   // One row style for everything
-  const rows = (items, id = "", five = false) => `<section class="interviews"${id ? ` id="${id}"` : ""}><ul class="list${five ? " five" : ""}">${items.map((x, i) => `
+  // Writing and Community use the same list as Interviews: big numbers in print colours, the title, who and what, a picture
+  const rows = (items, id = "") => `<section class="interviews"${id ? ` id="${id}"` : ""}><ul class="list spines v-contents show">${items.map((x, i) => `
     <li class="row" style="--i:${i}"><a${x.soon ? ' class="soon" aria-disabled="true" tabindex="-1"' : ` href="${x.url}"`}${x.ext ? ' target="_blank" rel="noopener"' : ""}>
       <img class="ph" src="${x.img}" alt="" width="56" height="56" loading="lazy" />
-      <span class="t">${esc(x.title)}</span>
-      ${five ? `<span class="au">${esc(x.authors)}</span>` : ""}
-      <span class="w">${x.line1 ? `<b>${esc(x.line1)}</b><br />` : ""}${esc(x.line2)}${x.accent ? `, <em>${esc(x.accent)}</em>` : ""}</span>
-      <span class="d">${esc(x.date)}</span>
+      <span class="sp-label" aria-hidden="true"><b>${String(items.length - i).padStart(2, "0")}</b></span>
+      <span class="sp-open">
+        <span class="t">${esc(x.title)}</span>
+        <span class="w${x.accent ? "" : " solo"}">${x.authors || x.line1 ? `<b>${esc(x.authors || x.line1)}</b><br />` : ""}${esc(x.line2)}${x.accent ? `, <em>${esc(x.accent)}</em>` : ""}</span>
+        <span class="d">${esc(x.date)}</span>
+      </span>
     </a></li>`).join("")}</ul></section>`;
   // A page can bring its own rows (Writing, Community) and keep the same frame, pictures and type as Interviews
-  const listHTML = () => window.PAGE ? rows(PAGE.items, "interviews", !!PAGE.five) : rows(CC.interviews.map(x => ({ url: x.url, img: PORTS[x.slug], title: x.headline, line1: x.name, line2: x.role, accent: x.company, date: x.date, soon: x.soon })), "interviews");
+  const listHTML = () => window.PAGE ? rows(PAGE.items, "interviews") : rows(CC.interviews.map(x => ({ url: x.url, img: PORTS[x.slug], title: x.headline, line1: x.name, line2: x.role, accent: x.company, date: x.date, soon: x.soon })), "interviews");
   const page = document.getElementById("page"), peek = document.getElementById("peek");
   // Phones, and the Interviews / Writing / Community pages at any size, get one drifting ribbon of pictures across the top instead of the side rails
   const isMobile = () => matchMedia("(max-width: 720px)").matches;
@@ -58,7 +61,7 @@
   const layouts = {
     wall:   () => listHTML() + wallHTML(),
     ribbon: () => { const h = Math.round(Math.min(innerHeight * .15, 150)); const per = Math.ceil(innerWidth / h) + 2; return listHTML() + ribbonHTML(h, 0, 1) + ribbonHTML(h, per, -1); },
-    rails:  () => topRibbon() ? mobileRibbonHTML() + listHTML() : `<div class="rails">${railHTML(0, false)}${listHTML()}${railHTML(railPer(), true)}</div>`,
+    rails:  () => window.PAGE ? listHTML() : topRibbon() ? mobileRibbonHTML() + listHTML() : `<div class="rails">${railHTML(0, false)}${listHTML()}${railHTML(railPer(), true)}</div>`,
   };
   const pages = {};
   let current = "rails", rot = null, pageName = "home", ribbons = [];

@@ -117,6 +117,7 @@
     .list.spines .row .w b { font-weight: 400; color: var(--ink-2); }
     .list.spines .row .w br { display: none; }
     .list.spines .row .w b::after { content: ", "; }
+    .list.spines .row .w.solo b::after { content: none; }
     .list.spines .row a .w em { color: var(--gt, var(--g)); }
     .list.spines .row a:active .w em { color: #161514; }
     .list.spines .row .d { display: none; }
