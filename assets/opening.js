@@ -22,7 +22,7 @@
   main.innerHTML = `<section class="interviews" id="interviews"><ul class="list spines v-contents" id="list">${CC.interviews.map((x, i) => `
     <li class="row" style="--i:${i}"><a${x.soon ? ' class="soon" aria-disabled="true" tabindex="-1"' : ` href="${x.url}"`}>
       <img class="ph" src="${PORTS[x.slug]}" alt="" width="56" height="56" data-slug="${x.slug}" />
-      <span class="sp-label" aria-hidden="true"><b>${String(i + 1).padStart(2, "0")}</b>${esc(x.name)}</span>
+      <span class="sp-label" aria-hidden="true"><b>${String(CC.interviews.length - i).padStart(2, "0")}</b>${esc(x.name)}</span>
       <span class="sp-open">
         <span class="t">${esc(x.headline)}</span>
         <span class="sp-q">&ldquo;${esc(x.quote)}&rdquo;</span>
