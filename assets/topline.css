@@ -20,8 +20,8 @@ html .cc-article-substack a.cc-highlight:hover { background: color-mix(in srgb, 
 html ::selection { background: var(--guest, var(--cc-yellow)); color: #161514; }
 
 /* Inside an interview, the guest's colour runs through the page: a marker under the title, their initials, the section marker, the links */
-html .cc-article-title .cc-mark { background: linear-gradient(var(--guest), var(--guest)) no-repeat 0 60% / 100% 78%; -webkit-box-decoration-break: clone; box-decoration-break: clone; padding: 0 .12em; margin-left: -.12em; }
-html .cc-speaker.is-guest { width: max-content; justify-self: start; align-self: start; background: var(--guest, transparent); box-shadow: 0 0 0 3px var(--guest, transparent); }
+html .cc-article-title .cc-mark { background: linear-gradient(color-mix(in srgb, var(--guest) 34%, transparent), color-mix(in srgb, var(--guest) 34%, transparent)) no-repeat 0 60% / 100% 78%; -webkit-box-decoration-break: clone; box-decoration-break: clone; padding: 0 .12em; margin-left: -.12em; }
+html .cc-speaker.is-guest { width: max-content; justify-self: start; align-self: start; background: color-mix(in srgb, var(--guest, transparent) 34%, transparent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--guest, transparent) 34%, transparent); }
 /* The Contents tracker: a thin line in the guest's colour that fills down the track as you read (topline.js sets --fill) */
 html .cc-sidebar-track-indicator { display: none; }
 html .cc-sidebar-track::after { content: ""; position: absolute; left: -.5px; top: 0; width: 2px; height: var(--fill, 0px); background: var(--guest, var(--cc-ink)); }
