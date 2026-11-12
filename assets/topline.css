@@ -13,8 +13,8 @@ html::after { content: ""; position: fixed; inset: 0; z-index: 2147483000; point
 
 /* In an interview, the highlighted lines are a marker in that guest's colour: a light wash at rest, the full colour on hover or tap */
 html .cc-highlight { background: color-mix(in srgb, var(--guest, var(--cc-pink)) 34%, transparent); color: var(--cc-ink, #161514); }
-html .cc-highlight:hover, html .cc-highlight.is-on { background: var(--guest, var(--cc-pink)); color: #161514; }
-html .cc-article-substack a.cc-highlight:hover { background: var(--guest, var(--cc-pink)); color: #161514; }
+html .cc-highlight:hover, html .cc-highlight.is-on { background: color-mix(in srgb, var(--guest, var(--cc-pink)) 34%, transparent); color: var(--cc-ink, #161514); }
+html .cc-article-substack a.cc-highlight:hover { background: color-mix(in srgb, var(--guest, var(--cc-pink)) 34%, transparent); color: var(--cc-ink, #161514); }
 
 /* Text you select is marked in the page's colour */
 html ::selection { background: var(--guest, var(--cc-yellow)); color: #161514; }
