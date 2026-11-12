@@ -44,7 +44,7 @@
       <span class="sp-label" aria-hidden="true"><b>${String(items.length - i).padStart(2, "0")}</b></span>
       <span class="sp-open">
         <span class="t">${esc(x.title)}</span>
-        <span class="w${x.accent ? "" : " solo"}">${x.authors || x.line1 ? `<b>${esc(x.authors || x.line1)}</b><br />` : ""}${esc(x.line2)}${x.accent ? `, <em>${esc(x.accent)}</em>` : ""}</span>
+        <span class="w${x.accent || x.with ? "" : " solo"}${x.with ? " solo with" : ""}">${x.with ? `<b>cohosted with</b> <em>${esc(x.with)}</em>` : ""}${x.authors || x.line1 ? `<b>${esc(x.authors || x.line1)}</b><br />` : ""}${x.line2 ? esc(x.line2) : ""}${x.accent ? `, <em>${esc(x.accent)}</em>` : ""}</span>
         <span class="d">${esc(x.date)}</span>
       </span>
     </a></li>`).join("")}</ul></section>`;
