@@ -104,9 +104,9 @@
   .list.spines .sp-open { display: contents; }
   .list.spines .row a { color: #161514; box-shadow: none; }
   .list.spines .row a .w em { font-style: normal; }
-  /* Phone: the same contents page with room to breathe: a smaller coloured number, the title (wrapping to two lines at most), "name, company" under it; no faces */
+  /* Phone: the same contents page with room to breathe: a smaller coloured number, the title (wrapping to two lines at most), "name, company" under it, and the face on the right */
   @media (max-width: 899px) {
-    .list.spines .row a { display: grid; grid-template-columns: 44px minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 14px; row-gap: 4px; align-items: start; padding: 20px 0; background: none; transition: background-color .2s ease; }
+    .list.spines .row a { display: grid; grid-template-columns: 44px minmax(0, 1fr) 52px; grid-template-rows: auto auto; column-gap: 14px; row-gap: 4px; align-items: start; padding: 16px 0; background: none; transition: background-color .2s ease; }
     .list.spines .row a:active { background: var(--g); }
     .list.spines .row .sp-label { display: block; grid-column: 1; grid-row: 1 / span 2; font-size: 0; }
     .list.spines .row .sp-label b { font-family: var(--serif); font-weight: 400; font-size: 31px; line-height: .9; color: var(--g); font-variant-numeric: lining-nums tabular-nums; }
@@ -121,7 +121,7 @@
     .list.spines .row a .w em { color: var(--gt, var(--g)); }
     .list.spines .row a:active .w em { color: #161514; }
     .list.spines .row .d { display: none; }
-    .list.spines .row .ph { display: none; }
+    .list.spines .row .ph { grid-column: 3; grid-row: 1 / span 2; align-self: center; width: 52px; height: 52px; }   /* the faces land here, as on a wide screen */
     .interviews { padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); }
   }
   .list:hover .row a, .list.spines:hover .row a .w b { color: #161514; }
