@@ -11,7 +11,7 @@ html::after { content: ""; position: fixed; inset: 0; z-index: 2147483000; point
 :root[data-theme="dark"]::after { opacity: .1; }
 @media print { html::after { display: none; } }
 
-/* In an interview, the highlighted lines are a marker in that guest's colour: a light wash at rest, the full colour on hover or tap */
+/* In an interview, the highlighted lines are a marker in that guest's colour: one light wash, the same on hover or tap */
 html .cc-highlight { background: color-mix(in srgb, var(--guest, var(--cc-pink)) 34%, transparent); color: var(--cc-ink, #161514); }
 html .cc-highlight:hover, html .cc-highlight.is-on { background: color-mix(in srgb, var(--guest, var(--cc-pink)) 34%, transparent); color: var(--cc-ink, #161514); }
 html .cc-article-substack a.cc-highlight:hover { background: color-mix(in srgb, var(--guest, var(--cc-pink)) 34%, transparent); color: var(--cc-ink, #161514); }
@@ -80,8 +80,8 @@ body.home.docked .cc-top .cc-top-mark, body.home.no-hero .cc-top .cc-top-mark { 
 @media (prefers-reduced-motion: reduce) { .cc-index-list a { transition: none; } }
 
 /* The passage a quote links to */
-.cc-jump { background: var(--guest, var(--cc-yellow)); color: #161514; box-shadow: 0 0 0 3px var(--guest, var(--cc-yellow)); -webkit-box-decoration-break: clone; box-decoration-break: clone; border-radius: 2px; transition: background 1s ease, box-shadow 1s ease, color 1s ease; }
-.cc-jump.is-fading { background: transparent; box-shadow: 0 0 0 3px transparent; color: inherit; }
+.cc-jump { background: color-mix(in srgb, var(--guest, var(--cc-pink)) 34%, transparent); color: #161514; box-shadow: none; -webkit-box-decoration-break: clone; box-decoration-break: clone; border-radius: 2px; transition: background 1s ease, color 1s ease; }
+.cc-jump.is-fading { background: transparent; box-shadow: none; color: inherit; }
 
 @media (max-width: 720px) {
   .cc-top { padding: 14px max(20px, env(safe-area-inset-right, 0px)) 14px max(20px, env(safe-area-inset-left, 0px)); }
