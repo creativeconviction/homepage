@@ -14,7 +14,9 @@ html::after { content: ""; position: fixed; inset: 0; z-index: 2147483000; point
 /* In an interview, the highlighted lines are a marker in that guest's colour: one light wash, the same on hover or tap */
 html .cc-highlight { background: color-mix(in srgb, var(--guest, var(--cc-pink)) 34%, transparent); color: var(--cc-ink, #161514); }
 html .cc-highlight:hover, html .cc-highlight.is-on { background: color-mix(in srgb, var(--guest, var(--cc-pink)) 34%, transparent); color: var(--cc-ink, #161514); }
-html .cc-article-substack a.cc-highlight:hover { background: color-mix(in srgb, var(--guest, var(--cc-pink)) 34%, transparent); color: var(--cc-ink, #161514); }
+/* "Substack version" is a plain underlined link like the others in the article, with no highlight */
+html .cc-article-substack a.cc-highlight { background: none; padding: 0; color: inherit; text-decoration: underline; text-decoration-color: var(--guest, currentColor); text-decoration-thickness: 2px; text-underline-offset: 3px; transition: background-color .2s ease; }
+html .cc-article-substack a.cc-highlight:hover { background: color-mix(in srgb, var(--guest, var(--cc-yellow)) 45%, transparent); color: inherit; }
 
 /* Text you select is marked in the page's colour */
 html ::selection { background: var(--guest, var(--cc-yellow)); color: #161514; }
@@ -104,7 +106,4 @@ body.home.docked .cc-top .cc-top-mark, body.home.no-hero .cc-top .cc-top-mark { 
   .cc-eb-br { display: inline; }
   .cc-article-meta { flex-direction: column; align-items: flex-start; gap: 4px; }
   .cc-article-meta a { order: 3; }
-  html .cc-article-substack a.cc-highlight, html .cc-article-substack a.cc-highlight:hover {
-    background: none; padding: 0; text-decoration: underline; text-underline-offset: 3px;
-  }
 }
