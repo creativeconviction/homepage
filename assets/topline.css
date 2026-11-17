@@ -57,8 +57,11 @@ body.home.docked .cc-top .cc-top-mark, body.home.no-hero .cc-top .cc-top-mark { 
 .cc-right .cc-about { color: var(--cc-ink-3, #6E6A63); text-decoration: none; }
 .cc-right .cc-about:hover { color: var(--cc-ink, #161514); }
 /* Subscribe is a print-colour button in ink: the guest's colour on their interview, pink elsewhere; each time you point at it, it steps to the next colour */
-.cc-top .cc-top-sub { color: #161514; background: var(--sub, var(--guest, var(--cc-pink))); padding: 6px 14px; text-decoration: none; font-weight: 500; transition: background-color .25s ease; }
-.cc-top .cc-top-sub:hover { color: #161514; }
+/* Subscribe is the word in ink on a thin strip of all eight print colours; pointing at it thickens the strip */
+.cc-top .cc-top-sub { color: #161514; padding: 0 0 4px; text-decoration: none; font-weight: 500;
+  background: linear-gradient(90deg, #F37DB6 0 12.5%, #F6DE3D 0 25%, #4A8FE7 0 37.5%, #F39B47 0 50%, #43B86E 0 62.5%, #B99AE8 0 75%, #EF5B3E 0 87.5%, #9FD3F2 0) no-repeat 0 100% / 100% 2px;
+  transition: background-size .25s ease; }
+.cc-top .cc-top-sub:hover { color: #161514; background-size: 100% 5px; }
 
 /* Index: one word top left with a plus. It opens a plain vertical list beneath it; nothing else on the page moves */
 .cc-index-btn { font: inherit; color: var(--cc-ink, #161514); background: none; border: 0; padding: 6px 0; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; flex: none; line-height: 1; }
@@ -88,9 +91,6 @@ body.home.docked .cc-top .cc-top-mark, body.home.no-hero .cc-top .cc-top-mark { 
 @media (max-width: 720px) {
   .cc-top { padding: 14px max(20px, env(safe-area-inset-right, 0px)) 14px max(20px, env(safe-area-inset-left, 0px)); }
   .cc-top .cc-top-mark { font-size: 18px; }
-  /* on a phone Subscribe is the word in ink sitting on a thin strip of all eight print colours */
-  .cc-top .cc-top-sub, .cc-top .cc-top-sub:hover { padding: 0 0 4px; color: #161514; font-weight: 500;
-    background: linear-gradient(90deg, #F37DB6 0 12.5%, #F6DE3D 0 25%, #4A8FE7 0 37.5%, #F39B47 0 50%, #43B86E 0 62.5%, #B99AE8 0 75%, #EF5B3E 0 87.5%, #9FD3F2 0) no-repeat 0 100% / 100% 2px; }
   .cc-right { gap: 12px; }
 }
 /* On a narrow phone About moves from the right side into the Index list */
