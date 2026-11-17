@@ -105,7 +105,8 @@
   const go = () => { const id = target(); if (id) requestAnimationFrame(() => document.getElementById(id).scrollIntoView()); };
   addEventListener("hashchange", () => { if (!target()) return; if (phase !== 3) land(); go(); });
 
-  // It plays by itself, once per visit: later loads in the same session go straight to the list. Scrolling still moves it on sooner.
+  // The opening is switched off: every visit goes straight to the list. Set OPENING to true to bring it back (once per visit).
+  const OPENING = false;
   let seen = false; try { seen = sessionStorage.getItem("cc-opened") === "1"; sessionStorage.setItem("cc-opened", "1"); } catch (e) {}
   // The opening is switched off: every visit goes straight to the list. Set OPENING to true to bring it back (once per visit).
   const OPENING = false;
