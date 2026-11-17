@@ -107,9 +107,11 @@
 
   // It plays by itself, once per visit: later loads in the same session go straight to the list. Scrolling still moves it on sooner.
   let seen = false; try { seen = sessionStorage.getItem("cc-opened") === "1"; sessionStorage.setItem("cc-opened", "1"); } catch (e) {}
+  // The opening is switched off: every visit goes straight to the list. Set OPENING to true to bring it back (once per visit).
+  const OPENING = false;
   (async () => {
     body.classList.add("opening"); scrollTo(0, 0);
-    if (reduce || seen || target()) { await wait(50); land(); return go(); }
+    if (!OPENING || reduce || seen || target()) { await wait(50); land(); return go(); }
     [...board.querySelectorAll("img")].forEach(im => im.decode().catch(() => {}));
     await wait(40); intro.classList.add("go");
     await wait(2200); phase = 1;
