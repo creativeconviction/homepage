@@ -108,8 +108,6 @@
   // The opening is switched off: every visit goes straight to the list. Set OPENING to true to bring it back (once per visit).
   const OPENING = false;
   let seen = false; try { seen = sessionStorage.getItem("cc-opened") === "1"; sessionStorage.setItem("cc-opened", "1"); } catch (e) {}
-  // The opening is switched off: every visit goes straight to the list. Set OPENING to true to bring it back (once per visit).
-  const OPENING = false;
   (async () => {
     body.classList.add("opening"); scrollTo(0, 0);
     if (!OPENING || reduce || seen || target()) { await wait(50); land(); return go(); }
