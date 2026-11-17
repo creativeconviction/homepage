@@ -105,12 +105,23 @@
   const go = () => { const id = target(); if (id) requestAnimationFrame(() => document.getElementById(id).scrollIntoView()); };
   addEventListener("hashchange", () => { if (!target()) return; if (phase !== 3) land(); go(); });
 
-  // The opening is switched off: every visit goes straight to the list. Set OPENING to true to bring it back (once per visit).
-  const OPENING = false;
+  // Once per visit the wordmark assembles from scattered letters and the tagline follows, then it fades straight into the list.
+  // TITLE_ONLY skips the Library board and the travelling faces; set it to false to bring the full opening back.
+  const OPENING = true, TITLE_ONLY = true;
   let seen = false; try { seen = sessionStorage.getItem("cc-opened") === "1"; sessionStorage.setItem("cc-opened", "1"); } catch (e) {}
+  let skip = null;
+  const finishTitle = () => { if (phase === 3) return; intro.classList.add("out"); body.classList.add("docked"); setTimeout(land, 650); phase = 3; };
+  if (TITLE_ONLY) {
+    // scrolling, a swipe or a key skips the title
+    const skipNow = () => { if (phase !== 3 && intro.classList.contains("go")) { clearTimeout(skip); finishTitle(); } };
+    addEventListener("wheel", e => { if (e.deltaY > 2) skipNow(); }, { passive: true });
+    addEventListener("touchmove", skipNow, { passive: true });
+    addEventListener("keydown", e => { if (["ArrowDown", "PageDown", " "].includes(e.key)) skipNow(); });
+  }
   (async () => {
     body.classList.add("opening"); scrollTo(0, 0);
     if (!OPENING || reduce || seen || target()) { await wait(50); land(); return go(); }
+    if (TITLE_ONLY) { await wait(40); intro.classList.add("go"); skip = setTimeout(finishTitle, 2600); return; }
     [...board.querySelectorAll("img")].forEach(im => im.decode().catch(() => {}));
     await wait(40); intro.classList.add("go");
     await wait(2200); phase = 1;
