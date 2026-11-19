@@ -281,7 +281,7 @@
     .cc-highlight.is-on { background: var(--cc-magenta-tint); color: var(--cc-magenta); }
     /* This essay's colour (orange, the same as its picture filter and its number on the Writing list) runs through the page the way a guest's colour does in an interview */
     html { --guest: var(--cc-orange-print); }
-    .cc-article-body a { text-decoration-color: var(--guest); text-decoration-thickness: 2px; overflow-wrap: anywhere; transition: background-color .2s ease; }
+    .cc-article-body a { text-decoration-color: var(--guest); text-decoration-thickness: 2px; text-decoration-skip-ink: none; overflow-wrap: anywhere; transition: background-color .2s ease; }
     .cc-article-body a:hover { background: color-mix(in srgb, var(--guest) 45%, transparent); }
     /* the values: a marker wash in the colour, not italic and not magenta */
     .cc-article-body p em { font-style: normal; color: var(--cc-ink); background: color-mix(in srgb, var(--guest) 34%, transparent); padding: 1px 4px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
