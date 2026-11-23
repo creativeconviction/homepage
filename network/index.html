@@ -67,6 +67,8 @@
     @media (min-width: 700px) { .in input { font-size: 14px; } }
     .in input::placeholder, .ta textarea::placeholder { color: var(--ink-3); }
     .in svg { flex: none; }
+    .in .pre { flex: none; color: var(--ink-3); margin-right: -8px; font-size: 16px; }
+    @media (min-width: 700px) { .in .pre { font-size: 14px; } }
     .ta { display: flex; padding: 10px 12px; border: 1px solid var(--rule); background: var(--white); }
     .ta textarea { all: unset; flex: 1; min-height: 80px; color: var(--ink); font: inherit; font-size: 16px; white-space: pre-wrap; }
     @media (min-width: 700px) { .ta textarea { font-size: 14px; } }
@@ -164,8 +166,8 @@
       <div class="group"><div class="inner">
         <div class="field"><label class="lab" for="portfolio">Portfolio</label><div class="in"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><input id="portfolio" name="portfolio" type="url" inputmode="url" placeholder="yoursite.com" data-url required></div></div>
         <div class="row2 stack">
-          <div class="field"><label class="lab" for="x">X</label><div class="in"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><input id="x" name="x" inputmode="url" placeholder="x.com/you" data-url="x.com"></div></div>
-          <div class="field"><label class="lab" for="instagram">Instagram<span class="opt">Optional</span></label><div class="in"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><input id="instagram" name="instagram" inputmode="url" placeholder="instagram.com/you" data-url="instagram.com"></div></div>
+          <div class="field"><label class="lab" for="x">X</label><div class="in"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span class="pre">x.com/</span><input id="x" name="x" placeholder="yourhandle" data-handle="x.com" aria-label="X handle" autocapitalize="off" autocorrect="off" spellcheck="false"></div></div>
+          <div class="field"><label class="lab" for="instagram">Instagram<span class="opt">Optional</span></label><div class="in"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span class="pre">instagram.com/</span><input id="instagram" name="instagram" placeholder="yourhandle" data-handle="instagram.com" aria-label="Instagram handle" autocapitalize="off" autocorrect="off" spellcheck="false"></div></div>
         </div>
       </div></div>
       <div class="field">
@@ -373,6 +375,13 @@
     if (!/^https?:\/\//i.test(v)) v = "https://" + v.replace(/^\/+/, "");
     return v;
   };
+  // X and Instagram: the address is shown before the box, so people only type their handle.
+  // A pasted link or an @ is folded back to the bare handle.
+  form.querySelectorAll("[data-handle]").forEach(i => {
+    const hosts = i.dataset.handle === "x.com" ? "(?:x|twitter)\\.com" : "instagram\\.com";
+    const re = new RegExp("^\\s*(?:https?:\\/\\/)?(?:www\\.)?" + hosts + "\\/", "i");
+    i.addEventListener("input", () => { const v = i.value.replace(re, "").replace(/^@/, "").replace(/[\/?#].*$/, "").trim(); if (v !== i.value) i.value = v; });
+  });
   form.querySelectorAll("[data-url]").forEach(i => i.addEventListener("blur", () => { i.value = toUrl(i.value, i.dataset.url || ""); }));
 
   form.addEventListener("input", e => { const st = e.target.closest(".step"); const el = st && st.querySelector(".err"); if (el) el.textContent = ""; });
@@ -412,7 +421,7 @@
     if (type === "creative") {
       Object.assign(d, {
         first_name: val("first_name"), last_name: val("last_name"), email: val("email"),
-        portfolio: toUrl(val("portfolio")), x: toUrl(val("x"), "x.com"), instagram: toUrl(val("instagram"), "instagram.com"),
+        portfolio: toUrl(val("portfolio")), x: val("x") ? "https://x.com/" + val("x") : "", instagram: val("instagram") ? "https://instagram.com/" + val("instagram") : "",
         category: pressed('[data-multi="category"]').join(", "), category_other: val("category_other"),
         open_to: (form.querySelector('.big[data-pick="open_to"][aria-pressed="true"]') || {}).dataset?.value || "",
         check_back: pressed('[data-single="check_back"]').join("") || val("check_back_other"),
