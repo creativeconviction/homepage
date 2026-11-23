@@ -315,19 +315,56 @@
   const form = document.getElementById("form");
   const steps = [...form.querySelectorAll(".step")];
   const flows = { me: ["start", "work", "open", "you"], friend: ["start", "nominate"], founder: ["need", "who"] };
-  let flow = "me", history = [];
+  let flow = "me", trail = [];
   const params = new URLSearchParams(location.search);
   const src = params.get("src") || params.get("ref") || params.get("utm_source") || (document.referrer ? new URL(document.referrer).hostname : "direct");
-  let submitted = null;
+  let submitted = null, done = false;
 
   const show = (name, push = true) => {
     const cur = steps.find(s => s.classList.contains("on"));
-    if (push && cur) history.push(cur.dataset.step);
+    if (push && cur) trail.push(cur.dataset.step);
     steps.forEach(s => s.classList.toggle("on", s.dataset.step === name));
     const el = steps.find(s => s.dataset.step === name);
     window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
     const h = el.querySelector("h1"); if (h) { h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true }); }
+    try { const st = { step: name, trail: [...trail], flow }; if (push) window.history.pushState(st, ""); else window.history.replaceState(st, ""); } catch {}
+    saveDraft();
   };
+  // The browser's back and forward buttons move between pages of the form instead of leaving it
+  addEventListener("popstate", e => {
+    const st = e.state; if (!st || !st.step) return;
+    if (done) { show("thanks", false); return; }
+    trail = st.trail || []; flow = st.flow || flow; show(st.step, false);
+  });
+
+  // Drafts: answers are kept in this browser until the form is sent, so going back, refreshing
+  // or closing the tab loses nothing. Cleared on submit; forgotten after 7 days.
+  const KEY = "cc-network-draft";
+  let restoring = false;
+  function saveDraft() {
+    if (restoring || done) return;
+    const cur = steps.find(x => x.classList.contains("on")); if (!cur || cur.dataset.step === "thanks") return;
+    const fields = {}; form.querySelectorAll("input[name], textarea[name]").forEach(i => { if (i.name !== "website" && i.value) fields[i.name] = i.value; });
+    const pressedBy = {}; form.querySelectorAll("[data-multi], [data-single]").forEach(g => { const k = g.dataset.multi || g.dataset.single; pressedBy[k] = [...g.querySelectorAll('.chip[aria-pressed="true"]')].map(c => c.textContent.trim()); });
+    const bigs = {}; form.querySelectorAll('.big[aria-pressed="true"]').forEach(b => bigs[b.dataset.pick] = b.dataset.value);
+    try { localStorage.setItem(KEY, JSON.stringify({ at: Date.now(), flow, step: cur.dataset.step, trail, fields, pressedBy, bigs, admireN })); } catch {}
+  }
+  function loadDraft() { try { const d = JSON.parse(localStorage.getItem(KEY) || "null"); return d && Date.now() - d.at < 7 * 864e5 ? d : null; } catch { return null; } }
+  function clearDraft() { try { localStorage.removeItem(KEY); } catch {} }
+  function restoreDraft(d) {
+    if (!steps.some(x => x.dataset.step === d.step) || d.step === "thanks") return false;
+    restoring = true;
+    try {
+      while (admireN < (d.admireN || 1)) document.getElementById("addAdmire").click();
+      Object.entries(d.fields || {}).forEach(([n, v]) => { const el = form.elements[n]; if (el && "value" in el) { el.value = v; const w = el.closest(".chip.wi"); if (w) w.classList.toggle("filled", !!v); } });
+      Object.entries(d.pressedBy || {}).forEach(([k, list]) => form.querySelectorAll(`[data-multi="${k}"] .chip:not(.wi), [data-single="${k}"] .chip:not(.wi)`).forEach(c => c.setAttribute("aria-pressed", list.includes(c.textContent.trim()) ? "true" : "false")));
+      Object.entries(d.bigs || {}).forEach(([pick, v]) => form.querySelectorAll(`.big[data-pick="${pick}"]`).forEach(b => b.setAttribute("aria-pressed", b.dataset.value === v ? "true" : "false")));
+      document.getElementById("checkback").hidden = (d.bigs || {}).open_to !== "later";
+      document.getElementById("relocWhere").hidden = !((d.pressedBy || {}).relocate || []).includes("Yes");
+      flow = d.flow || "me"; trail = d.trail || [];
+    } finally { restoring = false; }
+    return true;
+  }
 
   // Chips: single and multi select
   form.querySelectorAll("[data-multi] .chip:not(.wi), [data-single] .chip:not(.wi)").forEach(chip => {
@@ -404,7 +441,7 @@
     const t = e.target.closest("button"); if (!t) return;
     const step = t.closest(".step");
     if (t.hasAttribute("data-next")) { if (!validate(step)) return; show(nextOf(step.dataset.step)); }
-    else if (t.hasAttribute("data-back")) { const prev = history.pop(); if (prev) show(prev, false); }
+    else if (t.hasAttribute("data-back")) { const prev = trail.pop(); if (prev) show(prev, false); }
     else if (t.dataset.go) { flow = "founder"; show(t.dataset.go); }
     else if (t.dataset.submit) { if (validate(step)) submit(t.dataset.submit, t); }
   });
@@ -457,7 +494,7 @@
         ? "We'll read every request by hand. If we know someone great for you, you'll hear from us directly."
         : type === "nomination" ? "We'll look at their work by hand, and reach out to them first. Nothing gets shared without their yes."
         : "We'll read every profile by hand. If we think you should meet someone, you'll hear from us directly.";
-      history = []; show("thanks", false);
+      trail = []; done = true; clearDraft(); show("thanks", false);
     } catch (e) {
       err(step, "Something went wrong sending this. Please try again, or email libbiefrost@gmail.com.");
     } finally { btn.disabled = false; btn.textContent = label; }
@@ -481,9 +518,13 @@
     b.disabled = false; b.textContent = "Send";
   });
 
-  // Start: /network/?for=founders opens the founders flow directly
-  if (/^(founder|founders|startup|startups|hire)$/i.test(params.get("for") || "")) { flow = "founder"; show("need", false); }
+  // Start: pick up an unfinished draft from this browser, else /network/?for=founders opens the founders flow
+  const d = loadDraft();
+  if (d && restoreDraft(d)) show(d.step, false);
+  else if (/^(founder|founders|startup|startups|hire)$/i.test(params.get("for") || "")) { flow = "founder"; show("need", false); }
   else show("start", false);
+  form.addEventListener("input", () => saveDraft());
+  form.addEventListener("click", () => setTimeout(saveDraft, 0));
 })();
 </script>
 </body>
