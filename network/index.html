@@ -209,7 +209,8 @@
         <div class="field"><div class="in"><input name="last_name" placeholder="Last name" aria-label="Last name" autocomplete="family-name"></div></div>
       </div>
       <div class="field"><div class="in"><input name="email" type="email" inputmode="email" placeholder="you@email.com" aria-label="Email" autocomplete="email" required></div></div>
-      <div class="field"><div class="in"><input name="current_role" placeholder="Current role (e.g. Senior Product Designer at Linear)" aria-label="Current role" autocomplete="organization-title"></div></div>
+      <div class="field"><div class="in"><input name="current_role" placeholder="Current role (e.g. Product Designer)" aria-label="Current role" autocomplete="organization-title"></div></div>
+      <div class="field"><div class="in"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><input name="current_company" inputmode="url" placeholder="Current company (e.g. linear.app)" aria-label="Current company website" data-url autocapitalize="off" spellcheck="false"></div></div>
       <div class="group"><div class="inner" id="admire">
         <span class="lab">Who is the most creative person you've worked with?</span>
         <div class="row2 stack admire-row">
@@ -425,7 +426,7 @@
         category: pressed('[data-multi="category"]').join(", "), category_other: val("category_other"),
         open_to: (form.querySelector('.big[data-pick="open_to"][aria-pressed="true"]') || {}).dataset?.value || "",
         check_back: pressed('[data-single="check_back"]').join("") || val("check_back_other"),
-        location: pressed('[data-single="location"]').join("") || val("location"), current_role: val("current_role"),
+        location: pressed('[data-single="location"]').join("") || val("location"), current_role: val("current_role"), current_company: toUrl(val("current_company")),
         level: pressed('[data-multi="level"]').join(", "),
         relocate: pressed('[data-single="relocate"]').join(""), relocate_where: val("relocate_where"),
         admire: [...Array(admireN)].map((_, k) => [val("admire_name_" + (k + 1)), toUrl(val("admire_link_" + (k + 1)))].filter(Boolean).join(" — ")).filter(Boolean).join("\n")
