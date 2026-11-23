@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png" />
+  <title>Talent Network — Creative Conviction</title>
+  <meta name="description" content="The Creative Conviction Talent Network. Every profile is read by hand." />
+  <link rel="canonical" href="https://creativeconviction.ai/network/" />
+  <meta property="og:title" content="Creative Conviction Talent Network" />
+  <meta property="og:description" content="Every profile is read by hand." />
+  <meta property="og:url" content="https://creativeconviction.ai/network/" />
+  <meta name="theme-color" content="#F8F6F2" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500&display=swap" />
+  <style>
+    /* Creative Conviction Talent Network: one page, three flows (creatives, nominations, founders).
+       Paper and ink from the site; square corners; magenta buttons; film grain over everything. */
+    :root { --paper: #F8F6F2; --white: #FFFFFF; --field: #FBFAF7; --ink: #161514; --ink-2: #4A4641; --ink-3: #6E6A63; --rule: #D6D0C5; --rule-soft: #E3DED4;
+      --magenta: #D8016A; --magenta-deep: #B80059; --pink: #F37DB6; --pink-tint: #FBE0EC; --pink-line: #F2C6DA;
+      --serif: "EB Garamond", Garamond, "Iowan Old Style", Georgia, serif; --sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+      --ease: cubic-bezier(.16, 1, .3, 1); color-scheme: light; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--paper); color: var(--ink); }
+    body { font-family: var(--sans); font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; min-height: 100vh; min-height: 100dvh; }
+    html::after { content: ""; position: fixed; inset: 0; z-index: 2147483000; pointer-events: none; background: url(../assets/grain.png) 0 0 / 256px; mix-blend-mode: multiply; opacity: .22; }
+    a { color: inherit; }
+    button { font: inherit; color: inherit; }
+    :focus-visible { outline: 1px solid var(--ink); outline-offset: 3px; }
+
+    .stage { position: relative; width: 100%; max-width: 596px; margin: 0 auto; min-height: 100vh; min-height: 100dvh;
+      padding: max(18px, env(safe-area-inset-top)) 18px max(14px, env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 10px; }
+    @media (min-width: 700px) { .stage { padding-top: 6vh; padding-bottom: 6vh; min-height: 0; } }
+    .top { display: flex; justify-content: space-between; align-items: baseline; padding: 4px 6px 0; }
+    .wm { font-family: var(--serif); font-size: 21px; letter-spacing: -.01em; text-decoration: none; }
+    .wm i { color: var(--magenta); }
+    .net { font-size: 12px; color: var(--ink-2); }
+    .card { position: relative; flex: 1; display: flex; flex-direction: column; gap: 22px; background: var(--paper); border: 1px solid var(--rule); padding: 26px 28px 24px; }
+    @media (min-width: 700px) { .card { flex: none; min-height: min(880px, 86vh); } }
+    @media (max-width: 480px) { .card { padding: 22px 18px 18px; gap: 20px; } .stage { padding-left: 12px; padding-right: 12px; } }
+
+    .step { display: none; flex: 1; flex-direction: column; gap: 22px; }
+    .step.on { display: flex; animation: rise .5s var(--ease); }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .step.on { animation: none; } }
+
+    .prog { display: flex; align-items: center; gap: 14px; font-size: 12px; color: var(--ink-2); }
+    .prog.ghost { visibility: hidden; }
+    .bar { flex: 1; height: 1px; background: var(--rule); position: relative; }
+    .bar span { position: absolute; left: 0; top: -.5px; height: 2px; background: var(--ink); }
+    h1:focus { outline: none; }
+    h1 { font-family: var(--serif); font-weight: 400; font-size: 36px; line-height: 1.05; letter-spacing: -.02em; margin: 0; text-wrap: balance; }
+    @media (max-width: 480px) { h1 { font-size: 32px; } }
+
+    .field { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+    .row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    @media (max-width: 420px) { .row2.stack { grid-template-columns: 1fr; } }
+    .lab { font-size: 13px; font-weight: 500; }
+    .opt { font-weight: 400; color: var(--ink-3); margin-left: 6px; }
+    .in { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 12px; border: 1px solid var(--rule); background: var(--white); color: var(--ink-3); }
+    .in:focus-within, .ta:focus-within { border-color: var(--ink); }
+    .in input { all: unset; flex: 1; min-width: 0; color: var(--ink); font: inherit; font-size: 16px; }
+    @media (min-width: 700px) { .in input { font-size: 14px; } }
+    .in input::placeholder, .ta textarea::placeholder { color: var(--ink-3); }
+    .in svg { flex: none; }
+    .ta { display: flex; padding: 10px 12px; border: 1px solid var(--rule); background: var(--white); }
+    .ta textarea { all: unset; flex: 1; min-height: 80px; color: var(--ink); font: inherit; font-size: 16px; white-space: pre-wrap; }
+    @media (min-width: 700px) { .ta textarea { font-size: 14px; } }
+    .group { border: 1px solid var(--rule); background: var(--white); }
+    .group .inner { padding: 16px 16px 18px; display: flex; flex-direction: column; gap: 12px; }
+    .group .in, .group .ta { background: var(--field); }
+    .flag { display: flex; align-items: center; gap: 8px; padding: 8px 14px; background: var(--pink-tint); font-size: 12px; border-top: 1px solid var(--pink-line); }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 12px; border: 1px solid var(--rule); background: var(--white); font-size: 13px; cursor: pointer; }
+    .chip[aria-pressed="true"] { background: color-mix(in srgb, var(--pink) 34%, var(--white)); border-color: #E7A3C4; }
+    .chip .ck { display: none; }
+    .chip[aria-pressed="true"] .ck { display: inline; }
+    .chip.wi { cursor: text; }
+    .chip.wi input { all: unset; display: block; width: 110px; font-size: 13px; color: var(--ink); }
+    .chip.wi.filled { background: color-mix(in srgb, var(--pink) 34%, var(--white)); border-color: #E7A3C4; }
+    .other { max-width: 300px; min-height: 40px; }
+    .other input { font-size: 13px !important; }
+
+    .opts { display: flex; flex-direction: column; gap: 8px; }
+    .big { display: flex; gap: 12px; align-items: flex-start; text-align: left; width: 100%; padding: 16px; border: 1px solid var(--rule); background: var(--white); cursor: pointer; }
+    .big[aria-pressed="true"] { background: color-mix(in srgb, var(--pink) 22%, var(--white)); border-color: #E7A3C4; }
+    .big b { display: block; font-family: var(--serif); font-weight: 400; font-size: 22px; line-height: 1.15; }
+    .big small { display: block; margin-top: 3px; font-size: 13px; color: var(--ink-2); }
+    .dot { flex: none; width: 16px; height: 16px; margin-top: 5px; border: 1px solid var(--ink-3); border-radius: 50%; display: grid; place-items: center; }
+    .big[aria-pressed="true"] .dot { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+    .dot svg { display: none; }
+    .big[aria-pressed="true"] .dot svg { display: block; }
+    .reveal[hidden] { display: none; }
+    .alt { align-self: flex-start; background: none; border: 0; padding: 4px 0; font-size: 13px; color: var(--ink-2); cursor: pointer; text-decoration: underline; text-decoration-color: var(--pink); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+    .add { align-self: flex-start; font-size: 13px; background: none; border: 0; padding: 4px 0; cursor: pointer; }
+
+    .grow { flex: 1; }
+    .foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .back { font-size: 14px; background: none; border: 0; padding: 12px 4px; cursor: pointer; }
+    .next { display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 20px; border: 0; background: var(--magenta); color: var(--paper); font-size: 14px; font-weight: 500; cursor: pointer; transition: background .2s ease; }
+    .next:hover { background: var(--magenta-deep); }
+    .next[disabled] { opacity: .6; cursor: default; }
+    .err { min-height: 18px; margin: -10px 0 0; font-size: 12px; color: var(--magenta-deep); }
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+    /* Thank you */
+    .ty { display: flex; flex-direction: column; gap: 16px; margin-top: 18px; max-width: 420px; }
+    .ty h1 { font-size: 72px; line-height: .95; letter-spacing: -.03em; }
+    @media (max-width: 480px) { .ty h1 { font-size: 60px; } }
+    .ty p { margin: 0; font-family: var(--serif); font-size: 20px; line-height: 1.38; text-wrap: pretty; }
+    .ty p a { text-decoration: underline; text-decoration-color: var(--pink); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+    .mail { display: inline-flex; vertical-align: -6px; margin-left: 4px; padding: 4px; background: none; border: 0; cursor: pointer; transform-origin: 50% 80%; animation: nudge 3.2s ease-in-out infinite; }
+    .mail:hover { animation: none; transform: translateY(-2px) rotate(-4deg); }
+    @keyframes nudge { 0%, 78%, 100% { transform: none; } 82% { transform: rotate(-9deg); } 86% { transform: rotate(7deg); } 90% { transform: rotate(-4deg); } 94% { transform: rotate(2deg); } }
+    @media (prefers-reduced-motion: reduce) { .mail { animation: none; } }
+    .sentline { font-family: var(--serif); font-size: 18px; align-self: flex-start; padding: 0 4px; background: color-mix(in srgb, var(--pink) 34%, transparent); }
+    .sentline[hidden] { display: none; }
+
+    /* The letter slides up from the bottom */
+    .veil { position: fixed; inset: 0; z-index: 40; background: color-mix(in srgb, var(--paper) 80%, transparent); opacity: 0; visibility: hidden; transition: opacity .4s ease, visibility 0s linear .4s; }
+    .drawer { position: fixed; left: 50%; bottom: 0; z-index: 41; width: min(560px, 100%); height: min(820px, 88vh); height: min(820px, 88dvh); display: flex; flex-direction: column;
+      border: 1px solid var(--rule); border-bottom: 0; background: var(--field); transform: translate(-50%, 102%); visibility: hidden; transition: transform .9s var(--ease), visibility 0s linear .9s; }
+    body.letter .veil { opacity: 1; visibility: visible; transition: opacity .4s ease; }
+    body.letter .drawer { transform: translate(-50%, 0); visibility: visible; transition: transform .9s var(--ease); }
+    .stripes { display: flex; height: 12px; flex: none; }
+    .stripes i { display: block; height: 100%; }
+    .write { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 12px; padding: 34px 34px max(28px, env(safe-area-inset-bottom)); }
+    @media (max-width: 480px) { .write { padding: 26px 20px max(20px, env(safe-area-inset-bottom)); } }
+    .dear { font-family: var(--serif); font-size: 26px; line-height: 1.2; }
+    .write textarea { flex: 1; min-height: 0; width: 100%; border: 0; outline: none; resize: none; padding: 0; margin: 0;
+      background: repeating-linear-gradient(transparent 0 33px, var(--rule-soft) 33px 34px); font-family: var(--serif); font-size: 21px; line-height: 34px; color: var(--ink); }
+    .write textarea::placeholder { color: var(--ink-3); }
+    .wf { display: flex; justify-content: space-between; align-items: center; }
+  </style>
+</head>
+<body>
+<div class="stage">
+  <div class="top"><a class="wm" href="/">Creative <i>Conviction</i></a><span class="net">Talent Network</span></div>
+  <form class="card" id="form" novalidate autocomplete="on">
+    <div class="hp" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off"></label></div>
+
+    <!-- 0 · Who's it for -->
+    <section class="step" data-step="start">
+      <div class="prog ghost" aria-hidden="true"><span>Page 1 of 3</span><div class="bar"></div></div>
+      <h1>Who should we add to the network?</h1>
+      <div class="opts" role="radiogroup" aria-label="Who is this for">
+        <button type="button" class="big" data-pick="who" data-value="me" aria-pressed="true"><span class="dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>Me</b><small>I make things, and I'm excited to meet and work with founders building something great.</small></span></button>
+        <button type="button" class="big" data-pick="who" data-value="friend" aria-pressed="false"><span class="dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>Someone I admire</b><small>Their work deserves more people seeing it (we reach out first, and never share anything without their yes).</small></span></button>
+      </div>
+      <button type="button" class="alt" data-go="need">Building a startup? Tell us who you're looking for</button>
+      <div class="grow"></div>
+      <div class="foot"><span></span><button type="button" class="next" data-next>Start</button></div>
+    </section>
+
+    <!-- Creative 1 · Work -->
+    <section class="step" data-step="work">
+      <div class="prog"><span>Page 1 of 3</span><div class="bar"><span style="width: 33%"></span></div></div>
+      <h1>What work are you proud of?</h1>
+      <div class="group"><div class="inner">
+        <div class="field"><label class="lab" for="portfolio">Portfolio</label><div class="in"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><input id="portfolio" name="portfolio" type="url" inputmode="url" placeholder="yoursite.com" data-url required></div></div>
+        <div class="row2 stack">
+          <div class="field"><label class="lab" for="x">X</label><div class="in"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><input id="x" name="x" inputmode="url" placeholder="x.com/you" data-url="x.com"></div></div>
+          <div class="field"><label class="lab" for="instagram">Instagram<span class="opt">Optional</span></label><div class="in"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><input id="instagram" name="instagram" inputmode="url" placeholder="instagram.com/you" data-url="instagram.com"></div></div>
+        </div>
+      </div></div>
+      <div class="field">
+        <span class="lab" id="sp-lab">What is your superpower?</span>
+        <div class="chips" data-multi="category" role="group" aria-labelledby="sp-lab"><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Brand design</button><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Product design</button><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Design engineering</button><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Motion</button><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Illustration</button><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Creative direction</button><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Writing and narrative</button><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Social media</button><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Film</button></div>
+        <div class="in other"><input id="category_other" name="category_other" placeholder="Something else? Tell us in your words" aria-label="Your superpower, in your words"></div>
+      </div>
+      <p class="err" role="alert"></p>
+      <div class="grow"></div>
+      <div class="foot"><button type="button" class="back" data-back>Back</button><button type="button" class="next" data-next>Next</button></div>
+    </section>
+
+    <!-- Creative 2 · Open to -->
+    <section class="step" data-step="open">
+      <div class="prog"><span>Page 2 of 3</span><div class="bar"><span style="width: 67%"></span></div></div>
+      <h1>What are you interested in?</h1>
+      <div class="opts" role="radiogroup" aria-label="What you're interested in">
+        <button type="button" class="big" data-pick="open_to" data-value="project" aria-pressed="false"><span class="dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>Project work with startups</b><small>Freelance or a defined project, with teams we vet.</small></span></button><button type="button" class="big" data-pick="open_to" data-value="fulltime" aria-pressed="false"><span class="dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>The right full-time role</b><small>Not hunting, but you'd take the call for something great.</small></span></button><button type="button" class="big" data-pick="open_to" data-value="later" aria-pressed="false"><span class="dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>Nothing now, but maybe later</b><small>Keep me close and check back.</small></span></button>
+      </div>
+      <div class="reveal" id="checkback" hidden>
+        <div class="field"><span class="lab" id="cb-lab">When should we check back?</span>
+          <div class="chips" data-single="check_back" role="group" aria-labelledby="cb-lab"><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>In 3 months</button><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>In 6 months</button><label class="chip wi"><input name="check_back_other" placeholder="Sometime else" aria-label="Sometime else, write it in"></label></div>
+        </div>
+      </div>
+      <div class="field"><label class="lab" for="location">Where are you based?</label><div class="in"><input id="location" name="location" placeholder="City, country" autocomplete="address-level2"></div></div>
+      <p class="err" role="alert"></p>
+      <div class="grow"></div>
+      <div class="foot"><button type="button" class="back" data-back>Back</button><button type="button" class="next" data-next>Next</button></div>
+    </section>
+
+    <!-- Creative 3 · You -->
+    <section class="step" data-step="you">
+      <div class="prog"><span>Page 3 of 3</span><div class="bar"><span style="width: 100%"></span></div></div>
+      <h1>Who are you?</h1>
+      <div class="row2">
+        <div class="field"><div class="in"><input name="first_name" placeholder="First name" aria-label="First name" autocomplete="given-name" required></div></div>
+        <div class="field"><div class="in"><input name="last_name" placeholder="Last name" aria-label="Last name" autocomplete="family-name"></div></div>
+      </div>
+      <div class="field"><div class="in"><input name="email" type="email" inputmode="email" placeholder="you@email.com" aria-label="Email" autocomplete="email" required></div></div>
+      <div class="group"><div class="inner" id="admire">
+        <span class="lab">Who is the most talented creative you know?</span>
+        <div class="row2 stack admire-row">
+          <div class="field"><div class="in"><input name="admire_name_1" placeholder="Their name" aria-label="Their name"></div></div>
+          <div class="field"><div class="in"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><input name="admire_link_1" inputmode="url" placeholder="Link to their work" aria-label="Link to their work" data-url></div></div>
+        </div>
+        <button type="button" class="add" id="addAdmire">+ Add another</button>
+      </div></div>
+      <p class="err" role="alert"></p>
+      <div class="grow"></div>
+      <div class="foot"><button type="button" class="back" data-back>Back</button><button type="button" class="next" data-submit="creative">Submit</button></div>
+    </section>
+
+    <!-- Nominate someone -->
+    <section class="step" data-step="nominate">
+      <div class="prog"><span>Page 1 of 1</span><div class="bar"><span style="width: 100%"></span></div></div>
+      <h1>You're a kind person! <br>Who are they?</h1>
+      <div class="group"><div class="inner">
+        <div class="row2 stack">
+          <div class="field"><label class="lab" for="nominee_name">Who</label><div class="in"><input id="nominee_name" name="nominee_name" placeholder="Their name" required></div></div>
+          <div class="field"><label class="lab" for="nominee_social">Their X, IG, or LinkedIn</label><div class="in"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><input id="nominee_social" name="nominee_social" inputmode="url" placeholder="x.com/them" data-url="x.com"></div></div>
+        </div>
+        <div class="field"><label class="lab" for="nominee_work">Link to their work</label><div class="in"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><input id="nominee_work" name="nominee_work" inputmode="url" placeholder="theirsite.com" data-url required></div></div>
+        <div class="field"><label class="lab" for="nominee_why">Why them?</label><div class="ta"><textarea id="nominee_why" name="nominee_why" placeholder="e.g. She researches HCI, plays drums in a rock band, and writes about her songwriting process."></textarea></div></div>
+      </div><div class="flag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4h11l-2 4 2 4H5"/></svg><span>The more specific, the better!</span></div></div>
+      <div class="row2 stack">
+        <div class="field"><div class="in"><input name="nominator_name" placeholder="Your name" aria-label="Your name" autocomplete="name" required></div></div>
+        <div class="field"><div class="in"><input name="nominator_email" type="email" inputmode="email" placeholder="you@email.com" aria-label="Your email" autocomplete="email" required></div></div>
+      </div>
+      <p class="err" role="alert"></p>
+      <div class="grow"></div>
+      <div class="foot"><button type="button" class="back" data-back>Back</button><button type="button" class="next" data-submit="nomination">Submit</button></div>
+    </section>
+
+    <!-- Founders 1 · Need -->
+    <section class="step" data-step="need">
+      <div class="prog"><span>Page 1 of 2</span><div class="bar"><span style="width: 50%"></span></div></div>
+      <h1>What are you looking for?</h1>
+      <div class="field"><span class="lab" id="role-lab">Role</span><div class="chips" data-multi="role" role="group" aria-labelledby="role-lab"><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Brand design</button><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Founding designer</button><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Design engineer</button><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Product design</button><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Comms and narrative</button><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Motion</button><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Not sure yet</button></div></div>
+      <div class="row2 stack">
+        <div class="field"><span class="lab" id="shape-lab">Shape</span><div class="chips" data-single="shape" role="group" aria-labelledby="shape-lab"><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Project based</button><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Full time</button><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Either</button></div></div>
+        <div class="field"><span class="lab" id="when-lab">When</span><div class="chips" data-single="timing" role="group" aria-labelledby="when-lab"><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>ASAP</button><button type="button" class="chip" aria-pressed="false"><svg class="ck" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>This quarter</button><label class="chip wi"><input name="timing_other" placeholder="Sometime else" aria-label="Sometime else, write it in"></label></div></div>
+      </div>
+      <div class="group"><div class="inner">
+        <div class="field"><label class="lab" for="problem">What's the creative problem, and why now?</label><div class="ta"><textarea id="problem" name="problem" placeholder="e.g. We're 10 engineers, just got pre-empted for a large seed, and need to come out of stealth by X date. We need full blown brand and launch help." required></textarea></div></div>
+      </div><div class="flag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4h11l-2 4 2 4H5"/></svg><span>Specific problems get matched faster.</span></div></div>
+      <p class="err" role="alert"></p>
+      <div class="grow"></div>
+      <div class="foot"><button type="button" class="back" data-back>Back</button><button type="button" class="next" data-next>Next</button></div>
+    </section>
+
+    <!-- Founders 2 · Who -->
+    <section class="step" data-step="who">
+      <div class="prog"><span>Page 2 of 2</span><div class="bar"><span style="width: 100%"></span></div></div>
+      <h1>Who's behind it?</h1>
+      <div class="row2">
+        <div class="field"><div class="in"><input name="f_first_name" placeholder="First name" aria-label="First name" autocomplete="given-name" required></div></div>
+        <div class="field"><div class="in"><input name="f_last_name" placeholder="Last name" aria-label="Last name" autocomplete="family-name"></div></div>
+      </div>
+      <div class="field"><div class="in"><input name="f_email" type="email" inputmode="email" placeholder="you@company.com" aria-label="Work email" autocomplete="email" required></div></div>
+      <div class="row2 stack">
+        <div class="field"><label class="lab" for="company">Company</label><div class="in"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><input id="company" name="company" inputmode="url" placeholder="company.com" data-url required></div></div>
+        <div class="field"><label class="lab" for="f_social">You</label><div class="in"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><input id="f_social" name="f_social" inputmode="url" placeholder="LinkedIn or X" data-url="x.com"></div></div>
+      </div>
+      <div class="group"><div class="inner">
+        <div class="field"><label class="lab" for="decision">Why does this matter to you, and what is your decision process?</label><div class="ta"><textarea id="decision" name="decision" placeholder="e.g. I'm our Head of Product. I review portfolios and take first meeting, then introduce the founder. Our founder cares a lot about this topic because..."></textarea></div></div>
+      </div></div>
+      <p class="err" role="alert"></p>
+      <div class="grow"></div>
+      <div class="foot"><button type="button" class="back" data-back>Back</button><button type="button" class="next" data-submit="founder">Submit</button></div>
+    </section>
+
+    <!-- Thank you -->
+    <section class="step" data-step="thanks">
+      <div class="ty">
+        <h1 tabindex="-1">Thank you.</h1>
+        <p>We started Creative Conviction to inspire creative technologists. The network is a happy side effect.</p>
+        <p id="ty-promise">We'll read every profile by hand. If we think you should meet someone, you'll hear from us directly.</p>
+        <p><span>We also share content (<a href="/#interviews" target="_blank" rel="noopener">interviews</a> and <a href="/writing/" target="_blank" rel="noopener">writing</a>) and co-host <a href="/community/" target="_blank" rel="noopener">events</a>. We hope to keep improving, so we'd be so grateful for your feedback or ideas.</span><button type="button" class="mail" id="openLetter" aria-label="Write us a letter"><svg width="34" height="25" viewBox="0 0 30 22" aria-hidden="true"><rect x="1" y="1" width="28" height="20" fill="#FBFAF7" stroke="#161514" stroke-width="1.3"/><path d="M1 1l14 11L29 1" fill="none" stroke="#161514" stroke-width="1.3" stroke-linejoin="round"/><path d="M15 15.6c-1.7-1.2-2.8-2.1-2.8-3.2 0-.9.6-1.5 1.4-1.5.6 0 1.1.3 1.4.8.3-.5.8-.8 1.4-.8.8 0 1.4.6 1.4 1.5 0 1.1-1.1 2-2.8 3.2z" fill="#F37DB6"/></svg></button></p>
+      </div>
+      <span class="sentline" id="sentline" hidden>Received. Thank you for helping us dream bigger.</span>
+      <div class="grow"></div>
+    </section>
+  </form>
+</div>
+
+<div class="veil" id="veil"></div>
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Write us a letter">
+  <div class="stripes" aria-hidden="true"><i style="flex: 3; background: #F37DB6"></i><i style="flex: 1; background: #F6DE3D"></i><i style="flex: 2; background: #4A8FE7"></i><i style="flex: 4; background: #F39B47"></i><i style="flex: 1; background: #43B86E"></i><i style="flex: 3; background: #B99AE8"></i><i style="flex: 2; background: #EF5B3E"></i><i style="flex: 5; background: #9FD3F2"></i></div>
+  <div class="write">
+    <div class="dear">Dear LF + RA,</div>
+    <textarea id="letter" aria-label="Your letter to Creative Conviction" placeholder="What do you love? What could be better? How should we dream bigger?"></textarea>
+    <div class="wf"><button type="button" class="back" id="closeLetter">Not now</button><button type="button" class="next" id="sendLetter">Send</button></div>
+  </div>
+</div>
+
+<script>
+(() => {
+  // Paste the Google Apps Script web app URL here (Deploy › Web app › URL ending in /exec).
+  const ENDPOINT = "https://script.google.com/macros/s/AKfycbx3VTr3_rSWWKqctYFgMja1MKDT3zo7fgAPg7LNGKwgOQnb19O-5E5viY29oSQ1eR1KSA/exec";
+
+  const form = document.getElementById("form");
+  const steps = [...form.querySelectorAll(".step")];
+  const flows = { me: ["start", "work", "open", "you"], friend: ["start", "nominate"], founder: ["need", "who"] };
+  let flow = "me", history = [];
+  const params = new URLSearchParams(location.search);
+  const src = params.get("src") || params.get("ref") || params.get("utm_source") || (document.referrer ? new URL(document.referrer).hostname : "direct");
+  let submitted = null;
+
+  const show = (name, push = true) => {
+    const cur = steps.find(s => s.classList.contains("on"));
+    if (push && cur) history.push(cur.dataset.step);
+    steps.forEach(s => s.classList.toggle("on", s.dataset.step === name));
+    const el = steps.find(s => s.dataset.step === name);
+    window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+    const h = el.querySelector("h1"); if (h) { h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true }); }
+  };
+
+  // Chips: single and multi select
+  form.querySelectorAll("[data-multi] .chip:not(.wi), [data-single] .chip:not(.wi)").forEach(chip => {
+    chip.addEventListener("click", () => {
+      const group = chip.parentElement;
+      const on = chip.getAttribute("aria-pressed") === "true";
+      if (group.dataset.single) {
+        group.querySelectorAll(".chip:not(.wi)").forEach(c => c.setAttribute("aria-pressed", "false"));
+        const w = group.querySelector(".chip.wi input"); if (w) { w.value = ""; w.parentElement.classList.remove("filled"); }
+      }
+      chip.setAttribute("aria-pressed", on && group.dataset.multi ? "false" : (on && group.dataset.single ? "false" : "true"));
+    });
+  });
+  form.querySelectorAll(".chip.wi input").forEach(inp => inp.addEventListener("input", () => {
+    const group = inp.closest("[data-single]");
+    if (group && inp.value) group.querySelectorAll(".chip:not(.wi)").forEach(c => c.setAttribute("aria-pressed", "false"));
+    inp.parentElement.classList.toggle("filled", !!inp.value);
+  }));
+
+  // Big option cards (radio behaviour)
+  form.querySelectorAll(".big").forEach(b => b.addEventListener("click", () => {
+    form.querySelectorAll(`.big[data-pick="${b.dataset.pick}"]`).forEach(x => x.setAttribute("aria-pressed", "false"));
+    b.setAttribute("aria-pressed", "true");
+    if (b.dataset.pick === "who") flow = b.dataset.value;
+    if (b.dataset.pick === "open_to") document.getElementById("checkback").hidden = b.dataset.value !== "later";
+  }));
+
+  // Add another admired creative
+  let admireN = 1;
+  document.getElementById("addAdmire").addEventListener("click", () => {
+    if (admireN >= 5) return;
+    admireN++;
+    const row = form.querySelector(".admire-row").cloneNode(true);
+    row.querySelectorAll("input").forEach(i => { i.value = ""; i.name = i.name.replace(/_\d+$/, "_" + admireN); });
+    document.getElementById("addAdmire").before(row);
+    row.querySelector("input").focus();
+    if (admireN >= 5) document.getElementById("addAdmire").hidden = true;
+  });
+
+  // Links: turn "@name" or "x.com/name" into a full https URL so every cell in the Sheet is clickable
+  const toUrl = (v, host) => {
+    v = (v || "").trim(); if (!v) return "";
+    if (/^@?[A-Za-z0-9_.]+$/.test(v) && host && !v.includes(".")) return `https://${host}/${v.replace(/^@/, "")}`;
+    if (/^@[A-Za-z0-9_.]+$/.test(v) && host) return `https://${host}/${v.slice(1)}`;
+    if (!/^https?:\/\//i.test(v)) v = "https://" + v.replace(/^\/+/, "");
+    return v;
+  };
+  form.querySelectorAll("[data-url]").forEach(i => i.addEventListener("blur", () => { i.value = toUrl(i.value, i.dataset.url || ""); }));
+
+  form.addEventListener("input", e => { const st = e.target.closest(".step"); const el = st && st.querySelector(".err"); if (el) el.textContent = ""; });
+  form.addEventListener("click", e => { if (e.target.closest(".chip, .big")) { const st = e.target.closest(".step"); const el = st && st.querySelector(".err"); if (el) el.textContent = ""; } }, true);
+  const err = (step, msg) => { const e = step.querySelector(".err"); if (e) e.textContent = msg || ""; };
+  const emailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  const validate = step => {
+    for (const i of step.querySelectorAll("input[required], textarea[required]")) {
+      if (!i.value.trim()) { err(step, "A couple of things are missing."); i.focus(); return false; }
+      if (i.type === "email" && !emailOk(i.value.trim())) { err(step, "That email doesn't look right."); i.focus(); return false; }
+    }
+    if (step.dataset.step === "work" && !step.querySelector('.chip[aria-pressed="true"]') && !form.category_other.value.trim()) { err(step, "Pick a superpower, or tell us in your words."); return false; }
+    if (step.dataset.step === "need" && !step.querySelector('[data-multi="role"] .chip[aria-pressed="true"]')) { err(step, "Pick at least one role."); return false; }
+    err(step, ""); return true;
+  };
+
+  const nextOf = name => { const f = flows[flow]; const i = f.indexOf(name); return f[i + 1]; };
+  form.addEventListener("click", e => {
+    const t = e.target.closest("button"); if (!t) return;
+    const step = t.closest(".step");
+    if (t.hasAttribute("data-next")) { if (!validate(step)) return; show(nextOf(step.dataset.step)); }
+    else if (t.hasAttribute("data-back")) { const prev = history.pop(); if (prev) show(prev, false); }
+    else if (t.dataset.go) { flow = "founder"; show(t.dataset.go); }
+    else if (t.dataset.submit) { if (validate(step)) submit(t.dataset.submit, t); }
+  });
+  form.addEventListener("keydown", e => {
+    if (e.key !== "Enter" || e.target.tagName === "TEXTAREA" || e.target.tagName === "BUTTON") return;
+    e.preventDefault();
+    const step = e.target.closest(".step"); const b = step && step.querySelector("[data-next],[data-submit]"); if (b) b.click();
+  });
+
+  const pressed = sel => [...form.querySelectorAll(sel + ' .chip[aria-pressed="true"]')].map(c => c.textContent.trim());
+  const val = n => (form.elements[n] ? form.elements[n].value.trim() : "");
+
+  const payload = type => {
+    const d = { type, src, page: location.href, website: val("website"), submitted_at: new Date().toISOString() };
+    if (type === "creative") {
+      Object.assign(d, {
+        first_name: val("first_name"), last_name: val("last_name"), email: val("email"),
+        portfolio: toUrl(val("portfolio")), x: toUrl(val("x"), "x.com"), instagram: toUrl(val("instagram"), "instagram.com"),
+        category: pressed('[data-multi="category"]').join(", "), category_other: val("category_other"),
+        open_to: (form.querySelector('.big[data-pick="open_to"][aria-pressed="true"]') || {}).dataset?.value || "",
+        check_back: pressed('[data-single="check_back"]').join("") || val("check_back_other"),
+        location: val("location"),
+        admire: [...Array(admireN)].map((_, k) => [val("admire_name_" + (k + 1)), toUrl(val("admire_link_" + (k + 1)))].filter(Boolean).join(" — ")).filter(Boolean).join("\n")
+      });
+    } else if (type === "nomination") {
+      Object.assign(d, { nominee_name: val("nominee_name"), nominee_social: toUrl(val("nominee_social"), "x.com"), nominee_work: toUrl(val("nominee_work")),
+        nominee_why: val("nominee_why"), nominator_name: val("nominator_name"), nominator_email: val("nominator_email") });
+    } else if (type === "founder") {
+      Object.assign(d, { first_name: val("f_first_name"), last_name: val("f_last_name"), email: val("f_email"), company: toUrl(val("company")), social: toUrl(val("f_social"), "x.com"),
+        role: pressed('[data-multi="role"]').join(", "), shape: pressed('[data-single="shape"]').join(""), timing: pressed('[data-single="timing"]').join("") || val("timing_other"),
+        problem: val("problem"), decision: val("decision") });
+    }
+    return d;
+  };
+
+  const post = async d => {
+    if (!ENDPOINT) throw new Error("not connected");
+    await fetch(ENDPOINT, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams(d) });
+  };
+
+  const submit = async (type, btn) => {
+    const step = btn.closest(".step");
+    btn.disabled = true; const label = btn.textContent; btn.textContent = "Sending…";
+    try {
+      const d = payload(type); await post(d);
+      submitted = { type, email: d.email || d.nominator_email || "", name: [d.first_name || d.nominator_name || "", d.last_name || ""].join(" ").trim() };
+      document.getElementById("ty-promise").textContent = type === "founder"
+        ? "We'll read every request by hand. If we know someone great for you, you'll hear from us directly."
+        : type === "nomination" ? "We'll look at their work by hand, and reach out to them first. Nothing gets shared without their yes."
+        : "We'll read every profile by hand. If we think you should meet someone, you'll hear from us directly.";
+      history = []; show("thanks", false);
+    } catch (e) {
+      err(step, "Something went wrong sending this. Please try again, or email libbiefrost@gmail.com.");
+    } finally { btn.disabled = false; btn.textContent = label; }
+  };
+
+  // The letter
+  const body = document.body, letter = document.getElementById("letter");
+  const openL = () => { body.classList.add("letter"); setTimeout(() => letter.focus({ preventScroll: true }), 450); };
+  const closeL = () => { body.classList.remove("letter"); document.getElementById("openLetter").focus({ preventScroll: true }); };
+  document.getElementById("openLetter").addEventListener("click", openL);
+  document.getElementById("closeLetter").addEventListener("click", closeL);
+  document.getElementById("veil").addEventListener("click", closeL);
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && body.classList.contains("letter")) closeL(); });
+  document.getElementById("sendLetter").addEventListener("click", async e => {
+    const text = letter.value.trim(); if (!text) { letter.focus(); return; }
+    const b = e.currentTarget; b.disabled = true; b.textContent = "Sending…";
+    try {
+      await post({ type: "letter", letter: text, from_type: submitted?.type || "", email: submitted?.email || "", name: submitted?.name || "", src, page: location.href, submitted_at: new Date().toISOString() });
+      letter.value = ""; closeL(); document.getElementById("sentline").hidden = false;
+    } catch { b.textContent = "Try again"; b.disabled = false; return; }
+    b.disabled = false; b.textContent = "Send";
+  });
+
+  // Start: /network/?for=founders opens the founders flow directly
+  if (/^(founder|founders|startup|startups|hire)$/i.test(params.get("for") || "")) { flow = "founder"; show("need", false); }
+  else show("start", false);
+})();
+</script>
+</body>
+</html>
