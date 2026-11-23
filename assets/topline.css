@@ -93,9 +93,20 @@ body.home.docked .cc-top .cc-top-mark, body.home.no-hero .cc-top .cc-top-mark { 
   .cc-top .cc-top-mark { font-size: 18px; }
   .cc-right { gap: 12px; }
 }
-/* On a narrow phone About moves from the right side into the Index list */
-@media (max-width: 560px) {
-  .cc-right .cc-about { display: none; }
+/* Talent Network, Collaborate and Subscribe: each word in ink on its own thin strip. The eight print colours run once,
+   left to right, across the three strips; pointing at one thickens just that strip */
+.cc-top .cc-right .cc-act { color: #161514; font-weight: 400; padding: 0 0 4px; text-decoration: none; white-space: nowrap;
+  background: linear-gradient(90deg, #F37DB6 0 12.5%, #F6DE3D 0 25%, #4A8FE7 0 37.5%, #F39B47 0 50%, #43B86E 0 62.5%, #B99AE8 0 75%, #EF5B3E 0 87.5%, #9FD3F2 0) no-repeat; background-size: 300% 1.5px; background-position: var(--x, 0%) 100%; transition: background-size .25s ease; }
+.cc-top .cc-right .cc-act:hover { color: #161514; background-size: 300% 4px; }
+.cc-top .cc-right .cc-act:nth-of-type(1) { --x: 0%; }
+.cc-top .cc-right .cc-act:nth-of-type(2) { --x: 50%; }
+.cc-top .cc-right .cc-act:nth-of-type(3) { --x: 100%; }
+.cc-index-list a:nth-child(6) { --m: var(--cc-lilac); } .cc-index-list a:nth-child(7) { --m: var(--cc-red); }
+/* On phones and small tablets Talent Network and Collaborate move into the Index list; Subscribe keeps the whole strip */
+@media (max-width: 860px) {
+  .cc-top .cc-right .cc-act:not(.cc-top-sub) { display: none; }
+  .cc-top .cc-right .cc-act.cc-top-sub { background-size: 100% 1.5px; background-position: 0 100%; }
+  .cc-top .cc-right .cc-act.cc-top-sub:hover { background-size: 100% 4px; }
   .cc-index-list .cc-index-mob { display: block; }
 }
 
