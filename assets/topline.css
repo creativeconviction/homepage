@@ -93,6 +93,12 @@ body.home.docked .cc-top .cc-top-mark, body.home.no-hero .cc-top .cc-top-mark { 
   .cc-top .cc-top-mark { font-size: 18px; }
   .cc-right { gap: 12px; }
 }
+/* The smallest phones: a touch tighter so "Contents", the wordmark and Sign up never touch */
+@media (max-width: 360px) {
+  .cc-top { padding-left: max(14px, env(safe-area-inset-left, 0px)); padding-right: max(14px, env(safe-area-inset-right, 0px)); }
+  .cc-top .cc-top-mark { font-size: 16px; }
+  .cc-index-btn { gap: 7px; }
+}
 /* Talent Network, Collaborate and Subscribe: each word in ink on its own thin strip. The eight print colours run once,
    left to right, across the three strips; pointing at one thickens just that strip */
 .cc-top .cc-right .cc-act { color: #161514; font-weight: 400; padding: 0 0 4px; text-decoration: none; white-space: nowrap;
