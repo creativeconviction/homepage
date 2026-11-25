@@ -99,32 +99,13 @@ body.home.docked .cc-top .cc-top-mark, body.home.no-hero .cc-top .cc-top-mark { 
   .cc-top .cc-top-mark { font-size: 16px; }
   .cc-index-btn { gap: 7px; }
 }
-/* Talent Network, Collaborate and Subscribe: each word in ink on its own thin strip. The eight print colours run once,
-   left to right, across the three strips; pointing at one thickens just that strip */
+/* Subscribe: the word in ink on a thin strip of the eight print colours; pointing at it thickens the strip */
 .cc-top .cc-right .cc-act { color: #161514; font-weight: 400; padding: 0 0 4px; text-decoration: none; white-space: nowrap;
-  background: linear-gradient(90deg, #F37DB6 0 12.5%, #F6DE3D 0 25%, #4A8FE7 0 37.5%, #F39B47 0 50%, #43B86E 0 62.5%, #B99AE8 0 75%, #EF5B3E 0 87.5%, #9FD3F2 0) no-repeat; background-size: 300% 1.5px; background-position: var(--x, 0%) 100%; transition: background-size .25s ease; }
-.cc-top .cc-right .cc-act:hover { color: #161514; background-size: 300% 4px; }
-.cc-top .cc-right .cc-act:nth-of-type(1) { --x: 0%; }
-.cc-top .cc-right .cc-act:nth-of-type(2) { --x: 50%; }
-.cc-top .cc-right .cc-act:nth-of-type(3) { --x: 100%; }
-/* Sign up: on phones and small tablets the three actions fold into one word on the full strip, which opens a short list */
-.cc-signup, .cc-signup-menu { display: none; }
+  background: linear-gradient(90deg, #F37DB6 0 12.5%, #F6DE3D 0 25%, #4A8FE7 0 37.5%, #F39B47 0 50%, #43B86E 0 62.5%, #B99AE8 0 75%, #EF5B3E 0 87.5%, #9FD3F2 0) no-repeat 0 100% / 100% 1.5px; transition: background-size .25s ease; }
+.cc-top .cc-right .cc-act:hover { color: #161514; background-size: 100% 4px; }
 @media (max-width: 860px) {
-  .cc-top .cc-right .cc-act { display: none; }
-  .cc-top .cc-signup { display: inline-block; font: inherit; color: #161514; background: linear-gradient(90deg, #F37DB6 0 12.5%, #F6DE3D 0 25%, #4A8FE7 0 37.5%, #F39B47 0 50%, #43B86E 0 62.5%, #B99AE8 0 75%, #EF5B3E 0 87.5%, #9FD3F2 0) no-repeat 0 100% / 100% 1.5px; border: 0; padding: 6px 0 4px; cursor: pointer; transition: background-size .25s ease; }
-  .cc-top .cc-signup:hover, .cc-top .cc-signup[aria-expanded="true"] { background-size: 100% 4px; }
-  .cc-top .cc-signup-menu { position: absolute; top: 100%; right: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 14px; padding: 4px max(20px, env(safe-area-inset-right, 0px)) 20px 32px; background: var(--cc-paper, #F1EFEA); }
-  .cc-top .cc-signup-menu[hidden] { display: none; }
-  .cc-signup-menu a { font-size: 14px; line-height: 17px; color: var(--cc-ink-3, #6E6A63); text-decoration: none; white-space: nowrap; opacity: 0; transform: translateY(-6px); transition: opacity .3s ease, transform .4s cubic-bezier(.16, 1, .3, 1), color .2s ease; transition-delay: calc(var(--k, 0) * 40ms), calc(var(--k, 0) * 40ms), 0s; }
-  .cc-top.signup-open .cc-signup-menu a { opacity: 1; transform: none; }
-  .cc-signup-menu a span { padding: 1px 4px; margin-right: -4px; transition: background-color .2s ease; }
-  .cc-signup-menu a:hover { color: #161514; }
-  .cc-signup-menu a:nth-child(1):hover span { background: var(--cc-pink); }
-  .cc-signup-menu a:nth-child(2):hover span { background: var(--cc-lilac); }
-  .cc-signup-menu a:nth-child(3):hover span { background: var(--cc-red); }
   .cc-index-list .cc-index-mob { display: block; }
 }
-@media (prefers-reduced-motion: reduce) { .cc-signup-menu a { transition: none; } }
 
 
 /* Mobile article header: name on its own line, meta stacked */

@@ -62,24 +62,6 @@
     document.addEventListener("keydown", function (e) { if (e.key === "Escape" && ib.getAttribute("aria-expanded") === "true") { setOpen(false); ib.focus(); } });
   }
 
-  // Sign up (phones and small tablets): one word that opens Subscribe, Talent Network and Collaborate
-  var sb = document.querySelector(".cc-signup"), sm = document.getElementById("cc-signup-menu");
-  if (sb && sm) {
-    var bar = sb.closest(".cc-top"), shut = 0;
-    [].forEach.call(sm.querySelectorAll("a"), function (a, k) { a.style.setProperty("--k", k); });
-    var setSign = function (o) {
-      clearTimeout(shut); sb.setAttribute("aria-expanded", o ? "true" : "false");
-      if (o) { sm.hidden = false; void sm.offsetHeight; bar.classList.add("signup-open"); }
-      else { bar.classList.remove("signup-open"); shut = setTimeout(function () { sm.hidden = true; }, 300); }
-    };
-    sb.addEventListener("click", function (e) { e.stopPropagation(); if (ib && ib.getAttribute("aria-expanded") === "true") ib.click(); setSign(sb.getAttribute("aria-expanded") !== "true"); });
-    sm.addEventListener("click", function (e) { if (e.target.closest("a")) setSign(false); });
-    document.addEventListener("click", function (e) { if (sb.getAttribute("aria-expanded") === "true" && !e.target.closest(".cc-signup-menu")) setSign(false); });
-    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && sb.getAttribute("aria-expanded") === "true") { setSign(false); sb.focus(); } });
-    addEventListener("resize", function () { if (innerWidth > 860 && sb.getAttribute("aria-expanded") === "true") setSign(false); });
-    if (ib) ib.addEventListener("click", function () { if (sb.getAttribute("aria-expanded") === "true") setSign(false); });
-  }
-
   // A link like /interviews/x/#q=<passage> scrolls to that passage and marks just the quote in magenta; after a few seconds the mark fades away
   var m = /^#q=([^:]+)/.exec(location.hash); if (!m) return;
   var q; try { q = decodeURIComponent(m[1]); } catch (e) { return; }
