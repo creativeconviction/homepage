@@ -1,0 +1,21 @@
+/* Listen: a small audio player under an interview's title, read in a generic voice (Kokoro, "Heart"). Play, a thin progress line, the time, and a speed switch */
+.cc-listen { display: flex; align-items: center; gap: 14px; margin: 22px 0 0; max-width: 460px; font-family: var(--font-sans, "Inter", ui-sans-serif, system-ui, sans-serif); font-size: 13px; letter-spacing: 0.02em; line-height: 1.5; color: var(--fg-3, #6E6A63); }
+.cc-listen-play { flex: none; display: inline-flex; align-items: center; gap: 9px; margin: 0; padding: 0; border: 0; background: none; font: inherit; letter-spacing: inherit; color: var(--cc-ink, #161514); cursor: pointer; }
+.cc-listen-icon { position: relative; flex: none; width: 28px; height: 28px; border-radius: 50%; background: color-mix(in srgb, var(--guest, var(--cc-pink, #F37DB6)) 34%, transparent); transition: background-color .2s ease; }
+.cc-listen-play:hover .cc-listen-icon { background: color-mix(in srgb, var(--guest, var(--cc-pink, #F37DB6)) 60%, transparent); }
+.cc-listen-icon::before { content: ""; position: absolute; left: 11px; top: 9px; border-style: solid; border-width: 5px 0 5px 8px; border-color: transparent transparent transparent currentColor; }
+.cc-listen.is-playing .cc-listen-icon::before { left: 10px; top: 9.5px; width: 8px; height: 9px; border: 0; background: linear-gradient(90deg, currentColor 0 3px, transparent 3px 5px, currentColor 5px 8px); }
+.cc-listen-play:focus-visible, .cc-listen-speed:focus-visible, .cc-listen-bar:focus-visible { outline: 2px solid var(--cc-ink, #161514); outline-offset: 3px; }
+.cc-listen-track { flex: 1 1 auto; display: none; align-items: center; gap: 12px; min-width: 0; }
+.cc-listen.is-started .cc-listen-track { display: flex; }
+.cc-listen.is-started .cc-listen-len { display: none; }
+.cc-listen-bar { -webkit-appearance: none; appearance: none; flex: 1 1 auto; min-width: 60px; height: 18px; margin: 0; background: transparent; cursor: pointer; --p: 0%; }
+.cc-listen-bar::-webkit-slider-runnable-track { height: 2px; background: linear-gradient(var(--guest, var(--cc-ink, #161514)), var(--guest, var(--cc-ink, #161514))) 0 0 / var(--p) 100% no-repeat, var(--cc-rule, #D6D0C5); }
+.cc-listen-bar::-moz-range-track { height: 2px; background: var(--cc-rule, #D6D0C5); }
+.cc-listen-bar::-moz-range-progress { height: 2px; background: var(--guest, var(--cc-ink, #161514)); }
+.cc-listen-bar::-webkit-slider-thumb { -webkit-appearance: none; width: 10px; height: 10px; margin-top: -4px; border: 0; border-radius: 50%; background: var(--cc-ink, #161514); }
+.cc-listen-bar::-moz-range-thumb { width: 10px; height: 10px; border: 0; border-radius: 50%; background: var(--cc-ink, #161514); }
+.cc-listen-time { flex: none; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cc-listen-speed { flex: none; min-width: 42px; margin: 0; padding: 2px 6px; border: 1px solid var(--cc-rule, #D6D0C5); border-radius: 6px; background: none; font: inherit; letter-spacing: inherit; font-variant-numeric: tabular-nums; color: var(--cc-ink, #161514); cursor: pointer; transition: background-color .2s ease, border-color .2s ease; }
+.cc-listen-speed:hover { background: color-mix(in srgb, var(--guest, var(--cc-yellow, #F6DE3D)) 34%, transparent); border-color: transparent; }
+@media (max-width: 640px) { .cc-listen { gap: 10px; margin-top: 18px; font-size: 12px; } .cc-listen-track { gap: 8px; } }
